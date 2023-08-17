@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CommonActions } from '@react-navigation/native';
-import moment from 'moment';
 import {
   Alert,
   Linking,
@@ -9,32 +8,34 @@ import {
   Share,
   ToastAndroid,
 } from 'react-native';
+import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 import ImagePicker from 'react-native-image-crop-picker';
-import uuid from 'react-native-uuid';
 import { NavigationProps } from '../types/navigation-types';
-import Geocoder from 'react-native-geocoding';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
-
+// Helper function to convert degrees to radians
+function toRadians(degrees: any) {
+  return (degrees * Math.PI) / 180;
+}
 // Initialize the module (needs to be done only once)
 const getErrorList = (data: any) => {
   const { message, errors } = data;
+  if (typeof message === 'string') return message;
   let concatenatedMessages: any = null;
   console.log('errors=>>::', errors);
 
   if (typeof errors === 'object' && Object.keys(errors)?.length) {
-
     concatenatedMessages = errors
-      ? Object.values(message)?.flat()?.join(", ")
+      ? Object.values(message)?.flat()?.join(', ')
       : null;
   } else if (typeof message === 'string') return message;
   concatenatedMessages = message
-    ? Object.values(message)?.flat()?.join(", ")
+    ? Object.values(message)?.flat()?.join(', ')
     : null;
 
   console.log(concatenatedMessages);
   return concatenatedMessages;
-}
+};
 export const horizontalAnimation: any = {
   headerShown: false,
   gestureDirection: 'horizontal',
@@ -85,6 +86,16 @@ export const UTILS = {
       }),
     );
   },
+  isValidYouTubeUrl: (url: string) => {
+    try {
+      // Regular expression pattern to match YouTube URLs
+      const youtubePattern =
+        /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+.*$|^https?:\/\/youtu\.be\/[\w-]+.*$/i;
+      return youtubePattern.test(url);
+    } catch (error) {
+      console.log('error =>', error);
+    }
+  },
   dialPhone: async (phoneNumber: string) => {
     try {
       const isSupported = await Linking.canOpenURL(`tel:${phoneNumber}`);
@@ -125,34 +136,43 @@ export const UTILS = {
     return formData;
   },
   returnError: (error: any) => {
-    console.log("error.response:::", error.response);
-    if (error.response) {
-      if (error.response.data && error.response.data.errors) {
-        const errorMessages = Object.values(error.response.data.errors).flatMap(
-          (errors) => errors
-        );
-        const concatenatedErrors = errorMessages.join(", ");
-        console.log(concatenatedErrors);
-        return concatenatedErrors;
+    if (error?.response?.request) {
+      let { _response } = error?.response?.request;
+      console.log('FACTORY ERRORS :: ', JSON.parse(_response));
+      const temp = JSON.parse(_response);
+      const resp = getErrorList(temp);
+      console.log('ASDFGFDSDF:::', resp);
+      if (resp) return resp;
+      else {
+        return 'Something went wrong.';
       }
-      if (error.response?.data?.Message) {
-        return `${error.response?.data?.Message}`;
-      }
-      if (error?.message) return error?.message;
-
+    } else if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log('=>>>>>>::::', error.response.data?.errors);
       console.log(error.response.status);
-      console.log(error.response.headers);
-      return `${error.response.status}`;
-    } else if (error.request) {
+      // console.log(error.response.headers);
+      console.log('error data ==>', error?.response.data);
+      if (error.response.data?.errors) {
+        return `${error?.response?.data?.errors}`;
+      }
+      return `${error?.response?.data?.message || error?.response?.status}`;
+    } else if (error?.request) {
       // The request was made but no response was received
-      console.log(error.request);
-      return "Something went wrong!";
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error?.request);
     } else {
-      // Something else happened while setting up the request
-      console.log("Error", error.message);
-      console.log(error.config);
-      return "Something went wrong!";
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
     }
+    console.log(error.config);
+    console.log('type of code: ', error?.code);
+    console.log('type of message: ', error?.message);
+    if (typeof error === 'string') {
+      return error;
+    }
+    return error?.message || error?.code;
   },
   capitalizeFirst: (str: string) =>
     str?.charAt(0)?.toUpperCase() + str?.slice(1),
@@ -179,6 +199,7 @@ export const UTILS = {
       // console.log(error.message);
     }
   },
+
   get_current_location: async (
     onSuccess = (position: any) => { },
     onError = (error: any) => { },
@@ -196,9 +217,26 @@ export const UTILS = {
       throw new Error(error);
     }
   },
+  // Function to calculate the distance between two points using the Haversine formula
+  calculateDistance: (lat1: any, lon1: any, lat2: any, lon2: any) => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = toRadians(lat2 - lat1);
+    const dLon = toRadians(lon2 - lon1);
 
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance; // Distance in kilometers
+  },
   _returnAddress: async (latitude: any, longitude: any) => {
-    const addressObject = await Geocoder.from(latitude || '', longitude || '')
+    const addressObject = await Geocoder.from(latitude || '', longitude || '');
     let returnAddress = {
       street_number: null,
       street_address: null,
@@ -332,9 +370,10 @@ export const UTILS = {
       throw new Error(error);
     }
   },
-  _returnImageGallery: async () => {
+  _returnImageGallery: async (multi = false) => {
     try {
       let image = await ImagePicker.openPicker({
+        multiple: multi,
         // width: 1000,
         // height: 800,
         cropping: true,
@@ -343,20 +382,51 @@ export const UTILS = {
         // compressImageMaxWidth: 1500,
         // compressImageMaxHeight: 1000,
       });
-      const dotIndex = image?.path?.lastIndexOf('.');
-      const extension = image?.path.substring(dotIndex + 1);
-      return {
-        uri:
-          Platform.OS === 'android'
-            ? image?.path
-            : image?.path.replace('file://', ''),
-        name: image?.filename || `${new Date().getTime()}.${extension}`,
-        type: image?.mime,
-      };
+      if (multi) {
+        const result = image?.map((res: any) => {
+          const dotIndex = res?.path?.lastIndexOf('.');
+          const extension = res?.path.substring(dotIndex + 1);
+          return {
+            uri:
+              Platform.OS === 'android'
+                ? res?.path
+                : res?.path.replace('file://', ''),
+            name: res?.filename || `${new Date().getTime()}.${extension}`,
+            type: res?.mime,
+          };
+        })
+        return result;
+      } else {
+        const dotIndex = image?.path?.lastIndexOf('.');
+        const extension = image?.path.substring(dotIndex + 1);
+        return {
+          uri:
+            Platform.OS === 'android'
+              ? image?.path
+              : image?.path.replace('file://', ''),
+          name: image?.filename || `${new Date().getTime()}.${extension}`,
+          type: image?.mime,
+        };
+      }
     } catch (error: any) {
       throw new Error(error);
     }
   },
-  getMinutesDiff: (a: string, b: string) => moment(b).diff(a, 'm'),
-  getUUID: () => uuid?.v4()?.toString(),
+  returnDatesInMonth: (year: number, month: number) => {
+    var dates = [];
+
+    // Create a new Date object for the first day of the month
+    var date = new Date(year, month, 1);
+
+    // Loop through the days of the month
+    while (date?.getMonth() === month) {
+      // Add the current date to the array
+      dates.push(new Date(date));
+
+      // Move to the next day
+      date.setDate(date.getDate() + 1);
+    }
+
+    return dates;
+  },
 };

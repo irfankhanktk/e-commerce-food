@@ -1,5 +1,10 @@
+import { WhereFilterOp } from '@firebase/firestore-types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import firebase from '@react-native-firebase/app';
 import auth from '@react-native-firebase/auth';
 import Rnfirestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import { setUserInfo } from '../../store/reducers/user-reducer';
 import { UTILS } from 'utils';
 
 export const getCurrentUserId = () => auth()?.currentUser?.uid;
@@ -37,6 +42,29 @@ export const signInWithEmailAndPassword = async (email: string, password: string
   }
 }
 
+export const uploadFile = async (image: string) => {
+  try {
+    if (!image) {
+      throw 'image is not selected'
+    }
+    const uploadUri = image;
+    let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
+    const extension = filename.split('.').pop();
+    const name = filename.split('.').slice(0, -1).join('.');
+    filename = name + Date.now() + '.' + extension;
+    const storageRef = storage().ref(`photos/${filename}`);
+    const task = storageRef.putFile(uploadUri);
+    task.on('state_changed', taskSnapshot => {
+      const percent = (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100;
+      console.log(percent, '% bytes transferred');
+    });
+    await task;
+    const url: string = await storageRef.getDownloadURL();
+    return url;
+  } catch (error) {
+    throw error;
+  }
+};
 
 
 export const saveData = async (
@@ -242,7 +270,24 @@ export const filterArrayCollections = async (
     throw new Error(UTILS.returnError(error));
   }
 };
-
+export const filterCollections = async (
+  collection: string,
+  key: string,
+  op: WhereFilterOp,
+  value: any,
+) => {
+  try {
+    const ref = Rnfirestore().collection(collection);
+    const querySnapshot = await ref?.where(key, op, value).get();
+    const data: any[] = [];
+    querySnapshot.forEach(documentSnapshot => {
+      data?.push(documentSnapshot.data());
+    });
+    return data;
+  } catch (error) {
+    throw new Error(UTILS.returnError(error));
+  }
+};
 
 //you can execute multiple write operations as a single batch that contains any combination of set,
 // update, or delete operations. A batch of writes completes atomically and can write to multiple documents.

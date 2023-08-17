@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {STORAGEKEYS} from 'config/constants';
 export const postData = async (url, data) => {
   console.log('url: ', url);
-  console.log('data: ', data);
+  console.log('data:::: ', data);
   const response = await client.post(url, data);
   return response?.data;
 };
@@ -17,9 +17,10 @@ export const deleteData = async (url, payload) => {
 export const putData = async (url, data) => {
   console.log('url: ', url);
   const response = await client.put(url, data);
-  return response?.data;
+  return response;
 };
 export const postFormData = async (url, data) => {
+  console.log('data==>', data);
   console.log('url==>', url);
 
   data = UTILS.getFormData(data);
@@ -31,7 +32,7 @@ export const postFormData = async (url, data) => {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(res => res?.data)
+    .then(res => res)
     .catch(err => {
       throw err;
     });
@@ -80,7 +81,7 @@ export const postArrrayFormData = async (url, data) => {
     });
 };
 export const getData = async url => {
-  console.log('url: ', url);
+  console.log('url::::::: ', url);
   const response = await client.get(url);
   return response?.data;
 };

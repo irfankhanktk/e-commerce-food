@@ -15,8 +15,8 @@ type FcProps = {
 const Regular: React.FC<FcProps> = ({
   label,
   fontSize,
-  color,
   numberOfLines,
+  color = colors.primary,
   children,
   style,
   ...props
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.regular,
     fontSize: mvs(15),
-    color: colors.black, //default color
+    color: colors.primary, //default color
   },
 });

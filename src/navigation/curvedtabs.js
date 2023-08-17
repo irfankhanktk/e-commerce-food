@@ -1,16 +1,19 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import * as SVGS from 'assets/icons/tab-icons';
+// import * as SVGS from 'assets/icons/tab-icons';
+import * as SVGS from 'assets/icons/tab-icons/index';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {useAppSelector} from 'hooks/use-store';
 import {Text, TouchableOpacity, View} from 'react-native';
-import CartPreview from 'screens/cart-screens/cartPreview/cartPreview';
-import DiscoveryTab from 'screens/discovery-tab';
-import HomeTab from 'screens/home-tab';
-import LocationNiceMeet from 'screens/location-nice-meet';
-import MainDetails from 'screens/main-details';
-import Me from 'screens/me';
-import Search from 'screens/search';
+import CartTab from 'screens/cart';
+import CategoriesTab from 'screens/categories';
+import HomeTab from 'screens/home';
+import MessageTab from 'screens/message';
+// import CartScreen from 'screens/cart';
+// import AboutUsScreen from 'screens/categories';
+
+// import ShoppingScreen from 'screens/shopping';
+import UserTab from 'screens/user-tab';
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
@@ -58,7 +61,7 @@ function MyTabBar({state, descriptors, navigation}) {
             style={{
               flex: 1,
               alignItems: 'center',
-              height: 80,
+              height: 65,
             }}>
             <View
               style={{
@@ -74,7 +77,7 @@ function MyTabBar({state, descriptors, navigation}) {
               }}>
               <Icon height={mvs(20)} width={mvs(20)} />
             </View>
-            <View
+            {/* <View
               style={{
                 flex: 1,
                 justifyContent: 'flex-end',
@@ -87,7 +90,7 @@ function MyTabBar({state, descriptors, navigation}) {
                 }}>
                 {label}
               </Text>
-            </View>
+            </View> */}
           </TouchableOpacity>
         );
       })}
@@ -104,14 +107,12 @@ export const TabBar = () => {
       initialRouteName="Home"
       screenOptions={{headerShown: false}}
       tabBar={props => <MyTabBar {...props} />}>
-      <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Discovery" component={DiscoveryTab} options={{}} />
-      <Tab.Screen
-        name="Home"
-        component={user?.is_visited_Location ? MainDetails : LocationNiceMeet}
-      />
-      <Tab.Screen name="Cart" component={CartPreview} />
-      <Tab.Screen name="Me" component={Me} />
+      <Tab.Screen name="Home" component={HomeTab} />
+      <Tab.Screen name="Categories" component={CategoriesTab} />
+      <Tab.Screen name="Message" component={MessageTab} />
+      <Tab.Screen name="Carrt" component={CartTab} />
+      {/* {/* <Tab.Screen name="Categories" component={CategoriesTab} /> */}
+      <Tab.Screen name="Me" component={UserTab} />
     </Tab.Navigator>
   );
 };

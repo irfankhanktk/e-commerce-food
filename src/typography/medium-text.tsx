@@ -15,14 +15,16 @@ type FcProps = {
 const Medium: React.FC<FcProps> = ({
   label,
   fontSize,
-  color,
+  color = colors.primary,
   numberOfLines = 1,
   children,
+  onPress,
   style,
   ...props
 }) => {
   return (
     <Text
+      onPress={onPress}
       numberOfLines={numberOfLines}
       {...props}
       style={[{ ...styles.label, color: color, fontSize: fontSize, }, style]}>
@@ -38,6 +40,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.medium,
     fontSize: mvs(15),
-    color: colors.black, //default color
+    color: colors.primary, //default color
   },
 });

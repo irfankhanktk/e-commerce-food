@@ -1,39 +1,75 @@
 import {useNavigation} from '@react-navigation/native';
-import {colors} from 'config/colors';
-import {mvs} from 'config/metrices';
 import React from 'react';
 import {I18nManager, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
+import {navigate} from 'navigation/navigation-ref';
 import Medium from 'typography/medium-text';
+import Regular from 'typography/regular-text';
 import {Row} from '../row';
-import {goBack} from 'navigation/navigation-ref';
+import {SearchInput} from '../inputs';
 const HeaderX = ({
   style = {},
   title,
-  back = true,
+  back = false,
   onChangeText = t => {},
   isSearch = false,
   placeholder = 'Search here',
+  unreadNotification,
+  notification,
+  onPress,
   ...props
 }) => {
+  const navigation = useNavigation();
   return (
     <View style={[styles.container, style]}>
       <Row style={{alignItems: 'center'}}>
-        {back ? (
-          <TouchableOpacity style={{}} onPress={() => goBack()}>
-            <Icon
-              name={I18nManager.isRTL ? 'right' : 'left'}
-              size={mvs(20)}
-              color={colors.black}
+        <TouchableOpacity onPress={() => navigation?.goBack()}>
+          {back && (
+            <View
+              style={{
+                backgroundColor: colors.white,
+                padding: mvs(5),
+                borderRadius: mvs(7),
+              }}>
+              <Icon
+                name={I18nManager.isRTL ? 'right' : 'left'}
+                size={mvs(20)}
+                color={colors.black}
+              />
+            </View>
+          )}
+        </TouchableOpacity>
+        <Medium fontSize={mvs(20)} label={title} style={[styles.title]} />
+
+        {notification ? (
+          <TouchableOpacity onPress={() => navigate('Notifications')}>
+            <Ionicons
+              name="notifications-sharp"
+              size={mvs(25)}
+              color={colors.white}
+              style={{marginTop: mvs(5)}}
             />
+            {unreadNotification ? (
+              <View style={styles.notificationbadge}>
+                <Regular
+                  label={unreadNotification}
+                  fontSize={mvs(10)}
+                  style={{lineHeight: mvs(14), color: colors.white}}
+                />
+              </View>
+            ) : null}
           </TouchableOpacity>
         ) : (
-          <View />
+          <View></View>
         )}
-        <Medium fontSize={mvs(20)} label={title} style={[styles.title]} />
-        <View style={styles.empty} />
       </Row>
-      {/* {isSearch && <SearchInput onChangeText={onChangeText} placeholder={placeholder} />} */}
+      {isSearch && (
+        <SearchInput onChangeText={onChangeText} placeholder={placeholder} />
+      )}
     </View>
   );
 };
@@ -42,8 +78,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
     paddingHorizontal: mvs(22),
-    paddingTop: mvs(15),
-    paddingBottom: mvs(15),
+    paddingVertical: mvs(15),
+  },
+  notificationbadge: {
+    backgroundColor: colors.red,
+    borderColor: colors.white,
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    top: mvs(6),
+    right: mvs(-3),
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: mvs(15),
+    width: mvs(15),
+    borderRadius: mvs(7.5),
   },
   empty: {
     width: mvs(10),

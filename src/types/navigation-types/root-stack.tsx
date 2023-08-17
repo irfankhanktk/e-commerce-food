@@ -1,6 +1,7 @@
+
 type RootStackParamList = {
   Splash: undefined;
-  TabBar: undefined;
+  HotelStack: undefined;
   RenewPassword: undefined;
   ForgotPassword: undefined;
   BottomTab: undefined;
@@ -18,11 +19,5 @@ type RootStackParamList = {
   UpdatePassword: undefined;
   LanguageScreen: undefined;
   UpdateProfile: undefined;
-  SignUp: undefined | string | boolean;
-  VerifyEmail: undefined;
-  LoginScreen: undefined | boolean | string;
-  ResetPassword: undefined;
-  Me: undefined;
-  Profile: undefined;
 };
 export default RootStackParamList;

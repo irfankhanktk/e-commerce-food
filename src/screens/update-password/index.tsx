@@ -8,6 +8,7 @@ import { useAppDispatch } from 'hooks/use-store';
 import { t } from 'i18next';
 import React from 'react';
 import { View } from 'react-native';
+import { onUpdatePassword } from 'services/api/auth-api-actions';
 import { updatePasswordValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
@@ -17,7 +18,6 @@ const UpdatePassword = (props: props) => {
   const { navigation } = props;
   const dispatch = useAppDispatch();
   const initialValues = {
-    email: '',
     new_password: '',
     old_password: '',
   };
@@ -32,27 +32,18 @@ const UpdatePassword = (props: props) => {
     });
   return (
     <View style={styles.container}>
-      <Header1x2x isSearch={false} title={t('update_password')} />
+      <Header1x2x back={true} isSearch={false} title={t('update_password')} />
       <KeyboardAvoidScrollview
         contentContainerStyle={styles.contentContainerStyle}>
-        <PrimaryInput
-          keyboardType={'email-address'}
-          error={errors?.email}
-          label={t('email')}
-          placeholder={t('email')}
-          onChangeText={str => setFieldValue('email', str)}
-          onBlur={() => setFieldTouched('email', true)}
-          value={values.email}
-        />
         <PrimaryInput
           isPassword
           error={
             touched?.old_password && errors?.old_password
-              ? errors?.old_password
+              ? `${t(errors?.old_password)}`
               : undefined
           }
           placeholder={'********'}
-          label={'old_password'}
+          label={t('old_password')}
           onChangeText={str => setFieldValue('old_password', str)}
           onBlur={() => setFieldTouched('old_password', true)}
           value={values.old_password}
@@ -61,23 +52,23 @@ const UpdatePassword = (props: props) => {
           isPassword
           error={
             touched?.new_password && errors?.new_password
-              ? errors?.new_password
+              ?`${t(errors?.new_password)}`
               : undefined
           }
           placeholder={'********'}
-          label={t('Confirm Password')}
+          label={t('new_password')}
           onChangeText={str => setFieldValue('new_password', str)}
           onBlur={() => setFieldTouched('new_password', true)}
           value={values.new_password}
         />
         <PrimaryButton
-          onPress={() => { }}
           loading={loading}
           disabled={
             Object.keys(errors)?.length > 0 ||
             Object.keys(touched)?.length === 0
           }
-          title={t('Update')}
+          title={t('update')}
+          onPress={() => dispatch(onUpdatePassword(values, setLoading, props))}
           containerStyle={styles.button}
         />
       </KeyboardAvoidScrollview>

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "91601287529",
-    "project_id": "bookme-d1f6b",
-    "storage_bucket": "bookme-d1f6b.appspot.com"
+    "project_number": "596229250158",
+    "project_id": "techzology",
+    "storage_bucket": "techzology.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:91601287529:android:75d1f047603069991a65f8",
+        "mobilesdk_app_id": "1:596229250158:android:dc5b747eebeb1e8c58da7f",
         "android_client_info": {
-          "package_name": "com.prismatic.ecommerce"
+          "package_name": "com.techzology"
         }
       },
       "oauth_client": [
         {
-          "client_id": "91601287529-bo6pksk2uub7di8djp3gpf9ea3og4nol.apps.googleusercontent.com",
+          "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAYIN2lA1cXqfcuVzVGdjuMxnwji0M9TJs"
+          "current_key": "AIzaSyDY-O7BjknovQf3QUQPcxuQQhhPpfDXakY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "91601287529-bo6pksk2uub7di8djp3gpf9ea3og4nol.apps.googleusercontent.com",
+              "client_id": "596229250158-tcq13ekohmn9cj2gq2g8e9o92isbajpt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

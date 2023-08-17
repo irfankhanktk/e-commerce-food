@@ -1,3 +1,4 @@
+import {silder} from 'assets/images';
 import {colors} from 'config/colors';
 import {mvs, width} from 'config/metrices';
 import React from 'react';
@@ -14,13 +15,13 @@ const SwiperCard = () => {
         style={styles.wrapper}
         showsButtons={false}>
         <View style={styles.slide}>
-          {/* <Image source={Img_Slider1} style={styles.sliderImage} /> */}
+          <Image source={silder} style={styles.sliderImage} />
         </View>
         <View style={styles.slide}>
-          {/* <Image source={Img_Slider2} style={styles.sliderImage} /> */}
+          <Image source={silder} style={styles.sliderImage} />
         </View>
         <View style={styles.slide}>
-          {/* <Image source={Img_Slider3} style={styles.sliderImage} /> */}
+          <Image source={silder} style={styles.sliderImage} />
         </View>
       </Swiper>
     </View>
@@ -30,9 +31,9 @@ export default SwiperCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: mvs(220),
+    height: mvs(180),
     // marginHorizontal: mvs(20),
-    marginTop: mvs(30),
+    marginTop: mvs(0),
   },
   sliderImage: {
     width: width - mvs(40),
@@ -40,8 +41,8 @@ const styles = StyleSheet.create({
     borderRadius: mvs(18),
     resizeMode: 'cover',
   },
-  dotStyle: {marginBottom: -mvs(40)},
-  activeDotStyle: {marginBottom: -mvs(40), backgroundColor: colors.primary},
+  // dotStyle: {marginBottom: -mvs(40)},
+  // activeDotStyle: {marginBottom: -mvs(40), backgroundColor: colors.primary},
   wrapper: {},
   slide: {
     flex: 1,

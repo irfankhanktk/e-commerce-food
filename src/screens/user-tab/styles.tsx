@@ -5,7 +5,6 @@ import { colors } from 'config/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
   },
   contentContainerStyle: {
     flex: 1,
@@ -13,13 +12,21 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingHorizontal: mvs(20),
-    paddingTop: mvs(40),
+
+  },
+  scrollview: { flexGrow: 1, paddingTop: mvs(20) },
+  dashboardBtn: {
+    backgroundColor: colors.white,
+    height: mvs(40),
+    width: '50%',
+    borderRadius: mvs(5),
+    alignSelf: 'center',
+    marginTop: mvs(10),
   },
   linkContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    marginTop: mvs(36),
+    marginTop: mvs(10),
     backgroundColor: colors.secondary,
     width: width,
     borderTopLeftRadius: mvs(15),
@@ -27,6 +34,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingTop: mvs(30),
     paddingHorizontal: mvs(20),
+
   },
   name: {
     alignSelf: 'center',
@@ -73,15 +81,24 @@ const styles = StyleSheet.create({
     marginLeft: mvs(10),
   },
   img: {
-    height: mvs(70),
-    width: mvs(70),
-    borderRadius: mvs(35),
-    backgroundColor: colors.black,
+    height: mvs(100),
+    width: mvs(100),
+    borderRadius: mvs(50),
+    justifyContent: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
   },
   logouttab: {
     flexDirection: 'row',
     marginBottom: mvs(15),
+  },
+  imgUpload: {
+    height: mvs(100),
+    width: mvs(100),
+    borderRadius: mvs(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
   },
 });
 export default styles;

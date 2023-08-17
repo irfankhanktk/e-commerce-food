@@ -1,11 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
+import carSlice from './reducers/car-reducer'
+import docSlice from './reducers/doctor-reducer'
+import hotelSlice from './reducers/hotel-reducer'
 import userSlice from './reducers/user-reducer'
-import cartSlice from './reducers/cart-slice'
+import eventSlice from './reducers/event-reducer'
+import tourSlice from './reducers/tour-reducer'
 
 export const store = configureStore({
   reducer: {
+    doctor: docSlice,
     user: userSlice,
-    cart: cartSlice,
+    hotel: hotelSlice,
+    car: carSlice,
+    event: eventSlice,
+    tour: tourSlice,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

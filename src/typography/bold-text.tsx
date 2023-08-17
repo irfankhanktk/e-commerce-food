@@ -15,14 +15,16 @@ type FcProps = {
 const Bold: React.FC<FcProps> = ({
   label,
   fontSize,
-  color = colors.black,
+  color = colors.primary,
   numberOfLines,
   children,
+  onPress,
   style,
   ...props
 }) => {
   return (
     <Text
+      onPress={onPress}
       numberOfLines={numberOfLines}
       {...props}
       style={[{ ...styles.label, color: color, fontSize: fontSize, }, style]}>
@@ -38,6 +40,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: fonts.bold,
     fontSize: mvs(15),
-    color: colors.black, //default color
+    color: colors.primary, //default color
   },
 });

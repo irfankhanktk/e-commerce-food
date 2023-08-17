@@ -2,7 +2,7 @@ import axios from 'axios';
 import {URLS} from 'services/api/api-urls';
 import {UTILS} from '../utils';
 import {STORAGEKEYS} from './constants';
-import {navigate, resetStack} from 'navigation/navigation-ref';
+import {navigate} from 'navigation/navigation-ref';
 const CancelToken = axios.CancelToken;
 source = CancelToken.source();
 client = axios.create({
@@ -17,7 +17,6 @@ function newAbortSignal(timeoutMs) {
 client.interceptors.request.use(
   async config => {
     let token = await UTILS.getItem(STORAGEKEYS.token);
-    console.log('token->>>', token);
     config.headers = {
       Accept: 'application/json',
       'Cache-Control': 'no-cache',
@@ -48,9 +47,8 @@ client.interceptors.response.use(
     if (error?.response?.status === undefined && error?.config === undefined) {
       return Promise.reject('Hi Dude');
     } else if (error?.response?.status === 401) {
-      originalRequest._retry = true;
-      await UTILS.clearStorage();
-      resetStack('Login');
+      // originalRequest._retry = true;
+      navigate('Login');
       //await DIVIY_API.refreshToken(JSON.parse(token)?.refresh_token);
     }
     return Promise.reject(error);

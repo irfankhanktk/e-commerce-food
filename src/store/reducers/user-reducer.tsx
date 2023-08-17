@@ -1,25 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Alert } from 'react-native';
+import {createSlice} from '@reduxjs/toolkit';
 
 type Props = {
-  userInfo: any
-  wishlist: any[]
-  language: string
-  location?: any
-  notifications: any[]
-  wallet: any
-  unreadNotification: number
-  is_visited_Location: any
+  userInfo: any;
+  transaction_id: any;
+
+  language: string;
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
+  notifications: any[];
+  wallet: any;
+  unreadNotification: number;
+  locations: any[];
 };
 const initialState: Props = {
   userInfo: null,
-  wishlist: [],
+  transaction_id: null,
+
   language: 'en',
-  location: null,
+  location: undefined,
   notifications: [],
   wallet: {},
   unreadNotification: 0,
-  is_visited_Location: '0',
+  locations: [],
 };
 
 export const userSlice = createSlice({
@@ -29,26 +33,20 @@ export const userSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
-    setWishlist: (state, action) => {
-      state.wishlist = action.payload;
-    },
-    setAddToWishlist: (state, action) => {
-      state.wishlist.push(action.payload);
-    },
-    setRemoveFromWishlist: (state, action) => {
-      state.wishlist = state?.wishlist?.filter(x => x?.id !== action.payload?.id);
+    setTransactionId: (state, action) => {
+      state.transaction_id = action.payload;
     },
     setLanguage: (state, action) => {
       state.language = action.payload;
-    },
-    setIsVisitedLocation: (state, action) => {
-      state.is_visited_Location = action.payload;
     },
     setLocation: (state, action) => {
       state.location = action.payload;
     },
     reset: (state, action) => {
       state = initialState;
+    },
+    setLocations: (state, action) => {
+      state.locations = action.payload;
     },
     setNotifications: (state, action) => {
       state.notifications = action.payload;
@@ -67,14 +65,13 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   setUserInfo,
-  setWishlist,
-  setAddToWishlist,
-  setRemoveFromWishlist,
-  setIsVisitedLocation,
   reset,
   setLanguage,
   setLocation,
   setNotifications,
+  setTransactionId,
+
+  setLocations,
   setWallet,
   // demoAsync
 } = userSlice.actions;
