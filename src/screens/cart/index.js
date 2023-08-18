@@ -17,6 +17,7 @@ import Medium from 'typography/medium-text';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
 import CartCard from 'components/molecules/cart-card';
+import {navigate} from 'navigation/navigation-ref';
 
 const CartTab = props => {
   const {t} = i18n;
@@ -38,7 +39,9 @@ const CartTab = props => {
     },
   ];
 
-  const featuredProduct = ({item}) => <CartCard item={item} />;
+  const featuredProduct = ({item}) => (
+    <CartCard item={item} onPress={() => navigate('ProductDetials')} />
+  );
 
   return (
     <View style={styles.container}>

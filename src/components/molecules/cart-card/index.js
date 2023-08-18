@@ -1,13 +1,11 @@
+import {Delete} from 'assets/icons';
+import {PrimaryButton} from 'components/atoms/buttons';
+import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
-import styles from './styles';
 import Regular from 'typography/regular-text';
-import {featured, forklift, silder} from 'assets/images';
-import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {Delete} from 'assets/icons';
+import styles from './styles';
 
 const CartCard = ({item, style, onPress, loading}) => {
   const [count, setCount] = React.useState(1);
@@ -46,16 +44,16 @@ const CartCard = ({item, style, onPress, loading}) => {
           <PrimaryButton
             disabled={count == '1'}
             onPress={() => setCount(count - 1)}
-            textStyle={{color: colors.primary, fontSize: mvs(16)}}
+            textStyle={styles.subAddText}
             containerStyle={styles.subQuantity}
             title={'-'}
           />
-          <View style={{width: mvs(60), alignItems: 'center'}}>
+          <View style={styles.countextContainer}>
             <Regular label={count} />
           </View>
           <PrimaryButton
             onPress={() => setCount(count + 1)}
-            textStyle={{color: colors.primary, fontSize: mvs(16)}}
+            textStyle={styles.subAddText}
             containerStyle={styles.subQuantity}
             title={'+'}
           />

@@ -49,5 +49,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
     borderRadius: mvs(0),
   },
+  countextContainer: {width: mvs(60), alignItems: 'center'},
+  subAddText: {color: colors.primary, fontSize: mvs(16)},
 });
 export default styles;
