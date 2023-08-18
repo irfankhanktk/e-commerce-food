@@ -11,6 +11,7 @@ import Regular from 'typography/regular-text';
 import {SearchInput} from '../inputs';
 import {Row} from '../row';
 import Medium from 'typography/medium-text';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const AppHeader = ({
   style = {},
   title,
@@ -46,7 +47,11 @@ const AppHeader = ({
         )}
         <TouchableOpacity onPress={() => navigation?.goBack()}>
           {icon ? (
-            <FontAwesome5 name={name} size={mvs(20)} color={colors.primary} />
+            <AntDesign
+              name={'sharealt'}
+              size={mvs(20)}
+              color={colors.primary}
+            />
           ) : (
             <></>
           )}

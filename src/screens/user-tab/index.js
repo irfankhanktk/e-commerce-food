@@ -46,6 +46,7 @@ import {
   Heart,
   Language,
   Location,
+  Message,
   Pc,
   Refund,
   Shop,
@@ -199,45 +200,11 @@ const UserTab = props => {
           <Row style={{marginTop: mvs(10)}}>
             <TouchableOpacity style={{alignItems: 'center'}}>
               <View style={styles.innerItems}>
-                <Wallet />
+                <Message />
               </View>
               <Regular
                 style={{marginTop: mvs(5)}}
                 label={'Messages'}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Carttt />
-              </View>
-
-              <Regular
-                style={{marginTop: mvs(5)}}
-                label={'Orders'}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Heart />
-              </View>
-
-              <Regular
-                style={{marginTop: mvs(5)}}
-                label={'My Wishlist'}
-                fontSize={mvs(10)}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
-              <View style={styles.innerItems}>
-                <Refund />
-              </View>
-
-              <Regular
-                style={{marginTop: mvs(5)}}
-                numberOfLines={2}
-                label={'Refunds Requests'}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>

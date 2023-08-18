@@ -17,6 +17,7 @@ import PrivacyPolicy from 'screens/privacy-policy';
 import TabNavigator from './tab-navigation';
 import {TabBar} from './curvedtabs';
 import FeaturedCategories from 'screens/featured-categories';
+import ProductDetials from 'screens/product-details';
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
@@ -53,6 +54,7 @@ export const RootNavigator = () => {
             name="FeaturedCategories"
             component={FeaturedCategories}
           />
+          <Stack.Screen name="ProductDetials" component={ProductDetials} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

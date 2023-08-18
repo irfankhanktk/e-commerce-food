@@ -1,14 +1,15 @@
 import React from 'react'
-import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle,View } from 'react-native'
+import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle, View } from 'react-native'
 import { colors } from 'config/colors'
 import { mvs } from 'config/metrices'
 import Regular from '../../../typography/regular-text'
 import { Loader } from '../loader'
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Row } from '../row'
 type props = {
     onPress: () => void
     title: string
-    icon?: string,
+    Icon?: React.ReactNode,
     disabled?: boolean
     loading?: boolean
     textStyle?: StyleProp<ViewStyle>
@@ -50,23 +51,29 @@ export const IconButton = (props: props) => {
         disabled,
         loading,
         textStyle,
-        icon = 'user',
+        Icon,
         containerStyle,
     } = props;
     return (
         <TouchableOpacity disabled={disabled || loading} style={[styles.iconContainer, { backgroundColor: `${colors.primary}${disabled ? '50' : ''}`, }, containerStyle]} onPress={onPress}>
-            <Icon color={colors.white} name={icon} size={20} style={{ marginHorizontal: mvs(10) }} />
+
+
+            {Icon}
             {loading ?
-           
+
 
                 <Loader color={colors.white} />
                 :
-                <View style={{flex:1}}>
+                // <View style={{ flex: 1 }}>
 
-                    <Regular numberOfLines={1} style={[styles.iconText, textStyle]} label={title} />
-                </View>
-                }
-            
+                <Regular numberOfLines={1} style={[styles.iconText, textStyle]} label={title} />
+
+
+
+                // </View>
+            }
+
+
         </TouchableOpacity>
     )
 };
@@ -103,9 +110,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         backgroundColor: colors.primary,
-        height: mvs(80),
-        paddingHorizontal: mvs(10),
-        
+        height: mvs(50),
+        padding: mvs(10),
         borderRadius: mvs(10),
     },
     primaryText: {
@@ -114,8 +120,9 @@ const styles = StyleSheet.create({
     iconText: {
         color: colors.white,
         // marginHorizontal: mvs(10),
-        fontSize: mvs(18),
+        fontSize: mvs(15),
         lineHeight: mvs(22),
-        
+
     }
+
 })

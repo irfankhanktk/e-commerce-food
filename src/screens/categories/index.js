@@ -9,6 +9,7 @@ import styles from './styles';
 import AppHeader from 'components/atoms/headers/app-header';
 import Medium from 'typography/medium-text';
 import {colors} from 'config/colors';
+import {navigate} from 'navigation/navigation-ref';
 
 const CategoriesTab = props => {
   const featuredCategories = [
@@ -29,7 +30,12 @@ const CategoriesTab = props => {
     },
   ];
 
-  const featuredProduct = ({item}) => <FeaturedProductsCard item={item} />;
+  const featuredProduct = ({item}) => (
+    <FeaturedProductsCard
+      item={item}
+      onPress={() => navigate('ProductDetials')}
+    />
+  );
 
   return (
     <View style={styles.container}>

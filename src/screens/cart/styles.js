@@ -7,42 +7,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  contentContainerStyle: {
-    flexGrow: 1,
-    paddingHorizontal: mvs(0),
-    paddingBottom: mvs(150),
+  itemsContainer: {
+    width: mvs(56),
+    height: mvs(56),
+    backgroundColor: colors.blueHalf,
+    borderRadius: mvs(56),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  backgroundContainer: {
+  featuredContainer: {
     width: '100%',
-    height: mvs(250),
+    height: mvs(169),
     backgroundColor: colors.primary,
+    marginTop: mvs(15),
+    paddingHorizontal: mvs(10),
   },
-  inputContainer: {
-    marginTop: mvs(140),
-    backgroundColor: colors.white,
-    borderRadius: mvs(15),
-    height: mvs(570),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    paddingHorizontal: mvs(20),
-  },
-  loginTexhzologyContainer: {
-    marginTop: mvs(110),
-    alignSelf: 'center',
-    fontSize: mvs(15),
-    marginBottom: mvs(20),
-  },
-  mainInnerContainer: {
-    width: '100%',
-    position: 'absolute',
-    paddingHorizontal: mvs(20),
+  columnWrapperStyle: {
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
 });
 export default styles;

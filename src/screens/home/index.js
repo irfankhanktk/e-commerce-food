@@ -39,7 +39,12 @@ const HomeTab = props => {
   ];
 
   const renderShop = ({item}) => <FeaturedCategoriesCard item={item} />;
-  const featuredProduct = ({item}) => <FeaturedProductsCard item={item} />;
+  const featuredProduct = ({item}) => (
+    <FeaturedProductsCard
+      item={item}
+      onPress={() => navigate('ProductDetials')}
+    />
+  );
 
   return (
     <View style={styles.container}>
