@@ -5,6 +5,10 @@
   "add_to_cart":"Add To cart",
   "buy_now":"Buy Now",
   "quantity":"Quantity",
-  "shopping_cart":"Shopping Cart"
+  "shopping_cart":"Shopping Cart",
+  "my_wishlist":"My Wishlist",
+  "my_wallet":"My Wallet",
+  "wallet_balance":"Wallet Balance",
+  "recharge_wallet":"Recharge Wallet"
  
 }

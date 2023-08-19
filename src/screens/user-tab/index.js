@@ -152,7 +152,9 @@ const UserTab = props => {
         </Row>
         <View style={styles.boxContainer1}>
           <Row style={{marginTop: mvs(10)}}>
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigate('MyWallet')}
+              style={{alignItems: 'center'}}>
               <View style={styles.innerItems}>
                 <Wallet />
               </View>
@@ -173,7 +175,9 @@ const UserTab = props => {
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigate('MyWishList')}
+              style={{alignItems: 'center'}}>
               <View style={styles.innerItems}>
                 <Heart />
               </View>
