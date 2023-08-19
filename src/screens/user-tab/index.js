@@ -216,10 +216,15 @@ const UserTab = props => {
         </View>
       </View>
       <View style={{paddingHorizontal: mvs(20), marginTop: mvs(30)}}>
-        <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
-          <Shop />
-          <Regular style={{marginLeft: mvs(20)}} label={'Browse All Venders'} />
-        </Row>
+        <TouchableOpacity onPress={() => navigate('BrowseAllVenders')}>
+          <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
+            <Shop />
+            <Regular
+              style={{marginLeft: mvs(20)}}
+              label={'Browse All Venders'}
+            />
+          </Row>
+        </TouchableOpacity>
         <Row
           style={{
             justifyContent: 'flex-start',

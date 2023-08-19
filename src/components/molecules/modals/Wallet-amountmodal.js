@@ -70,7 +70,7 @@ export default WalletAmount;
 const styles = StyleSheet.create({
   contentContainerStyle: {
     width: '100%',
-    backgroundColor: colors.black,
+    backgroundColor: colors.transparent,
     flex: 1,
     justifyContent: 'center',
     paddingVertical: 0,
