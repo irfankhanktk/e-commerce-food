@@ -12,6 +12,7 @@
   "recharge_wallet":"Recharge Wallet",
   "wallet_recharge_history":"Wallet Recharge History",
   "amount":"Amount",
-  "browse_all_venders":"Browse All Venders"
+  "browse_all_venders":"Browse All Venders",
+  "refund_status":"Refund Status"
  
 }

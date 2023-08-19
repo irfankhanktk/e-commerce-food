@@ -188,7 +188,9 @@ const UserTab = props => {
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigate('RefundStatus')}
+              style={{alignItems: 'center'}}>
               <View style={styles.innerItems}>
                 <Refund />
               </View>

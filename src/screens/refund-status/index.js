@@ -7,8 +7,10 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
+import RechargeWalletCard from 'components/molecules/recharge-wallet-card';
+import RefundStatusCard from 'components/molecules/refund-status-card';
 
-const BrowseAllVenders = props => {
+const RefundStatus = props => {
   const featuredCategories = [
     {
       id: 1,
@@ -27,21 +29,22 @@ const BrowseAllVenders = props => {
     },
   ];
 
-  const featuredProduct = ({item}) => <BrowseAllVendersCard item={item} />;
+  const featuredProduct = ({item}) => <RefundStatusCard item={item} />;
 
   return (
     <View style={styles.container}>
-      <AppHeader back title={t('browse_all_venders')} />
+      <AppHeader back title={t('refund_status')} />
 
       <CustomFlatList
-        numColumns={2}
         showsVerticalScrollIndicator={false}
-        columnWrapperStyle={styles.columnWrapperStyle}
         data={featuredCategories}
         renderItem={featuredProduct}
-        contentContainerStyle={{paddingBottom: mvs(20)}}
+        contentContainerStyle={{
+          paddingBottom: mvs(20),
+          paddingHorizontal: mvs(20),
+        }}
       />
     </View>
   );
 };
-export default BrowseAllVenders;
+export default RefundStatus;
