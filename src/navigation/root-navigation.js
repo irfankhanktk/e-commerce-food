@@ -20,6 +20,7 @@ import FeaturedCategories from 'screens/featured-categories';
 import ProductDetials from 'screens/product-details';
 import MyWishList from 'screens/my-wishlist';
 import MyWallet from 'screens/my-wallet';
+import RechargeWallet from 'screens/recharge-wallet';
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
@@ -59,6 +60,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="ProductDetials" component={ProductDetials} />
           <Stack.Screen name="MyWishList" component={MyWishList} />
           <Stack.Screen name="MyWallet" component={MyWallet} />
+          <Stack.Screen name="RechargeWallet" component={RechargeWallet} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

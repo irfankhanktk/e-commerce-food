@@ -24,3 +24,5 @@ export {default as Heart} from './heart.svg';
 export {default as Message} from './message.svg';
 export {default as MessageTwo} from './messagetwo.svg';
 export {default as Delete} from './delete.svg';
+export {default as Select} from './select.svg';
+export {default as Paypal} from './paypal.svg';

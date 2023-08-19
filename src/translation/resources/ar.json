@@ -10,7 +10,10 @@
   "my_wishlist":"قائمة امنياتي",
   "my_wallet":"محفظتى",
   "wallet_balance":"رصيد المحفظة",
-  "recharge_wallet":"إعادة شحن المحفظة"
+  "recharge_wallet":"إعادة شحن المحفظة",
+  "wallet_recharge_history":"سجل إعادة شحن المحفظة",
+  "amount":"كمية"
+
 
 
 

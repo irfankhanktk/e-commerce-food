@@ -1,6 +1,5 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
-import FeaturedProductsCard from 'components/molecules/featured-products-card';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
@@ -14,6 +13,8 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {colors} from 'config/colors';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
+import WalletHistoryCard from 'components/molecules/wallet-history-card';
+import WalletAmount from 'components/molecules/modals/Wallet-amountmodal';
 
 const MyWallet = props => {
   const featuredCategories = [
@@ -33,13 +34,12 @@ const MyWallet = props => {
       id: 3,
     },
   ];
+  const [amountModal, setAmountModal] = React.useState(false);
+  const [value, setValue] = React.useState('');
 
-  // const featuredProduct = ({item}) => (
-  //   <FeaturedProductsCard
-  //     item={item}
-  //     onPress={() => navigate('ProductDetials')}
-  //   />
-  // );
+  const featuredProduct = ({item}) => (
+    <WalletHistoryCard item={item} onPress={() => navigate('ProductDetials')} />
+  );
 
   return (
     <View style={styles.container}>
@@ -55,20 +55,32 @@ const MyWallet = props => {
           />
         </View>
 
-        <TouchableOpacity style={styles.rechargeContainer}>
+        <TouchableOpacity
+          onPress={() => setAmountModal(true)}
+          style={styles.rechargeContainer}>
           <Medium label={t('recharge_wallet')} />
           <Bold fontSize={mvs(20)} label={'+'} />
         </TouchableOpacity>
       </Row>
-
-      {/* <CustomFlatList
-        numColumns={2}
+      <Medium
+        style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
+        label={t('wallet_recharge_history')}
+      />
+      <CustomFlatList
         showsVerticalScrollIndicator={false}
-        columnWrapperStyle={styles.columnWrapperStyle}
         data={featuredCategories}
         renderItem={featuredProduct}
-        contentContainerStyle={{paddingBottom: mvs(20)}}
-      /> */}
+        contentContainerStyle={{
+          paddingBottom: mvs(20),
+          paddingHorizontal: mvs(20),
+        }}
+      />
+      <WalletAmount
+        onClose={() => setAmountModal(false)}
+        visible={amountModal}
+        setValue={setValue}
+        value={value}
+      />
     </View>
   );
 };

@@ -9,6 +9,8 @@
   "my_wishlist":"My Wishlist",
   "my_wallet":"My Wallet",
   "wallet_balance":"Wallet Balance",
-  "recharge_wallet":"Recharge Wallet"
+  "recharge_wallet":"Recharge Wallet",
+  "wallet_recharge_history":"Wallet Recharge History",
+  "amount":"Amount"
  
 }
