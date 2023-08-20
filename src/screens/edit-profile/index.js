@@ -92,7 +92,7 @@ const EditProfile = props => {
           />
         </View>
         <UpdatedProfileModal
-          onClose={() => setUpdatedModat(false)}
+          onClose={() => setUpdatedModal(false)}
           visible={updatedModal}
         />
         <UpdatedPasswordModal

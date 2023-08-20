@@ -141,7 +141,9 @@ const UserTab = props => {
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('AddressDetails')}
+            style={{alignItems: 'center'}}>
             <View style={styles.itemsContainer}>
               <Location />
             </View>

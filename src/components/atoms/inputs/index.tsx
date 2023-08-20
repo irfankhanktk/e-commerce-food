@@ -16,7 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import PhoneInput from 'react-native-phone-number-input';
 import Regular from 'typography/regular-text';
-import { mvs } from 'config/metrices';
+import { mvs, width } from 'config/metrices';
 import { colors } from 'config/colors';
 import Medium from 'typography/medium-text';
 import { Row } from '../row';
@@ -369,7 +369,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(10),
     backgroundColor: colors.white,
     borderRadius: mvs(15),
-    borderStyle: 'solid'
+    borderStyle: 'solid',
+    width: '100%',
 
   },
   commentContainer: {
