@@ -14,7 +14,21 @@
   "wallet_recharge_history":"سجل إعادة شحن المحفظة",
   "amount":"كمية",
   "browse_all_venders":"تصفح جميع الباعة",
-  "refund_status":"حالة رد الأموال"
+  "refund_status":"حالة رد الأموال",
+  "edit_profile":"تعديل الملف الشخصي",
+  "name":"اسم",
+  "phone":"هاتف",
+  "email":"بريد إلكتروني",
+  "new_password":"كلمة المرور الجديدة",
+  "retype_password":"أعد إدخال كلمة السر",
+  "update_password":"تطوير كلمة السر",
+  "update_profile":"تحديث الملف",
+  "password_changes":"تغيير كلمة المرور",
+  "basic_information":"معلومات اساسية",
+  "your_profile_has_been_updated":"تم تحديث ملفك الشخصي",
+  "your_password_has_been_updated":"لقد تم تحديث كلمة السر الخاصة بك"
+
+
 
 
 

@@ -9,7 +9,7 @@ import {colors} from 'config/colors';
 
 const FeaturedProducts = ({item, style, onPress, loading}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <View style={styles.container}>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           borderRadius={mvs(10)}
@@ -18,6 +18,7 @@ const FeaturedProducts = ({item, style, onPress, loading}) => {
           {/* <Image source={{uri: item?.image}} style={styles.innerImage} /> */}
         </ImageBackground>
         <PrimaryButton
+          onPress={onPress}
           containerStyle={styles.btnAddtoCart}
           title="Add To Cart"
         />
@@ -38,7 +39,7 @@ const FeaturedProducts = ({item, style, onPress, loading}) => {
           <Regular label={'$120.000'} fontSize={mvs(12)} />
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 export default React.memo(FeaturedProducts);

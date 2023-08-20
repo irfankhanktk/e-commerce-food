@@ -13,6 +13,19 @@
   "wallet_recharge_history":"Wallet Recharge History",
   "amount":"Amount",
   "browse_all_venders":"Browse All Venders",
-  "refund_status":"Refund Status"
+  "refund_status":"Refund Status",
+  "edit_profile":"Edit Profile",
+  "name":"Name",
+  "phone":"Phone",
+  "email":"Email",
+  "new_password":"New Password",
+  "retype_password":"Retype Password",
+  "update_password":"Update Password",
+  "update_profile":"Update profile",
+  "password_changes":"Password Changes",
+  "basic_information":"Basic Information",
+  "your_profile_has_been_updated":"Your profile has been updated",
+  "your_password_has_been_updated":"Your password has been updated"
+
  
 }

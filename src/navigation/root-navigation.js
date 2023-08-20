@@ -23,6 +23,7 @@ import MyWallet from 'screens/my-wallet';
 import RechargeWallet from 'screens/recharge-wallet';
 import BrowseAllVenders from 'screens/browse-all-venders';
 import RefundStatus from 'screens/refund-status';
+import EditProfile from 'screens/edit-profile';
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
@@ -65,6 +66,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="RechargeWallet" component={RechargeWallet} />
           <Stack.Screen name="BrowseAllVenders" component={BrowseAllVenders} />
           <Stack.Screen name="RefundStatus" component={RefundStatus} />
+          <Stack.Screen name="EditProfile" component={EditProfile} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

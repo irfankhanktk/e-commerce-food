@@ -129,7 +129,9 @@ const UserTab = props => {
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('EditProfile')}
+            style={{alignItems: 'center'}}>
             <View style={styles.itemsContainer}>
               <UserEdit />
             </View>

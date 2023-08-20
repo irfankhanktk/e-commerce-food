@@ -38,7 +38,12 @@ const HomeTab = props => {
     },
   ];
 
-  const renderShop = ({item}) => <FeaturedCategoriesCard item={item} />;
+  const renderShop = ({item}) => (
+    <FeaturedCategoriesCard
+      item={item}
+      onPress={() => navigate('FeaturedCategories')}
+    />
+  );
   const featuredProduct = ({item}) => (
     <FeaturedProductsCard
       item={item}
@@ -87,17 +92,16 @@ const HomeTab = props => {
               </TouchableOpacity>
             </Row>
             <View style={styles.featuredContainer}>
-              <TouchableOpacity onPress={() => navigate('FeaturedCategories')}>
-                <Medium
-                  style={{
-                    marginTop: mvs(5),
-                    marginBottom: mvs(10),
-                    marginLeft: mvs(10),
-                  }}
-                  color={colors.white}
-                  label={'Featured Categories'}
-                />
-              </TouchableOpacity>
+              <Medium
+                style={{
+                  marginTop: mvs(5),
+                  marginBottom: mvs(10),
+                  marginLeft: mvs(10),
+                }}
+                color={colors.white}
+                label={'Featured Categories'}
+              />
+
               <CustomFlatList
                 horizontal={true}
                 showsVerticalScrollIndicator={false}
