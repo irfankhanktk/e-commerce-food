@@ -45,7 +45,8 @@ const AddressDetails = props => {
       <AppHeader back title={t('address_details')} />
       <View style={{paddingHorizontal: mvs(20)}}>
         <TouchableOpacity
-          onPress={() => setSelectModal(true)}
+          // onPress={() => setSelectModal(true)}
+          onPress={() => navigate('Location')}
           style={styles.newAddressContainer}>
           <Medium label={'No Addresses Is Added'} />
           <Bold fontSize={mvs(22)} label={'+'} />

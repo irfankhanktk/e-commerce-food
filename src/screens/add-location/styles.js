@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    height: mvs(400),
+    height: mvs(350),
     width: '100%',
     backgroundColor: colors.white,
     position: 'absolute',
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flex: 1,
     borderRadius: mvs(10),
+    paddingHorizontal: mvs(20),
   },
   inputContainerStyle: {
     borderWidth: 0,

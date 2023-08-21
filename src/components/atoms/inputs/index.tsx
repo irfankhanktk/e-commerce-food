@@ -456,6 +456,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     ...colors.shadow,
+    width: '100%'
   },
   searchIcon: {
     // backgroundColor: colors.primary,

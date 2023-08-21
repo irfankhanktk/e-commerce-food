@@ -9,7 +9,7 @@ import AppHeader from 'components/atoms/headers/app-header';
 import i18n from 'translation';
 import styles from './styles';
 import ChatCard from 'components/molecules/chat-card';
-const MessageTab = props => {
+const InboxMessage = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const featuredCategories = [
@@ -30,7 +30,7 @@ const MessageTab = props => {
     },
   ];
   const featuredProduct = ({item}) => (
-    <ChatCard item={item} onPress={() => navigate('InboxMessage')} />
+    <ChatCard item={item} onPress={() => navigate('ProductDetials')} />
   );
   return (
     <View style={styles.container}>
@@ -47,4 +47,4 @@ const MessageTab = props => {
     </View>
   );
 };
-export default MessageTab;
+export default InboxMessage;

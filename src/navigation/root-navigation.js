@@ -25,7 +25,8 @@ import BrowseAllVenders from 'screens/browse-all-venders';
 import RefundStatus from 'screens/refund-status';
 import EditProfile from 'screens/edit-profile';
 import AddressDetails from 'screens/address-details';
-import Location from 'screens/location';
+import AddLocation from 'screens/add-location';
+import InboxMessage from 'screens/inbox-message';
 
 const Stack = createNativeStackNavigator();
 
@@ -71,7 +72,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="RefundStatus" component={RefundStatus} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="AddressDetails" component={AddressDetails} />
-          <Stack.Screen name="Location" component={Location} />
+          <Stack.Screen name="Location" component={AddLocation} />
+          <Stack.Screen name="InboxMessage" component={InboxMessage} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

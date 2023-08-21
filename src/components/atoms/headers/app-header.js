@@ -45,17 +45,17 @@ const AppHeader = ({
         ) : (
           <></>
         )}
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          {icon ? (
+        {icon ? (
+          <TouchableOpacity onPress={() => navigation?.goBack()}>
             <AntDesign
               name={'sharealt'}
               size={mvs(20)}
               color={colors.primary}
             />
-          ) : (
-            <></>
-          )}
-        </TouchableOpacity>
+          </TouchableOpacity>
+        ) : (
+          <View></View>
+        )}
       </Row>
     </View>
   );
