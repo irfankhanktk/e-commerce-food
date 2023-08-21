@@ -27,3 +27,4 @@ export {default as Delete} from './delete.svg';
 export {default as Select} from './select.svg';
 export {default as Paypal} from './paypal.svg';
 export {default as Edit} from './edit.svg';
+export {default as CurrentLocation} from './current-loc.svg';

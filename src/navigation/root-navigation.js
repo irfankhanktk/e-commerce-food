@@ -14,7 +14,7 @@ import UpdatePassword from 'screens/update-password';
 import {horizontalAnimation} from '../utils';
 import TermsAndConditions from 'screens/terms-conditions';
 import PrivacyPolicy from 'screens/privacy-policy';
-import TabNavigator from './tab-navigation';
+// import TabNavigator from './tab-navigation';
 import {TabBar} from './curvedtabs';
 import FeaturedCategories from 'screens/featured-categories';
 import ProductDetials from 'screens/product-details';
@@ -25,6 +25,8 @@ import BrowseAllVenders from 'screens/browse-all-venders';
 import RefundStatus from 'screens/refund-status';
 import EditProfile from 'screens/edit-profile';
 import AddressDetails from 'screens/address-details';
+import Location from 'screens/location';
+
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
@@ -47,8 +49,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
           <Stack.Screen name="RenewPassword" component={RenewPassword} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-          {/* <Stack.Screen name="TabNavigator" component={TabNavigator} /> */}
           <Stack.Screen name="TabNavigator" component={TabBar} />
+          {/* <Stack.Screen name="Drawer" component={DrawerNavigation} /> */}
           <Stack.Screen
             name="TermsAndConditions"
             component={TermsAndConditions}
@@ -69,6 +71,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="RefundStatus" component={RefundStatus} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="AddressDetails" component={AddressDetails} />
+          <Stack.Screen name="Location" component={Location} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

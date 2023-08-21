@@ -34,7 +34,7 @@ const CartCard = ({item, style, onPress, loading}) => {
             }
           />
           <Row style={{marginTop: mvs(5)}}>
-            <Regular label={'$120.000'} />
+            <Regular style={{flex: 1}} label={'$120.000'} />
             <TouchableOpacity>
               <Delete />
             </TouchableOpacity>

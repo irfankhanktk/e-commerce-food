@@ -53,8 +53,6 @@ const styles = StyleSheet.create({
   },
   passCode: {marginLeft: mvs(30), fontSize: mvs(12), color: colors.darkBlack},
   dotContainer: {
-    width: mvs(100),
-    height: mvs(110),
     backgroundColor: 'white',
     position: 'absolute',
     alignSelf: 'flex-end',

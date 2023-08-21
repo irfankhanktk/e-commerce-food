@@ -11,6 +11,7 @@ import {t} from 'i18next';
 import Entypo from 'react-native-vector-icons/Entypo';
 import SelectEditModal from '../modals/select-edit-modal';
 import AddressAddedSucessfully from '../modals/address-add-sucessfully';
+import {navigate} from 'navigation/navigation-ref';
 
 const AddressCard = ({item, style, onPress, loading}) => {
   const [select, setSelect] = React.useState(true);
@@ -70,7 +71,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               label={t('delete')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigate('Location')}>
             <Regular
               style={{color: colors.darkBlack, marginTop: mvs(10)}}
               fontSize={mvs(12)}
