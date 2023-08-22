@@ -45,7 +45,7 @@ const OrderHistory = props => {
   ];
 
   const featuredProduct = ({item}) => (
-    <OrderHistoryCard item={item} onPress={() => navigate('ProductDetials')} />
+    <OrderHistoryCard item={item} onPress={() => navigate('OrderDetails')} />
   );
 
   return (
@@ -60,7 +60,7 @@ const OrderHistory = props => {
               style={{
                 paddingHorizontal: mvs(5),
               }}>
-              <Regular fontSize={mvs(12)} label={selectByPayment} />
+              <Regular fontSize={mvs(12)} label={t(selectByPayment)} />
               <Entypo
                 name={'chevron-small-right'}
                 size={20}
@@ -77,14 +77,14 @@ const OrderHistory = props => {
             <View style={styles.dotContainer}>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('All');
+                  setSelectByPayment('all');
                   setSelect(!select);
                 }}>
                 <Regular color={colors.darkBlack} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('Paid');
+                  setSelectByPayment('paid');
                   setSelect(!select);
                 }}>
                 <Regular
@@ -94,7 +94,7 @@ const OrderHistory = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('Unpaid');
+                  setSelectByPayment('unpaid');
                   setSelect(!select);
                 }}>
                 <Regular
@@ -118,7 +118,7 @@ const OrderHistory = props => {
               style={{
                 paddingHorizontal: mvs(5),
               }}>
-              <Regular fontSize={mvs(12)} label={selectByDelivery} />
+              <Regular fontSize={mvs(12)} label={t(selectByDelivery)} />
               <Entypo
                 name={'chevron-small-right'}
                 size={20}
@@ -133,14 +133,14 @@ const OrderHistory = props => {
             <View style={styles.deliverdContainer}>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('All');
+                  setSelectByDelivery('all');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular color={colors.darkBlack} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('Confirmed');
+                  setSelectByDelivery('confirmed');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
@@ -150,7 +150,7 @@ const OrderHistory = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('On Delivery');
+                  setSelectByDelivery('on_delivery');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
@@ -161,7 +161,7 @@ const OrderHistory = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('Delivered');
+                  setSelectByDelivery('delivered');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular

@@ -36,7 +36,16 @@
   "postal_code":"رمز بريدي",
   "add":"يضيف",
   "close":"يغلق",
-  "your_new_address_had_been_added":"تمت إضافة عنوانك الجديد بنجاح!"
+  "your_new_address_had_been_added":"تمت إضافة عنوانك الجديد بنجاح!",
+  "all":"الجميع",
+  "paid":"مدفوع",
+  "unpaid":"غير مدفوعة",
+  "confirmed":"مؤكد",
+  "on_delivery":"عند التسليم",
+  "delivered":"تم التوصيل",
+  "order_history":"تاريخ الطلب",
+  "order_details":"تفاصيل الطلب"
+  
   
 
 

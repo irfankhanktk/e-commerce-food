@@ -28,6 +28,7 @@ import AddressDetails from 'screens/address-details';
 import AddLocation from 'screens/add-location';
 import InboxMessage from 'screens/inbox-message';
 import OrderHistory from 'screens/order-history';
+import OrderDetails from 'screens/order-details';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +77,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="Location" component={AddLocation} />
           <Stack.Screen name="InboxMessage" component={InboxMessage} />
           <Stack.Screen name="OrderHistory" component={OrderHistory} />
+          <Stack.Screen name="OrderDetails" component={OrderDetails} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

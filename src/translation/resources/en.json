@@ -35,7 +35,15 @@
   "postal_code":"Postal Code",
   "add":"Add",
   "close":"Close",
-  "your_new_address_had_been_added":"Your New Address has been added successfully!"
+  "your_new_address_had_been_added":"Your New Address has been added successfully!",
+  "all":"All",
+  "paid":"Paid",
+  "unpaid":"Unpaid",
+  "confirmed":"Confirmed",
+  "on_delivery":"On Delivery",
+  "delivered":"Delivered",
+  "order_history":"Order History",
+  "order_details":"Order Details"
 
 
  

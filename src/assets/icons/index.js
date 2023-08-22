@@ -34,3 +34,7 @@ export {default as CreaditCard} from './credit-card.svg';
 export {default as Delivery} from './delivery.svg';
 export {default as DeliveryTwo} from './deliverytwo.svg';
 export {default as ClanderTwo} from './cleandertwo.svg';
+export {default as ShoppingBag} from './shopping-bag.svg';
+export {default as Like} from './like.svg';
+export {default as DeliveryThree} from './deliverythree.svg';
+export {default as Tick} from './tick.svg';
