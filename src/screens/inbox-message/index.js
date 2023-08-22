@@ -19,6 +19,8 @@ import {colors} from 'config/colors';
 import {ford, forklift} from 'assets/images';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
+import {MessageInput} from 'components/atoms/inputs';
+import Feather from 'react-native-vector-icons/Feather';
 const InboxMessage = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
@@ -32,6 +34,14 @@ const InboxMessage = props => {
     },
     {
       id: 3,
+    },
+    {
+      id: 3,
+      me: true,
+    },
+    {
+      id: 3,
+      me: false,
     },
     {
       id: 3,
@@ -76,6 +86,7 @@ const InboxMessage = props => {
         </Row>
       </View>
       <CustomFlatList
+        inverted
         showsVerticalScrollIndicator={false}
         data={featuredCategories}
         renderItem={featuredProduct}
@@ -84,6 +95,18 @@ const InboxMessage = props => {
           paddingHorizontal: mvs(20),
         }}
       />
+
+      <Row
+        style={{
+          marginHorizontal: mvs(20),
+          alignItems: 'center',
+          paddingBottom: mvs(20),
+        }}>
+        <MessageInput />
+        <TouchableOpacity style={styles.sendIcon}>
+          <Feather name={'send'} size={25} color={colors.white} />
+        </TouchableOpacity>
+      </Row>
     </View>
   );
 };

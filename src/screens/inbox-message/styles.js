@@ -27,5 +27,14 @@ const styles = StyleSheet.create({
     height: mvs(30),
     marginTop: mvs(10),
   },
+  sendIcon: {
+    width: mvs(50),
+    height: mvs(52),
+    backgroundColor: colors.primary,
+    borderRadius: mvs(10),
+    marginLeft: mvs(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 export default styles;

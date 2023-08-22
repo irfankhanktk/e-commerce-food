@@ -168,7 +168,9 @@ const UserTab = props => {
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={{alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => navigate('OrderHistory')}
+              style={{alignItems: 'center'}}>
               <View style={styles.innerItems}>
                 <Carttt />
               </View>

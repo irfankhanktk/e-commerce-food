@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
         height: mvs(50),
         padding: mvs(10),
         borderRadius: mvs(10),
+
     },
     primaryText: {
         color: colors.white,

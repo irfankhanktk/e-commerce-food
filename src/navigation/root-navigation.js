@@ -27,6 +27,7 @@ import EditProfile from 'screens/edit-profile';
 import AddressDetails from 'screens/address-details';
 import AddLocation from 'screens/add-location';
 import InboxMessage from 'screens/inbox-message';
+import OrderHistory from 'screens/order-history';
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="AddressDetails" component={AddressDetails} />
           <Stack.Screen name="Location" component={AddLocation} />
           <Stack.Screen name="InboxMessage" component={InboxMessage} />
+          <Stack.Screen name="OrderHistory" component={OrderHistory} />
         </Stack.Group>
       </Stack.Navigator>
     </View>
