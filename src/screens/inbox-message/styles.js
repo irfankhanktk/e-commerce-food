@@ -12,37 +12,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: mvs(0),
     paddingBottom: mvs(150),
   },
-  backgroundContainer: {
-    width: '100%',
-    height: mvs(250),
-    backgroundColor: colors.primary,
+  imageContainer: {
+    height: mvs(60),
+    borderColor: colors.primary,
+    borderWidth: 1,
+    width: mvs(60),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: mvs(10),
+    marginLeft: mvs(20),
   },
-  inputContainer: {
-    marginTop: mvs(140),
-    backgroundColor: colors.white,
-    borderRadius: mvs(15),
-    height: mvs(570),
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-    paddingHorizontal: mvs(20),
-  },
-  loginTexhzologyContainer: {
-    marginTop: mvs(110),
-    alignSelf: 'center',
-    fontSize: mvs(15),
-    marginBottom: mvs(20),
-  },
-  mainInnerContainer: {
-    width: '100%',
-    position: 'absolute',
-    paddingHorizontal: mvs(20),
+  backGroundImage: {
+    width: mvs(45),
+    height: mvs(30),
+    marginTop: mvs(10),
   },
 });
 export default styles;

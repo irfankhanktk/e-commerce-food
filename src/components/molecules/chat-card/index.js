@@ -11,7 +11,7 @@ import Bold from 'typography/bold-text';
 
 const ChatCard = ({item, style, onPress, loading}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Row style={styles.InnerContainer}>
         <View style={styles.imageContainer}>
           <ImageBackground
@@ -27,7 +27,7 @@ const ChatCard = ({item, style, onPress, loading}) => {
         </View>
         <Regular label={'08:06'} />
       </Row>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default React.memo(ChatCard);

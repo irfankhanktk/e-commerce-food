@@ -9,6 +9,7 @@ import AppHeader from 'components/atoms/headers/app-header';
 import i18n from 'translation';
 import styles from './styles';
 import ChatCard from 'components/molecules/chat-card';
+
 const MessageTab = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;

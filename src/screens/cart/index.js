@@ -1,23 +1,16 @@
-import {IconButton, PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
-import AppHeader from 'components/atoms/headers/app-header';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
-import {Row} from 'components/atoms/row';
-import Stars from 'components/atoms/stars';
-import i18n from 'translation';
-import Regular from 'typography/regular-text';
-import styles from './styles';
-import {colors} from 'config/colors';
-import {MessageTwo, Carttt, CartWhite} from 'assets/icons';
-import DescriptionCard from 'components/atoms/description-card';
-import {CarrtActive, Cart} from 'assets/icons/tab-icons';
-import Medium from 'typography/medium-text';
 import CustomFlatList from 'components/atoms/custom-flatlist';
-import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
-import CartCard from 'components/molecules/cart-card';
+import AppHeader from 'components/atoms/headers/app-header';
+import {Row} from 'components/atoms/row';
+
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
+import React from 'react';
+import {View} from 'react-native';
+import i18n from 'translation';
+import Medium from 'typography/medium-text';
+import styles from './styles';
+import CartCard from 'components/molecules/cart-card';
 
 const CartTab = props => {
   const {t} = i18n;
