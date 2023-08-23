@@ -44,7 +44,27 @@
   "on_delivery":"عند التسليم",
   "delivered":"تم التوصيل",
   "order_history":"تاريخ الطلب",
-  "order_details":"تفاصيل الطلب"
+  "order_details":"تفاصيل الطلب",
+  "do_you_want_to_cancle_this_order?":"هل تريد إلغاء هذا الطلب؟",
+  "please_ensure_us.":"يرجى التأكد منا.",
+  "no":"لا",
+  "yes":"نعم",
+  "order_code":"رمز الطلب",
+  "shipping_method":"طريقة الشحن",
+  "order_date":"تاريخ الطلب",
+  "payment_method":"طريقة الدفع او السداد",
+  "payment_status":"حالة السداد",
+  "delivery_status":"حالة التسليم",
+  "shipping_address":"عنوان الشحن",
+  "total_amount":"المبلغ الإجمالي",
+  "ordered_product":"المنتج المطلوب",
+  "ask_for_refund":"اطلب استرداد الأموال",
+  "sub_total":"المجموع الفرعي",
+  "tax":"ضريبة",
+  "shipping_discount":"خصم الشحن",
+  "discount":"تخفيض",
+  "grand_total":"المجموع الإجمالي",
+  "cancle_order":"الغاء الطلب"
   
   
 

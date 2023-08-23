@@ -43,7 +43,27 @@
   "on_delivery":"On Delivery",
   "delivered":"Delivered",
   "order_history":"Order History",
-  "order_details":"Order Details"
+  "order_details":"Order Details",
+  "do_you_want_to_cancle_this_order?":"DO YOU WANT TO CANCLE THIS ORDER ?",
+  "please_ensure_us.":"Please Ensure Us.",
+  "no":"No",
+  "yes":"Yes",
+  "order_code":"Order Code",
+  "shipping_method":"Shipping Method",
+  "order_date":"Order Date",
+  "payment_method":"Payment Method",
+  "payment_status":"Payment Status",
+  "delivery_status":"Delivery Status",
+  "shipping_address":"Shipping Address",
+  "total_amount":"Total Amount",
+  "ordered_product":"Ordered Product",
+  "ask_for_refund":"Ask for refund",
+  "sub_total":"Sub Total",
+  "tax":"Tax",
+  "shipping_discount":"Shipping Discount",
+  "discount":"Discount",
+  "grand_total":"Grand Total",
+  "cancle_order":"Cancle Order"
 
 
  

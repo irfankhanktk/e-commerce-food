@@ -52,6 +52,9 @@ const CartTab = props => {
           paddingBottom: mvs(20),
         }}
       />
+      <View>
+        <View></View>
+      </View>
     </View>
   );
 };

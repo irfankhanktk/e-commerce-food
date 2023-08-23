@@ -38,3 +38,5 @@ export {default as ShoppingBag} from './shopping-bag.svg';
 export {default as Like} from './like.svg';
 export {default as DeliveryThree} from './deliverythree.svg';
 export {default as Tick} from './tick.svg';
+export {default as RefundTwo} from './refundtwo.svg';
+export {default as TickTwo} from './ticktwo.svg';
