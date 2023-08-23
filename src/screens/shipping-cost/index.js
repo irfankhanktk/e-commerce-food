@@ -36,11 +36,12 @@ const ShippingCost = props => {
       selected: false,
     },
   ]);
+  const [select, setSelect] = React.useState(true);
   const featuredProduct = ({item}) => <ShippingCostCard item={item} />;
 
   return (
     <View style={styles.container}>
-      <AppHeader back title={t('shipping_info  $18')} />
+      <AppHeader back title={t('shipping_cost  $18')} />
       <Medium
         label={t('inhouse_product')}
         style={{paddingHorizontal: mvs(20)}}
