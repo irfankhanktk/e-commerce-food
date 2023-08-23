@@ -15,26 +15,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  featuredContainer: {
+  newAddressContainer: {
     width: '100%',
-    height: mvs(169),
-    backgroundColor: colors.primary,
-    marginTop: mvs(15),
-    paddingHorizontal: mvs(10),
-  },
-  columnWrapperStyle: {
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-  },
-
-  bottomContainer: {
-    width: '100%',
-    paddingVertical: mvs(10),
-    paddingHorizontal: mvs(20),
+    paddingVertical: mvs(20),
     backgroundColor: colors.blueHalf,
-    marginBottom: mvs(20),
-    marginTop: mvs(10),
+
+    marginTop: mvs(20),
     borderRadius: mvs(10),
+    alignItems: 'center',
+  },
+  backGroundImage: {
+    width: mvs(77),
+    height: mvs(56),
+    marginTop: mvs(10),
   },
 });
 export default styles;

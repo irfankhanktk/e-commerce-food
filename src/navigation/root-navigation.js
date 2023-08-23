@@ -29,6 +29,8 @@ import AddLocation from 'screens/add-location';
 import InboxMessage from 'screens/inbox-message';
 import OrderHistory from 'screens/order-history';
 import OrderDetails from 'screens/order-details';
+import ShippingInfo from 'screens/shipping-info';
+import ShippingCost from 'screens/shipping-cost';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +80,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="InboxMessage" component={InboxMessage} />
           <Stack.Screen name="OrderHistory" component={OrderHistory} />
           <Stack.Screen name="OrderDetails" component={OrderDetails} />
+          <Stack.Screen name="ShippingInfo" component={ShippingInfo} />
+          <Stack.Screen name="ShippingCost" component={ShippingCost} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

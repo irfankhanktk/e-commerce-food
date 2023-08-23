@@ -11,6 +11,8 @@ import i18n from 'translation';
 import Medium from 'typography/medium-text';
 import styles from './styles';
 import CartCard from 'components/molecules/cart-card';
+import Regular from 'typography/regular-text';
+import {PrimaryButton} from 'components/atoms/buttons';
 
 const CartTab = props => {
   const {t} = i18n;
@@ -52,8 +54,18 @@ const CartTab = props => {
           paddingBottom: mvs(20),
         }}
       />
-      <View>
-        <View></View>
+      <View style={{paddingHorizontal: mvs(20)}}>
+        <View style={styles.bottomContainer}>
+          <Row>
+            <Regular label={t('total_amount')} />
+            <Regular label={'$12000'} />
+          </Row>
+        </View>
+        <PrimaryButton
+          onPress={() => navigate('ShippingInfo')}
+          containerStyle={{marginBottom: mvs(15)}}
+          title={t('proceed_to_shipping')}
+        />
       </View>
     </View>
   );
