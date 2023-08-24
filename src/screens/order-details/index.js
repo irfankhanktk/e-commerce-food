@@ -21,14 +21,17 @@ import Medium from 'typography/medium-text';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {PrimaryButton} from 'components/atoms/buttons';
 import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
+import CustomMap from 'components/atoms/custom-map';
+import MapDirections from 'components/atoms/custom-map-direction';
+import {navigate} from 'navigation/navigation-ref';
 
 const OrderDetails = props => {
   const {status, order} = props?.route?.params || {};
   const data = order;
-  console.log(status);
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
-
+  const origin = {latitude: 31.560249, longitude: 74.362284};
+  const destination = {latitude: 31.556014, longitude: 74.354795};
   return (
     <View style={styles.container}>
       <AppHeader back title={t('order_details')} />
@@ -129,7 +132,21 @@ const OrderDetails = props => {
           <Row>
             <View style={{width: '45%'}}>
               <Regular style={styles.title} label={t('payment_status')} />
-              <Regular fontSize={mvs(12)} label={'Unpaid'} />
+              <Row>
+                <Regular fontSize={mvs(12)} label={'Unpaid'} />
+                <View
+                  style={[
+                    styles.paidContainer,
+                    {
+                      backgroundColor:
+                        data?.payment_status === 'Paid'
+                          ? colors.green
+                          : colors.red,
+                    },
+                  ]}>
+                  <TickTwo />
+                </View>
+              </Row>
             </View>
             <View style={{width: '45%'}}>
               <Regular style={styles.title} label={t('delivery_status')} />
@@ -195,56 +212,70 @@ const OrderDetails = props => {
           </Row>
         </View>
 
-        <Medium
-          style={{paddingVertical: mvs(10)}}
-          label={t('ordered_product')}
-        />
-        <Row style={styles.orderContainer}>
-          <View style={styles.idContainer} />
-          <View style={styles.orderInnerContainer}>
-            <Row>
-              <Regular fontSize={mvs(12)} label={'Shipping Container'} />
-              <Regular fontSize={mvs(12)} label={'$120.000'} />
-            </Row>
-            <Row style={{marginTop: mvs(5)}}>
-              <Regular fontSize={mvs(12)} label={'2 x item'} />
-              <TouchableOpacity>
-                <Row>
-                  <Regular fontSize={mvs(12)} label={t('ask_for_refund')} />
-                  <RefundTwo />
-                </Row>
-              </TouchableOpacity>
-            </Row>
+        {status === '4' ? (
+          <View style={styles.mapContainer}>
+            <CustomMap>
+              <MapDirections origin={origin} destination={destination} />
+            </CustomMap>
           </View>
-        </Row>
-        <View style={styles.innerContainer}>
-          <Row>
-            <Regular fontSize={mvs(12)} label={t('sub_total')} />
-            <Regular fontSize={mvs(12)} label={'$12000.00'} />
-          </Row>
-          <Row>
-            <Regular fontSize={mvs(12)} label={t('tax')} />
-            <Regular fontSize={mvs(12)} label={'$0.00'} />
-          </Row>
-          <Row>
-            <Regular fontSize={mvs(12)} label={t('shipping_cost')} />
-            <Regular fontSize={mvs(12)} label={'$12.00'} />
-          </Row>
-          <Row>
-            <Regular fontSize={mvs(12)} label={t('discount')} />
-            <Regular fontSize={mvs(12)} label={'$10.00'} />
-          </Row>
-          <View style={styles.innerLine} />
-          <Row>
-            <Regular fontSize={mvs(12)} label={t('grand_total')} />
-            <Regular fontSize={mvs(12)} label={'$1300.00'} />
-          </Row>
-        </View>
-        <PrimaryButton
-          onPress={() => setOrderConfirmationModal(true)}
-          containerStyle={{marginTop: mvs(25)}}
-          title={t(status === '3' ? 'tracking' : 'cancle_order')}
-        />
+        ) : (
+          <>
+            <Medium
+              style={{paddingVertical: mvs(10)}}
+              label={t('ordered_product')}
+            />
+            <Row style={styles.orderContainer}>
+              <View style={styles.idContainer} />
+              <View style={styles.orderInnerContainer}>
+                <Row>
+                  <Regular fontSize={mvs(12)} label={'Shipping Container'} />
+                  <Regular fontSize={mvs(12)} label={'$120.000'} />
+                </Row>
+                <Row style={{marginTop: mvs(5)}}>
+                  <Regular fontSize={mvs(12)} label={'2 x item'} />
+                  <TouchableOpacity>
+                    <Row>
+                      <Regular fontSize={mvs(12)} label={t('ask_for_refund')} />
+                      <RefundTwo />
+                    </Row>
+                  </TouchableOpacity>
+                </Row>
+              </View>
+            </Row>
+            <View style={styles.innerContainer}>
+              <Row>
+                <Regular fontSize={mvs(12)} label={t('sub_total')} />
+                <Regular fontSize={mvs(12)} label={'$12000.00'} />
+              </Row>
+              <Row>
+                <Regular fontSize={mvs(12)} label={t('tax')} />
+                <Regular fontSize={mvs(12)} label={'$0.00'} />
+              </Row>
+              <Row>
+                <Regular fontSize={mvs(12)} label={t('shipping_cost')} />
+                <Regular fontSize={mvs(12)} label={'$12.00'} />
+              </Row>
+              <Row>
+                <Regular fontSize={mvs(12)} label={t('discount')} />
+                <Regular fontSize={mvs(12)} label={'$10.00'} />
+              </Row>
+              <View style={styles.innerLine} />
+              <Row>
+                <Regular fontSize={mvs(12)} label={t('grand_total')} />
+                <Regular fontSize={mvs(12)} label={'$1300.00'} />
+              </Row>
+            </View>
+            <PrimaryButton
+              onPress={() => {
+                status === '3'
+                  ? navigate('Tracking')
+                  : setOrderConfirmationModal(true);
+              }}
+              containerStyle={{marginTop: mvs(25)}}
+              title={t(status === '3' ? 'tracking' : 'cancle_order')}
+            />
+          </>
+        )}
       </KeyboardAvoidScrollview>
 
       <OrderConfirmationModal

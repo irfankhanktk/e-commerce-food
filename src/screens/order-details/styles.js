@@ -88,5 +88,22 @@ const styles = StyleSheet.create({
     fontSize: mvs(12),
     marginLeft: mvs(5),
   },
+  mapContainer: {
+    height: mvs(200),
+    borderWidth: 1,
+    borderColor: colors.primary,
+    marginTop: mvs(10),
+    borderRadius: mvs(10),
+    padding: mvs(5),
+    // flex: 1,
+  },
+  paidContainer: {
+    width: mvs(15),
+    height: mvs(15),
+    borderRadius: mvs(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: mvs(60),
+  },
 });
 export default styles;

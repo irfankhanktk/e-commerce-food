@@ -74,7 +74,9 @@
   "checkout":"الدفع",
   "products":"منتجات",
   "place_my_order":"ضع طلبي",
-  "your_order_has_been_placed":"وقد وضعت طلبك"
+  "your_order_has_been_placed.":"وقد وضعت طلبك",
+  "tracking":"تتبع"
+
 
 
   

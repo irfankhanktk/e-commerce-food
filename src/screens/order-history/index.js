@@ -51,7 +51,7 @@ const OrderHistory = props => {
     {
       id: '202104002-050430',
       date: '01-08-2023',
-      payment_status: 'Unaid',
+      payment_status: 'UnPaid',
       delivery_status: 'Confirm',
       price: '$12.150',
     },
