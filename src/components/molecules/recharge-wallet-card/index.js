@@ -11,7 +11,15 @@ import {Paypal, Select} from 'assets/icons';
 
 const RechargeWalletCard = ({item, style, onPress, loading}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        styles.container,
+        {
+          borderWidth: item?.selected ? mvs(1) : mvs(0),
+          borderColor: item?.selected ? colors.green : colors.white,
+        },
+      ]}>
       <Row style={{justifyContent: 'flex-start'}}>
         <View style={{alignItems: 'center'}}>
           <Paypal />
@@ -19,9 +27,13 @@ const RechargeWalletCard = ({item, style, onPress, loading}) => {
         <View style={{flex: 1, paddingLeft: mvs(10), marginTop: mvs(10)}}>
           <Regular color={colors.darkBlack} label={'Recharge With PayPal'} />
         </View>
-        <View>
-          <Select />
-        </View>
+        {item?.selected ? (
+          <View>
+            <Select />
+          </View>
+        ) : (
+          <></>
+        )}
       </Row>
     </TouchableOpacity>
   );

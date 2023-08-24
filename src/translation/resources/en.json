@@ -63,7 +63,17 @@
   "shipping_discount":"Shipping Discount",
   "discount":"Discount",
   "grand_total":"Grand Total",
-  "cancle_order":"Cancle Order"
+  "cancle_order":"Cancle Order",
+  "proceed_to_shipping":"Proceed to Shipping",
+  "shipping_info":"Shipping Info",
+  "continue_to_delivery_info":"Continue To Delivery info",
+  "choose_delivery":"Choose Delivery",
+  "carrier":"Carrier",
+  "pickup_point":"Pickup Point",
+  "checkout":"CheckOut",
+  "products":"Products",
+  "place_my_order":"Place My Order",
+  "your_order_has_been_placed":"Your Order has been placed"
 
 
  

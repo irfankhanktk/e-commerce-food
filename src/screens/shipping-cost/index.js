@@ -13,6 +13,7 @@ import Regular from 'typography/regular-text';
 import {Row} from 'components/atoms/row';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {colors} from 'config/colors';
+import {navigate} from 'navigation/navigation-ref';
 const ShippingCost = props => {
   const [data, setData] = React.useState([
     {
@@ -36,7 +37,11 @@ const ShippingCost = props => {
       selected: false,
     },
   ]);
-  const [select, setSelect] = React.useState(true);
+  const [select, setSelect] = React.useState('carrier');
+  const isButtonSelected = buttonName => {
+    return select === buttonName;
+  };
+
   const featuredProduct = ({item}) => <ShippingCostCard item={item} />;
 
   return (
@@ -61,14 +66,66 @@ const ShippingCost = props => {
         <Regular label={t('choose_delivery')} />
         <Row style={{marginTop: mvs(10)}}>
           <IconButton
-            Icon={<Entypo name={'dot-single'} size={30} color={colors.white} />}
+            Icon={
+              <Entypo
+                name={'dot-single'}
+                size={30}
+                color={
+                  isButtonSelected('carrier') ? colors.white : colors.primary
+                }
+              />
+            }
             title={t('carrier')}
-            containerStyle={{width: '45%'}}
+            textStyle={{
+              color: isButtonSelected('carrier')
+                ? colors.white
+                : colors.primary,
+            }}
+            containerStyle={[
+              styles.carrierBtn,
+              {
+                backgroundColor: isButtonSelected('carrier')
+                  ? colors.primary
+                  : colors.white,
+                borderWidth: isButtonSelected('carrier') ? mvs(0) : mvs(1),
+                borderColor: isButtonSelected('carrier')
+                  ? null
+                  : colors.primary,
+              },
+            ]}
+            onPress={() => setSelect('carrier')}
           />
           <IconButton
-            Icon={<Entypo name={'dot-single'} size={30} color={colors.white} />}
+            Icon={
+              <Entypo
+                name={'dot-single'}
+                size={30}
+                color={
+                  isButtonSelected('pickup_point')
+                    ? colors.white
+                    : colors.primary
+                }
+              />
+            }
+            onPress={() => setSelect('pickup_point')}
             title={t('pickup_point')}
-            containerStyle={{width: '45%'}}
+            textStyle={{
+              color: isButtonSelected('pickup_point')
+                ? colors.white
+                : colors.primary,
+            }}
+            containerStyle={[
+              styles.carrierBtn,
+              {
+                backgroundColor: isButtonSelected('pickup_point')
+                  ? colors.primary
+                  : colors.white,
+                borderWidth: isButtonSelected('pickup_point') ? mvs(0) : mvs(1),
+                borderColor: isButtonSelected('pickup_point')
+                  ? null
+                  : colors.primary,
+              },
+            ]}
           />
         </Row>
       </View>
@@ -79,6 +136,7 @@ const ShippingCost = props => {
           justifyContent: 'flex-end',
         }}>
         <PrimaryButton
+          onPress={() => navigate('CheckOut')}
           containerStyle={{marginBottom: mvs(20)}}
           title={t('continue_to_delivery_info')}
         />

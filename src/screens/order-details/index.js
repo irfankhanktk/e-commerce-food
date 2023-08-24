@@ -23,6 +23,9 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
 
 const OrderDetails = props => {
+  const {status, order} = props?.route?.params || {};
+  const data = order;
+  console.log(status);
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
 
@@ -59,17 +62,45 @@ const OrderDetails = props => {
         <View style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
           <View style={styles.line} />
           <Row>
-            <View style={styles.circle}>
-              <TickTwo />
+            <View
+              style={[
+                styles.circle,
+                {
+                  borderRadius: 9,
+                  backgroundColor: status >= 1 ? colors.green : colors.halfGray,
+                },
+              ]}>
+              {status >= 1 && <TickTwo />}
             </View>
-            <View style={styles.circle}>
-              <TickTwo />
+            <View
+              style={[
+                styles.circle,
+                {
+                  borderRadius: 9,
+                  backgroundColor: status >= 2 ? colors.green : colors.halfGray,
+                },
+              ]}>
+              {status >= 2 && <TickTwo />}
             </View>
-            <View style={styles.circle}>
-              <TickTwo />
+            <View
+              style={[
+                styles.circle,
+                {
+                  borderRadius: 9,
+                  backgroundColor: status >= 3 ? colors.green : colors.halfGray,
+                },
+              ]}>
+              {status >= 3 && <TickTwo />}
             </View>
-            <View style={styles.circle}>
-              <TickTwo />
+            <View
+              style={[
+                styles.circle,
+                {
+                  borderRadius: 9,
+                  backgroundColor: status >= 4 ? colors.green : colors.halfGray,
+                },
+              ]}>
+              {status >= 4 && <TickTwo />}
             </View>
           </Row>
         </View>
@@ -163,6 +194,7 @@ const OrderDetails = props => {
             </View>
           </Row>
         </View>
+
         <Medium
           style={{paddingVertical: mvs(10)}}
           label={t('ordered_product')}
@@ -211,7 +243,7 @@ const OrderDetails = props => {
         <PrimaryButton
           onPress={() => setOrderConfirmationModal(true)}
           containerStyle={{marginTop: mvs(25)}}
-          title={t('cancle_order')}
+          title={t(status === '3' ? 'tracking' : 'cancle_order')}
         />
       </KeyboardAvoidScrollview>
 

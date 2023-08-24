@@ -14,7 +14,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
       <Row style={styles.container}>
         <View style={styles.idContainer} />
         <View style={styles.contentContainer}>
-          <Regular label={'202104002-050430'} fontSize={mvs(12)} />
+          <Regular label={item?.id} fontSize={mvs(12)} />
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
             <Clander />
             <Regular
@@ -23,7 +23,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.darkBlack,
                 fontSize: mvs(12),
               }}
-              label={'01-08-2023'}
+              label={item?.date}
             />
           </Row>
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -34,7 +34,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.darkBlack,
                 fontSize: mvs(12),
               }}
-              label={'Payment Status - Paid'}
+              label={`${'Payment Status -'} ${item?.payment_status}`}
             />
           </Row>
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -45,7 +45,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.darkBlack,
                 fontSize: mvs(12),
               }}
-              label={'Delivery Status - Order Placed'}
+              label={`${'Delivery Status -'} ${item?.delivery_status}`}
             />
           </Row>
         </View>

@@ -28,24 +28,61 @@ const OrderHistory = props => {
 
   const featuredCategories = [
     {
-      id: 1,
+      id: '202104002-050430',
+      date: '01-08-2023',
+      payment_status: 'Unpaid',
+      delivery_status: 'Placed',
+      price: '$12.150',
     },
     {
-      id: 2,
+      id: '202104002-050430',
+      date: '01-08-2023',
+      payment_status: 'Paid',
+      delivery_status: 'Order Placed',
+      price: '$12.150',
     },
     {
-      id: 3,
+      id: '202104002-050430',
+      date: '01-08-2023',
+      payment_status: 'Unpaid',
+      delivery_status: 'On the way',
+      price: '$12.150',
     },
     {
-      id: 3,
+      id: '202104002-050430',
+      date: '01-08-2023',
+      payment_status: 'Unaid',
+      delivery_status: 'Confirm',
+      price: '$12.150',
     },
     {
-      id: 3,
+      id: '202104002-050430',
+      date: '01-08-2023',
+      payment_status: 'Paid',
+      delivery_status: 'Placed',
+      price: '$12.150',
     },
   ];
 
-  const featuredProduct = ({item}) => (
-    <OrderHistoryCard item={item} onPress={() => navigate('OrderDetails')} />
+  const featuredProduct = ({item, index}) => (
+    <OrderHistoryCard
+      item={item}
+      onPress={() =>
+        navigate('OrderDetails', {
+          order: item,
+          status:
+            item?.delivery_status === 'Placed'
+              ? '1'
+              : item?.delivery_status === 'Confirm'
+              ? '2'
+              : item?.delivery_status === 'On the way'
+              ? '3'
+              : item?.delivery_status === 'Order Placed'
+              ? '4'
+              : null,
+        })
+      }
+    />
   );
 
   return (

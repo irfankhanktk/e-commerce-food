@@ -64,7 +64,19 @@
   "shipping_discount":"خصم الشحن",
   "discount":"تخفيض",
   "grand_total":"المجموع الإجمالي",
-  "cancle_order":"الغاء الطلب"
+  "cancle_order":"الغاء الطلب",
+  "proceed_to_shipping":"انتقل إلى الشحن",
+  "shipping_info":"معلومات الشحن",
+  "continue_to_delivery_info":"تابع إلى معلومات التسليم",
+  "choose_delivery":"اختر التسليم",
+  "carrier":"الناقل",
+  "pickup_point":"نقطة الالتقاط",
+  "checkout":"الدفع",
+  "products":"منتجات",
+  "place_my_order":"ضع طلبي",
+  "your_order_has_been_placed":"وقد وضعت طلبك"
+
+
   
   
 

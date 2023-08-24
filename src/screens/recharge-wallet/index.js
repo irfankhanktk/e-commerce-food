@@ -12,30 +12,43 @@ import {colors} from 'config/colors';
 import {navigate} from 'navigation/navigation-ref';
 import {t} from 'i18next';
 import RechargeWalletCard from 'components/molecules/recharge-wallet-card';
+import {PrimaryButton} from 'components/atoms/buttons';
 
 const RechargeWallet = props => {
-  const featuredCategories = [
+  const [data, setData] = React.useState([
     {
       id: 1,
+      selected: false,
     },
     {
       id: 2,
+      selected: false,
     },
     {
       id: 3,
+      selected: false,
     },
     {
-      id: 3,
+      id: 4,
+      selected: false,
     },
     {
-      id: 3,
+      id: 5,
+      selected: false,
     },
-  ];
+  ]);
 
   const featuredProduct = ({item}) => (
     <RechargeWalletCard
       item={item}
-      onPress={() => navigate('ProductDetials')}
+      onPress={() => {
+        setData(prevData =>
+          prevData.map(data => ({
+            ...data,
+            selected: data.id === item.id,
+          })),
+        );
+      }}
     />
   );
 
@@ -45,13 +58,19 @@ const RechargeWallet = props => {
 
       <CustomFlatList
         showsVerticalScrollIndicator={false}
-        data={featuredCategories}
+        data={data}
         renderItem={featuredProduct}
         contentContainerStyle={{
           paddingBottom: mvs(20),
           paddingHorizontal: mvs(20),
         }}
       />
+      <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(10)}}>
+        <PrimaryButton
+          title={t('recharge_Wallet')}
+          onPress={() => navigate('MyWallet')}
+        />
+      </View>
     </View>
   );
 };
