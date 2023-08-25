@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     borderWidth: mvs(1),
     borderColor: colors.primary,
     marginTop: mvs(20),
-    height: mvs(316),
+    height: mvs(366),
   },
   trackingTextContainer: {
     backgroundColor: colors.primary,
@@ -73,27 +73,12 @@ const styles = StyleSheet.create({
     // bottom: mvs(99),
     // left: mvs(-6),
   },
-  circleTwo: {
-    width: mvs(15),
-    height: mvs(15),
-    borderRadius: mvs(10),
-    borderWidth: mvs(2),
-    borderColor: colors.primary,
+  lineVertical: {
+    height: mvs(130),
+    backgroundColor: colors.primary,
+    width: mvs(2),
+    left: mvs(6),
     position: 'absolute',
-    bottom: mvs(50),
-    left: mvs(-6),
-    backgroundColor: colors.white,
-  },
-  circleThree: {
-    width: mvs(15),
-    height: mvs(15),
-    borderRadius: mvs(10),
-    borderWidth: mvs(2),
-    borderColor: colors.primary,
-    position: 'absolute',
-    bottom: mvs(0),
-    left: mvs(-6),
-    backgroundColor: colors.white,
   },
 });
 export default styles;

@@ -34,9 +34,7 @@ const CartTab = props => {
     },
   ];
 
-  const featuredProduct = ({item}) => (
-    <CartCard item={item} onPress={() => navigate('ProductDetials')} />
-  );
+  const featuredProduct = ({item}) => <CartCard item={item} />;
 
   return (
     <View style={styles.container}>

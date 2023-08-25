@@ -44,7 +44,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular style={styles.phone} label={'03448422399'} />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
-              <Regular fontSize={mvs(12)} label={t('postal_code ')} />
+              <Regular fontSize={mvs(12)} label={t('postal_code')} />
               <Regular style={styles.passCode} label={'0344'} />
             </Row>
           </View>

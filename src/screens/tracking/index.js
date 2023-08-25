@@ -149,35 +149,29 @@ const Tracking = props => {
             <Regular label={t('time_line')} />
             <Row>
               <View>
-                <View style={{height: mvs(100)}}>
-                  <View
-                    style={{
-                      height: mvs(100),
-                      backgroundColor: colors.primary,
-                      width: mvs(2),
-                      left: mvs(6),
-                      position: 'absolute',
-                    }}
-                  />
+                <View style={{height: mvs(120)}}>
+                  <View style={styles.lineVertical} />
                   <View
                     style={{
                       justifyContent: 'space-between',
-                      height: mvs(100),
+                      height: mvs(120),
                     }}>
                     <Row
                       style={{
                         alignItems: 'flex-start',
                       }}>
                       <View style={styles.circleOne} />
-                      <Row>
-                        <Regular
-                          style={{fontSize: mvs(12)}}
-                          label={'pending'}
-                        />
-                        <Regular
-                          style={{marginLeft: mvs(20)}}
-                          label={'pending'}
-                        />
+                      <Row style={{marginLeft: mvs(15)}}>
+                        <View style={{width: mvs(80)}}>
+                          <Regular
+                            style={{fontSize: mvs(12)}}
+                            label={'pending'}
+                          />
+                        </View>
+                        <View style={{flex: 1}}>
+                          <Regular label={'Start Driving'} />
+                          <Regular label={'Locatioin'} />
+                        </View>
                       </Row>
                     </Row>
                     <Row
@@ -185,32 +179,40 @@ const Tracking = props => {
                         alignItems: 'flex-start',
                       }}>
                       <View style={styles.circleOne} />
-                      <Row>
-                        <Regular
-                          style={{fontSize: mvs(12)}}
-                          label={'pending'}
-                        />
-                        <Regular
-                          style={{marginLeft: mvs(20)}}
-                          label={'pending'}
-                        />
+                      <Row style={{marginLeft: mvs(15), flex: 1}}>
+                        <View style={{width: mvs(80)}}>
+                          <Regular
+                            style={{fontSize: mvs(12)}}
+                            label={'on the way'}
+                          />
+                        </View>
+                        <View style={{flex: 1}}>
+                          <Regular label={'driving'} />
+                          <Regular fontSize={mvs(12)} label={'Location'} />
+                          <Row style={{paddingRight: mvs(15)}}>
+                            <Regular fontSize={mvs(12)} label={'7 km/h'} />
+                            <Regular fontSize={mvs(12)} label={'50 min'} />
+                            <Regular fontSize={mvs(12)} label={'10 .5 km'} />
+                          </Row>
+                        </View>
                       </Row>
                     </Row>
                     <Row style={{alignItems: 'flex-end'}}>
                       <View style={styles.circleOne} />
                       <Row
                         style={{
-                          backgroundColor: 'red',
                           alignItems: 'flex-end',
+                          marginLeft: mvs(15),
                         }}>
-                        <Regular
-                          style={{fontSize: mvs(12)}}
-                          label={'pending'}
-                        />
-                        <Regular
-                          style={{marginLeft: mvs(20)}}
-                          label={'pending'}
-                        />
+                        <View style={{width: mvs(80)}}>
+                          <Regular
+                            style={{fontSize: mvs(12)}}
+                            label={'Location'}
+                          />
+                        </View>
+                        <View style={{flex: 1}}>
+                          <Regular label={'Stopped'} />
+                        </View>
                       </Row>
                     </Row>
                   </View>

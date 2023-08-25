@@ -11,7 +11,7 @@ const CartCard = ({item, style, onPress, loading}) => {
   const [count, setCount] = React.useState(1);
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <View onPress={onPress} style={styles.container}>
       <Row style={{justifyContent: 'flex-start'}}>
         <View style={styles.imageMainContainer}>
           <View style={{backgroundColor: 'white', height: mvs(110)}}>
@@ -59,7 +59,7 @@ const CartCard = ({item, style, onPress, loading}) => {
           />
         </View>
       </Row>
-    </TouchableOpacity>
+    </View>
   );
 };
 export default React.memo(CartCard);

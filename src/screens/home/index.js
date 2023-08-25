@@ -1,12 +1,3 @@
-import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
-import styles from './styles';
-import HomeHeader from 'components/atoms/headers/home-header';
-import SwiperCard from 'components/atoms/swiper';
-import {Row} from 'components/atoms/row';
-import {height, mvs} from 'config/metrices';
-import {colors} from 'config/colors';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {
   Brands,
   Coupons,
@@ -14,13 +5,20 @@ import {
   TopCategories,
   TopVendors,
 } from 'assets/icons';
-import Regular from 'typography/regular-text';
 import CustomFlatList from 'components/atoms/custom-flatlist';
+import HomeHeader from 'components/atoms/headers/home-header';
+import {Row} from 'components/atoms/row';
+import SwiperCard from 'components/atoms/swiper';
 import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
-import Bold from 'typography/bold-text';
-import Medium from 'typography/medium-text';
 import FeaturedProductsCard from 'components/molecules/featured-products-card';
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
+import React from 'react';
+import {TouchableOpacity, View} from 'react-native';
+import Medium from 'typography/medium-text';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 
 const HomeTab = props => {
   const featuredCategories = [

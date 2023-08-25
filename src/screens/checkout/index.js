@@ -16,7 +16,7 @@ const CheckOut = props => {
   const [data, setData] = React.useState([
     {
       id: 1,
-      selected: false,
+      selected: true,
       title: 'Cash on delivery',
     },
     {

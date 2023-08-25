@@ -14,7 +14,7 @@ const ShippingInfo = props => {
   const [data, setData] = React.useState([
     {
       id: 1,
-      selected: false,
+      selected: true,
     },
     {
       id: 2,

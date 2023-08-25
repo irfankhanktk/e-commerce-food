@@ -1,6 +1,5 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 
-import FeaturedProductsCard from 'components/molecules/featured-products-card';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
