@@ -6,7 +6,7 @@ import fonts from '../../assets/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.white,
     // alignItems: 'center',
   },
   cross: {
@@ -14,9 +14,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     right: mvs(10),
   },
-  logout: {
-    color: colors.white,
-  },
+
   imageStyle: {
     width: mvs(150),
     height: mvs(150),
@@ -24,22 +22,17 @@ const styles = StyleSheet.create({
     marginTop: mvs(50),
   },
   userImage: {width: '100%', height: '100%', borderRadius: mvs(100)},
-  userName: {alignSelf: 'center', marginTop: mvs(10), fontSize: mvs(14)},
-  profilebutton: {
-    backgroundColor: colors.primary,
-    width: mvs(190),
-    height: mvs(40),
-    marginTop: mvs(70),
-    alignSelf: 'center',
-  },
-  textbtn: {fontSize: mvs(12), fontFamily: fonts.bold},
-  textLogoutBtn: {fontSize: mvs(12), fontFamily: fonts.bold, color: 'red'},
-  termBtn: {
-    backgroundColor: colors.primary,
-    width: mvs(190),
-    height: mvs(40),
+  userName: {alignSelf: 'center', marginTop: mvs(10)},
+  line: {
+    height: mvs(1),
+    backgroundColor: colors.lightGray,
     marginTop: mvs(20),
-    alignSelf: 'center',
+  },
+  innerContainer: {marginTop: mvs(20), paddingHorizontal: mvs(20)},
+  textStyle: {
+    color: colors.primary,
+    marginLeft: mvs(15),
+    color: colors.darkBlack,
   },
 });
 export default styles;

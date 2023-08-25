@@ -7,7 +7,21 @@ import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import Bold from 'typography/bold-text';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {PrimaryButton} from 'components/atoms/buttons';
+import {IconButton, PrimaryButton} from 'components/atoms/buttons';
+import Regular from 'typography/regular-text';
+import {
+  Carttt,
+  Edit,
+  Heart,
+  Location,
+  Refund,
+  Shop,
+  ShoppingBag,
+  UserEdit,
+  Wallet,
+} from 'assets/icons';
+import {t} from 'i18next';
+import {navigate} from 'navigation/navigation-ref';
 
 const CustomDrawer = props => {
   const dispatch = useAppDispatch();
@@ -17,14 +31,14 @@ const CustomDrawer = props => {
   const {navigation} = props;
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      {/* <TouchableOpacity onPress={() => navigation.goBack()}>
         <Entypo
           size={25}
           name="cross"
           color={colors.white}
           style={styles.cross}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <ImageBackground
         source={{
@@ -34,25 +48,69 @@ const CustomDrawer = props => {
         borderRadius={mvs(100)}>
         {/* <Image source={{uri: user?.profileImage}} style={styles.userImage} /> */}
       </ImageBackground>
-      <Bold label={user?.name} style={styles.userName} />
-      <PrimaryButton
-        onPress={() => navigation.navigate('ProfileTab')}
-        containerStyle={styles.profilebutton}
-        textStyle={styles.textbtn}
-        title="Profile"
+
+      <Bold
+        color={colors.darkBlack}
+        label={'Paul K. Jrnsen'}
+        style={styles.userName}
       />
-      <PrimaryButton
-        onPress={() => navigation.navigate('TermAndCondition')}
-        containerStyle={styles.termBtn}
-        textStyle={styles.textbtn}
-        title="Terms and Conditions"
+      <Regular
+        color={colors.darkBlack}
+        style={{alignSelf: 'center'}}
+        label={'customer@gmail.com'}
       />
-      <PrimaryButton
-        onPress={() => navigation.navigate('PrivacyPolicy')}
-        containerStyle={styles.termBtn}
-        textStyle={styles.textbtn}
-        title="Privacy Policy"
-      />
+      <View style={styles.line} />
+      <View style={styles.innerContainer}>
+        <IconButton
+          onPress={() => navigate('MyWallet')}
+          title={t('my_wallet')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Wallet />}
+        />
+        <IconButton
+          onPress={() => navigate('OrderHistory')}
+          title={t('orders')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Carttt />}
+        />
+        <IconButton
+          onPress={() => navigate('MyWishList')}
+          title={t('my_wishlist')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Heart />}
+        />
+        <IconButton
+          onPress={() => navigate('RefundStatus')}
+          title={t('refund_status')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Refund />}
+        />
+        <IconButton
+          onPress={() => navigate('EditProfile')}
+          title={t('edit_profile')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<UserEdit />}
+        />
+        <IconButton
+          onPress={() => navigate('AddressDetails')}
+          title={t('address')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Location />}
+        />
+        <IconButton
+          onPress={() => navigate('BrowseAllVenders')}
+          title={t('browse_all_venders')}
+          textStyle={styles.textStyle}
+          containerStyle={{backgroundColor: 'white'}}
+          Icon={<Shop />}
+        />
+      </View>
     </View>
   );
 };
