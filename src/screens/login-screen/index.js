@@ -44,7 +44,7 @@ const LoginScreen = props => {
       //     dispatch(onLogin({...values, token: fcmToken}, setLoading, props));
       //   })
       //   .catch(error => console.log(error));
-      navigate('TabNavigator');
+      navigate('Drawer');
     } catch (error) {
       console.log('error=>', error);
     }

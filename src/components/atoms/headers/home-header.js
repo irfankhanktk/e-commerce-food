@@ -13,7 +13,7 @@ import {Row} from '../row';
 const HomeHeader = ({
   style = {},
   title,
-  back = false,
+  menu = false,
   onChangeText = t => {},
   isSearch = false,
   placeholder = 'Search',
@@ -26,8 +26,8 @@ const HomeHeader = ({
   return (
     <View style={[styles.container, style]}>
       <Row style={{alignItems: 'center'}}>
-        <TouchableOpacity onPress={() => navigation?.goBack()}>
-          {back && (
+        <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          {menu && (
             <Entypo
               name={I18nManager.isRTL ? 'Menu' : 'menu'}
               size={mvs(40)}

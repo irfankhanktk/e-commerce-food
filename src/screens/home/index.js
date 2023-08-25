@@ -51,7 +51,7 @@ const HomeTab = props => {
 
   return (
     <View style={styles.container}>
-      <HomeHeader back isSearch notification />
+      <HomeHeader menu isSearch notification />
 
       <CustomFlatList
         ListHeaderComponent={

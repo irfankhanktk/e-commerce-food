@@ -33,6 +33,7 @@ import ShippingInfo from 'screens/shipping-info';
 import ShippingCost from 'screens/shipping-cost';
 import CheckOut from 'screens/checkout';
 import Tracking from 'screens/tracking';
+import DrawerNavigator from './drawer-navigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -56,8 +57,8 @@ export const RootNavigator = () => {
           <Stack.Screen name="UpdatePassword" component={UpdatePassword} />
           <Stack.Screen name="RenewPassword" component={RenewPassword} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-          <Stack.Screen name="TabNavigator" component={TabBar} />
-          {/* <Stack.Screen name="Drawer" component={DrawerNavigation} /> */}
+          {/* <Stack.Screen name="TabNavigator" component={TabBar} /> */}
+          <Stack.Screen name="Drawer" component={DrawerNavigator} />
           <Stack.Screen
             name="TermsAndConditions"
             component={TermsAndConditions}
