@@ -1,18 +1,17 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 
+import AppHeader from 'components/atoms/headers/app-header';
+import AddressCard from 'components/molecules/address-card';
+import AddressAddedSucessfully from 'components/molecules/modals/address-add-sucessfully';
+import SelectEditModal from 'components/molecules/modals/select-edit-modal';
 import {mvs} from 'config/metrices';
+import {t} from 'i18next';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import styles from './styles';
-import AppHeader from 'components/atoms/headers/app-header';
-import Medium from 'typography/medium-text';
-import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
-import {t} from 'i18next';
 import Bold from 'typography/bold-text';
-import AddressCard from 'components/molecules/address-card';
-import SelectEditModal from 'components/molecules/modals/select-edit-modal';
-import AddressAddedSucessfully from 'components/molecules/modals/address-add-sucessfully';
+import Medium from 'typography/medium-text';
+import styles from './styles';
 
 const AddressDetails = props => {
   const featuredCategories = [

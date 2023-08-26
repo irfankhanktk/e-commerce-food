@@ -1,17 +1,15 @@
-import {mvs} from 'config/metrices';
-import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
-import styles from './styles';
-import Regular from 'typography/regular-text';
-import {featured, forklift, silder} from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
 import {Row} from 'components/atoms/row';
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
 import {t} from 'i18next';
-import Entypo from 'react-native-vector-icons/Entypo';
-import SelectEditModal from '../modals/select-edit-modal';
-import AddressAddedSucessfully from '../modals/address-add-sucessfully';
 import {navigate} from 'navigation/navigation-ref';
+import React from 'react';
+import {TouchableOpacity, View} from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Regular from 'typography/regular-text';
+import AddressAddedSucessfully from '../modals/address-add-sucessfully';
+import SelectEditModal from '../modals/select-edit-modal';
+import styles from './styles';
 
 const AddressCard = ({item, style, onPress, loading}) => {
   const [select, setSelect] = React.useState(true);
@@ -59,10 +57,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
       </View>
       {!select ? (
         <View style={styles.dotContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              setSelectModal(true);
-            }}>
+          <TouchableOpacity onPress={() => navigate('Location')}>
             <Regular color={colors.darkBlack} label={t('edit')} />
           </TouchableOpacity>
           <TouchableOpacity>

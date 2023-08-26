@@ -84,7 +84,7 @@ const CustomDrawer = props => {
         />
         <IconButton
           onPress={() => navigate('RefundStatus')}
-          title={t('refund_status')}
+          title={t('refund_requests')}
           textStyle={styles.textStyle}
           containerStyle={{backgroundColor: 'white'}}
           Icon={<Refund />}

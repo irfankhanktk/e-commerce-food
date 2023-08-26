@@ -40,7 +40,7 @@ const CartTab = props => {
     <View style={styles.container}>
       <AppHeader back title={t('shopping_cart')} />
       <Row style={{paddingHorizontal: mvs(20)}}>
-        <Medium color={colors.darkBlack} label={'Inhouse'} />
+        <Medium color={colors.darkBlack} label={t('inhouse')} />
         <Medium label={'$30.00'} />
       </Row>
       <CustomFlatList

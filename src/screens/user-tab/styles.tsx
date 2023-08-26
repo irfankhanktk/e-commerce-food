@@ -48,8 +48,12 @@ const styles = StyleSheet.create({
     marginTop: mvs(25),
     borderRadius: mvs(10),
     padding: mvs(15),
+  },
+  topContainer:{
+    backgroundColor: colors.primary,
+    paddingHorizontal: mvs(20),
+    height: mvs(500),
   }
-
 
 });
 export default styles;

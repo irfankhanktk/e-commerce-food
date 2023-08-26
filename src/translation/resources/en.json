@@ -76,7 +76,27 @@
   "your_order_has_been_placed.":"Your Order has been placed",
   "tracking":"Tracking",
   "address_details":"Address Details",
-  "city":"City"
+  "city":"City",
+  "log_out":"LogOut",
+  "in_your_cart":"In Your Cart",
+  "in_your_wishlist":"In Your Wishlist",
+  "your_ordered":"Your Ordered",
+  "language":"Language",
+  "currency":"Currency",
+  "user_edit":"User Eidt",
+  "orders":"Orders",
+  "refund_requests":"Refund Requests",
+  "messages":"Messages",
+  "browse_all_vendors":"Browse All Venders",
+  "followed_vendors":"Followed Venders",
+  "inhouse":"Inhouse",
+  "message":"Message",
+  "password":"Password",
+  "login_in_to_techzology_ecommerces":"Login in to techzology ecommerces",
+  "or_create_a_new_account":"Or Create A New Account",
+  "signup":"Sign up"
+  
+
 
 
  

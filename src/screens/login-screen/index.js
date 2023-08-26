@@ -1,4 +1,3 @@
-import messaging from '@react-native-firebase/messaging';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {useFormik} from 'formik';
@@ -11,7 +10,6 @@ import {SplashIcon} from 'assets/icons';
 import PrimaryInput from 'components/atoms/inputs';
 import {Row} from 'components/atoms/row';
 import {colors} from 'config/colors';
-import {onLogin} from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
@@ -57,7 +55,7 @@ const LoginScreen = props => {
           <View style={styles.inputContainer}>
             <Bold
               style={styles.loginTexhzologyContainer}
-              label={'Login in to techzology ecommerces'}
+              label={t('login_in_to_techzology_ecommerces')}
             />
             <PrimaryInput
               keyboardType={'email-address'}
@@ -73,7 +71,7 @@ const LoginScreen = props => {
             />
             <PrimaryInput
               isPassword
-              placeholder={t('password_place')}
+              placeholder={t('password')}
               onChangeText={str => setFieldValue('password', str)}
               onBlur={() => setFieldTouched('password', true)}
               value={values.password}
@@ -99,12 +97,12 @@ const LoginScreen = props => {
               title={t('login')}
             />
             <Regular
-              label={'Or Create A New Account'}
+              label={t('or_create_a_new_account')}
               fontSize={mvs(10)}
               style={{alignSelf: 'center', marginTop: mvs(12)}}
             />
             <PrimaryButton
-              title="Sign Up"
+              title={t('signup')}
               onPress={() => navigate('Signup')}
               containerStyle={{
                 backgroundColor: colors.green,

@@ -77,7 +77,29 @@
   "your_order_has_been_placed.":"وقد وضعت طلبك",
   "tracking":"تتبع",
   "address_details":"تفاصيل العنوان",
-  "city":"مدينة"
+  "city":"مدينة",
+  "log_out":"تسجيل خروج",
+  "in_your_cart":"في سلة التسوق الخاصة بك",
+  "in_your_wishlist":"في قائمة أمنياتك",
+  "your_ordered":"أمرك",
+  "language":"لغة",
+  "currency":"عملة",
+  "user_edit":"المستخدم عيدت",
+  "orders":"طلبات",
+  "refund_requests":"طلبات استرداد الأموال",
+  "messages":"رسائل",
+  "browse_all_vendors":"تصفح جميع البائعين",
+  "followed_vendors":"يتبع البائعين",
+  "inhouse":"في بيت",
+  "message":"رسالة",
+  "password":"كلمة المرور",
+  "login_in_to_techzology_ecommerces":"تسجيل الدخول إلى التكنولوجيا",
+  "or_create_a_new_account":"أو إنشاء حساب جديد",
+  "signup":"اشتراك"
+
+
+  
+
 
 
 

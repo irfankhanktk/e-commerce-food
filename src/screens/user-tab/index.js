@@ -1,46 +1,4 @@
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {CompositeScreenProps} from '@react-navigation/native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-
-import {PrimaryButton} from 'components/atoms/buttons';
-import {Loader} from 'components/atoms/loader';
-import {colors} from 'config/colors';
-import {height, mvs} from 'config/metrices';
-import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {navigate} from 'navigation/navigation-ref';
-import React from 'react';
 import {
-  Alert,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {
-  deletePermanentAccount,
-  onLogoutPress,
-  onUpdateProfile,
-} from 'services/api/auth-api-actions';
-import {postFileData} from 'services/api/hotel/api-actions';
-import TabParamList from 'types/navigation-types/bottom-tab';
-import Medium from 'typography/medium-text';
-import Regular from 'typography/regular-text';
-import {UTILS} from 'utils';
-import i18n from '../../translation/index';
-import RootStackParamList from '../../types/navigation-types/root-stack';
-import styles from './styles';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
-import {Row} from 'components/atoms/row';
-import {user} from 'assets/images';
-import Bold from 'typography/bold-text';
-import {
-  Brands,
   Carttt,
   Currency,
   Heart,
@@ -53,16 +11,23 @@ import {
   UserEdit,
   Wallet,
 } from 'assets/icons';
+import {user} from 'assets/images';
+import {PrimaryButton} from 'components/atoms/buttons';
+import {Row} from 'components/atoms/row';
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
+import {t} from 'i18next';
+import {navigate} from 'navigation/navigation-ref';
+import React from 'react';
+import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import Bold from 'typography/bold-text';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 
 const UserTab = props => {
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: colors.primary,
-          paddingHorizontal: mvs(20),
-          height: mvs(500),
-        }}>
+      <View style={styles.topContainer}>
         <Row style={{marginTop: mvs(25), justifyContent: 'flex-start'}}>
           <ImageBackground
             source={user}
@@ -77,8 +42,9 @@ const UserTab = props => {
             />
           </View>
           <PrimaryButton
+            onPress={() => navigate('Login')}
             textStyle={{color: colors.primary}}
-            title="Log out"
+            title={t('log_out')}
             containerStyle={styles.loginBtn}
           />
         </Row>
@@ -88,7 +54,7 @@ const UserTab = props => {
             <Regular
               fontSize={mvs(10)}
               color={colors.darkBlack}
-              label={'In Your Cart'}
+              label={t('in_your_cart')}
             />
           </View>
           <View style={styles.boxContainer}>
@@ -96,7 +62,7 @@ const UserTab = props => {
             <Regular
               fontSize={mvs(10)}
               color={colors.darkBlack}
-              label={'In Your Wishlist'}
+              label={t('in_your_wishlist')}
             />
           </View>
           <View style={styles.boxContainer}>
@@ -104,7 +70,7 @@ const UserTab = props => {
             <Regular
               fontSize={mvs(10)}
               color={colors.darkBlack}
-              label={'Your Ordered'}
+              label={t('your_ordered')}
             />
           </View>
         </Row>
@@ -115,7 +81,7 @@ const UserTab = props => {
             </View>
             <Regular
               color={colors.white}
-              label={'Language'}
+              label={t('language')}
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
@@ -125,7 +91,7 @@ const UserTab = props => {
             </View>
             <Regular
               color={colors.white}
-              label={'Currency'}
+              label={t('currency')}
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
@@ -137,7 +103,7 @@ const UserTab = props => {
             </View>
             <Regular
               color={colors.white}
-              label={'User Eidt'}
+              label={t('user_edit')}
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
@@ -149,7 +115,7 @@ const UserTab = props => {
             </View>
             <Regular
               color={colors.white}
-              label={'Address'}
+              label={t('address')}
               fontSize={mvs(10)}
             />
           </TouchableOpacity>
@@ -164,7 +130,7 @@ const UserTab = props => {
               </View>
               <Regular
                 style={{marginTop: mvs(5)}}
-                label={'My Wallet'}
+                label={t('my_wallet')}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
@@ -177,7 +143,7 @@ const UserTab = props => {
 
               <Regular
                 style={{marginTop: mvs(5)}}
-                label={'Orders'}
+                label={t('orders')}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
@@ -190,7 +156,7 @@ const UserTab = props => {
 
               <Regular
                 style={{marginTop: mvs(5)}}
-                label={'My Wishlist'}
+                label={t('my_wishlist')}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
@@ -204,7 +170,7 @@ const UserTab = props => {
               <Regular
                 style={{marginTop: mvs(5)}}
                 numberOfLines={2}
-                label={'Refunds Requests'}
+                label={t('refund_requests')}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
@@ -216,7 +182,7 @@ const UserTab = props => {
               </View>
               <Regular
                 style={{marginTop: mvs(5)}}
-                label={'Messages'}
+                label={t('messages')}
                 fontSize={mvs(10)}
               />
             </TouchableOpacity>
@@ -229,7 +195,7 @@ const UserTab = props => {
             <Shop />
             <Regular
               style={{marginLeft: mvs(20)}}
-              label={'Browse All Venders'}
+              label={t('browse_all_vendors')}
             />
           </Row>
         </TouchableOpacity>
@@ -240,7 +206,10 @@ const UserTab = props => {
             marginTop: mvs(20),
           }}>
           <Pc />
-          <Regular style={{marginLeft: mvs(20)}} label={'Followed Venders'} />
+          <Regular
+            style={{marginLeft: mvs(20)}}
+            label={t('followed_vendors')}
+          />
         </Row>
       </View>
     </View>
