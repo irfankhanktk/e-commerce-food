@@ -15,6 +15,7 @@ import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
+import {onLogin} from 'services/api/auth-api-actions';
 const LoginScreen = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
@@ -26,20 +27,21 @@ const LoginScreen = props => {
   };
   const [loading, setLoading] = React.useState(false);
 
-  const onSubmit = async () => {
-    // try {
-    navigate('Drawer');
-    // } catch (error) {
-    //   console.log('error=>', error);
-    // }
+  const onSubmit = async values => {
+    try {
+      await dispatch(onLogin(values, setLoading, props));
+    } catch (error) {
+      console.log('error=>', error);
+    }
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.backgroundContainer}>
         <SplashIcon style={{alignSelf: 'center', marginTop: mvs(76)}} />
         <Formik
           onSubmit={onSubmit}
-          initialValues={initialValues}
+          initialValuevalue={initialValues}
           validationSchema={signinFormValidation}>
           {({
             handleChange,
@@ -62,7 +64,7 @@ const LoginScreen = props => {
                   placeholder={t('email')}
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
-                  value={values.email}
+                  value={values?.email}
                   error={
                     touched?.email && errors?.email
                       ? `${t(errors?.email)}`
@@ -74,8 +76,8 @@ const LoginScreen = props => {
                   isPassword
                   placeholder={t('password')}
                   onChangeText={handleChange('password')}
-                  onBlur={() => handleBlur('password')}
-                  value={values.password}
+                  onBlur={handleBlur('password')}
+                  value={values?.password}
                   errorStyle={{marginBottom: 0}}
                   error={
                     touched?.password && errors?.password

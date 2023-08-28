@@ -4,7 +4,7 @@ import { PrimaryButton } from 'components/atoms/buttons';
 import PrimaryInput from 'components/atoms/inputs';
 
 import { mvs } from 'config/metrices';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import { useAppDispatch } from 'hooks/use-store';
 import React from 'react';
 import { View } from 'react-native';
@@ -27,24 +27,12 @@ const ForgotPassword = (props: props) => {
   // const [otpModal, setOtpModal] = React.useState(false);
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [value, setValue] = React.useState('');
-  const { values, errors, touched, setFieldValue, setFieldTouched, isValid } =
-    useFormik({
-      initialValues: initialValues,
-      validateOnBlur: true,
-      validateOnChange: true,
-      validationSchema: forgotemailFormValidation,
-      onSubmit: () => { },
-    });
-  console.log('errors=>', errors);
 
   const onSubmit = async () => {
     try {
-      if (isValid && Object.keys(touched).length > 0) {
-        navigate('RenewPassword')
-      } else {
-        setFieldTouched('email', true);
 
-      }
+      navigate('RenewPassword')
+
     } catch (error) {
       console.log('error=>', error);
 
@@ -57,36 +45,52 @@ const ForgotPassword = (props: props) => {
 
       <View style={styles.backgroundContainer}>
         <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
-        <View style={styles.mainInnerContainer}>
+        <Formik
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          validationSchema={forgotemailFormValidation}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            isValid,
+            touched,
+            errors,
+          }) => (
+            <View style={styles.mainInnerContainer}>
+              <View style={styles.inputContainer}>
+                <Bold
+                  style={styles.loginTexhzologyContainer}
+                  label={'Forgot Password'}
+                />
+                <PrimaryInput
+                  keyboardType={'email-address'}
+                  placeholder={t('email')}
+                  onChangeText={handleChange('email',)}
+                  onBlur={handleBlur('email',)}
+                  value={values.email}
+                  error={
+                    touched?.email && errors?.email
+                      ? `${t(errors?.email)}`
+                      : undefined
+                  }
+                />
 
-          <View style={styles.inputContainer}>
-            <Bold
-              style={styles.loginTexhzologyContainer}
-              label={'Forgot Password'}
-            />
-            <PrimaryInput
-              keyboardType={'email-address'}
-              placeholder={t('email')}
-              onChangeText={str => setFieldValue('email', str)}
-              onBlur={() => setFieldTouched('email', true)}
-              value={values.email}
-              error={
-                touched?.email && errors?.email
-                  ? `${t(errors?.email)}`
-                  : undefined
-              }
-            />
+                <PrimaryButton
+                  title="Send"
+                  onPress={handleSubmit}
+                  containerStyle={{
+                    marginTop: mvs(12),
+                  }}
+                />
+              </View>
 
-            <PrimaryButton
-              title="Send"
-              onPress={onSubmit}
-              containerStyle={{
-                marginTop: mvs(12),
-              }}
-            />
-          </View>
+            </View>
+          )}
+        </Formik>
 
-        </View>
+
       </View>
 
 

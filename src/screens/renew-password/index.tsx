@@ -3,7 +3,7 @@ import { SplashIcon } from 'assets/icons';
 import { PrimaryButton } from 'components/atoms/buttons';
 import PrimaryInput from 'components/atoms/inputs';
 import { mvs } from 'config/metrices';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import { useAppDispatch } from 'hooks/use-store';
 import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
@@ -25,25 +25,15 @@ const RenewPassword = (props: props) => {
     password: '',
   };
   const [loading, setLoading] = React.useState(false);
-  const { values, errors, touched, setFieldValue, setFieldTouched, isValid } =
-    useFormik({
-      initialValues: initialValues,
-      validateOnBlur: true,
-      validateOnChange: true,
-      validationSchema: renewpasswordFormValidation,
-      onSubmit: () => { },
-    });
-  console.log('errors=>', errors);
+
+
   const onSubmit = async () => {
     try {
-      if (isValid && Object.keys(touched).length > 0) {
-        navigate('SucessfullyChangePassword')
-      } else {
-        setFieldTouched('password', true);
-        setFieldTouched('confirm_password', true);
 
-      }
-    } catch (error) {
+      navigate('SucessfullyChangePassword')
+
+    }
+    catch (error) {
       console.log('error=>', error);
 
     } finally {
@@ -55,51 +45,68 @@ const RenewPassword = (props: props) => {
     <View style={styles.container}>
       <View style={styles.backgroundContainer}>
         <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
-        <View style={styles.mainInnerContainer}>
-
-          <View style={styles.inputContainer}>
-            <Bold
-              style={styles.loginTexhzologyContainer}
-              label={'reset your Password'}
-            />
-            <PrimaryInput
-              isPassword
-              placeholder={t('New Password')}
-              onChangeText={str => setFieldValue('password', str)}
-              onBlur={() => setFieldTouched('password', true)}
-              value={values.password}
-              errorStyle={{ marginBottom: 0 }}
-              error={
-                touched?.password && errors?.password
-                  ? `${t(errors?.password)}`
-                  : undefined
-              }
-            />
-            <PrimaryInput
-              isPassword
-              placeholder={t('confirm_pass')}
-              onChangeText={str => setFieldValue('confirm_password', str)}
-              onBlur={() => setFieldTouched('confirm_password', true)}
-              value={values.confirm_password}
-              errorStyle={{ marginBottom: 0 }}
-              error={
-                touched?.confirm_password && errors?.confirm_password
-                  ? `${t(errors?.confirm_password)}`
-                  : undefined
-              }
-            />
-            <PrimaryButton
-              title="Confirm"
-              onPress={onSubmit}
-              containerStyle={{
-                marginTop: mvs(12),
-              }}
-            />
+        <Formik
+          onSubmit={onSubmit}
+          initialValues={initialValues}
+          validationSchema={renewpasswordFormValidation}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            isValid,
+            touched,
+            errors,
+          }) => (
 
 
-          </View>
+            <View style={styles.mainInnerContainer}>
+              <View style={styles.inputContainer}>
+                <Bold
+                  style={styles.loginTexhzologyContainer}
+                  label={'reset your Password'}
+                />
+                <PrimaryInput
+                  isPassword
+                  placeholder={t('New Password')}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  errorStyle={{ marginBottom: 0 }}
+                  error={
+                    touched?.password && errors?.password
+                      ? `${t(errors?.password)}`
+                      : undefined
+                  }
+                />
+                <PrimaryInput
+                  isPassword
+                  placeholder={t('confirm_pass')}
+                  onChangeText={handleChange('confirm_password')}
+                  onBlur={handleBlur('confirm_password')}
+                  value={values.confirm_password}
+                  errorStyle={{ marginBottom: 0 }}
+                  error={
+                    touched?.confirm_password && errors?.confirm_password
+                      ? `${t(errors?.confirm_password)}`
+                      : undefined
+                  }
+                />
+                <PrimaryButton
+                  title="Confirm"
+                  onPress={handleSubmit}
+                  containerStyle={{
+                    marginTop: mvs(12),
+                  }}
+                />
 
-        </View>
+
+              </View>
+
+            </View>
+          )}
+        </Formik>
+
       </View>
 
       {/* <ImageBackground source={auth_bg} style={{

@@ -18,25 +18,16 @@ export const getUserInfo = () => {
 export const onLogin = (
   values: any,
   setLoading: (bool: boolean) => void,
-  props: any,
+ 
 ) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
       setLoading(true);
       const res = await postData(URLS.auth.login, values);
       console.log('res of onLogin=>', res);
-      await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
 
-      const uRes = await getUserInfo();
-      console.log('result of info:::', uRes?.user);
 
-      dispatch(setUserInfo(uRes?.user));
-      const role = uRes?.user?.role?.name;
-      let screen = `${role}Stack`;
-      if (!role) {
-        screen = 'Login';
-      }
-      resetStack(screen);
+
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));
       Alert.alert('', UTILS.returnError(error));

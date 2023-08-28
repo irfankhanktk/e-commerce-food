@@ -29,8 +29,8 @@ const Signup = (props: props) => {
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [value, setValue] = React.useState('');
   const { t } = i18n;
-  const { doctor, user } = useAppSelector(s => s);
-  const { location } = user;
+
+
 
   const dispatch = useAppDispatch();
   const initialValues = {
@@ -41,14 +41,7 @@ const Signup = (props: props) => {
 
   };
   const [loading, setLoading] = React.useState(false);
-  const { values, errors, touched, setFieldValue, setFieldTouched, isValid } =
-    useFormik({
-      initialValues: initialValues,
-      validateOnBlur: true,
-      validateOnChange: true,
-      validationSchema: signupFormValidation,
-      onSubmit: () => { },
-    });
+
   const onSubmit = async () => {
     try {
 
