@@ -94,7 +94,29 @@
   "password":"Password",
   "login_in_to_techzology_ecommerces":"Login in to techzology ecommerces",
   "or_create_a_new_account":"Or Create A New Account",
-  "signup":"Sign up"
+  "signup":"Sign up",
+  "login_with":"Login with",
+  "Google":"Google",
+  "Facebook":"Facebook",
+  "signup_up_to_techzology_ecommerces":"Sign up to techzology ecommerces",
+  "confirm_pass":"Confirm Password",
+  "i_agree_the":"I agree the",
+  "terms_and_condition":"Terms and conditions,",
+  "return_policy":"Return Policy & Privacy Policy",
+  "dont_have_account":"Dont have an account?",
+  "login":"LogIn",
+  "error_pass_short":"Password is too short - should be 8 chars minimum",
+  "error_pass_enter": "Password is required",
+  "invalid_email": "Email is invalid",
+  "req_email": "Email is required",
+  "req_name": "Name is required",
+  "req_pass": "Password is required",
+  "weak_pass": "Password is weak",
+  "miss_match_pass": "Password did not match"
+
+
+
+
   
 
 

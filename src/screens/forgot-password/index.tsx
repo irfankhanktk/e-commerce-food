@@ -8,7 +8,6 @@ import { useFormik } from 'formik';
 import { useAppDispatch } from 'hooks/use-store';
 import React from 'react';
 import { View } from 'react-native';
-import { onForgot } from 'services/api/doctor/api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import { forgotemailFormValidation } from 'validations';
@@ -22,9 +21,7 @@ const ForgotPassword = (props: props) => {
   const { t } = i18n;
   const dispatch = useAppDispatch();
   const initialValues = {
-
     email: '',
-
   };
   const [loading, setLoading] = React.useState(false);
   // const [otpModal, setOtpModal] = React.useState(false);
@@ -43,15 +40,7 @@ const ForgotPassword = (props: props) => {
   const onSubmit = async () => {
     try {
       if (isValid && Object.keys(touched).length > 0) {
-        try {
-
-          setLoading(true);
-          const res = await onForgot(values);
-          setOtpModalVisible(true);
-        } catch (error) {
-          console.log('error=>', error);
-
-        }
+        navigate('RenewPassword')
       } else {
         setFieldTouched('email', true);
 
@@ -90,13 +79,11 @@ const ForgotPassword = (props: props) => {
 
             <PrimaryButton
               title="Send"
-              onPress={() => navigate('RenewPassword')}
+              onPress={onSubmit}
               containerStyle={{
                 marginTop: mvs(12),
               }}
             />
-
-
           </View>
 
         </View>

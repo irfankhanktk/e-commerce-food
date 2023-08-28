@@ -10,7 +10,8 @@ import React from 'react';
 import { View } from 'react-native';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
-import { signupFormValidation } from 'validations';
+
+import { renewpasswordFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 type props = NativeStackScreenProps<RootStackParamList, 'RenewPassword'>;
@@ -29,10 +30,26 @@ const RenewPassword = (props: props) => {
       initialValues: initialValues,
       validateOnBlur: true,
       validateOnChange: true,
-      validationSchema: signupFormValidation,
+      validationSchema: renewpasswordFormValidation,
       onSubmit: () => { },
     });
   console.log('errors=>', errors);
+  const onSubmit = async () => {
+    try {
+      if (isValid && Object.keys(touched).length > 0) {
+        navigate('SucessfullyChangePassword')
+      } else {
+        setFieldTouched('password', true);
+        setFieldTouched('confirm_password', true);
+
+      }
+    } catch (error) {
+      console.log('error=>', error);
+
+    } finally {
+      setLoading(false)
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -61,19 +78,19 @@ const RenewPassword = (props: props) => {
             <PrimaryInput
               isPassword
               placeholder={t('confirm_pass')}
-              onChangeText={str => setFieldValue('password', str)}
-              onBlur={() => setFieldTouched('password', true)}
-              value={values.password}
+              onChangeText={str => setFieldValue('confirm_password', str)}
+              onBlur={() => setFieldTouched('confirm_password', true)}
+              value={values.confirm_password}
               errorStyle={{ marginBottom: 0 }}
               error={
-                touched?.password && errors?.password
-                  ? `${t(errors?.password)}`
+                touched?.confirm_password && errors?.confirm_password
+                  ? `${t(errors?.confirm_password)}`
                   : undefined
               }
             />
             <PrimaryButton
               title="Confirm"
-              onPress={() => navigate('SucessfullyChangePassword')}
+              onPress={onSubmit}
               containerStyle={{
                 marginTop: mvs(12),
               }}
