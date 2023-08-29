@@ -112,7 +112,12 @@
   "req_name": "Name is required",
   "req_pass": "Password is required",
   "weak_pass": "Password is weak",
-  "miss_match_pass": "Password did not match"
+  "miss_match_pass": "Password did not match",
+  "verification-otp": "Verification OTP",
+  "verfication_desc": " We have sent you an OTP code via email on",
+  "verification_code":"Verification Code",
+  "reset_your_password":"Reset Your Password",
+  "resend_code":"Resend Code"
 
 
 

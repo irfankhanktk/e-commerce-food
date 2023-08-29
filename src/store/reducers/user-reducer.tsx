@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 type Props = {
   userInfo: any;
   transaction_id: any;
-
   language: string;
   location?: {
     latitude: number;

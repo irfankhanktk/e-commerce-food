@@ -113,7 +113,13 @@
   "req_name": "مطلوب اسم",
   "req_pass": "كلمة المرور مطلوبة",
   "miss_match_pass": "لم لا تتطابق مع كلمة المرور",
-  "weak_pass": "كلمة المرور ضعيفة"
+  "weak_pass": "كلمة المرور ضعيفة",
+  "verification-otp": "التحقق من OTP",
+  "verfication_desc": "لقد أرسلنا لك رمز OTP عبر البريد الإلكتروني على",
+  "verification_code":"رمز التحقق",
+  "reset_your_password":"اعد ضبط كلمه السر",
+  "resend_code":"أعد إرسال الرمز"
+
 
 
 

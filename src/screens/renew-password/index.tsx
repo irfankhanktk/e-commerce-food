@@ -3,35 +3,42 @@ import { SplashIcon } from 'assets/icons';
 import { PrimaryButton } from 'components/atoms/buttons';
 import PrimaryInput from 'components/atoms/inputs';
 import { mvs } from 'config/metrices';
-import { Formik, useFormik } from 'formik';
+import { Formik } from 'formik';
 import { useAppDispatch } from 'hooks/use-store';
 import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import { View } from 'react-native';
+import { Alert, TouchableOpacity, View } from 'react-native';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 
 import { renewpasswordFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
+
+import { changePassword, resendPasswordCode } from 'services/api/auth-api-actions';
+import Regular from 'typography/regular-text';
+import { UTILS } from 'utils';
 type props = NativeStackScreenProps<RootStackParamList, 'RenewPassword'>;
 
 const RenewPassword = (props: props) => {
-  const { navigation } = props;
+  const emailcheck = props?.route?.params?.email?.email_or_phone;
   const { t } = i18n;
-  const dispatch = useAppDispatch();
   const initialValues = {
-    confirm_password: '',
+    verification_code: '',
     password: '',
   };
   const [loading, setLoading] = React.useState(false);
 
 
-  const onSubmit = async () => {
+  const onSubmit = async (values: any) => {
+
     try {
+      Alert.alert('hel')
+      setLoading(true)
+      const res = await changePassword(values)
+      console.log('res check=======>', res);
 
       navigate('SucessfullyChangePassword')
-
     }
     catch (error) {
       console.log('error=>', error);
@@ -40,7 +47,14 @@ const RenewPassword = (props: props) => {
       setLoading(false)
     }
   };
+  const onResendCode = async () => {
+    try {
+      await resendPasswordCode({ verify_by: 'email', email_or_phone: emailcheck })
+    } catch (error) {
+      console.log('error====>', UTILS.returnError(error));
+    }
 
+  }
   return (
     <View style={styles.container}>
       <View style={styles.backgroundContainer}>
@@ -64,7 +78,15 @@ const RenewPassword = (props: props) => {
               <View style={styles.inputContainer}>
                 <Bold
                   style={styles.loginTexhzologyContainer}
-                  label={'reset your Password'}
+                  label={t('reset_your_password')}
+                />
+                <PrimaryInput
+                  placeholder={t('verification_code')}
+                  onChangeText={handleChange('verification_code')}
+                  onBlur={handleBlur('verification_code')}
+                  value={values.verification_code}
+                  errorStyle={{ marginBottom: 0 }}
+
                 />
                 <PrimaryInput
                   isPassword
@@ -79,19 +101,7 @@ const RenewPassword = (props: props) => {
                       : undefined
                   }
                 />
-                <PrimaryInput
-                  isPassword
-                  placeholder={t('confirm_pass')}
-                  onChangeText={handleChange('confirm_password')}
-                  onBlur={handleBlur('confirm_password')}
-                  value={values.confirm_password}
-                  errorStyle={{ marginBottom: 0 }}
-                  error={
-                    touched?.confirm_password && errors?.confirm_password
-                      ? `${t(errors?.confirm_password)}`
-                      : undefined
-                  }
-                />
+
                 <PrimaryButton
                   title="Confirm"
                   onPress={handleSubmit}
@@ -99,7 +109,9 @@ const RenewPassword = (props: props) => {
                     marginTop: mvs(12),
                   }}
                 />
-
+                <TouchableOpacity onPress={() => onResendCode()} style={{ alignItems: "center", marginTop: mvs(10) }}>
+                  <Regular fontSize={mvs(12)} label={t('resend_code')} />
+                </TouchableOpacity>
 
               </View>
 

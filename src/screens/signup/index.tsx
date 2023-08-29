@@ -21,6 +21,8 @@ import { UTILS } from 'utils';
 import { signupFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
+import OtpModal from 'components/molecules/modals/otp-modal';
+import { onSignup, resendVerifyOtp, verifyOtp } from 'services/api/auth-api-actions';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
@@ -28,31 +30,51 @@ type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 const Signup = (props: props) => {
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [value, setValue] = React.useState('');
+  const [userId, setUserId] = React.useState('')
+
   const { t } = i18n;
-
-
-
-  const dispatch = useAppDispatch();
   const initialValues = {
     name: '',
-    email: '',
+    email_or_phone: '',
     password: '',
-    confirm_password: ''
+    passowrd_confirmation: '',
+    register_by: 'email',
+    user_type: 'customer'
 
   };
   const [loading, setLoading] = React.useState(false);
 
-  const onSubmit = async () => {
+  const onSubmit = async (values) => {
     try {
-
-      navigate('Drawer')
+      setLoading(true)
+      const res = await onSignup(values);
+      console.log('on Signup res=====>', res);
+      setUserId(res?.user_id);
+      setOtpModalVisible(true)
     } catch (error) {
       console.log('error=>', error);
-
     } finally {
       setLoading(false)
     }
   };
+  const onVerifySubmit = async () => {
+    try {
+      const res = await verifyOtp({ user_id: userId, verification_code: value })
+      console.log('otp verification res =====>', res);
+      navigate('Login')
+    } catch (error) {
+      console.log('error=>', error);
+    }
+  }
+  const onResendVerifyOtp = async () => {
+    try {
+      const res = await resendVerifyOtp({ user_id: userId, verify_by: 'email' })
+      console.log('resend otp verification res =====>', res);
+
+    } catch (error) {
+      console.log('error=>', error);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -79,7 +101,6 @@ const Signup = (props: props) => {
                   label={t('signup_up_to_techzology_ecommerces')}
                 />
                 <PrimaryInput
-                  keyboardType={'email-address'}
                   placeholder={t('name')}
                   onChangeText={handleChange('name')}
                   onBlur={handleBlur('name')}
@@ -91,12 +112,12 @@ const Signup = (props: props) => {
                 <PrimaryInput
                   keyboardType={'email-address'}
                   placeholder={t('email')}
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  value={values.email}
+                  onChangeText={handleChange('email_or_phone')}
+                  onBlur={handleBlur('email_or_phone')}
+                  value={values.email_or_phone}
                   error={
-                    touched?.email && errors?.email
-                      ? `${t(errors?.email)}`
+                    touched?.email_or_phone && errors?.email_or_phone
+                      ? `${t(errors?.email_or_phone)}`
                       : undefined
                   }
                 />
@@ -116,13 +137,13 @@ const Signup = (props: props) => {
                 <PrimaryInput
                   isPassword
                   placeholder={t('confirm_pass')}
-                  onChangeText={handleChange('confirm_password')}
-                  onBlur={handleBlur('confirm_password')}
-                  value={values.confirm_password}
+                  onChangeText={handleChange('passowrd_confirmation')}
+                  onBlur={handleBlur('passowrd_confirmation')}
+                  value={values.passowrd_confirmation}
                   errorStyle={{ marginBottom: 0 }}
                   error={
-                    touched?.confirm_password && errors?.confirm_password
-                      ? `${t(errors?.confirm_password)}`
+                    touched?.passowrd_confirmation && errors?.passowrd_confirmation
+                      ? `${t(errors?.passowrd_confirmation)}`
                       : undefined
                   }
                 />
@@ -169,6 +190,15 @@ const Signup = (props: props) => {
           )}
         </Formik>
       </View>
+
+      <OtpModal
+        onClose={() => setOtpModalVisible(false)}
+        visible={otpModalVisible}
+        setValue={setValue}
+        value={value}
+        onPress={onVerifySubmit}
+        onResendOtpPress={onResendVerifyOtp}
+      />
     </View>
   );
 };

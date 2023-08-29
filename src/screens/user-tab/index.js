@@ -19,12 +19,30 @@ import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {useSelector} from 'react-redux';
+import {logout} from 'services/api/auth-api-actions';
+import {UTILS} from 'utils';
+import {STORAGEKEYS} from 'config/constants';
 
 const UserTab = props => {
+  const [loading, setLoading] = React.useState(false);
+  const LogOut = async () => {
+    try {
+      setLoading(true);
+      const res = await logout();
+      Alert.alert(res?.message);
+      navigate('Login');
+    } catch (error) {
+      console.log('Error===>', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -42,7 +60,8 @@ const UserTab = props => {
             />
           </View>
           <PrimaryButton
-            onPress={() => navigate('Login')}
+            loading={loading}
+            onPress={() => LogOut()}
             textStyle={{color: colors.primary}}
             title={t('log_out')}
             containerStyle={styles.loginBtn}

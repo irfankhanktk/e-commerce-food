@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { STORAGEKEYS } from 'config/constants';
-import { resetStack } from 'navigation/navigation-ref';
+import { navigate, resetStack } from 'navigation/navigation-ref';
 import { Alert } from 'react-native';
 import { AppDispatch, RootState } from 'store';
 import { UTILS } from 'utils';
@@ -18,16 +18,18 @@ export const getUserInfo = () => {
 export const onLogin = (
   values: any,
   setLoading: (bool: boolean) => void,
- 
+
 ) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
       setLoading(true);
       const res = await postData(URLS.auth.login, values);
+      await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
+
       console.log('res of onLogin=>', res);
+      dispatch(setUserInfo(res));
 
-
-
+      navigate('Drawer')
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));
       Alert.alert('', UTILS.returnError(error));
@@ -36,26 +38,16 @@ export const onLogin = (
     }
   };
 };
-export const onSignup = (
-  values: any,
-  setLoading: (bool: boolean) => void,
-  props: any,
-  setOtpLoading: (bool: boolean) => void,
-) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    try {
-      setLoading(true);
-      const res = await postData(URLS.auth.signup, values);
-      console.log('res of onSignupPress=>', res);
-      setOtpLoading(true);
-    } catch (error: any) {
-      console.log('error in onSignupPress', UTILS?.returnError(error));
-      Alert.alert('', UTILS?.returnError(error));
-    } finally {
-      setLoading(false);
-    }
-  };
-};
+export const onSignup = (values: any) => postData(URLS.auth.signup, values);
+export const verifyOtp = (values: any) => postData(URLS.auth.otp_verify, values);
+export const resendVerifyOtp = (values: any) => postData(URLS.auth.resend_otp_verify, values);
+export const forgotPassword = (values: any) => postData(URLS.auth.forget_password, values);
+export const resendPasswordCode = (values: any) => postData(URLS.auth.resend_password_code, values);
+export const changePassword = (values: any) => postData(URLS.auth.change_password, values);
+export const logout = () => getData(URLS.auth.logout);
+
+
+
 //// add amount///
 export const onAddAmount = (values: any) => {
   return postData(URLS.wallet.add_amount, values);
@@ -146,20 +138,7 @@ export const onLogoutPress = () => {
     }
   };
 };
-export const deletePermanentAccount = () => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    try {
-      const res = await getData(`${URLS.auth.delete_account}`);
-      console.log('res of deletaccount', res);
-      Alert.alert('Success', 'Account Deleted Successfully');
-      dispatch(onLogoutPress());
-      return res;
-    } catch (error) {
-      console.log('error', UTILS.returnError(error));
-      Alert.alert('Error', UTILS.returnError(error));
-    }
-  };
-};
+
 export const getPaymentUri = async (data: any) =>
   axios.post('https://secure.clickpay.com.sa/payment/request', data, {
     headers: {
@@ -174,7 +153,7 @@ export const getPaymentTransationStatus = async (data: any) =>
       Authorization: 'SNJNL9M6RH-J69NMZLB9Z-GGNBNKDBTJ',
     },
   });
-export const getBookings = (slug: any) => getData(`${URLS.auth.get_bookings}`);
+
 ///Notifications///
 export const getNotifications = (
 ) => {
@@ -190,4 +169,3 @@ export const getNotifications = (
     }
   };
 };
-export const getDashBoard = (slug: any) => getData(`${URLS.auth.get_dashboard}`);

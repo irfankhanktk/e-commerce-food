@@ -1,18 +1,20 @@
-export const IP = 'https://multiecom.prismatic-technologies.com/';
+export const IP = 'https://multiecom.prismatic-technologies.com';
 export const URLS = {
   base_url: `${IP}/api/`,
   image_url: `${IP}/`,
   auth: {
-    signup: 'doctor/signup',
+    signup: 'v2/auth/signup',
     get_notification: 'user/getNotification',
     login: 'v2/auth/login',
     get_user_info: 'user/userInfo',
     update_password: 'user/updatePassword',
-    change_password: 'doctor/changePassword',
-    otp_verify: 'doctor/otpVerify',
-    forget_password: 'doctor/forgetPassword',
+    change_password: 'v2/auth/password/confirm_reset',
+    otp_verify: 'v2/auth/confirm_code',
+    resend_otp_verify: 'v2/auth/resend_code',
+    forget_password: 'v2/auth/password/forget_request',
+    resend_password_code: 'v2/auth/password/resend_code',
     update_profile: 'user/updateProfile',
     locations: 'locations',
-    delete_account: 'user/permanently_deleted',
+    logout: 'v2/auth/logout',
   },
 };

@@ -1,6 +1,6 @@
 import {PrimaryButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
-import {ErrorMessage, Formik, useFormik} from 'formik';
+import {Formik} from 'formik';
 import {useAppDispatch} from 'hooks/use-store';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
@@ -10,17 +10,15 @@ import {SplashIcon} from 'assets/icons';
 import PrimaryInput from 'components/atoms/inputs';
 import {Row} from 'components/atoms/row';
 import {colors} from 'config/colors';
+import {onLogin} from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
-import {onLogin} from 'services/api/auth-api-actions';
 const LoginScreen = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
-  const [otpModalVisible, setOtpModalVisible] = React.useState(false);
-  const [value, setValue] = React.useState('');
   const initialValues = {
     email: '',
     password: '',
@@ -41,14 +39,13 @@ const LoginScreen = props => {
         <SplashIcon style={{alignSelf: 'center', marginTop: mvs(76)}} />
         <Formik
           onSubmit={onSubmit}
-          initialValuevalue={initialValues}
+          initialValues={initialValues}
           validationSchema={signinFormValidation}>
           {({
             handleChange,
             handleBlur,
             handleSubmit,
             values,
-            isValid,
             touched,
             errors,
           }) => (
@@ -58,26 +55,24 @@ const LoginScreen = props => {
                   style={styles.loginTexhzologyContainer}
                   label={t('login_in_to_techzology_ecommerces')}
                 />
-
                 <PrimaryInput
                   keyboardType={'email-address'}
                   placeholder={t('email')}
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
-                  value={values?.email}
+                  value={values.email}
                   error={
                     touched?.email && errors?.email
                       ? `${t(errors?.email)}`
                       : undefined
                   }
                 />
-
                 <PrimaryInput
                   isPassword
                   placeholder={t('password')}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
-                  value={values?.password}
+                  value={values.password}
                   errorStyle={{marginBottom: 0}}
                   error={
                     touched?.password && errors?.password

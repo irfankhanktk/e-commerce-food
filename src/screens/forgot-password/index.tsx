@@ -14,6 +14,8 @@ import { forgotemailFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 import { navigate } from 'navigation/navigation-ref';
+import { forgotPassword } from 'services/api/auth-api-actions';
+import { UTILS } from 'utils';
 type props = NativeStackScreenProps<RootStackParamList, 'ForgotPassword'>;
 
 const ForgotPassword = (props: props) => {
@@ -21,20 +23,21 @@ const ForgotPassword = (props: props) => {
   const { t } = i18n;
   const dispatch = useAppDispatch();
   const initialValues = {
-    email: '',
+    email_or_phone: '',
+    send_code_by: 'email'
+
   };
   const [loading, setLoading] = React.useState(false);
   // const [otpModal, setOtpModal] = React.useState(false);
-  const [otpModalVisible, setOtpModalVisible] = React.useState(false);
-  const [value, setValue] = React.useState('');
 
-  const onSubmit = async () => {
+  const onSubmit = async (values) => {
     try {
-
-      navigate('RenewPassword')
-
+      setLoading(true)
+      const res = await forgotPassword(values)
+      console.log('forgot pasword====>', res);
+      navigate('RenewPassword', { email: values })
     } catch (error) {
-      console.log('error=>', error);
+      console.log('error=>', UTILS.returnError(error));
 
     } finally {
       setLoading(false)
@@ -67,17 +70,18 @@ const ForgotPassword = (props: props) => {
                 <PrimaryInput
                   keyboardType={'email-address'}
                   placeholder={t('email')}
-                  onChangeText={handleChange('email',)}
-                  onBlur={handleBlur('email',)}
-                  value={values.email}
+                  onChangeText={handleChange('email_or_phone',)}
+                  onBlur={handleBlur('email_or_phone',)}
+                  value={values.email_or_phone}
                   error={
-                    touched?.email && errors?.email
-                      ? `${t(errors?.email)}`
+                    touched?.email_or_phone && errors?.email_or_phone
+                      ? `${t(errors?.email_or_phone)}`
                       : undefined
                   }
                 />
 
                 <PrimaryButton
+                  loading={loading}
                   title="Send"
                   onPress={handleSubmit}
                   containerStyle={{
