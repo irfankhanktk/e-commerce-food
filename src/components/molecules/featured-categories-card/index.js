@@ -1,6 +1,6 @@
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import {ImageBackground, TouchableOpacity, View, Image} from 'react-native';
 import styles from './styles';
 import Regular from 'typography/regular-text';
 import {featured, silder} from 'assets/images';
@@ -13,11 +13,11 @@ const FeaturedCategories = ({item, style, onPress, loading}) => {
           borderRadius={mvs(10)}
           source={featured}
           style={styles.backGroundImage}>
-          {/* <Image source={{uri: item?.image}} style={styles.innerImage} /> */}
+          <Image source={{uri: item?.banner}} style={styles.innerImage} />
         </ImageBackground>
         <Regular
-          label={'$120.000'}
-          fontSize={mvs(12)}
+          label={item?.name}
+          fontSize={mvs(10)}
           style={{marginTop: mvs(15)}}
         />
       </View>

@@ -19,8 +19,31 @@ import {TouchableOpacity, View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {
+  banners,
+  getAllFeaturedProducts,
+  getFeaturedCategories,
+} from 'services/api/auth-api-actions';
+import AllProductsCard from 'components/molecules/all-products-card';
 
 const HomeTab = props => {
+  const [banner, setBanner] = React.useState([]);
+  const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
+  const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
+  // console.log('banners check==========>', allFeaturedProducts?.data);
+
+  const getBanners = async () => {
+    const res = await banners();
+    setBanner(res);
+    const resCategories = await getFeaturedCategories();
+    setFeaturedCategorie(resCategories);
+    const resAllFeaturedProducts = await getAllFeaturedProducts();
+    setAllFeaturedProducts(resAllFeaturedProducts);
+  };
+  React.useEffect(() => {
+    getBanners();
+  }, []);
+
   const featuredCategories = [
     {
       id: 1,
@@ -35,7 +58,6 @@ const HomeTab = props => {
       name: 'ali',
     },
   ];
-
   const renderShop = ({item}) => (
     <FeaturedCategoriesCard
       item={item}
@@ -48,6 +70,9 @@ const HomeTab = props => {
       onPress={() => navigate('ProductDetials')}
     />
   );
+  const allProduct = ({item}) => (
+    <AllProductsCard item={item} onPress={() => navigate('ProductDetials')} />
+  );
 
   return (
     <View style={styles.container}>
@@ -56,7 +81,7 @@ const HomeTab = props => {
       <CustomFlatList
         ListHeaderComponent={
           <View>
-            <SwiperCard />
+            <SwiperCard data={banner?.data} />
             <Row style={{marginTop: mvs(25), paddingHorizontal: mvs(20)}}>
               <TouchableOpacity style={{alignItems: 'center'}}>
                 <View style={styles.itemsContainer}>
@@ -104,13 +129,32 @@ const HomeTab = props => {
                 horizontal={true}
                 showsVerticalScrollIndicator={false}
                 // columnWrapperStyle={styles.columnWrapperStyle}
-                data={featuredCategories}
+                data={featuredCategorie?.data}
                 renderItem={renderShop}
+              />
+            </View>
+
+            <View style={styles.featuredContainer}>
+              <Medium
+                style={{
+                  marginTop: mvs(5),
+                  marginBottom: mvs(10),
+                  marginLeft: mvs(10),
+                }}
+                color={colors.white}
+                label={'Featured Products'}
+              />
+              <CustomFlatList
+                horizontal={true}
+                showsVerticalScrollIndicator={false}
+                // columnWrapperStyle={styles.columnWrapperStyle}
+                data={allFeaturedProducts?.data}
+                renderItem={featuredProduct}
               />
             </View>
             <Medium
               style={{marginLeft: mvs(20), marginTop: mvs(10)}}
-              label={'Featured Products'}
+              label={'All Products'}
             />
           </View>
         }
@@ -118,7 +162,7 @@ const HomeTab = props => {
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnWrapperStyle}
         data={featuredCategories}
-        renderItem={featuredProduct}
+        renderItem={allProduct}
         contentContainerStyle={{paddingBottom: mvs(20)}}
       />
     </View>

@@ -45,6 +45,9 @@ export const forgotPassword = (values: any) => postData(URLS.auth.forget_passwor
 export const resendPasswordCode = (values: any) => postData(URLS.auth.resend_password_code, values);
 export const changePassword = (values: any) => postData(URLS.auth.change_password, values);
 export const logout = () => getData(URLS.auth.logout);
+export const banners = () => getData(URLS.app.get_banners);
+export const getFeaturedCategories = () => getData(URLS.app.get_featured_categories);
+export const getAllFeaturedProducts = () => getData(URLS.app.get_all_featured_products);
 
 
 

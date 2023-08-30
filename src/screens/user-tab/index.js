@@ -17,16 +17,14 @@ import {Row} from 'components/atoms/row';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
-import {navigate} from 'navigation/navigation-ref';
+import {navigate, resetStack} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
+import {logout} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
-import styles from './styles';
-import {useSelector} from 'react-redux';
-import {logout} from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
-import {STORAGEKEYS} from 'config/constants';
+import styles from './styles';
 
 const UserTab = props => {
   const [loading, setLoading] = React.useState(false);
@@ -35,7 +33,8 @@ const UserTab = props => {
       setLoading(true);
       const res = await logout();
       Alert.alert(res?.message);
-      navigate('Login');
+      await UTILS.clearStorage();
+      resetStack('Login');
     } catch (error) {
       console.log('Error===>', UTILS.returnError(error));
     } finally {

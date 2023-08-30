@@ -35,6 +35,7 @@ export const PrimaryButton = (props: props) => {
         loading,
         textStyle,
         containerStyle,
+
     } = props;
     return (
         <TouchableOpacity disabled={disabled || loading} style={[styles.primaryContainer, { backgroundColor: `${colors.primary}${disabled ? '50' : ''}`, }, containerStyle]} onPress={onPress}>

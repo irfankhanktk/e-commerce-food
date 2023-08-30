@@ -14,14 +14,9 @@ const SwiperCard = ({data = [0, 0, 0]}) => {
         activeDotStyle={styles.activeDotStyle}
         style={styles.wrapper}
         showsButtons={false}>
-        {data.map((item, index) => (
-          <View key={index} style={styles.slide}>
-            <Image
-              source={item ? {uri: item?.photo} : silder}
-              style={styles.sliderImage}
-            />
-          </View>
-        ))}
+        <View style={styles.slide}>
+          <Image source={silder} style={styles.sliderImage} />
+        </View>
         {/* <View style={styles.slide}>
           <Image source={silder} style={styles.sliderImage} />
         </View>

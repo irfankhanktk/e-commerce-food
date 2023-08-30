@@ -49,11 +49,8 @@ const Splash = (props: props) => {
         UTILS.getItem(STORAGEKEYS.token).then(async (token: any) => {
           if (token) {
             try {
-              const res = await getUserInfo();
-              const role = res?.user?.role?.name;
-              screen = `${role}Stack`;
-              loadNotifications();
-              dispatch(setUserInfo(res?.user));
+              screen = 'Drawer';
+
             } catch (error) {
               console.log('error', error);
             }

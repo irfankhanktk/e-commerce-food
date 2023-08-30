@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     width: (width - 80) / 3,
-    height: mvs(109),
+    padding: 5,
     marginHorizontal: mvs(10),
   },
   backGroundImage: {
@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     height: mvs(56),
     marginTop: mvs(10),
   },
-  // innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
+  innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
 });
 export default styles;

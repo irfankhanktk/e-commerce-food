@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   featuredContainer: {
     width: '100%',
-    height: mvs(169),
+    padding: mvs(5),
     backgroundColor: colors.primary,
     marginTop: mvs(15),
     paddingHorizontal: mvs(10),

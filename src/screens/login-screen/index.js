@@ -16,6 +16,7 @@ import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
+import {UTILS} from 'utils';
 const LoginScreen = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
@@ -29,7 +30,7 @@ const LoginScreen = props => {
     try {
       await dispatch(onLogin(values, setLoading, props));
     } catch (error) {
-      console.log('error=>', error);
+      console.log('error=>', UTILS.returnError(error));
     }
   };
 

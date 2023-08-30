@@ -30,15 +30,13 @@ const ForgotPassword = (props: props) => {
   const [loading, setLoading] = React.useState(false);
   // const [otpModal, setOtpModal] = React.useState(false);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: any) => {
     try {
       setLoading(true)
       const res = await forgotPassword(values)
-      console.log('forgot pasword====>', res);
       navigate('RenewPassword', { email: values })
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));
-
     } finally {
       setLoading(false)
     }

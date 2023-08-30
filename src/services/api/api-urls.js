@@ -17,4 +17,9 @@ export const URLS = {
     locations: 'locations',
     logout: 'v2/auth/logout',
   },
+  app: {
+    get_banners: 'v2/banners',
+    get_featured_categories: 'v2/categories/featured',
+    get_all_featured_products: 'v2/products/featured',
+  },
 };
