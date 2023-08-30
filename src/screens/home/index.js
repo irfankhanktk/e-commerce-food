@@ -15,49 +15,79 @@ import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Alert, TouchableOpacity, View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {
   banners,
   getAllFeaturedProducts,
+  getAllProducts,
   getFeaturedCategories,
 } from 'services/api/auth-api-actions';
 import AllProductsCard from 'components/molecules/all-products-card';
+import {Loader} from 'components/atoms/loader';
+import {UTILS} from 'utils';
 
 const HomeTab = props => {
   const [banner, setBanner] = React.useState([]);
   const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
   const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
+  const [pageLoading, setPageLoading] = React.useState(false);
+  const [pageNumber, setPageNumber] = React.useState(1);
+  const [allProducts, setAllProducts] = React.useState([]);
   // console.log('banners check==========>', allFeaturedProducts?.data);
 
   const getBanners = async () => {
-    const res = await banners();
-    setBanner(res);
-    const resCategories = await getFeaturedCategories();
-    setFeaturedCategorie(resCategories);
-    const resAllFeaturedProducts = await getAllFeaturedProducts();
-    setAllFeaturedProducts(resAllFeaturedProducts);
+    try {
+      const res = await banners();
+      setBanner(res);
+      const resCategories = await getFeaturedCategories();
+      setFeaturedCategorie(resCategories);
+      const resAllFeaturedProducts = await getAllFeaturedProducts();
+      setAllFeaturedProducts(resAllFeaturedProducts);
+    } catch (error) {
+      console.log('Error get Banners====>', UTILS.returnError(error));
+    }
+  };
+  const fetchProducts = async setDataLoading => {
+    try {
+      setDataLoading(true);
+      const res = await getAllProducts(pageNumber);
+      setAllProducts(preProducts =>
+        pageNumber > 1
+          ? {
+              ...res,
+              data: preProducts?.data
+                ? [...preProducts?.data, ...res?.data]
+                : [...res?.data],
+            }
+          : res,
+      );
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setDataLoading(false);
+    }
+  };
+  const handleLoadMore = () => {
+    const lastPage = Math.ceil(
+      (allProducts?.meta?.total || 0) / allProducts?.meta?.per_page,
+    );
+    if (!pageLoading && pageNumber < lastPage) {
+      setPageNumber(prevPageNumber => prevPageNumber + 1);
+    }
   };
   React.useEffect(() => {
     getBanners();
   }, []);
+  React.useEffect(() => {
+    if (pageNumber > 0 && !pageLoading) {
+      fetchProducts(setPageLoading);
+    }
+  }, [pageNumber]);
 
-  const featuredCategories = [
-    {
-      id: 1,
-      name: 'ali',
-    },
-    {
-      id: 2,
-      name: 'ali',
-    },
-    {
-      id: 3,
-      name: 'ali',
-    },
-  ];
   const renderShop = ({item}) => (
     <FeaturedCategoriesCard
       item={item}
@@ -67,10 +97,10 @@ const HomeTab = props => {
   const featuredProduct = ({item}) => (
     <FeaturedProductsCard
       item={item}
-      onPress={() => navigate('ProductDetials')}
+      onPress={() => navigate('ProductDetials', {item: item})}
     />
   );
-  const allProduct = ({item}) => (
+  const renderProduct = ({item}) => (
     <AllProductsCard item={item} onPress={() => navigate('ProductDetials')} />
   );
 
@@ -161,9 +191,12 @@ const HomeTab = props => {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnWrapperStyle}
-        data={featuredCategories}
-        renderItem={allProduct}
+        data={allProducts?.data || []}
+        renderItem={renderProduct}
+        onEndReached={handleLoadMore} // Load more when reaching the end of the list
+        onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
         contentContainerStyle={{paddingBottom: mvs(20)}}
+        ListFooterComponent={pageLoading && <Loader />}
       />
     </View>
   );

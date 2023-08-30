@@ -1,8 +1,12 @@
-import CustomFlatList from 'components/atoms/custom-flatlist';
-import HomeHeader from 'components/atoms/headers/home-header';
-import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
-import FeaturedProductsCard from 'components/molecules/featured-products-card';
+import {Edit} from 'assets/icons';
+import {PrimaryButton} from 'components/atoms/buttons';
+import AppHeader from 'components/atoms/headers/app-header';
+import PrimaryInput from 'components/atoms/inputs';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
+import UpdatedPasswordModal from 'components/molecules/modals/updated-password-modal';
+import UpdatedProfileModal from 'components/molecules/modals/updated-profile-modal';
 import {mvs} from 'config/metrices';
+import {t} from 'i18next';
 import React from 'react';
 import {
   Alert,
@@ -11,21 +15,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import styles from './styles';
-import AppHeader from 'components/atoms/headers/app-header';
 import Medium from 'typography/medium-text';
-import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
-import {t} from 'i18next';
-import {user} from 'assets/images';
 import Regular from 'typography/regular-text';
-import {Edit} from 'assets/icons';
-import PrimaryInput from 'components/atoms/inputs';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {UTILS} from 'utils';
-import UpdatedProfileModal from 'components/molecules/modals/updated-profile-modal';
-import UpdatedPasswordModal from 'components/molecules/modals/updated-password-modal';
+import styles from './styles';
 
 const EditProfile = props => {
   const [image, setImage] = React.useState();

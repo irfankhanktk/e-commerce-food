@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.primary,
     marginTop: mvs(20),
+    borderRadius: mvs(10),
   },
   backGroundImage: {
     width: mvs(134),
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     marginTop: mvs(10),
   },
-  // innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
+  innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
   btnAddtoCart: {
     borderRadius: mvs(0),
     height: mvs(35),

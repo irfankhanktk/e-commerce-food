@@ -26,8 +26,8 @@ import {navigate} from 'navigation/navigation-ref';
 const CustomDrawer = props => {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(s => s);
-  // console.log('userInfo me check====>', userInfo.user.userInfo);
-  const user = userInfo?.user?.userInfo;
+  const user = userInfo?.user?.userInfo?.user;
+
   const {navigation} = props;
   return (
     <View style={styles.container}>
@@ -51,13 +51,13 @@ const CustomDrawer = props => {
 
       <Bold
         color={colors.darkBlack}
-        label={'Paul K. Jrnsen'}
+        label={user?.name}
         style={styles.userName}
       />
       <Regular
         color={colors.darkBlack}
         style={{alignSelf: 'center'}}
-        label={'customer@gmail.com'}
+        label={user?.email}
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>

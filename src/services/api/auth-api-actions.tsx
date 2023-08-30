@@ -48,7 +48,10 @@ export const logout = () => getData(URLS.auth.logout);
 export const banners = () => getData(URLS.app.get_banners);
 export const getFeaturedCategories = () => getData(URLS.app.get_featured_categories);
 export const getAllFeaturedProducts = () => getData(URLS.app.get_all_featured_products);
-
+export const getAllProducts = (pageNumber: any) => {
+  let url = `${URLS.app.get_all_products}?page=${pageNumber}`;
+  return getData(url);
+};
 
 
 //// add amount///

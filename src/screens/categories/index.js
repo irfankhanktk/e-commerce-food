@@ -1,15 +1,13 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
-import HomeHeader from 'components/atoms/headers/home-header';
-import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
-import FeaturedProductsCard from 'components/molecules/featured-products-card';
+import AppHeader from 'components/atoms/headers/app-header';
+import AllProductsCard from 'components/molecules/all-products-card';
+import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
-import styles from './styles';
-import AppHeader from 'components/atoms/headers/app-header';
 import Medium from 'typography/medium-text';
-import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
+import styles from './styles';
 
 const CategoriesTab = props => {
   const featuredCategories = [
@@ -31,10 +29,7 @@ const CategoriesTab = props => {
   ];
 
   const featuredProduct = ({item}) => (
-    <FeaturedProductsCard
-      item={item}
-      onPress={() => navigate('ProductDetials')}
-    />
+    <AllProductsCard item={item} onPress={() => navigate('ProductDetials')} />
   );
 
   return (
