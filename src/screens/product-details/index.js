@@ -1,22 +1,39 @@
+import {CartWhite, Carttt, MessageTwo} from 'assets/icons';
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
-import {mvs} from 'config/metrices';
-import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import DescriptionCard from 'components/atoms/description-card';
 import AppHeader from 'components/atoms/headers/app-header';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {Row} from 'components/atoms/row';
 import Stars from 'components/atoms/stars';
+import {colors} from 'config/colors';
+import {mvs} from 'config/metrices';
+import React from 'react';
+import {Alert, Image, TouchableOpacity, View} from 'react-native';
 import i18n from 'translation';
 import Regular from 'typography/regular-text';
 import styles from './styles';
-import {colors} from 'config/colors';
-import {MessageTwo, Carttt, CartWhite} from 'assets/icons';
-import DescriptionCard from 'components/atoms/description-card';
-import {CarrtActive, Cart} from 'assets/icons/tab-icons';
+import {getProductDetails} from 'services/api/auth-api-actions';
+import {UTILS} from 'utils';
 
 const ProductDetials = props => {
+  const productId = props?.route?.params?.productId;
   const {t} = i18n;
-  const data = [
+  const [data, setData] = React.useState('');
+  console.log('data check=========>', data);
+  const fetchProduct = async () => {
+    try {
+      const res = await getProductDetails(productId);
+      setData(res);
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    }
+  };
+  React.useEffect(() => {
+    fetchProduct();
+  }, []);
+
+  const imageSlide = [
     {
       id: 1,
       image:
@@ -33,7 +50,7 @@ const ProductDetials = props => {
         'https://png.pngtree.com/png-clipart/20200206/ourmid/pngtree-three-dimensional-elements-of-honey-skin-care-products-png-image_2133185.jpg',
     },
   ];
-  const [selectImage, setSelectImage] = React.useState(data[0]?.image);
+  const [selectImage, setSelectImage] = React.useState(imageSlide[0]?.image);
   const [count, setCount] = React.useState(1);
   return (
     <View style={styles.container}>
@@ -41,7 +58,7 @@ const ProductDetials = props => {
       <KeyboardAvoidScrollview contentContainerStyle={{paddingBottom: mvs(10)}}>
         <Row style={{justifyContent: 'flex-start'}}>
           <View>
-            {data?.map(item => (
+            {imageSlide?.map(item => (
               <TouchableOpacity
                 key={item.id}
                 onPress={() => setSelectImage(item.image)}
@@ -60,7 +77,7 @@ const ProductDetials = props => {
             />
           </View>
         </Row>
-        <Regular style={styles.productName} label={'Shipping Container'} />
+        <Regular style={styles.productName} label={data?.name} />
         <Row style={styles.reviewContainer}>
           <Stars />
           <Regular style={styles.reviewsText} label={'(0 reviews)'} />
@@ -104,11 +121,7 @@ const ProductDetials = props => {
           </Row>
         </Row>
         <Regular style={{marginTop: mvs(25)}} label={t('description')} />
-        <DescriptionCard
-          description={
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text'
-          }
-        />
+        <DescriptionCard description={data?.meta_description} />
         <Row>
           <IconButton
             Icon={<CartWhite />}

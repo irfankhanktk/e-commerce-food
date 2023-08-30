@@ -22,5 +22,6 @@ export const URLS = {
     get_featured_categories: 'v2/categories/featured',
     get_all_featured_products: 'v2/products/featured',
     get_all_products: 'v2/products',
+    get_product_details: 'v2/products/',
   },
 };

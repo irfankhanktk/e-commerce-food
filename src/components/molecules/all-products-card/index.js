@@ -9,7 +9,7 @@ import {colors} from 'config/colors';
 
 const AllProductsCard = ({item, style, onPress, loading}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           borderRadius={mvs(10)}
@@ -36,7 +36,7 @@ const AllProductsCard = ({item, style, onPress, loading}) => {
           <Regular label={item?.main_price} fontSize={mvs(12)} />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default React.memo(AllProductsCard);

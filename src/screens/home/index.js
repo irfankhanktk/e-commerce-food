@@ -97,11 +97,14 @@ const HomeTab = props => {
   const featuredProduct = ({item}) => (
     <FeaturedProductsCard
       item={item}
-      onPress={() => navigate('ProductDetials', {item: item})}
+      onPress={() => navigate('ProductDetials', {productId: item?.id})}
     />
   );
   const renderProduct = ({item}) => (
-    <AllProductsCard item={item} onPress={() => navigate('ProductDetials')} />
+    <AllProductsCard
+      item={item}
+      onPress={() => navigate('ProductDetials', {productId: item?.id})}
+    />
   );
 
   return (

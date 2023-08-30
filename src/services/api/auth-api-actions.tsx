@@ -52,7 +52,8 @@ export const getAllProducts = (pageNumber: any) => {
   let url = `${URLS.app.get_all_products}?page=${pageNumber}`;
   return getData(url);
 };
-
+export const getProductDetails = (productId: any) => getData(`${URLS.app.get_product_details}${productId}`
+)
 
 //// add amount///
 export const onAddAmount = (values: any) => {
