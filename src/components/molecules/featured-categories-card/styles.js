@@ -6,8 +6,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     width: (width - 80) / 3,
-    padding: 5,
+    padding: mvs(5),
     marginHorizontal: mvs(10),
+    borderWidth: mvs(0.6),
+    borderColor: colors.halfGray,
   },
   backGroundImage: {
     width: mvs(77),

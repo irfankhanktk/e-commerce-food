@@ -102,7 +102,8 @@
   "confirm_pass":"Confirm Password",
   "i_agree_the":"I agree the",
   "terms_and_condition":"Terms and conditions,",
-  "return_policy":"Return Policy & Privacy Policy",
+  "Return_Policy":"Return Policy",
+
   "dont_have_account":"Dont have an account?",
   "login":"LogIn",
   "error_pass_short":"Password is too short - should be 8 chars minimum",
@@ -117,7 +118,15 @@
   "verfication_desc": " We have sent you an OTP code via email on",
   "verification_code":"Verification Code",
   "reset_your_password":"Reset Your Password",
-  "resend_code":"Resend Code"
+  "resend_code":"Resend Code",
+  "product_you_may_also_like":"Product You May Also Like",
+  "top_selling_products":"Top Selling Products",
+  "video":"Video",
+  "reviews":"Reviews",
+  "vendor_policy":"Vendor Policy",
+  "policy":"Return Policy",
+  "support_policy":"Support Policy"
+
 
 
 

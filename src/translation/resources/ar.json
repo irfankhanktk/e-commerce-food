@@ -118,7 +118,15 @@
   "verfication_desc": "لقد أرسلنا لك رمز OTP عبر البريد الإلكتروني على",
   "verification_code":"رمز التحقق",
   "reset_your_password":"اعد ضبط كلمه السر",
-  "resend_code":"أعد إرسال الرمز"
+  "resend_code":"أعد إرسال الرمز",
+  "product_you_may_also_like":"منتج قد يعجبك أيضًا",
+  "top_selling_products":"المنتجات الأكثر مبيعا",
+  "video":"فيديو",
+  "reviews":"التعليقات",
+  "vendor_policy":"سياسة البائع",
+  "policy":"سياسة العائدات",
+  "support_policy":"سياسة الدعم"
+
 
 
 

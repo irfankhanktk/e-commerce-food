@@ -9,7 +9,7 @@ const DescriptionCard = ({description, style, onPress}) => {
     <View style={[styles.container, style]}>
       <Regular
         style={{lineHeight: mvs(16)}}
-        numberOfLines={5}
+        numberOfLines={10}
         color={colors.white}
         fontSize={mvs(12)}
         label={description || 'Short description of doctor will be here'}
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: mvs(15),
     backgroundColor: colors.primary,
-    height: mvs(79),
-    borderTopLeftRadius: mvs(15),
+    padding: mvs(10),
+    borderRadius: mvs(15),
     paddingHorizontal: mvs(20),
     paddingTop: mvs(20),
     paddingBottom: mvs(10),

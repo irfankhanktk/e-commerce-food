@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginHorizontal: mvs(20),
+
     marginTop: mvs(18),
   },
   backGroundImage: {

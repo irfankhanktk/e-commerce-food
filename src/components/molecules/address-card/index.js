@@ -57,16 +57,22 @@ const AddressCard = ({item, style, onPress, loading}) => {
       </View>
       {!select ? (
         <View style={styles.dotContainer}>
-          <TouchableOpacity onPress={() => navigate('Location')}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate('Location'), setSelect(!select);
+            }}>
             <Regular color={colors.darkBlack} label={t('edit')} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => setSelect(!select)}>
             <Regular
               style={{color: colors.darkBlack, marginTop: mvs(10)}}
               label={t('delete')}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigate('Location')}>
+          <TouchableOpacity
+            onPress={() => {
+              navigate('Location'), setSelect(!select);
+            }}>
             <Regular
               style={{color: colors.darkBlack, marginTop: mvs(10)}}
               fontSize={mvs(12)}

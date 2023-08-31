@@ -55,6 +55,7 @@ const FeaturedCategories = props => {
         renderItem={featuredProduct}
         contentContainerStyle={{
           paddingBottom: mvs(20),
+          paddingHorizontal: mvs(20),
         }}
       />
     </View>
