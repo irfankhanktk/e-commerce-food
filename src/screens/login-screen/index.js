@@ -89,7 +89,8 @@ const LoginScreen = props => {
                 </TouchableOpacity>
                 <PrimaryButton
                   loading={loading}
-                  onPress={handleSubmit}
+                  // onPress={handleSubmit}
+                  onPress={() => navigate('Drawer')}
                   title={t('login')}
                 />
                 <Regular

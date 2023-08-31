@@ -28,12 +28,12 @@ const AllProductsCard = ({item, style, onPress, loading}) => {
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular
             color={colors.darkBlack}
-            label={item?.name}
+            label={'Apple Phone'}
             fontSize={mvs(12)}
             numberOfLines={3}
           />
 
-          <Regular label={item?.main_price} fontSize={mvs(12)} />
+          <Regular label={'$300'} fontSize={mvs(12)} />
         </View>
       </View>
     </TouchableOpacity>

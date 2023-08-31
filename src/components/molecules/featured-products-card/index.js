@@ -24,12 +24,12 @@ const FeaturedProducts = ({item, style, onPress, loading}) => {
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular
             color={colors.darkBlack}
-            label={item?.name}
+            label={'Mobile'}
             numberOfLines={2}
             fontSize={mvs(12)}
           />
 
-          <Regular label={item?.main_price} fontSize={mvs(12)} />
+          <Regular label={'$ 15.00'} fontSize={mvs(12)} />
         </View>
       </View>
     </TouchableOpacity>

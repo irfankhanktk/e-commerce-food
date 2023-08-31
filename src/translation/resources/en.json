@@ -117,7 +117,8 @@
   "verfication_desc": " We have sent you an OTP code via email on",
   "verification_code":"Verification Code",
   "reset_your_password":"Reset Your Password",
-  "resend_code":"Resend Code"
+  "resend_code":"Resend Code",
+  "resend_otp_code":"Resend Otp Code"
 
 
 

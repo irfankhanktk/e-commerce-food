@@ -16,7 +16,7 @@ const FeaturedCategories = ({item, style, onPress, loading}) => {
           <Image source={{uri: item?.banner}} style={styles.innerImage} />
         </ImageBackground>
         <Regular
-          label={item?.name}
+          label={'Mobile'}
           fontSize={mvs(10)}
           style={{marginTop: mvs(15)}}
         />

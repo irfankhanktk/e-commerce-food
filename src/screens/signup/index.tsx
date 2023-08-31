@@ -44,11 +44,10 @@ const Signup = (props: props) => {
   };
   const [loading, setLoading] = React.useState(false);
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: any) => {
     try {
       setLoading(true)
       const res = await onSignup(values);
-      console.log('on Signup res=====>', res);
       setUserId(res?.user_id);
       setOtpModalVisible(true)
     } catch (error) {
@@ -171,7 +170,8 @@ const Signup = (props: props) => {
                 <PrimaryButton
 
                   loading={loading}
-                  onPress={handleSubmit}
+                  // onPress={handleSubmit}
+                  onPress={() => setOtpModalVisible(true)}
                   title={t("signup")}
                   containerStyle={{
                     marginTop: mvs(16),
@@ -196,7 +196,8 @@ const Signup = (props: props) => {
         visible={otpModalVisible}
         setValue={setValue}
         value={value}
-        onPress={onVerifySubmit}
+        // onPress={onVerifySubmit}
+        onPress={() => navigate('Drawer')}
         onResendOtpPress={onResendVerifyOtp}
       />
     </View>

@@ -38,6 +38,16 @@ const HomeTab = props => {
   const [allProducts, setAllProducts] = React.useState([]);
   // console.log('banners check==========>', allFeaturedProducts?.data);
 
+  const item = [
+    {
+      id: 1,
+    },
+    {
+      id: 2,
+    },
+    {id: 3},
+  ];
+
   const getBanners = async () => {
     try {
       const res = await banners();
@@ -162,7 +172,7 @@ const HomeTab = props => {
                 horizontal={true}
                 showsVerticalScrollIndicator={false}
                 // columnWrapperStyle={styles.columnWrapperStyle}
-                data={featuredCategorie?.data}
+                data={item}
                 renderItem={renderShop}
               />
             </View>
@@ -181,7 +191,7 @@ const HomeTab = props => {
                 horizontal={true}
                 showsVerticalScrollIndicator={false}
                 // columnWrapperStyle={styles.columnWrapperStyle}
-                data={allFeaturedProducts?.data}
+                data={item}
                 renderItem={featuredProduct}
               />
             </View>
@@ -194,7 +204,8 @@ const HomeTab = props => {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnWrapperStyle}
-        data={allProducts?.data || []}
+        // data={allProducts?.data || []}
+        data={item}
         renderItem={renderProduct}
         onEndReached={handleLoadMore} // Load more when reaching the end of the list
         onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
