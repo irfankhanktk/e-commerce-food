@@ -81,7 +81,8 @@ const ForgotPassword = (props: props) => {
                 <PrimaryButton
                   loading={loading}
                   title="Send"
-                  onPress={handleSubmit}
+                  // onPress={handleSubmit}
+                  onPress={() => navigate('RenewPassword')}
                   containerStyle={{
                     marginTop: mvs(12),
                   }}

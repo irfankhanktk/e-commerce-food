@@ -33,11 +33,8 @@ const RenewPassword = (props: props) => {
   const onSubmit = async (values: any) => {
 
     try {
-      Alert.alert('hel')
       setLoading(true)
       const res = await changePassword(values)
-      console.log('res check=======>', res);
-
       navigate('SucessfullyChangePassword')
     }
     catch (error) {
@@ -104,7 +101,8 @@ const RenewPassword = (props: props) => {
 
                 <PrimaryButton
                   title="Confirm"
-                  onPress={handleSubmit}
+                  // onPress={handleSubmit}
+                  onPress={() => navigate('SucessfullyChangePassword')}
                   containerStyle={{
                     marginTop: mvs(12),
                   }}
