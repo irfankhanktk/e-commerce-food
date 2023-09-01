@@ -36,7 +36,7 @@ const ForgotPassword = (props: props) => {
     try {
       setLoading(true)
       // const res = await forgotPassword(values)
-      navigate('RenewPassword', { email: values })
+      navigate('RenewPassword', { email_or_phone: values?.email_or_phone })
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));
     } finally {
