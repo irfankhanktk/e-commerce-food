@@ -55,6 +55,15 @@ export const getAllProducts = (pageNumber: any) => {
 export const getProductDetails = (productId: any) => getData(`${URLS.app.get_product_details}${productId}`
 )
 
+//////////add addresss/////////////////
+export const getAddress = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
+export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
+export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address, newAddress}`)
+export const getCities = () => getData(URLS.address.get_cities)
+
+
+
+
 //// add amount///
 export const onAddAmount = (values: any) => {
   return postData(URLS.wallet.add_amount, values);

@@ -7,7 +7,7 @@ import {featured, forklift, silder} from 'assets/images';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {colors} from 'config/colors';
 
-const AllProductsCard = ({item, style, onPress, loading}) => {
+const AllProductsCard = ({item, style, onPress, loading, onAddCart}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={{alignItems: 'center'}}>
@@ -21,7 +21,7 @@ const AllProductsCard = ({item, style, onPress, loading}) => {
           />
         </ImageBackground>
         <PrimaryButton
-          onPress={onPress}
+          onPress={onAddCart}
           containerStyle={styles.btnAddtoCart}
           title="Add To Cart"
         />

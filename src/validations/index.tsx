@@ -13,10 +13,10 @@ export const forgotemailFormValidation = yup.object().shape({
 });
 export const renewpasswordFormValidation = yup.object().shape({
   password: yup.string().required('req_pass').min(8, 'weak_pass'),
-  // verification_code: yup
-  //   .string()
-  //   .required('req_pass')
-  //   .oneOf([yup.ref('password')], 'miss_match_pass'),
+  verification_code: yup
+    .string()
+    .required('Verification code is required').min(6, 'Enter 6 digit verification code').max(6, 'Enter 6 digit verification code')
+
 });
 export const signupFormValidation = yup.object().shape({
   name: yup.string().required('req_name'),

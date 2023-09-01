@@ -125,7 +125,10 @@
   "reviews":"Reviews",
   "vendor_policy":"Vendor Policy",
   "policy":"Return Policy",
-  "support_policy":"Support Policy"
+  "support_policy":"Support Policy",
+  "shipping_cost":"Shipping Cost",
+  "return_policy":"Return Policy",
+  "resend_otp_code":"Resend OTP Code"
 
 
 

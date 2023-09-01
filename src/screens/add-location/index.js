@@ -23,6 +23,7 @@ import {UTILS} from 'utils';
 import PrimaryInput, {SearchInput} from 'components/atoms/inputs';
 import {goBack} from 'navigation/navigation-ref';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {addAddress} from 'services/api/auth-api-actions';
 
 const AddLocation = props => {
   const {route} = props;
@@ -34,7 +35,7 @@ const AddLocation = props => {
   const [loading, setLoading] = React.useState(false);
   const [payload, setPayload] = React.useState({
     addressId: address?.id || '',
-    name: '',
+    postal_code: '',
     title: '',
     address: '',
     description: '',
@@ -45,7 +46,7 @@ const AddLocation = props => {
   const language = user?.language;
   const dispatch = useAppDispatch();
   const {t} = i18n;
-  const addAddress = async () => {
+  const addAddressPress = async () => {
     try {
       setLoading(true);
       const newAddress = {
@@ -54,8 +55,12 @@ const AddLocation = props => {
         address: payload?.address,
         latitude: payload?.coordinate?.latitude,
         longitude: payload?.coordinate?.longitude,
+        postal_code: payload?.postal_code,
+        phone: payload?.note,
       };
-      const res = await addUserAddress(newAddress);
+      console.log('check nre address===>', newAddress);
+      return;
+      const res = await addAddress(newAddress);
       console.log('res:::', res);
       setPayload({
         ...payload,
@@ -104,10 +109,9 @@ const AddLocation = props => {
         <ScrollView style={styles.scrollViewContainer}>
           <PrimaryInput
             isIcon={false}
-            label={'Name'}
-            placeholder="Enter Name"
-            value={payload?.name}
-            onChangeText={t => setPayload({...payload, name: t})}
+            placeholder="Enter Postal Code"
+            value={payload?.postal_code}
+            onChangeText={t => setPayload({...payload, postal_code: t})}
             labelStyle={{color: colors.placeholder}}
             style={{color: colors.black}}
             containerStyle={styles.inputContainerStyle}
@@ -122,15 +126,7 @@ const AddLocation = props => {
               </View>
             </Row>
           </View>
-          {/* <PrimaryInput
-            value={payload?.description}
-            isIcon={false}
-            placeholder="Enter address details"
-            labelStyle={{color: colors.placeholder}}
-            containerStyle={styles.inputContainerStyle}
-            style={{color: colors.black}}
-            onChangeText={t => setPayload({...payload, description: t})}
-          /> */}
+
           <PrimaryInput
             isIcon={false}
             placeholder={t('phone')}
@@ -141,7 +137,7 @@ const AddLocation = props => {
             onChangeText={t => setPayload({...payload, note: t})}
           />
           <PrimaryButton
-            onPress={addAddress}
+            onPress={addAddressPress}
             loading={loading}
             containerStyle={styles.addAddressBtn}
             title={`${payload?.addressId ? 'Update' : 'Add'} address`}

@@ -99,18 +99,19 @@ function MyTabBar({state, descriptors, navigation}) {
 }
 
 // ...
-export const TabBar = () => {
+export const TabBar = props => {
+  const initialRoute = props?.route?.params?.initialRoute;
   const Tab = createBottomTabNavigator();
   const {user} = useAppSelector(s => s);
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={initialRoute || 'Home'}
       screenOptions={{headerShown: false}}
       tabBar={props => <MyTabBar {...props} />}>
       <Tab.Screen name="Home" component={HomeTab} />
       <Tab.Screen name="Categories" component={CategoriesTab} />
       <Tab.Screen name="Message" component={MessageTab} />
-      <Tab.Screen name="Carrt" component={CartTab} />
+      <Tab.Screen name="Cart" component={CartTab} />
       {/* {/* <Tab.Screen name="Categories" component={CategoriesTab} /> */}
       <Tab.Screen name="Me" component={UserTab} />
     </Tab.Navigator>

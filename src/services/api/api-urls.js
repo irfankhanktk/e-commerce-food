@@ -24,4 +24,10 @@ export const URLS = {
     get_all_products: 'v2/products',
     get_product_details: 'v2/products/',
   },
+  address: {
+    get_address: 'v2/user/shipping/address/',
+    add_address: 'v2/user/shipping/create',
+    delete_address: 'v2/user/shipping/delete/',
+    get_cities: 'v2/cities',
+  },
 };

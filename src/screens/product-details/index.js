@@ -19,6 +19,7 @@ import CustomFlatList from 'components/atoms/custom-flatlist';
 import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
 import Medium from 'typography/medium-text';
 import ProductDetailButtonCard from 'components/molecules/product-detail-button-card';
+import {navigate} from 'navigation/navigation-ref';
 
 const ProductDetials = props => {
   const productId = props?.route?.params?.productId;
@@ -131,6 +132,7 @@ const ProductDetials = props => {
                 label={t('inhouse_product')}
               />
               <IconButton
+                onPress={() => navigate('InboxMessage')}
                 containerStyle={styles.messageContainer}
                 textStyle={styles.messageTextStyle}
                 Icon={<MessageTwo />}
@@ -193,6 +195,9 @@ const ProductDetials = props => {
 
       <Row style={{paddingHorizontal: mvs(20), paddingVertical: mvs(10)}}>
         <IconButton
+          onPress={() =>
+            props?.navigation?.replace('Drawer', {initialRoute: 'Cart'})
+          }
           Icon={<CartWhite />}
           title={t('add_to_cart')}
           containerStyle={{width: '48%'}}

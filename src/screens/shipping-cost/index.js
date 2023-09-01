@@ -46,7 +46,7 @@ const ShippingCost = props => {
 
   return (
     <View style={styles.container}>
-      <AppHeader back title={t('shipping_cost  $18')} />
+      <AppHeader back title={`${t('shipping_cost')} ${'$18'}`} />
       <Medium
         label={t('inhouse_product')}
         style={{paddingHorizontal: mvs(20)}}

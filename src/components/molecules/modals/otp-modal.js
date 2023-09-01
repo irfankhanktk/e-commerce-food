@@ -74,7 +74,7 @@ const OtpModal = ({
         <TouchableOpacity
           onPress={onResendOtpPress}
           style={{alignItems: 'center', marginTop: mvs(10)}}>
-          <Regular fontSize={mvs(12)} label={'resend_otp_code'} />
+          <Regular fontSize={mvs(12)} label={t('resend_otp_code')} />
         </TouchableOpacity>
       </View>
     </ModalWrapper>

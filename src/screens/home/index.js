@@ -104,6 +104,7 @@ const HomeTab = props => {
     <AllProductsCard
       item={item}
       onPress={() => navigate('ProductDetials', {productId: item?.id})}
+      onAddCart={() => navigate('Cart')}
     />
   );
 

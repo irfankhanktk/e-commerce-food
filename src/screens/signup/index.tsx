@@ -30,6 +30,7 @@ type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 const Signup = (props: props) => {
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [value, setValue] = React.useState('');
+  const [checked, setChecked] = React.useState(false)
   const [userId, setUserId] = React.useState('')
 
   const { t } = i18n;
@@ -47,9 +48,8 @@ const Signup = (props: props) => {
   const onSubmit = async (values) => {
     try {
       setLoading(true)
-      const res = await onSignup(values);
-      console.log('on Signup res=====>', res);
-      setUserId(res?.user_id);
+      // const res = await onSignup(values);
+      // setUserId(res?.user_id);
       setOtpModalVisible(true)
     } catch (error) {
       console.log('error=>', error);
@@ -59,9 +59,9 @@ const Signup = (props: props) => {
   };
   const onVerifySubmit = async () => {
     try {
-      const res = await verifyOtp({ user_id: userId, verification_code: value })
-      console.log('otp verification res =====>', res);
-      navigate('Login')
+      // const res = await verifyOtp({ user_id: userId, verification_code: value })
+      // console.log('otp verification res =====>', res);
+      navigate('Drawer')
     } catch (error) {
       console.log('error=>', error);
     }
@@ -153,7 +153,7 @@ const Signup = (props: props) => {
                     alignItems: 'center',
                     marginTop: mvs(16),
                   }}>
-                  <Checkbox onPress={() => { }} />
+                  <Checkbox checked={checked} onPress={() => setChecked(!checked)} />
                   <View style={{ paddingLeft: mvs(10), flex: 1 }}>
                     <Regular
                       color={colors.darkBlack}

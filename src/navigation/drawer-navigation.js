@@ -6,7 +6,8 @@ import {TabBar} from './curvedtabs';
 
 const Drawer = createDrawerNavigator();
 
-function DrawerNavigator() {
+function DrawerNavigator(props) {
+  const {initialRoute} = props?.route?.params || {};
   return (
     <>
       <Drawer.Navigator
@@ -16,7 +17,13 @@ function DrawerNavigator() {
         }}
         initialRouteName="TabNavigator"
         drawerContent={props => <CustomDrawer {...props} />}>
-        <Drawer.Screen name="TabNavigator" component={TabBar} />
+        <Drawer.Screen
+          name="TabNavigator"
+          initialParams={{
+            initialRoute,
+          }}
+          component={TabBar}
+        />
       </Drawer.Navigator>
     </>
   );

@@ -33,10 +33,10 @@ const RenewPassword = (props: props) => {
   const onSubmit = async (values: any) => {
 
     try {
-      Alert.alert('hel')
+
       setLoading(true)
-      const res = await changePassword(values)
-      console.log('res check=======>', res);
+      // const res = await changePassword(values)
+
 
       navigate('SucessfullyChangePassword')
     }
@@ -86,7 +86,11 @@ const RenewPassword = (props: props) => {
                   onBlur={handleBlur('verification_code')}
                   value={values.verification_code}
                   errorStyle={{ marginBottom: 0 }}
-
+                  error={
+                    touched?.verification_code && errors?.verification_code
+                      ? `${t(errors?.verification_code)}`
+                      : undefined
+                  }
                 />
                 <PrimaryInput
                   isPassword
