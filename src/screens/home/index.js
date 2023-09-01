@@ -28,6 +28,7 @@ import {
 import AllProductsCard from 'components/molecules/all-products-card';
 import {Loader} from 'components/atoms/loader';
 import {UTILS} from 'utils';
+import {t} from 'i18next';
 
 const HomeTab = props => {
   const [banner, setBanner] = React.useState([]);
@@ -91,7 +92,7 @@ const HomeTab = props => {
   const renderShop = ({item}) => (
     <FeaturedCategoriesCard
       item={item}
-      onPress={() => navigate('FeaturedCategories')}
+      onPress={() => navigate('FeaturedCategories', {item: item})}
     />
   );
   const featuredProduct = ({item}) => (
@@ -149,15 +150,19 @@ const HomeTab = props => {
               </TouchableOpacity>
             </Row>
             <View style={styles.featuredContainer}>
-              <Medium
+              <Row
                 style={{
                   marginTop: mvs(5),
                   marginBottom: mvs(10),
-                  marginLeft: mvs(10),
-                }}
-                color={colors.white}
-                label={'Featured Categories'}
-              />
+                  alignItems: 'center',
+                  paddingHorizontal: mvs(10),
+                }}>
+                <Medium color={colors.white} label={'Featured Categories'} />
+                <TouchableOpacity
+                  onPress={() => navigate('AllFeaturedCategories')}>
+                  <Regular color={colors.white} label={t('see_all')} />
+                </TouchableOpacity>
+              </Row>
 
               <CustomFlatList
                 horizontal={true}

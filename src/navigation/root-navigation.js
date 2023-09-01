@@ -34,6 +34,7 @@ import ShippingCost from 'screens/shipping-cost';
 import CheckOut from 'screens/checkout';
 import Tracking from 'screens/tracking';
 import DrawerNavigator from './drawer-navigation';
+import AllFeaturedCategories from 'screens/all-featured-categories';
 
 const Stack = createNativeStackNavigator();
 
@@ -87,6 +88,10 @@ export const RootNavigator = () => {
           <Stack.Screen name="ShippingCost" component={ShippingCost} />
           <Stack.Screen name="CheckOut" component={CheckOut} />
           <Stack.Screen name="Tracking" component={Tracking} />
+          <Stack.Screen
+            name="AllFeaturedCategories"
+            component={AllFeaturedCategories}
+          />
         </Stack.Group>
       </Stack.Navigator>
     </View>

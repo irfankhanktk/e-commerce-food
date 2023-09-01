@@ -5,13 +5,14 @@ import {mvs} from 'config/metrices';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
-import {getAllCategories} from 'services/api/auth-api-actions';
+import {getAllFeaturedCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
+import {Loader} from 'components/atoms/loader';
 
-const CategoriesTab = props => {
+const AllFeaturedCategories = props => {
   const [data, setData] = React.useState([]);
   const fetchCategories = async () => {
-    const res = await getAllCategories();
+    const res = await getAllFeaturedCategories();
     setData(res);
   };
   React.useEffect(() => {
@@ -24,7 +25,7 @@ const CategoriesTab = props => {
 
   return (
     <View style={styles.container}>
-      <AppHeader back title={'Categories'} />
+      <AppHeader back title={'All Featured Categories'} />
 
       <CustomFlatList
         numColumns={2}
@@ -33,8 +34,9 @@ const CategoriesTab = props => {
         data={data?.data}
         renderItem={featuredProduct}
         contentContainerStyle={{paddingBottom: mvs(20)}}
+        // ListFooterComponent={<Loader />}
       />
     </View>
   );
 };
-export default CategoriesTab;
+export default AllFeaturedCategories;
