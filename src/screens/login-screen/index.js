@@ -20,7 +20,9 @@ import styles from './styles';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import LottieAnimation from 'components/atoms/animation';
 import {loginJson} from 'assets/lottie';
+import {useTheme} from '@react-navigation/native';
 const LoginScreen = props => {
+  // const colors = useTheme().colors;
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const initialValues = {
@@ -31,11 +33,13 @@ const LoginScreen = props => {
 
   const onSubmit = async values => {
     try {
-      
+      setLoading(true);
       // await dispatch(onLogin(values, setLoading, props));
       navigate('Drawer');
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
     }
   };
 

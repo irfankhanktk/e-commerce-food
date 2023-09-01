@@ -84,7 +84,16 @@ const styles = StyleSheet.create({
     plusContainer: {
         position: 'absolute',
         bottom: mvs(40),
-        ...colors.shadow,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
+
         backgroundColor: colors.primary,
         right: mvs(20),
         justifyContent: 'center',

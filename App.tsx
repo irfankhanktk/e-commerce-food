@@ -9,7 +9,12 @@ import { Provider } from 'react-redux';
 import { store } from 'store';
 import './src/config/axios-interceptor';
 import 'translation';
+import { useColorScheme } from 'react-native';
+import { darkTheme, lightTheme } from 'config/colors';
 const App = () => {
+
+  const theme = useColorScheme()
+
   const [loading, setLoading] = useState(true);
   const [initialRoute, setInitialRoute] = useState<string | undefined>('Splash');
 
@@ -43,11 +48,10 @@ const App = () => {
   }
 
 
-
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
       <Provider store={store}>
-        <NavigationContainer ref={navigationRef} linking={linking}>
+        <NavigationContainer theme={theme === 'dark' ? { colors: darkTheme, dark: true } : { colors: lightTheme, dark: false }} ref={navigationRef} linking={linking}>
           <RootNavigator />
         </NavigationContainer>
       </Provider>
