@@ -1,19 +1,18 @@
-import CustomFlatList from 'components/atoms/custom-flatlist';
-
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
+import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
+import {Row} from 'components/atoms/row';
+import ShippingCostCard from 'components/molecules/shipping-cost-card';
+import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
-import styles from './styles';
-import Medium from 'typography/medium-text';
-import ShippingCostCard from 'components/molecules/shipping-cost-card';
-import Regular from 'typography/regular-text';
-import {Row} from 'components/atoms/row';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
+import Medium from 'typography/medium-text';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 const ShippingCost = props => {
   const [data, setData] = React.useState([
     {

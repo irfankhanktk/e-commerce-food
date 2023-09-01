@@ -14,9 +14,9 @@ import {onLogin} from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
+import {UTILS} from 'utils';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
-import {UTILS} from 'utils';
 const LoginScreen = props => {
   const dispatch = useAppDispatch();
   const {t} = i18n;
@@ -128,21 +128,3 @@ const LoginScreen = props => {
   );
 };
 export default LoginScreen;
-
-// //  <KeyboardAvoidScrollview
-// // contentContainerStyle={styles.contentContainerStyle}>
-// //  <TouchableOpacity
-// //       style={{alignSelf: 'center', marginTop: mvs(20)}}
-// //       onPress={() => navigate('Signup')}>
-// //       <Medium
-// //         label={t('dont_have_account')}
-// //         style={{textDecorationLine: 'underline'}}
-// //       />
-// //     </TouchableOpacity>
-// // <OtpModal
-// //   onClose={() => setOtpModalVisible(false)}
-// //   visible={otpModalVisible}
-// //   setValue={setValue}
-// //   value={value}
-// // />
-// // </KeyboardAvoidScrollview>
