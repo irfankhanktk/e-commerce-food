@@ -2,7 +2,9 @@
 type RootStackParamList = {
   Splash: undefined;
   HotelStack: undefined;
-  RenewPassword: undefined;
+  RenewPassword: {
+    email_or_phone?: string
+  };
   ForgotPassword: undefined;
   BottomTab: undefined;
   Signup: undefined;

@@ -4,10 +4,9 @@ import { PrimaryButton } from 'components/atoms/buttons';
 import PrimaryInput from 'components/atoms/inputs';
 import { mvs } from 'config/metrices';
 import { Formik } from 'formik';
-import { useAppDispatch } from 'hooks/use-store';
 import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import { Alert, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 
@@ -15,15 +14,15 @@ import { renewpasswordFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 
-import { changePassword, resendPasswordCode } from 'services/api/auth-api-actions';
+import { fotgotJson } from 'assets/lottie';
+import LottieAnimation from 'components/atoms/animation';
+import { resendPasswordCode } from 'services/api/auth-api-actions';
 import Regular from 'typography/regular-text';
 import { UTILS } from 'utils';
-import LottieAnimation from 'components/atoms/animation';
-import { fotgotJson } from 'assets/lottie';
 type props = NativeStackScreenProps<RootStackParamList, 'RenewPassword'>;
 
 const RenewPassword = (props: props) => {
-  const emailcheck = props?.route?.params?.email?.email_or_phone;
+  const emailcheck = props?.route?.params?.email_or_phone;
   const { t } = i18n;
   const initialValues = {
     verification_code: '',
@@ -79,7 +78,7 @@ const RenewPassword = (props: props) => {
                 <LottieAnimation style={styles.lottie} src={fotgotJson} />
                 <Bold
                   style={styles.loginTexhzologyContainer}
-                  label={t('reset_your_password')}
+                  label={`${t('reset_your_password')}`}
                 />
                 <PrimaryInput
                   placeholder={t('verification_code')}
