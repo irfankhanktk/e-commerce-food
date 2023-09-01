@@ -5,7 +5,8 @@ import { colors } from 'config/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white
+        backgroundColor: colors.white,
+        paddingBottom: mvs(30),
     },
     contentContainerStyle: {
         paddingVertical: mvs(30),
@@ -21,14 +22,14 @@ const styles = StyleSheet.create({
     },
     backgroundContainer: {
         width: '100%',
-        height: mvs(250),
         backgroundColor: colors.primary,
     },
     inputContainer: {
-        marginTop: mvs(140),
+        marginTop: mvs(-125),
+        paddingVertical: mvs(20),
         backgroundColor: colors.white,
         borderRadius: mvs(15),
-        height: mvs(520),
+        // flex: 1,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -36,9 +37,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
-        paddingHorizontal: mvs(20),
     },
     loginTexhzologyContainer: {
         marginTop: mvs(30),
@@ -47,8 +46,7 @@ const styles = StyleSheet.create({
         marginBottom: mvs(20),
     },
     mainInnerContainer: {
-        width: '100%',
-        position: 'absolute',
+        flex: 1,
         paddingHorizontal: mvs(20),
     },
 });

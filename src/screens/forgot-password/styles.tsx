@@ -7,6 +7,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.white
     },
+    lottie: {
+        height: mvs(100),
+        width: mvs(100),
+        alignSelf: 'center',
+        marginTop: mvs(20),
+    },
     contentContainerStyle: {
         paddingTop: 80,
         paddingHorizontal: mvs(20)
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: mvs(20),
     },
     loginTexhzologyContainer: {
-        marginTop: mvs(110),
+        marginTop: mvs(20),
         paddingLeft: mvs(20),
         fontSize: mvs(15),
         marginBottom: mvs(20),

@@ -18,6 +18,8 @@ import styles from './styles';
 import { changePassword, resendPasswordCode } from 'services/api/auth-api-actions';
 import Regular from 'typography/regular-text';
 import { UTILS } from 'utils';
+import LottieAnimation from 'components/atoms/animation';
+import { fotgotJson } from 'assets/lottie';
 type props = NativeStackScreenProps<RootStackParamList, 'RenewPassword'>;
 
 const RenewPassword = (props: props) => {
@@ -72,10 +74,9 @@ const RenewPassword = (props: props) => {
             touched,
             errors,
           }) => (
-
-
             <View style={styles.mainInnerContainer}>
               <View style={styles.inputContainer}>
+                <LottieAnimation style={styles.lottie} src={fotgotJson} />
                 <Bold
                   style={styles.loginTexhzologyContainer}
                   label={t('reset_your_password')}
@@ -114,57 +115,14 @@ const RenewPassword = (props: props) => {
                   }}
                 />
                 <TouchableOpacity onPress={() => onResendCode()} style={{ alignItems: "center", marginTop: mvs(10) }}>
-                  <Regular fontSize={mvs(12)} label={t('resend_code')} />
+                  <Regular fontSize={mvs(12)} label={`${t('resend_code')}`} />
                 </TouchableOpacity>
-
               </View>
 
             </View>
           )}
         </Formik>
-
       </View>
-
-      {/* <ImageBackground source={auth_bg} style={{
-        height: height,
-        width: width,
-      }}>
-        <KeyboardAvoidScrollview contentContainerStyle={styles.contentContainerStyle}>
-          <RenewLogo style={{ alignSelf: 'center', marginBottom: mvs(15), }} />
-          <Bold label={`${t('renew_pass')}`} style={styles.txt} />
-          <PrimaryInput
-            isPassword
-            error={
-              touched?.password && errors?.password
-                ? t(errors?.password)
-                : undefined
-            }
-            placeholder={'********'}
-            label={t('password')}
-            onChangeText={(str) => setFieldValue('password', str)}
-            onBlur={() => setFieldTouched('password', true)}
-            value={values.password} />
-          <PrimaryInput
-            isPassword
-            error={
-              touched?.confirm_password && errors?.confirm_password
-                ? t(errors?.confirm_password)
-                : undefined
-            }
-            placeholder={'********'}
-            label={t('confirm_pass')}
-            onChangeText={(str) => setFieldValue('confirm_password', str)}
-            onBlur={() => setFieldTouched('confirm_password', true)}
-            value={values.confirm_password} />
-
-          <PrimaryButton
-            loading={loading}
-            disabled={Object.keys(errors)?.length > 0 || Object.keys(touched)?.length === 0}
-            title={t('set_password')}
-            onPress={() => dispatch(onSignup(values, setLoading, props))}
-            containerStyle={styles.button} />
-        </KeyboardAvoidScrollview>
-      </ImageBackground> */}
     </View>
 
   );

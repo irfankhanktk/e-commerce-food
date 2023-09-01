@@ -11,16 +11,15 @@ import {OtpInput} from '../otp-input';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 const OtpModal = ({
-  disabled,
   loading,
   style = {},
   email,
   visible = false,
   value,
   setValue,
-  onClose = item => {},
-  onPress = () => {},
-  onResendOtpPress = () => {},
+  onClose = () => {},
+  onPress,
+  onResendOtpPress,
 }) => {
   return (
     <ModalWrapper
@@ -47,13 +46,13 @@ const OtpModal = ({
         <Medium
           numberOfLines={3}
           style={styles.msg}
-          label={`${t('verfication_desc')} ${email || '@email'}`}
+          label={`${t('verfication_desc')} ${email}`}
         />
         <View style={styles.otp}>
           <OtpInput setValue={setValue} value={value} />
         </View>
         <TouchableOpacity
-          disabled={disabled}
+          disabled={loading}
           onPress={onPress}
           style={{
             backgroundColor: colors.blueHalf,

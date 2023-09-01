@@ -16,6 +16,8 @@ import styles from './styles';
 import { navigate } from 'navigation/navigation-ref';
 import { forgotPassword } from 'services/api/auth-api-actions';
 import { UTILS } from 'utils';
+import LottieAnimation from 'components/atoms/animation';
+import { fotgotJson } from 'assets/lottie';
 type props = NativeStackScreenProps<RootStackParamList, 'ForgotPassword'>;
 
 const ForgotPassword = (props: props) => {
@@ -61,6 +63,8 @@ const ForgotPassword = (props: props) => {
           }) => (
             <View style={styles.mainInnerContainer}>
               <View style={styles.inputContainer}>
+                <LottieAnimation style={styles.lottie} src={fotgotJson} />
+
                 <Bold
                   style={styles.loginTexhzologyContainer}
                   label={'Forgot Password'}

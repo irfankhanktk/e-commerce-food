@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Formik, useFormik } from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
@@ -9,20 +9,19 @@ import { PrimaryButton } from 'components/atoms/buttons';
 import { Checkbox } from 'components/atoms/checkbox';
 import PrimaryInput from 'components/atoms/inputs';
 import { Row } from 'components/atoms/row';
+import OtpModal from 'components/molecules/modals/otp-modal';
 import { colors } from 'config/colors';
-import { mvs } from 'config/metrices';
-import { useAppDispatch, useAppSelector } from 'hooks/use-store';
+import { height, mvs } from 'config/metrices';
 import { navigate } from 'navigation/navigation-ref';
+import { resendVerifyOtp } from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-import { UTILS } from 'utils';
 import { signupFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
-import OtpModal from 'components/molecules/modals/otp-modal';
-import { onSignup, resendVerifyOtp, verifyOtp } from 'services/api/auth-api-actions';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
@@ -44,9 +43,11 @@ const Signup = (props: props) => {
 
   };
   const [loading, setLoading] = React.useState(false);
-
-  const onSubmit = async (values) => {
+  const [verifyLoading, setVerifyLoading] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const onSubmit = async (values: any) => {
     try {
+      setEmail(values?.email);
       setLoading(true)
       // const res = await onSignup(values);
       // setUserId(res?.user_id);
@@ -59,11 +60,14 @@ const Signup = (props: props) => {
   };
   const onVerifySubmit = async () => {
     try {
+      setVerifyLoading(true);
       // const res = await verifyOtp({ user_id: userId, verification_code: value })
       // console.log('otp verification res =====>', res);
       navigate('Drawer')
     } catch (error) {
       console.log('error=>', error);
+    } finally {
+      setVerifyLoading(false);
     }
   }
   const onResendVerifyOtp = async () => {
@@ -78,27 +82,34 @@ const Signup = (props: props) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
-        <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
-        <Formik
-          onSubmit={onSubmit}
-          initialValues={initialValues}
-          validationSchema={signupFormValidation}>
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            isValid,
-            touched,
-            errors,
-          }) => (
+      <View
+        style={{
+          paddingTop: mvs(76),
+          paddingBottom: height / 5,
+          backgroundColor: colors.primary,
+        }}>
+        <SplashIcon style={{ alignSelf: 'center' }} />
+      </View>
+      <Formik
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+        validationSchema={signupFormValidation}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          touched,
+          errors,
+        }) => (
 
-            <View style={styles.mainInnerContainer}>
-              <View style={styles.inputContainer}>
+          <View style={styles.mainInnerContainer}>
+            <View style={styles.inputContainer}>
+              <KeyboardAvoidScrollview>
+
                 <Bold
                   style={styles.loginTexhzologyContainer}
-                  label={t('signup_up_to_techzology_ecommerces')}
+                  label={`${t('signup_up_to_techzology_ecommerces')}`}
                 />
                 <PrimaryInput
                   placeholder={t('name')}
@@ -158,12 +169,12 @@ const Signup = (props: props) => {
                     <Regular
                       color={colors.darkBlack}
                       fontSize={mvs(10)}
-                      label={t('i_agree_the')}>{' '}
+                      label={`${t('i_agree_the')} `}>
                       <Medium
                         onPress={() => navigate('TermsAndConditions')}
-                        label={t('terms_and_condition')}
-                      />{' '}
-                      <Medium onPress={() => navigate('PrivacyPolicy')} label={t('return_policy')} />
+                        label={`${t('terms_and_condition')} `}
+                      />
+                      <Medium onPress={() => navigate('PrivacyPolicy')} label={`${t('return_policy')}`} />
                     </Regular>
                   </View>
                 </Row>
@@ -177,25 +188,26 @@ const Signup = (props: props) => {
                     marginTop: mvs(16),
                   }}
                 />
-
                 <Regular
                   style={{ marginTop: mvs(16), alignSelf: 'center' }}
-                  label={t('dont_have_account')}>{' '}
-                  <Bold onPress={() => navigate('Login')} label={t('login')} />
+                  label={`${t('dont_have_account')} `}>
+                  <Bold onPress={() => navigate('Login')} label={`${t('login')}`} />
                 </Regular>
-              </View>
+              </KeyboardAvoidScrollview>
+
             </View>
+          </View>
 
 
-          )}
-        </Formik>
-      </View>
-
+        )}
+      </Formik>
       <OtpModal
+        email={email}
         onClose={() => setOtpModalVisible(false)}
         visible={otpModalVisible}
         setValue={setValue}
         value={value}
+        loading={verifyLoading}
         onPress={onVerifySubmit}
         onResendOtpPress={onResendVerifyOtp}
       />
