@@ -29,8 +29,11 @@ import AllProductsCard from 'components/molecules/all-products-card';
 import {Loader} from 'components/atoms/loader';
 import {UTILS} from 'utils';
 import {t} from 'i18next';
+import {useTheme} from '@react-navigation/native';
 
 const HomeTab = props => {
+  const colors = useTheme().colors;
+
   const [banner, setBanner] = React.useState([]);
   const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
   const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
@@ -110,7 +113,7 @@ const HomeTab = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <HomeHeader menu isSearch notification />
 
       <CustomFlatList
@@ -149,7 +152,11 @@ const HomeTab = props => {
                 <Regular label={'Coupons'} fontSize={mvs(10)} />
               </TouchableOpacity>
             </Row>
-            <View style={styles.featuredContainer}>
+            <View
+              style={{
+                ...styles.featuredContainer,
+                backgroundColor: colors.primary,
+              }}>
               <Row
                 style={{
                   marginTop: mvs(5),
@@ -173,7 +180,11 @@ const HomeTab = props => {
               />
             </View>
 
-            <View style={styles.featuredContainer}>
+            <View
+              style={{
+                ...styles.featuredContainer,
+                backgroundColor: colors.primary,
+              }}>
               <Medium
                 style={{
                   marginTop: mvs(5),

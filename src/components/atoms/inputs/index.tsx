@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   I18nManager,
   KeyboardTypeOptions,
@@ -12,19 +12,17 @@ import {
   ViewStyle,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import { colors } from 'config/colors';
+import { mvs } from 'config/metrices';
+import { useAppSelector } from 'hooks/use-store';
 import PhoneInput from 'react-native-phone-number-input';
 import Regular from 'typography/regular-text';
-import { mvs, width } from 'config/metrices';
-import { colors } from 'config/colors';
-import Medium from 'typography/medium-text';
 import { Row } from '../row';
-import { useAppSelector } from 'hooks/use-store';
 
 // import DropdownModal from 'components/molecules/doctor/modals/dropdown-modal';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { t } from 'i18next';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 type Item = { label: string; value: string };
 type props = {

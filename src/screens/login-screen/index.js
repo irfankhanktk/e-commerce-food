@@ -22,7 +22,7 @@ import LottieAnimation from 'components/atoms/animation';
 import {loginJson} from 'assets/lottie';
 import {useTheme} from '@react-navigation/native';
 const LoginScreen = props => {
-  // const colors = useTheme().colors;
+  const colors = useTheme().colors;
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const initialValues = {
@@ -44,8 +44,12 @@ const LoginScreen = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
+      <View
+        style={{
+          ...styles.backgroundContainer,
+          backgroundColor: colors.background,
+        }}>
         <View
           style={{
             paddingTop: mvs(76),
@@ -68,10 +72,15 @@ const LoginScreen = props => {
             errors,
           }) => (
             <View style={styles.mainInnerContainer}>
-              <View style={styles.inputContainer}>
+              <View
+                style={{
+                  ...styles.inputContainer,
+                  backgroundColor: colors.background,
+                }}>
                 <KeyboardAvoidScrollview>
                   <LottieAnimation style={styles.lottie} src={loginJson} />
                   <Bold
+                    color={colors.text}
                     style={styles.loginTexhzologyContainer}
                     label={t('login_in_to_techzology_ecommerces')}
                   />
@@ -104,7 +113,7 @@ const LoginScreen = props => {
                   <TouchableOpacity
                     style={{alignSelf: 'flex-end', marginBottom: mvs(15)}}
                     onPress={() => navigate('ForgotPassword')}>
-                    <Bold label={t('Forgot Password?')} />
+                    <Bold color={colors.text} label={t('Forgot Password?')} />
                   </TouchableOpacity>
                   <PrimaryButton
                     loading={loading}
@@ -112,6 +121,7 @@ const LoginScreen = props => {
                     title={t('login')}
                   />
                   <Regular
+                    color={colors.text}
                     label={t('or_create_a_new_account')}
                     fontSize={mvs(10)}
                     style={{alignSelf: 'center', marginTop: mvs(12)}}
@@ -125,16 +135,17 @@ const LoginScreen = props => {
                     }}
                   />
                   <Regular
+                    color={colors.text}
                     label={t('login_with')}
                     fontSize={mvs(10)}
                     style={{alignSelf: 'center', marginTop: mvs(12)}}
                   />
                   <Row style={{paddingHorizontal: mvs(35), marginTop: mvs(12)}}>
                     <TouchableOpacity>
-                      <Regular label={t('Google')} />
+                      <Regular color={colors.text} label={t('Google')} />
                     </TouchableOpacity>
                     <TouchableOpacity>
-                      <Regular label={t('Facebook')} />
+                      <Regular color={colors.text} label={t('Facebook')} />
                     </TouchableOpacity>
                   </Row>
                 </KeyboardAvoidScrollview>

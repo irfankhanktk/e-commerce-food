@@ -1,23 +1,19 @@
+import { colors } from 'config/colors';
+import { mvs } from 'config/metrices';
+import { useAppSelector } from 'hooks/use-store';
 import React, { useState } from 'react';
 import {
-  I18nManager,
   KeyboardTypeOptions,
   NativeSyntheticEvent,
   StyleProp,
   StyleSheet,
-  TextInput,
   TextInputFocusEventData,
-  TouchableOpacity,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
 import MaskInput from 'react-native-mask-input';
-import { useAppSelector } from 'hooks/use-store';
 import PhoneInput from 'react-native-phone-number-input';
 import Regular from 'typography/regular-text';
-import { colors } from 'config/colors';
-import { mvs } from 'config/metrices';
 type Item = { label: string; value: string };
 type props = {
   onChangeText: (text: string) => void;

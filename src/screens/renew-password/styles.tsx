@@ -5,7 +5,7 @@ import { colors } from 'config/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white
+        // backgroundColor: colors.white
     },
     lottie: {
         height: mvs(100),
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
     backgroundContainer: {
         width: '100%',
         height: mvs(250),
-        backgroundColor: colors.primary,
+        // backgroundColor: colors.primary,
     },
     inputContainer: {
         marginTop: mvs(140),
         paddingBottom: mvs(20),
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
         borderRadius: mvs(15),
         shadowColor: '#000',
         shadowOffset: {

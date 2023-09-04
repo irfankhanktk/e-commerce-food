@@ -19,9 +19,12 @@ import LottieAnimation from 'components/atoms/animation';
 import { resendPasswordCode } from 'services/api/auth-api-actions';
 import Regular from 'typography/regular-text';
 import { UTILS } from 'utils';
+import { useTheme } from '@react-navigation/native';
 type props = NativeStackScreenProps<RootStackParamList, 'RenewPassword'>;
 
 const RenewPassword = (props: props) => {
+  const colors = useTheme().colors;
+
   const emailcheck = props?.route?.params?.email_or_phone;
   const { t } = i18n;
   const initialValues = {
@@ -57,8 +60,8 @@ const RenewPassword = (props: props) => {
 
   }
   return (
-    <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <View style={{ ...styles.backgroundContainer, backgroundColor: colors.primary }}>
         <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
         <Formik
           onSubmit={onSubmit}
@@ -74,9 +77,10 @@ const RenewPassword = (props: props) => {
             errors,
           }) => (
             <View style={styles.mainInnerContainer}>
-              <View style={styles.inputContainer}>
+              <View style={{ ...styles.inputContainer, backgroundColor: colors.background }}>
                 <LottieAnimation style={styles.lottie} src={fotgotJson} />
                 <Bold
+                  color={colors.text}
                   style={styles.loginTexhzologyContainer}
                   label={`${t('reset_your_password')}`}
                 />
@@ -114,7 +118,7 @@ const RenewPassword = (props: props) => {
                   }}
                 />
                 <TouchableOpacity onPress={() => onResendCode()} style={{ alignItems: "center", marginTop: mvs(10) }}>
-                  <Regular fontSize={mvs(12)} label={`${t('resend_code')}`} />
+                  <Regular color={colors.text} fontSize={mvs(12)} label={`${t('resend_code')}`} />
                 </TouchableOpacity>
               </View>
 

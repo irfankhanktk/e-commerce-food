@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
   lottie: {
     height: mvs(100),
@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
   },
   backgroundContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     paddingBottom: mvs(30),
   },
   inputContainer: {
     marginTop: mvs(-125),
     paddingBottom: mvs(30),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     borderRadius: mvs(15),
     shadowColor: '#000',
     shadowOffset: {

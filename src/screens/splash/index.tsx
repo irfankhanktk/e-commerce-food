@@ -14,9 +14,12 @@ import {
 } from '../../store/reducers/user-reducer';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
+import { useTheme } from '@react-navigation/native';
 type props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const Splash = (props: props) => {
+  const colors = useTheme().colors;
+
   const { navigation } = props;
   const dispatch = useAppDispatch();
   const loadNotifications = async () => {
@@ -64,7 +67,10 @@ const Splash = (props: props) => {
   }, []);
 
   return (
-    <View style={{ ...styles.container }}>
+    <View style={{
+      ...styles.container,
+      backgroundColor: colors.primary,
+    }}>
       <SplashIcon />
     </View>
   );

@@ -11,27 +11,32 @@ import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
+import { useTheme } from '@react-navigation/native';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 
 const SucessfullyChangePassword = (props: props) => {
+  const colors = useTheme().colors;
+
   return (
-    <View style={styles.container}>
-      <View style={styles.backgroundContainer}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
+      <View style={{ ...styles.backgroundContainer, backgroundColor: colors.primary }}>
         <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
         <View style={styles.mainInnerContainer}>
 
-          <View style={styles.inputContainer}>
+          <View style={{ ...styles.inputContainer, backgroundColor: colors.background }}>
             <Bold
+              color={colors.text}
               style={styles.paswordChangedTxt}
               label={'Password Changed'}
             />
             <Bold
+
               style={styles.congraTxt}
               label={'Congratulations!!'}
             />
-            <Regular style={styles.contentTxt} label={'You Have Successfully Changed Your Password'} />
+            <Regular color={colors.text} style={styles.contentTxt} label={'You Have Successfully Changed Your Password'} />
 
 
             <PrimaryButton

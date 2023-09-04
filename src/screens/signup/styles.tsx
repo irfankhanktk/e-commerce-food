@@ -5,7 +5,7 @@ import { colors } from 'config/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
         paddingBottom: mvs(30),
     },
     contentContainerStyle: {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginTop: mvs(-125),
         paddingVertical: mvs(20),
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
         borderRadius: mvs(15),
         // flex: 1,
         shadowColor: '#000',

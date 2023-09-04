@@ -35,10 +35,13 @@ import CheckOut from 'screens/checkout';
 import Tracking from 'screens/tracking';
 import DrawerNavigator from './drawer-navigation';
 import AllFeaturedCategories from 'screens/all-featured-categories';
+import {useTheme} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
+  const colors = useTheme().colors;
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={{flex: 0, backgroundColor: colors.primary}} />

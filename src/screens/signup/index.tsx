@@ -22,11 +22,14 @@ import { signupFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview';
+import { useTheme } from '@react-navigation/native';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 
 const Signup = (props: props) => {
+  const colors = useTheme().colors;
+
   const [otpModalVisible, setOtpModalVisible] = React.useState(false);
   const [value, setValue] = React.useState('');
   const [checked, setChecked] = React.useState(false)
@@ -81,7 +84,7 @@ const Signup = (props: props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
       <View
         style={{
           paddingTop: mvs(76),
@@ -104,10 +107,11 @@ const Signup = (props: props) => {
         }) => (
 
           <View style={styles.mainInnerContainer}>
-            <View style={styles.inputContainer}>
+            <View style={{ ...styles.inputContainer, backgroundColor: colors.background }}>
               <KeyboardAvoidScrollview>
 
                 <Bold
+                  color={colors.text}
                   style={styles.loginTexhzologyContainer}
                   label={`${t('signup_up_to_techzology_ecommerces')}`}
                 />
@@ -167,14 +171,15 @@ const Signup = (props: props) => {
                   <Checkbox checked={checked} onPress={() => setChecked(!checked)} />
                   <View style={{ paddingLeft: mvs(10), flex: 1 }}>
                     <Regular
-                      color={colors.darkBlack}
+                      color={colors.border}
                       fontSize={mvs(10)}
                       label={`${t('i_agree_the')} `}>
                       <Medium
+                        color={colors.text}
                         onPress={() => navigate('TermsAndConditions')}
                         label={`${t('terms_and_condition')} `}
                       />
-                      <Medium onPress={() => navigate('PrivacyPolicy')} label={`${t('return_policy')}`} />
+                      <Medium color={colors.text} onPress={() => navigate('PrivacyPolicy')} label={`${t('return_policy')}`} />
                     </Regular>
                   </View>
                 </Row>
@@ -189,9 +194,10 @@ const Signup = (props: props) => {
                   }}
                 />
                 <Regular
+                  color={colors.text}
                   style={{ marginTop: mvs(16), alignSelf: 'center' }}
                   label={`${t('dont_have_account')} `}>
-                  <Bold onPress={() => navigate('Login')} label={`${t('login')}`} />
+                  <Bold color={colors.text} onPress={() => navigate('Login')} label={`${t('login')}`} />
                 </Regular>
               </KeyboardAvoidScrollview>
 

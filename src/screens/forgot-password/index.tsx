@@ -18,9 +18,12 @@ import { forgotPassword } from 'services/api/auth-api-actions';
 import { UTILS } from 'utils';
 import LottieAnimation from 'components/atoms/animation';
 import { fotgotJson } from 'assets/lottie';
+import { useTheme } from '@react-navigation/native';
 type props = NativeStackScreenProps<RootStackParamList, 'ForgotPassword'>;
 
 const ForgotPassword = (props: props) => {
+  const colors = useTheme().colors;
+
   const { navigation } = props;
   const { t } = i18n;
   const dispatch = useAppDispatch();
@@ -44,9 +47,9 @@ const ForgotPassword = (props: props) => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, backgroundColor: colors.background }}>
 
-      <View style={styles.backgroundContainer}>
+      <View style={{ ...styles.backgroundContainer, backgroundColor: colors.primary }}>
         <SplashIcon style={{ alignSelf: 'center', marginTop: mvs(76) }} />
         <Formik
           onSubmit={onSubmit}
@@ -62,10 +65,11 @@ const ForgotPassword = (props: props) => {
             errors,
           }) => (
             <View style={styles.mainInnerContainer}>
-              <View style={styles.inputContainer}>
+              <View style={{ ...styles.inputContainer, backgroundColor: colors.background }}>
                 <LottieAnimation style={styles.lottie} src={fotgotJson} />
 
                 <Bold
+                  color={colors.text}
                   style={styles.loginTexhzologyContainer}
                   label={'Forgot Password'}
                 />
