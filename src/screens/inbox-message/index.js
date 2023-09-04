@@ -1,6 +1,12 @@
+import {useTheme} from '@react-navigation/native';
+import {ford} from 'assets/images';
+import CustomFlatList from 'components/atoms/custom-flatlist';
+import {MessageInput} from 'components/atoms/inputs';
+import {Row} from 'components/atoms/row';
+import InboxChatCard from 'components/molecules/inbox-chat-card';
 import {mvs} from 'config/metrices';
 import {useAppDispatch} from 'hooks/use-store';
-import {goBack, navigate} from 'navigation/navigation-ref';
+import {goBack} from 'navigation/navigation-ref';
 import React from 'react';
 import {
   I18nManager,
@@ -8,21 +14,16 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CustomFlatList from 'components/atoms/custom-flatlist';
-import AppHeader from 'components/atoms/headers/app-header';
-import i18n from 'translation';
-import styles from './styles';
-import InboxChatCard from 'components/molecules/inbox-chat-card';
-import {Row} from 'components/atoms/row';
+import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {colors} from 'config/colors';
-import {ford, forklift} from 'assets/images';
+import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
-import {MessageInput} from 'components/atoms/inputs';
-import Feather from 'react-native-vector-icons/Feather';
+import styles from './styles';
 const InboxMessage = props => {
   const dispatch = useAppDispatch();
+  const colors = useTheme().colors;
+
   const {t} = i18n;
   const featuredCategories = [
     {
@@ -54,7 +55,7 @@ const InboxMessage = props => {
   ];
   const featuredProduct = ({item}) => <InboxChatCard item={item} />;
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <View
         style={{
           paddingHorizontal: mvs(20),
@@ -68,10 +69,10 @@ const InboxMessage = props => {
             <FontAwesome5
               name={I18nManager.isRTL ? 'arrow-right' : 'arrow-left'}
               size={mvs(20)}
-              color={colors.primary}
+              color={colors.iconColor}
             />
           </TouchableOpacity>
-          <View style={styles.imageContainer}>
+          <View style={{...styles.imageContainer, borderColor: colors.primary}}>
             <ImageBackground
               borderRadius={mvs(10)}
               source={ford}
@@ -80,8 +81,12 @@ const InboxMessage = props => {
             </ImageBackground>
           </View>
           <View style={{paddingHorizontal: mvs(10), flex: 1}}>
-            <Bold label={'Mitsubishi'} />
-            <Regular numberOfLines={1} label={'Mitsubishi@email.com'} />
+            <Bold color={colors.text} label={'Mitsubishi'} />
+            <Regular
+              color={colors.text}
+              numberOfLines={1}
+              label={'Mitsubishi@email.com'}
+            />
           </View>
         </Row>
       </View>

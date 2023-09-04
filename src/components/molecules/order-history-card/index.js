@@ -7,11 +7,14 @@ import Medium from 'typography/medium-text';
 import styles from './styles';
 import Regular from 'typography/regular-text';
 import {Clander, CreaditCard, Delivery} from 'assets/icons';
+import {useTheme} from '@react-navigation/native';
 
 const OrderHistoryCard = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Row style={styles.container}>
+      <Row style={{...styles.container, backgroundColor: colors.background}}>
         <View style={styles.idContainer} />
         <View style={styles.contentContainer}>
           <Regular label={item?.id} fontSize={mvs(12)} />
@@ -20,7 +23,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
             <Regular
               style={{
                 marginLeft: mvs(10),
-                color: colors.darkBlack,
+                color: colors.text,
                 fontSize: mvs(12),
               }}
               label={item?.date}
@@ -31,7 +34,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
             <Regular
               style={{
                 marginLeft: mvs(10),
-                color: colors.darkBlack,
+                color: colors.text,
                 fontSize: mvs(12),
               }}
               label={`${'Payment Status -'} ${item?.payment_status}`}
@@ -42,7 +45,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
             <Regular
               style={{
                 marginLeft: mvs(10),
-                color: colors.darkBlack,
+                color: colors.text,
                 fontSize: mvs(12),
               }}
               label={`${'Delivery Status -'} ${item?.delivery_status}`}

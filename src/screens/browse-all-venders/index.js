@@ -7,8 +7,11 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const BrowseAllVenders = props => {
+  const colors = useTheme().colors;
+
   const featuredCategories = [
     {
       id: 1,
@@ -30,7 +33,7 @@ const BrowseAllVenders = props => {
   const featuredProduct = ({item}) => <BrowseAllVendersCard item={item} />;
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('browse_all_venders')} />
 
       <CustomFlatList

@@ -2,7 +2,6 @@ import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
 import {Row} from 'components/atoms/row';
 import OrderHistoryCard from 'components/molecules/order-history-card';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
@@ -11,10 +10,13 @@ import {TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
+import {useTheme} from '@react-navigation/native';
 import {ClanderTwo, DeliveryTwo} from 'assets/icons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 const OrderHistory = props => {
+  const colors = useTheme().colors;
+
   const [select, setSelect] = React.useState(true);
   const [selectByPayment, setSelectByPayment] = React.useState('All');
   const [selectByDelivery, setSelectByDelivery] = React.useState('All');
@@ -86,7 +88,7 @@ const OrderHistory = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('order_history')} />
       <Row style={{paddingHorizontal: mvs(20)}}>
         <Row style={styles.innerContainer}>
@@ -97,11 +99,15 @@ const OrderHistory = props => {
               style={{
                 paddingHorizontal: mvs(5),
               }}>
-              <Regular fontSize={mvs(12)} label={t(selectByPayment)} />
+              <Regular
+                color={colors.text}
+                fontSize={mvs(12)}
+                label={t(selectByPayment)}
+              />
               <Entypo
                 name={'chevron-small-right'}
                 size={20}
-                color={colors.primary}
+                color={colors.text}
                 style={{transform: [{rotate: select ? '0deg' : '90deg'}]}}
               />
             </Row>
@@ -111,13 +117,17 @@ const OrderHistory = props => {
           </View>
 
           {!select ? (
-            <View style={styles.dotContainer}>
+            <View
+              style={{
+                ...styles.dotContainer,
+                backgroundColor: colors.downColor,
+              }}>
               <TouchableOpacity
                 onPress={() => {
                   setSelectByPayment('all');
                   setSelect(!select);
                 }}>
-                <Regular color={colors.darkBlack} label={t('all')} />
+                <Regular color={colors.text} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -125,7 +135,7 @@ const OrderHistory = props => {
                   setSelect(!select);
                 }}>
                 <Regular
-                  style={{color: colors.darkBlack, marginTop: mvs(10)}}
+                  style={{color: colors.text, marginTop: mvs(10)}}
                   label={t('paid')}
                 />
               </TouchableOpacity>
@@ -135,7 +145,7 @@ const OrderHistory = props => {
                   setSelect(!select);
                 }}>
                 <Regular
-                  style={{color: colors.darkBlack, marginTop: mvs(10)}}
+                  style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
                   label={t('unpaid')}
                 />
@@ -155,11 +165,15 @@ const OrderHistory = props => {
               style={{
                 paddingHorizontal: mvs(5),
               }}>
-              <Regular fontSize={mvs(12)} label={t(selectByDelivery)} />
+              <Regular
+                color={colors.text}
+                fontSize={mvs(12)}
+                label={t(selectByDelivery)}
+              />
               <Entypo
                 name={'chevron-small-right'}
                 size={20}
-                color={colors.primary}
+                color={colors.text}
                 style={{
                   transform: [{rotate: deliverySelect ? '0deg' : '90deg'}],
                 }}
@@ -167,13 +181,17 @@ const OrderHistory = props => {
             </Row>
           </TouchableOpacity>
           {!deliverySelect ? (
-            <View style={styles.deliverdContainer}>
+            <View
+              style={{
+                ...styles.deliverdContainer,
+                backgroundColor: colors.downColor,
+              }}>
               <TouchableOpacity
                 onPress={() => {
                   setSelectByDelivery('all');
                   setDeliverySelect(!deliverySelect);
                 }}>
-                <Regular color={colors.darkBlack} label={t('all')} />
+                <Regular color={colors.text} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
@@ -181,7 +199,7 @@ const OrderHistory = props => {
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
-                  style={{color: colors.darkBlack, marginTop: mvs(10)}}
+                  style={{color: colors.text, marginTop: mvs(10)}}
                   label={t('confirmed')}
                 />
               </TouchableOpacity>
@@ -191,7 +209,7 @@ const OrderHistory = props => {
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
-                  style={{color: colors.darkBlack, marginTop: mvs(10)}}
+                  style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
                   label={t('on_delivery')}
                 />
@@ -202,7 +220,7 @@ const OrderHistory = props => {
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
-                  style={{color: colors.darkBlack, marginTop: mvs(10)}}
+                  style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
                   label={t('delivered')}
                 />

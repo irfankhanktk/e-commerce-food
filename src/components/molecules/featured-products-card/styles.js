@@ -4,13 +4,14 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     // padding: 5,
     borderWidth: 1,
     borderColor: colors.primary,
     width: mvs(150),
     marginLeft: mvs(10),
     borderRadius: mvs(10),
+    marginTop: mvs(10),
   },
   backGroundImage: {
     width: mvs(134),

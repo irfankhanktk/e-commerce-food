@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   itemsContainer: {
     width: mvs(56),
     height: mvs(56),
-    backgroundColor: colors.blueHalf,
+
     borderRadius: mvs(56),
     alignItems: 'center',
     justifyContent: 'center',

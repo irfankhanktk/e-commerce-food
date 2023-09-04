@@ -7,8 +7,11 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const MyWishList = props => {
+  const colors = useTheme().colors;
+
   const featuredCategories = [
     {
       id: 1,
@@ -35,7 +38,7 @@ const MyWishList = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('my_wishlist')} />
 
       <CustomFlatList

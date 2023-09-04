@@ -16,6 +16,7 @@ export const colors = {
   primary: '#3B63A9', //'#5586FF'
   yellow: '#ffd79c',
   secondary: '#f3f3f3', //'#F2F2F2',
+  skyBlue: '#CEE2E9',
 
 };
 export const darkTheme = {
@@ -34,8 +35,10 @@ export const darkTheme = {
   transparent: 'transparent',
   green: '#006933',
   primary: '#2E2E3B', //'#5586FF'
+  downColor: '#2E2E3B',
   yellow: '#ffd79c',
   secondary: '#f3f3f3', //'#F2F2F2',
+  skyBlue: '#CEE2E9',
 };
 export const lightTheme = {
   darkBlack: '#484848',
@@ -53,6 +56,8 @@ export const lightTheme = {
   transparent: 'transparent',
   green: '#006933',
   primary: '#3B63A9', //'#5586FF'
+  downColor: '#fff',
   yellow: '#ffd79c',
   secondary: '#f3f3f3', //'#F2F2F2',
+  skyBlue: '#CEE2E9',
 };

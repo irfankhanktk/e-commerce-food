@@ -122,7 +122,12 @@ const HomeTab = props => {
             <SwiperCard data={banner?.data} />
             <Row style={{marginTop: mvs(25), paddingHorizontal: mvs(20)}}>
               <TouchableOpacity style={{alignItems: 'center'}}>
-                <View style={styles.itemsContainer}>
+                <View
+                  style={{
+                    ...styles.itemsContainer,
+                    backgroundColor: colors.skyBlue,
+                    borderRadius: mvs(100),
+                  }}>
                   <TopCategories />
                 </View>
                 <Regular
@@ -132,7 +137,11 @@ const HomeTab = props => {
                 />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
-                <View style={styles.itemsContainer}>
+                <View
+                  style={{
+                    ...styles.itemsContainer,
+                    backgroundColor: colors.skyBlue,
+                  }}>
                   <Brands />
                 </View>
                 <Regular
@@ -142,7 +151,12 @@ const HomeTab = props => {
                 />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
-                <View style={styles.itemsContainer}>
+                <View
+                  style={{
+                    ...styles.itemsContainer,
+                    backgroundColor: colors.skyBlue,
+                    borderRadius: mvs(100),
+                  }}>
                   <TopVendors />
                 </View>
                 <Regular
@@ -152,7 +166,12 @@ const HomeTab = props => {
                 />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
-                <View style={styles.itemsContainer}>
+                <View
+                  style={{
+                    ...styles.itemsContainer,
+                    backgroundColor: colors.skyBlue,
+                    borderRadius: mvs(100),
+                  }}>
                   <FlashDeals />
                 </View>
                 <Regular
@@ -162,7 +181,12 @@ const HomeTab = props => {
                 />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
-                <View style={styles.itemsContainer}>
+                <View
+                  style={{
+                    ...styles.itemsContainer,
+                    backgroundColor: colors.skyBlue,
+                    borderRadius: mvs(100),
+                  }}>
                   <Coupons />
                 </View>
                 <Regular

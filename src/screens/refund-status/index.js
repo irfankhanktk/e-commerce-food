@@ -1,16 +1,17 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
-import BrowseAllVendersCard from 'components/molecules/browse-venders-card';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
-import RechargeWalletCard from 'components/molecules/recharge-wallet-card';
 import RefundStatusCard from 'components/molecules/refund-status-card';
+import {useTheme} from '@react-navigation/native';
 
 const RefundStatus = props => {
+  const colors = useTheme().colors;
+
   const featuredCategories = [
     {
       id: 1,
@@ -32,7 +33,7 @@ const RefundStatus = props => {
   const featuredProduct = ({item}) => <RefundStatusCard item={item} />;
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('refund_status')} />
 
       <CustomFlatList

@@ -9,9 +9,12 @@ import AppHeader from 'components/atoms/headers/app-header';
 import i18n from 'translation';
 import styles from './styles';
 import ChatCard from 'components/molecules/chat-card';
+import {useTheme} from '@react-navigation/native';
 
 const MessageTab = props => {
   const dispatch = useAppDispatch();
+  const colors = useTheme().colors;
+
   const {t} = i18n;
   const featuredCategories = [
     {
@@ -34,7 +37,7 @@ const MessageTab = props => {
     <ChatCard item={item} onPress={() => navigate('InboxMessage')} />
   );
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('message')} />
       <CustomFlatList
         showsVerticalScrollIndicator={false}

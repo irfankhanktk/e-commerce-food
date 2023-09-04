@@ -1,18 +1,23 @@
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const InboxChatCard = ({item, style, onPress, loading}) => {
   const me = item.me;
+  const colors = useTheme().colors;
 
   return (
     <View
       onPress={onPress}
-      style={[{alignItems: me ? 'flex-end' : 'flex-start'}, styles.container]}>
+      style={{
+        ...styles.container,
+        alignItems: me ? 'flex-end' : 'flex-start',
+        backgroundColor: colors.background,
+      }}>
       <View
         style={[
           {

@@ -5,7 +5,7 @@ import { colors } from 'config/colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
+
 
   },
   loginBtn: {
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   itemsContainer: {
     width: mvs(73),
     height: mvs(73),
-    backgroundColor: colors.blueHalf,
     borderRadius: mvs(56),
     alignItems: 'center',
     justifyContent: 'center',
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: mvs(10),
     padding: mvs(15),
   },
-  topContainer:{
+  topContainer: {
     backgroundColor: colors.primary,
     paddingHorizontal: mvs(20),
     height: mvs(500),

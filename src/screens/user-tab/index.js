@@ -14,7 +14,6 @@ import {
 import {user} from 'assets/images';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate, resetStack} from 'navigation/navigation-ref';
@@ -25,8 +24,11 @@ import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const UserTab = props => {
+  const colors = useTheme().colors;
+
   const [loading, setLoading] = React.useState(false);
   const LogOut = async () => {
     try {
@@ -43,8 +45,8 @@ const UserTab = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topContainer}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
+      <View style={{...styles.topContainer, backgroundColor: colors.primary}}>
         <Row style={{marginTop: mvs(25), justifyContent: 'flex-start'}}>
           <ImageBackground
             source={user}
@@ -61,40 +63,60 @@ const UserTab = props => {
           <PrimaryButton
             loading={loading}
             onPress={() => LogOut()}
-            textStyle={{color: colors.primary}}
+            textStyle={{color: colors.text}}
             title={t('log_out')}
-            containerStyle={styles.loginBtn}
+            containerStyle={{
+              ...styles.loginBtn,
+              backgroundColor: colors.background,
+            }}
           />
         </Row>
         <Row style={{marginTop: mvs(25)}}>
-          <View style={styles.boxContainer}>
-            <Bold label={'01'} />
+          <View
+            style={{
+              ...styles.boxContainer,
+              backgroundColor: colors.background,
+            }}>
+            <Bold color={colors.text} label={'01'} />
             <Regular
               fontSize={mvs(10)}
-              color={colors.darkBlack}
+              color={colors.text}
               label={t('in_your_cart')}
             />
           </View>
-          <View style={styles.boxContainer}>
-            <Bold label={'07'} />
+          <View
+            style={{
+              ...styles.boxContainer,
+              backgroundColor: colors.background,
+            }}>
+            <Bold color={colors.text} label={'07'} />
             <Regular
               fontSize={mvs(10)}
-              color={colors.darkBlack}
+              color={colors.text}
               label={t('in_your_wishlist')}
             />
           </View>
-          <View style={styles.boxContainer}>
-            <Bold label={'75'} />
+          <View
+            style={{
+              ...styles.boxContainer,
+              backgroundColor: colors.background,
+            }}>
+            <Bold color={colors.text} label={'75'} />
             <Regular
               fontSize={mvs(10)}
-              color={colors.darkBlack}
+              color={colors.text}
               label={t('your_ordered')}
             />
           </View>
         </Row>
         <Row style={{marginTop: mvs(25)}}>
           <TouchableOpacity style={{alignItems: 'center'}}>
-            <View style={styles.itemsContainer}>
+            <View
+              style={{
+                ...styles.itemsContainer,
+                borderRadius: mvs(56),
+                backgroundColor: colors.background,
+              }}>
               <Language />
             </View>
             <Regular
@@ -104,7 +126,11 @@ const UserTab = props => {
             />
           </TouchableOpacity>
           <TouchableOpacity style={{alignItems: 'center'}}>
-            <View style={styles.itemsContainer}>
+            <View
+              style={{
+                ...styles.itemsContainer,
+                backgroundColor: colors.background,
+              }}>
               <Currency />
             </View>
             <Regular
@@ -116,7 +142,12 @@ const UserTab = props => {
           <TouchableOpacity
             onPress={() => navigate('EditProfile')}
             style={{alignItems: 'center'}}>
-            <View style={styles.itemsContainer}>
+            <View
+              style={{
+                ...styles.itemsContainer,
+                borderRadius: mvs(56),
+                backgroundColor: colors.background,
+              }}>
               <UserEdit />
             </View>
             <Regular
@@ -128,7 +159,12 @@ const UserTab = props => {
           <TouchableOpacity
             onPress={() => navigate('AddressDetails')}
             style={{alignItems: 'center'}}>
-            <View style={styles.itemsContainer}>
+            <View
+              style={{
+                ...styles.itemsContainer,
+                backgroundColor: colors.background,
+                borderRadius: mvs(56),
+              }}>
               <Location />
             </View>
             <Regular
@@ -138,7 +174,8 @@ const UserTab = props => {
             />
           </TouchableOpacity>
         </Row>
-        <View style={styles.boxContainer1}>
+        <View
+          style={{...styles.boxContainer1, backgroundColor: colors.background}}>
           <Row style={{marginTop: mvs(10)}}>
             <TouchableOpacity
               onPress={() => navigate('MyWallet')}
@@ -147,6 +184,7 @@ const UserTab = props => {
                 <Wallet />
               </View>
               <Regular
+                color={colors.text}
                 style={{marginTop: mvs(5)}}
                 label={t('my_wallet')}
                 fontSize={mvs(10)}
@@ -160,6 +198,7 @@ const UserTab = props => {
               </View>
 
               <Regular
+                color={colors.text}
                 style={{marginTop: mvs(5)}}
                 label={t('orders')}
                 fontSize={mvs(10)}
@@ -173,6 +212,7 @@ const UserTab = props => {
               </View>
 
               <Regular
+                color={colors.text}
                 style={{marginTop: mvs(5)}}
                 label={t('my_wishlist')}
                 fontSize={mvs(10)}
@@ -186,6 +226,7 @@ const UserTab = props => {
               </View>
 
               <Regular
+                color={colors.text}
                 style={{marginTop: mvs(5)}}
                 numberOfLines={2}
                 label={t('refund_requests')}
@@ -199,6 +240,7 @@ const UserTab = props => {
                 <Message />
               </View>
               <Regular
+                color={colors.text}
                 style={{marginTop: mvs(5)}}
                 label={t('messages')}
                 fontSize={mvs(10)}
@@ -212,6 +254,7 @@ const UserTab = props => {
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
             <Shop />
             <Regular
+              color={colors.text}
               style={{marginLeft: mvs(20)}}
               label={t('browse_all_vendors')}
             />
@@ -225,6 +268,7 @@ const UserTab = props => {
           }}>
           <Pc />
           <Regular
+            color={colors.text}
             style={{marginLeft: mvs(20)}}
             label={t('followed_vendors')}
           />

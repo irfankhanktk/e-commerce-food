@@ -8,12 +8,17 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {colors} from 'config/colors';
 import {Row} from 'components/atoms/row';
 import Bold from 'typography/bold-text';
+import {useTheme} from '@react-navigation/native';
 
 const ChatCard = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{...styles.container, backgroundColor: colors.background}}>
       <Row style={styles.InnerContainer}>
-        <View style={styles.imageContainer}>
+        <View style={{...styles.imageContainer, borderColor: colors.primary}}>
           <ImageBackground
             borderRadius={mvs(10)}
             source={forklift}
@@ -22,10 +27,14 @@ const ChatCard = ({item, style, onPress, loading}) => {
           </ImageBackground>
         </View>
         <View style={{paddingHorizontal: mvs(10), flex: 1}}>
-          <Bold label={'Mitsubishi'} />
-          <Regular numberOfLines={1} label={'Mitsubishi@email.com'} />
+          <Bold color={colors.text} label={'Mitsubishi'} />
+          <Regular
+            color={colors.text}
+            numberOfLines={1}
+            label={'Mitsubishi@email.com'}
+          />
         </View>
-        <Regular label={'08:06'} />
+        <Regular color={colors.text} label={'08:06'} />
       </Row>
     </TouchableOpacity>
   );

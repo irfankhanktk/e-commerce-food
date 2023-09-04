@@ -6,15 +6,20 @@ import React from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const CartCard = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   const [count, setCount] = React.useState(1);
 
   return (
-    <View onPress={onPress} style={styles.container}>
+    <View
+      onPress={onPress}
+      style={{...styles.container, backgroundColor: colors.background}}>
       <Row style={{justifyContent: 'flex-start'}}>
         <View style={styles.imageMainContainer}>
-          <View style={{backgroundColor: 'white', height: mvs(110)}}>
+          <View style={{backgroundColor: colors.background, height: mvs(110)}}>
             <View style={{marginLeft: mvs(10)}}>
               <ImageBackground
                 source={{
@@ -25,8 +30,9 @@ const CartCard = ({item, style, onPress, loading}) => {
           </View>
         </View>
         <View style={styles.contentContainer}>
-          <Regular label={'shipping container'} />
+          <Regular color={colors.text} label={'shipping container'} />
           <Regular
+            color={colors.text}
             numberOfLines={2}
             fontSize={mvs(10)}
             label={
@@ -34,7 +40,7 @@ const CartCard = ({item, style, onPress, loading}) => {
             }
           />
           <Row style={{marginTop: mvs(5)}}>
-            <Regular style={{flex: 1}} label={'$120.000'} />
+            <Regular color={colors.text} style={{flex: 1}} label={'$120.000'} />
             <TouchableOpacity>
               <Delete />
             </TouchableOpacity>
@@ -44,17 +50,23 @@ const CartCard = ({item, style, onPress, loading}) => {
           <PrimaryButton
             disabled={count == '1'}
             onPress={() => setCount(count - 1)}
-            textStyle={styles.subAddText}
-            containerStyle={styles.subQuantity}
+            textStyle={{...styles.subAddText, color: colors.text}}
+            containerStyle={{
+              ...styles.subQuantity,
+              borderColor: colors.primary,
+            }}
             title={'-'}
           />
           <View style={styles.countextContainer}>
-            <Regular label={count} />
+            <Regular color={colors.text} label={count} />
           </View>
           <PrimaryButton
             onPress={() => setCount(count + 1)}
-            textStyle={styles.subAddText}
-            containerStyle={styles.subQuantity}
+            textStyle={{...styles.subAddText, color: colors.text}}
+            containerStyle={{
+              ...styles.subQuantity,
+              borderColor: colors.primary,
+            }}
             title={'+'}
           />
         </View>
