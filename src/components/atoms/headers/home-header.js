@@ -9,6 +9,7 @@ import {navigate} from 'navigation/navigation-ref';
 import Regular from 'typography/regular-text';
 import {SearchInput} from '../inputs';
 import {Row} from '../row';
+import {colors} from 'config/colors';
 const HomeHeader = ({
   style = {},
   title,
@@ -50,6 +51,7 @@ const HomeHeader = ({
             <MaterialCommunityIcons
               name="bell-ring-outline"
               size={mvs(30)}
+              color={colors.iconColor}
               style={{marginTop: mvs(5)}}
             />
             {unreadNotification ? (
@@ -57,7 +59,7 @@ const HomeHeader = ({
                 <Regular
                   label={unreadNotification}
                   fontSize={mvs(10)}
-                  style={{lineHeight: mvs(14)}}
+                  style={{lineHeight: mvs(14), color: colors.iconColor}}
                 />
               </View>
             ) : null}

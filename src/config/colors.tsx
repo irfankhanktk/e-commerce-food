@@ -24,7 +24,7 @@ export const darkTheme = {
   black: '#1a2b48',
   white: '#fff',
   iconColor: '#fff',
-  background: '#232D47',
+  background: '#000',
   text: '#fff',
   lightGray: '#dfdede',
   halfWhite: '#F6F6F6',

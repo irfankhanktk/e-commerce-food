@@ -125,31 +125,51 @@ const HomeTab = props => {
                 <View style={styles.itemsContainer}>
                   <TopCategories />
                 </View>
-                <Regular label={'Top Categories'} fontSize={mvs(10)} />
+                <Regular
+                  color={colors.text}
+                  label={'Top Categories'}
+                  fontSize={mvs(10)}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
                 <View style={styles.itemsContainer}>
                   <Brands />
                 </View>
-                <Regular label={'Brands'} fontSize={mvs(10)} />
+                <Regular
+                  color={colors.text}
+                  label={'Brands'}
+                  fontSize={mvs(10)}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
                 <View style={styles.itemsContainer}>
                   <TopVendors />
                 </View>
-                <Regular label={'Top Vendors'} fontSize={mvs(10)} />
+                <Regular
+                  color={colors.text}
+                  label={'Top Vendors'}
+                  fontSize={mvs(10)}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
                 <View style={styles.itemsContainer}>
                   <FlashDeals />
                 </View>
-                <Regular label={'Flash Deals'} fontSize={mvs(10)} />
+                <Regular
+                  color={colors.text}
+                  label={'Flash Deals'}
+                  fontSize={mvs(10)}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{alignItems: 'center'}}>
                 <View style={styles.itemsContainer}>
                   <Coupons />
                 </View>
-                <Regular label={'Coupons'} fontSize={mvs(10)} />
+                <Regular
+                  color={colors.text}
+                  label={'Coupons'}
+                  fontSize={mvs(10)}
+                />
               </TouchableOpacity>
             </Row>
             <View
@@ -203,6 +223,7 @@ const HomeTab = props => {
               />
             </View>
             <Medium
+              color={colors.text}
               style={{marginLeft: mvs(20), marginTop: mvs(10)}}
               label={'All Products'}
             />

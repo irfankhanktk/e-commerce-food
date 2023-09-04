@@ -7,8 +7,11 @@ import React from 'react';
 import {View} from 'react-native';
 import {getAllCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const CategoriesTab = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([]);
   const fetchCategories = async () => {
     const res = await getAllCategories();
@@ -26,7 +29,7 @@ const CategoriesTab = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={'Categories'} />
 
       <CustomFlatList
