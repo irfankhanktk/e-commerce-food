@@ -6,16 +6,14 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
+import {useTheme} from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
-import Regular from 'typography/regular-text';
-import styles from './styles';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
+import WalletAmount from 'components/molecules/modals/Wallet-amountmodal';
+import WalletHistoryCard from 'components/molecules/wallet-history-card';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
-import WalletHistoryCard from 'components/molecules/wallet-history-card';
-import WalletAmount from 'components/molecules/modals/Wallet-amountmodal';
-import {useTheme} from '@react-navigation/native';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 
 const MyWallet = props => {
   const colors = useTheme().colors;
