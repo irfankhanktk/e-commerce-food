@@ -21,7 +21,7 @@ const FeaturedCategories = ({item, style, onPress, loading}) => {
           <Image source={{uri: item?.banner}} style={styles.innerImage} />
         </ImageBackground>
         <Regular
-          color={colors.white}
+          color={colors.text}
           label={item?.name}
           fontSize={mvs(10)}
           style={{marginTop: mvs(15), textAlign: 'center'}}

@@ -64,7 +64,11 @@ const CheckOut = props => {
       }}
     />
   );
-  const renderProducts = ({item}) => <AllFeaturedCategoriesCard item={item} />;
+  const renderProducts = ({item}) => (
+    <View style={{marginHorizontal: mvs(20)}}>
+      <AllFeaturedCategoriesCard item={item} />
+    </View>
+  );
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
@@ -85,7 +89,7 @@ const CheckOut = props => {
         <Regular label={t('products')} />
       </View>
 
-      <View style={{maxHeight: mvs(340), paddingHorizontal: mvs(20)}}>
+      <View style={{maxHeight: mvs(340)}}>
         <CustomFlatList
           showsVerticalScrollIndicator={false}
           data={dataa}
