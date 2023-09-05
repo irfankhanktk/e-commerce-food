@@ -8,10 +8,15 @@ import styles from './styles';
 import Regular from 'typography/regular-text';
 import {Clander, CreaditCard, Delivery} from 'assets/icons';
 import {forklift} from 'assets/images';
+import {useTheme} from '@react-navigation/native';
 
 const ShippingCostCard = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      style={{...styles.container, backgroundColor: colors.downColor}}
+      onPress={onPress}>
       <Row>
         <View style={styles.idContainer} />
 
@@ -34,7 +39,7 @@ const ShippingCostCard = ({item, style, onPress, loading}) => {
           }}>
           <Regular label={'Shipping Container'} />
           <Regular
-            color={colors.darkBlack}
+            color={colors.text}
             fontSize={mvs(12)}
             numberOfLines={3}
             label={

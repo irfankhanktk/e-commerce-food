@@ -29,28 +29,28 @@ const styles = StyleSheet.create({
 
   yourAddress: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(50),
     fontSize: mvs(12),
     flex: 1,
   },
   yourCity: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(55),
     fontSize: mvs(12),
     flex: 1,
   },
   yourCountry: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(58),
     fontSize: mvs(12),
     flex: 1,
   },
   phone: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(60),
     fontSize: mvs(12),
     flex: 1,
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     marginLeft: mvs(60),
     flex: 1,
     fontSize: mvs(12),
-    color: colors.darkBlack,
   },
 
   circle: {

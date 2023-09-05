@@ -20,8 +20,11 @@ import FeaturedCategoriesCard from 'components/molecules/featured-categories-car
 import Medium from 'typography/medium-text';
 import ProductDetailButtonCard from 'components/molecules/product-detail-button-card';
 import {navigate} from 'navigation/navigation-ref';
+import {useTheme} from '@react-navigation/native';
 
 const ProductDetials = props => {
+  const colors = useTheme().colors;
+
   const productId = props?.route?.params?.productId;
   const {t} = i18n;
   const [data, setData] = React.useState('');
@@ -89,7 +92,7 @@ const ProductDetials = props => {
   const [selectImage, setSelectImage] = React.useState(imageSlide[0]?.image);
   const [count, setCount] = React.useState(1);
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('order')} icon />
 
       <CustomFlatList
@@ -116,19 +119,27 @@ const ProductDetials = props => {
                 />
               </View>
             </Row>
-            <Regular style={styles.productName} label={data?.name} />
+            <Regular
+              color={colors.text}
+              style={styles.productName}
+              label={data?.name}
+            />
             <Row style={styles.reviewContainer}>
               <Stars />
               <Regular style={styles.reviewsText} label={'(0 reviews)'} />
             </Row>
             <Regular style={styles.inquiryText} label={'Product Inquiry'} />
             <Row style={{justifyContent: 'flex-start'}}>
-              <Regular label={'Brand'} style={styles.brand} />
+              <Regular
+                color={colors.text}
+                label={'Brand'}
+                style={styles.brand}
+              />
               <Regular label={'Calvin Klein'} style={styles.brandName} />
             </Row>
             <Row style={styles.messageMainContainer}>
               <Regular
-                style={{color: colors.darkBlack, fontSize: mvs(12)}}
+                style={{color: colors.text, fontSize: mvs(12)}}
                 label={t('inhouse_product')}
               />
               <IconButton
@@ -140,30 +151,31 @@ const ProductDetials = props => {
               />
             </Row>
             <Row style={{marginTop: mvs(25)}}>
-              <Regular
-                label={t('quantity')}
-                style={{color: colors.darkBlack}}
-              />
+              <Regular label={t('quantity')} style={{color: colors.text}} />
               <Row style={{alignItems: 'center'}}>
                 <PrimaryButton
                   disabled={count == '1'}
                   onPress={() => setCount(count - 1)}
-                  textStyle={{color: colors.primary, fontSize: mvs(16)}}
+                  textStyle={{color: colors.text, fontSize: mvs(16)}}
                   containerStyle={styles.subQuantity}
                   title={'-'}
                 />
                 <View style={{width: mvs(60), alignItems: 'center'}}>
-                  <Regular label={count} />
+                  <Regular color={colors.text} label={count} />
                 </View>
                 <PrimaryButton
                   onPress={() => setCount(count + 1)}
-                  textStyle={{color: colors.primary, fontSize: mvs(16)}}
+                  textStyle={{color: colors.text, fontSize: mvs(16)}}
                   containerStyle={styles.subQuantity}
                   title={'+'}
                 />
               </Row>
             </Row>
-            <Regular style={{marginTop: mvs(25)}} label={t('description')} />
+            <Regular
+              color={colors.text}
+              style={{marginTop: mvs(25)}}
+              label={t('description')}
+            />
             <DescriptionCard description={data?.meta_description} />
             <ProductDetailButtonCard label={t('video')} />
             <ProductDetailButtonCard label={t('reviews')} />
@@ -172,6 +184,7 @@ const ProductDetials = props => {
             <ProductDetailButtonCard label={t('support_policy')} />
             <Medium
               style={{marginTop: mvs(10)}}
+              color={colors.text}
               label={t('product_you_may_also_like')}
             />
             <CustomFlatList
@@ -181,7 +194,7 @@ const ProductDetials = props => {
               data={featuredCategories}
               renderItem={renderLikeProduct}
             />
-            <Medium label={t('top_selling_products')} />
+            <Medium color={colors.text} label={t('top_selling_products')} />
           </View>
         }
         showsVerticalScrollIndicator={false}

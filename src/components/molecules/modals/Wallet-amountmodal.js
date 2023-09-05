@@ -12,6 +12,7 @@ import {PrimaryButton} from 'components/atoms/buttons';
 import {UTILS} from 'utils';
 import {CrossModal} from 'assets/icons';
 import {Row} from 'components/atoms/row';
+import {useTheme} from '@react-navigation/native';
 const WalletAmount = ({
   style,
   email,
@@ -24,6 +25,7 @@ const WalletAmount = ({
 }) => {
   const {t} = i18n;
   const [loading, setLoading] = React.useState(false);
+  const colors = useTheme().colors;
 
   return (
     <ModalWrapper
@@ -31,7 +33,7 @@ const WalletAmount = ({
       onBackButtonPress={() => onClose()}
       visible={visible}
       style={[styles.contentContainerStyle, style]}>
-      <View style={styles.container}>
+      <View style={{...styles.container, backgroundColor: colors.downColor}}>
         <View style={styles.otp}>
           <PrimaryInput
             keyboardType={'number-pad'}
@@ -52,7 +54,10 @@ const WalletAmount = ({
               }}
             />
             <PrimaryButton
-              onPress={() => navigate('RechargeWallet')}
+              onPress={() => {
+                navigate('RechargeWallet');
+                onClose();
+              }}
               title={t('proceed')}
               containerStyle={{
                 marginTop: mvs(20),

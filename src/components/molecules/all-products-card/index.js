@@ -6,10 +6,15 @@ import Regular from 'typography/regular-text';
 import {featured, forklift, silder} from 'assets/images';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {colors} from 'config/colors';
+import {useTheme} from '@react-navigation/native';
 
 const AllProductsCard = ({item, style, onPress, loading, onAddCart}) => {
+  const colors = useTheme().colors;
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{...styles.container, backgroundColor: colors.downColor}}>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           borderRadius={mvs(10)}
@@ -27,13 +32,18 @@ const AllProductsCard = ({item, style, onPress, loading, onAddCart}) => {
         />
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular
-            color={colors.darkBlack}
+            style={{textAlign: 'center'}}
+            color={colors.text}
             label={item?.name}
             fontSize={mvs(12)}
             numberOfLines={3}
           />
 
-          <Regular label={item?.main_price} fontSize={mvs(12)} />
+          <Regular
+            color={colors.text}
+            label={item?.main_price}
+            fontSize={mvs(12)}
+          />
         </View>
       </View>
     </TouchableOpacity>

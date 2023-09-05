@@ -9,8 +9,11 @@ import {View} from 'react-native';
 import styles from './styles';
 import ShippingInfoCard from 'components/molecules/shipping-info-card';
 import {PrimaryButton} from 'components/atoms/buttons';
+import {useTheme} from '@react-navigation/native';
 
 const ShippingInfo = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -48,7 +51,7 @@ const ShippingInfo = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('shipping_info')} />
 
       <CustomFlatList

@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     width: '100%',
-
     marginTop: mvs(20),
     shadowColor: '#000',
     shadowOffset: {
@@ -82,9 +81,8 @@ const styles = StyleSheet.create({
     paddingVertical: mvs(10),
     paddingHorizontal: mvs(10),
   },
-  title: {color: colors.darkBlack, fontSize: mvs(12)},
+  title: {fontSize: mvs(12)},
   addressTitle: {
-    color: colors.darkBlack,
     fontSize: mvs(12),
     marginLeft: mvs(5),
   },

@@ -40,15 +40,15 @@ import {useTheme} from '@react-navigation/native';
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
-  const colors = useTheme().colors;
+  const {colors, dark} = useTheme();
 
   return (
     <View style={styles.container}>
       <SafeAreaView style={{flex: 0, backgroundColor: colors.primary}} />
       <StatusBar
         translucent={false}
-        backgroundColor={colors.primary}
-        barStyle={'light-content'}
+        backgroundColor={colors.background}
+        barStyle={dark ? 'light-content' : 'dark-content'}
       />
       <Stack.Navigator
         initialRouteName="Splash"

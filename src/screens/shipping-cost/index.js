@@ -13,7 +13,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 const ShippingCost = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -44,9 +47,10 @@ const ShippingCost = props => {
   const featuredProduct = ({item}) => <ShippingCostCard item={item} />;
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={`${t('shipping_cost')} ${'$18'}`} />
       <Medium
+        color={colors.text}
         label={t('inhouse_product')}
         style={{paddingHorizontal: mvs(20)}}
       />
@@ -61,8 +65,8 @@ const ShippingCost = props => {
           }}
         />
       </View>
-      <View style={{paddingHorizontal: mvs(20), marginTop: mvs(10)}}>
-        <Regular label={t('choose_delivery')} />
+      <View style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
+        <Regular color={colors.text} label={t('choose_delivery')} />
         <Row style={{marginTop: mvs(10)}}>
           <IconButton
             Icon={

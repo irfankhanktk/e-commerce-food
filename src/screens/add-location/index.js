@@ -24,6 +24,7 @@ import PrimaryInput, {SearchInput} from 'components/atoms/inputs';
 import {goBack} from 'navigation/navigation-ref';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {addAddress} from 'services/api/auth-api-actions';
+import {useTheme} from '@react-navigation/native';
 
 const AddLocation = props => {
   const {route} = props;
@@ -46,6 +47,7 @@ const AddLocation = props => {
   const language = user?.language;
   const dispatch = useAppDispatch();
   const {t} = i18n;
+  const colors = useTheme().colors;
   const addAddressPress = async () => {
     try {
       setLoading(true);
@@ -74,7 +76,7 @@ const AddLocation = props => {
     }
   };
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <View style={{}}>
         <Row
           style={{
@@ -89,7 +91,7 @@ const AddLocation = props => {
             <FontAwesome5
               name={I18nManager.isRTL ? 'arrow-right' : 'arrow-left'}
               size={mvs(20)}
-              color={colors.primary}
+              color={colors.text}
             />
           </TouchableOpacity>
 
@@ -105,7 +107,8 @@ const AddLocation = props => {
             coordinate: res?.coordinate,
           });
         }}></CustomMap>
-      <View style={styles.bottomContainer}>
+      <View
+        style={{...styles.bottomContainer, backgroundColor: colors.downColor}}>
         <ScrollView style={styles.scrollViewContainer}>
           <PrimaryInput
             isIcon={false}
@@ -118,11 +121,19 @@ const AddLocation = props => {
           />
 
           <View style={styles.addressContainer}>
-            <Regular color={colors.black} label={'Address'} />
+            <Regular color={colors.text} label={'Address'} />
             <Row style={{justifyContent: 'flex-start'}}>
               <View style={{marginLeft: mvs(10), flex: 1}}>
-                <Medium fontSize={mvs(12)} label={payload?.title} />
-                <Regular fontSize={mvs(10)} label={payload?.address} />
+                <Medium
+                  color={colors.text}
+                  fontSize={mvs(12)}
+                  label={payload?.title}
+                />
+                <Regular
+                  color={colors.text}
+                  fontSize={mvs(10)}
+                  label={payload?.address}
+                />
               </View>
             </Row>
           </View>

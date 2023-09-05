@@ -41,7 +41,7 @@ const AppHeader = ({
 
         {title ? (
           <Medium
-            color={colors.text}
+            color={colors.iconColor}
             fontSize={mvs(20)}
             label={title}
             style={[styles.title]}

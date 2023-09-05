@@ -1,15 +1,18 @@
+import {useTheme} from '@react-navigation/native';
+import {forklift} from 'assets/images';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View, Image} from 'react-native';
-import styles from './styles';
+import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
-import {featured, forklift, silder} from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
+import styles from './styles';
 
 const FeaturedProducts = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={{...styles.container, backgroundColor: colors.downColor}}>
       <View style={{alignItems: 'center'}}>
         <ImageBackground
           borderRadius={mvs(10)}
@@ -23,13 +26,18 @@ const FeaturedProducts = ({item, style, onPress, loading}) => {
 
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular
-            color={colors.darkBlack}
+            style={{textAlign: 'center'}}
+            color={colors.text}
             label={item?.name}
             numberOfLines={2}
             fontSize={mvs(12)}
           />
 
-          <Regular label={item?.main_price} fontSize={mvs(12)} />
+          <Regular
+            color={colors.text}
+            label={item?.main_price}
+            fontSize={mvs(12)}
+          />
         </View>
       </View>
     </TouchableOpacity>

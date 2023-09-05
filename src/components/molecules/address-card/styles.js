@@ -1,4 +1,3 @@
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {StyleSheet} from 'react-native';
 
@@ -29,29 +28,29 @@ const styles = StyleSheet.create({
 
   yourAddress: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(50),
     fontSize: mvs(12),
   },
   yourCity: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(80),
     fontSize: mvs(12),
   },
   yourCountry: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(58),
     fontSize: mvs(12),
   },
   phone: {
     marginLeft: mvs(30),
-    color: colors.darkBlack,
+
     marginLeft: mvs(60),
     fontSize: mvs(12),
   },
-  passCode: {marginLeft: mvs(30), fontSize: mvs(12), color: colors.darkBlack},
+  passCode: {marginLeft: mvs(30), fontSize: mvs(12)},
   dotContainer: {
     backgroundColor: 'white',
     position: 'absolute',

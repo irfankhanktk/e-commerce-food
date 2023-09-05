@@ -11,16 +11,19 @@ import {
 } from 'react-native';
 import Regular from 'typography/regular-text';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {useTheme} from '@react-navigation/native';
 const ProductDetailButtonCard = ({onPress, label}) => {
+  const colors = useTheme().colors;
+
   return (
     <TouchableOpacity style={{borderRadius: mvs(10)}} onPress={onPress}>
-      <Row style={styles.row}>
+      <Row style={{...styles.row}}>
         <View style={styles.line} />
-        <Regular style={styles.label} label={label} />
+        <Regular color={colors.text} style={styles.label} label={label} />
         <FontAwesome5
           name={I18nManager.isRTL ? 'arrow-left' : 'arrow-right'}
           size={mvs(20)}
-          color={colors.primary}
+          color={colors.iconColor}
         />
       </Row>
     </TouchableOpacity>

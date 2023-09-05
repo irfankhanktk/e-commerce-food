@@ -8,8 +8,11 @@ import {View} from 'react-native';
 import {getAllFeaturedCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
 import {Loader} from 'components/atoms/loader';
+import {useTheme} from '@react-navigation/native';
 
 const AllFeaturedCategories = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([]);
   const fetchCategories = async () => {
     const res = await getAllFeaturedCategories();
@@ -24,7 +27,7 @@ const AllFeaturedCategories = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={'All Featured Categories'} />
 
       <CustomFlatList

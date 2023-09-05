@@ -1,20 +1,18 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
-import HomeHeader from 'components/atoms/headers/home-header';
 
+import {useTheme} from '@react-navigation/native';
+import AppHeader from 'components/atoms/headers/app-header';
+import {Loader} from 'components/atoms/loader';
+import AllProductsCard from 'components/molecules/all-products-card';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {View} from 'react-native';
-import styles from './styles';
-import AppHeader from 'components/atoms/headers/app-header';
-import Medium from 'typography/medium-text';
-import {colors} from 'config/colors';
-import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
-import {navigate} from 'navigation/navigation-ref';
 import {getAllProductCategoryPaginated} from 'services/api/auth-api-actions';
-import AllProductsCard from 'components/molecules/all-products-card';
-import {Loader} from 'components/atoms/loader';
+import styles from './styles';
 
 const FeaturedCategories = props => {
+  const colors = useTheme().colors;
+
   const route = props?.route?.params?.item;
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
@@ -63,7 +61,7 @@ const FeaturedCategories = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={route?.name} />
       {/* <Medium
         label={'Featured Categories'}

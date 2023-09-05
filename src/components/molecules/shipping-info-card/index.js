@@ -7,18 +7,20 @@ import {TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {colors} from 'config/colors';
+import {useTheme} from '@react-navigation/native';
 
 const ShippingInfoCard = ({item, style, onPress, loading}) => {
+  const colors = useTheme().colors;
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[
-        styles.container,
-        {
-          borderWidth: item?.selected ? mvs(1) : mvs(0),
-          borderColor: item?.selected ? colors.green : colors.white,
-        },
-      ]}>
+      style={{
+        ...styles.container,
+        backgroundColor: colors.downColor,
+        borderWidth: item?.selected ? mvs(1) : mvs(0),
+        borderColor: item?.selected ? colors.green : colors.white,
+      }}>
       <View style={styles.innerContainer}>
         <Row>
           <View style={{flex: 1}}>
@@ -28,11 +30,19 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
                 fontSize={mvs(12)}
                 label={t('address')}
               />
-              <Regular style={styles.yourAddress} label={'your location'} />
+              <Regular
+                color={colors.text}
+                style={styles.yourAddress}
+                label={'your location'}
+              />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
               <Regular style={{flex: 1}} fontSize={mvs(12)} label={t('city')} />
-              <Regular style={styles.yourCity} label={'your city'} />
+              <Regular
+                color={colors.text}
+                style={styles.yourCity}
+                label={'your city'}
+              />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
               <Regular
@@ -40,11 +50,19 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
                 fontSize={mvs(12)}
                 label={t('country')}
               />
-              <Regular style={styles.yourCountry} label={'your country'} />
+              <Regular
+                color={colors.text}
+                style={styles.yourCountry}
+                label={'your country'}
+              />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
               <Regular style={{flex: 1}} label={t('phone')} />
-              <Regular style={styles.phone} label={'03448422399'} />
+              <Regular
+                color={colors.text}
+                style={styles.phone}
+                label={'03448422399'}
+              />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
               <Regular
@@ -52,7 +70,11 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
                 fontSize={mvs(12)}
                 label={t('postal_code ')}
               />
-              <Regular style={styles.passCode} label={'0344'} />
+              <Regular
+                color={colors.text}
+                style={styles.passCode}
+                label={'0344'}
+              />
             </Row>
           </View>
           {item?.selected ? (

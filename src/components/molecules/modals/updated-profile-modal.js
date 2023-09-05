@@ -1,17 +1,13 @@
 import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-import i18n from 'translation';
-import PrimaryInput from 'components/atoms/inputs';
-import {mvs} from 'config/metrices';
 import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import {mvs} from 'config/metrices';
+import i18n from 'translation';
 
+import {useTheme} from '@react-navigation/native';
 import {PrimaryButton} from 'components/atoms/buttons';
-import {UTILS} from 'utils';
-import {CrossModal} from 'assets/icons';
-import {Row} from 'components/atoms/row';
 import Medium from 'typography/medium-text';
 const UpdatedProfileModal = ({
   style,
@@ -23,6 +19,8 @@ const UpdatedProfileModal = ({
   isSubmited,
   onClose = item => {},
 }) => {
+  
+  const colors = useTheme().colors;
   const {t} = i18n;
   const [loading, setLoading] = React.useState(false);
 
@@ -32,8 +30,11 @@ const UpdatedProfileModal = ({
       onBackButtonPress={() => onClose()}
       visible={visible}
       style={[styles.contentContainerStyle, style]}>
-      <View style={styles.container}>
-        <Medium label={t('your_profile_has_been_updated')} />
+      <View style={{...styles.container, backgroundColor: colors.downColor}}>
+        <Medium
+          color={colors.text}
+          label={t('your_profile_has_been_updated')}
+        />
         <PrimaryButton
           onPress={() => onClose()}
           containerStyle={styles.btnOk}

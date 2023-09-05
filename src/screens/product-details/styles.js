@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   },
   productName: {
     marginTop: mvs(20),
-    color: colors.darkBlack,
+
     fontSize: mvs(12),
   },
   brand: {
     marginTop: mvs(15),
-    color: colors.darkBlack,
+
     fontSize: mvs(12),
   },
   brandName: {

@@ -19,19 +19,17 @@ const styles = StyleSheet.create({
   name: {
     marginTop: mvs(10),
     alignSelf: 'center',
-    color: colors.darkBlack,
   },
   email: {
     alignSelf: 'center',
     fontSize: mvs(12),
-    color: colors.darkBlack,
   },
   editBtn: {
     position: 'absolute',
     zIndex: 1,
-    alignSelf: 'flex-end',
-    marginTop: mvs(40),
-    // marginLeft: mvs(70),
+    top: mvs(40),
+    // left: mvs(70),
+    right: mvs(-5),
   },
   innerContainer: {
     width: '100%',

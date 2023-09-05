@@ -15,8 +15,11 @@ import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import WalletHistoryCard from 'components/molecules/wallet-history-card';
 import WalletAmount from 'components/molecules/modals/Wallet-amountmodal';
+import {useTheme} from '@react-navigation/native';
 
 const MyWallet = props => {
+  const colors = useTheme().colors;
+
   const featuredCategories = [
     {
       id: 1,
@@ -42,7 +45,7 @@ const MyWallet = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('my_wallet')} />
       <Row style={{paddingHorizontal: mvs(20), marginTop: mvs(20)}}>
         <View style={styles.balanceContainer}>
@@ -57,12 +60,16 @@ const MyWallet = props => {
 
         <TouchableOpacity
           onPress={() => setAmountModal(true)}
-          style={styles.rechargeContainer}>
+          style={{
+            ...styles.rechargeContainer,
+            backgroundColor: colors.skyBlue,
+          }}>
           <Medium label={t('recharge_wallet')} />
           <Bold fontSize={mvs(20)} label={'+'} />
         </TouchableOpacity>
       </Row>
       <Medium
+        color={colors.text}
         style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
         label={t('wallet_recharge_history')}
       />

@@ -1,18 +1,20 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 
+import {useTheme} from '@react-navigation/native';
 import {PrimaryButton} from 'components/atoms/buttons';
 import AppHeader from 'components/atoms/headers/app-header';
 import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
 import CheckoutCard from 'components/molecules/checkout-card';
+import OrderPlacedModal from 'components/molecules/modals/order-placed-modal';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import React from 'react';
 import {View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
-import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
-import OrderPlacedModal from 'components/molecules/modals/order-placed-modal';
 const CheckOut = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -49,7 +51,7 @@ const CheckOut = props => {
     },
   ]);
   const [done, setDone] = React.useState(false);
-  const featuredProduct = ({item}) => (
+  const renderCheckout = ({item}) => (
     <CheckoutCard
       item={item}
       onPress={() => {
@@ -65,14 +67,14 @@ const CheckOut = props => {
   const renderProducts = ({item}) => <AllFeaturedCategoriesCard item={item} />;
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('checkout')} />
 
       <View style={{maxHeight: mvs(240)}}>
         <CustomFlatList
           showsVerticalScrollIndicator={false}
           data={data}
-          renderItem={featuredProduct}
+          renderItem={renderCheckout}
           contentContainerStyle={{
             paddingBottom: mvs(20),
             paddingHorizontal: mvs(20),
@@ -83,7 +85,7 @@ const CheckOut = props => {
         <Regular label={t('products')} />
       </View>
 
-      <View style={{maxHeight: mvs(340)}}>
+      <View style={{maxHeight: mvs(340), paddingHorizontal: mvs(20)}}>
         <CustomFlatList
           showsVerticalScrollIndicator={false}
           data={dataa}

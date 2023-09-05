@@ -15,6 +15,7 @@ import {Row} from 'components/atoms/row';
 import Regular from 'typography/regular-text';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
+import {useTheme} from '@react-navigation/native';
 const OrderConfirmationModal = ({
   style,
   email,
@@ -27,16 +28,18 @@ const OrderConfirmationModal = ({
 }) => {
   const {t} = i18n;
   const [loading, setLoading] = React.useState(false);
+  const colors = useTheme().colors;
 
   return (
     <ModalWrapper
       onBackdropPress={() => onClose()}
       onBackButtonPress={() => onClose()}
       visible={visible}
-      style={[styles.contentContainerStyle, style]}>
-      <View style={styles.container}>
-        <Bold label={t('please_ensure_us.')} />
+      style={{...styles.contentContainerStyle, style}}>
+      <View style={{...styles.container, backgroundColor: colors.downColor}}>
+        <Bold color={colors.text} label={t('please_ensure_us.')} />
         <Medium
+          color={colors.text}
           fontSize={mvs(12)}
           label={t('do_you_want_to_cancle_this_order?')}
         />

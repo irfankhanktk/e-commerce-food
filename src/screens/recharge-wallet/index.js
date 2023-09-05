@@ -1,24 +1,22 @@
+import {PrimaryButton} from 'components/atoms/buttons';
 import CustomFlatList from 'components/atoms/custom-flatlist';
-import HomeHeader from 'components/atoms/headers/home-header';
-import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
-import FeaturedProductsCard from 'components/molecules/featured-products-card';
+import AppHeader from 'components/atoms/headers/app-header';
+import RechargeWalletCard from 'components/molecules/recharge-wallet-card';
 import {mvs} from 'config/metrices';
+import {t} from 'i18next';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
-import AppHeader from 'components/atoms/headers/app-header';
-import Medium from 'typography/medium-text';
-import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
-import {t} from 'i18next';
-import RechargeWalletCard from 'components/molecules/recharge-wallet-card';
-import {PrimaryButton} from 'components/atoms/buttons';
+import {useTheme} from '@react-navigation/native';
 
 const RechargeWallet = props => {
+  const colors = useTheme().colors;
+
   const [data, setData] = React.useState([
     {
       id: 1,
-      selected: false,
+      selected: true,
     },
     {
       id: 2,
@@ -53,7 +51,7 @@ const RechargeWallet = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('recharge_wallet')} />
 
       <CustomFlatList
@@ -67,7 +65,7 @@ const RechargeWallet = props => {
       />
       <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(10)}}>
         <PrimaryButton
-          title={t('recharge_Wallet')}
+          title={t('recharge_wallet')}
           onPress={() => navigate('MyWallet')}
         />
       </View>

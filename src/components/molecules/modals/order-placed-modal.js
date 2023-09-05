@@ -9,6 +9,7 @@ import i18n from 'translation';
 
 import {PrimaryButton} from 'components/atoms/buttons';
 import Bold from 'typography/bold-text';
+import {useTheme} from '@react-navigation/native';
 const OrderPlacedModal = ({
   style,
   email,
@@ -19,6 +20,8 @@ const OrderPlacedModal = ({
   isSubmited,
   onClose = item => {},
 }) => {
+  const colors = useTheme().colors;
+
   const {t} = i18n;
   const [loading, setLoading] = React.useState(false);
 
@@ -28,8 +31,8 @@ const OrderPlacedModal = ({
       onBackButtonPress={() => onClose()}
       visible={visible}
       style={[styles.contentContainerStyle, style]}>
-      <View style={styles.container}>
-        <Bold label={t('your_order_has_been_placed.')} />
+      <View style={{...styles.container, backgroundColor: colors.downColor}}>
+        <Bold color={colors.text} label={t('your_order_has_been_placed.')} />
 
         <View style={styles.otp}>
           <PrimaryButton

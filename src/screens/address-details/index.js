@@ -12,8 +12,11 @@ import {TouchableOpacity, View} from 'react-native';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const AddressDetails = props => {
+  const colors = useTheme().colors;
+
   const featuredCategories = [
     {
       id: 1,
@@ -39,13 +42,16 @@ const AddressDetails = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('address_details')} />
       <View style={{paddingHorizontal: mvs(20)}}>
         <TouchableOpacity
           // onPress={() => setSelectModal(true)}
           onPress={() => navigate('Location')}
-          style={styles.newAddressContainer}>
+          style={{
+            ...styles.newAddressContainer,
+            backgroundColor: colors.skyBlue,
+          }}>
           <Medium label={'No Addresses Is Added'} />
           <Bold fontSize={mvs(22)} label={'+'} />
         </TouchableOpacity>

@@ -31,19 +31,19 @@ const styles = StyleSheet.create({
   bottomContainer: {
     height: mvs(350),
     width: '100%',
-    backgroundColor: colors.white,
     position: 'absolute',
     bottom: 0,
     alignSelf: 'center',
     flex: 1,
-    borderRadius: mvs(10),
+    borderTopLeftRadius: mvs(10),
+    borderTopRightRadius: mvs(10),
     paddingHorizontal: mvs(20),
   },
   inputContainerStyle: {
     borderWidth: 0,
     borderBottomWidth: 1,
     borderColor: colors.placeholder,
-    borderRadius: 0,
+    borderRadius: 10,
   },
   addressContainer: {
     paddingBottom: mvs(10),

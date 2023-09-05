@@ -13,6 +13,7 @@ import {UTILS} from 'utils';
 import {CrossModal} from 'assets/icons';
 import {Row} from 'components/atoms/row';
 import Medium from 'typography/medium-text';
+import {useTheme} from '@react-navigation/native';
 const UpdatedPasswordModal = ({
   style,
   email,
@@ -25,6 +26,7 @@ const UpdatedPasswordModal = ({
 }) => {
   const {t} = i18n;
   const [loading, setLoading] = React.useState(false);
+  const colors = useTheme().colors;
 
   return (
     <ModalWrapper
@@ -32,8 +34,11 @@ const UpdatedPasswordModal = ({
       onBackButtonPress={() => onClose()}
       visible={visible}
       style={[styles.contentContainerStyle, style]}>
-      <View style={styles.container}>
-        <Medium label={t('your_password_has_been_updated')} />
+      <View style={{...styles.container, backgroundColor: colors.downColor}}>
+        <Medium
+          color={colors.text}
+          label={t('your_password_has_been_updated')}
+        />
         <PrimaryButton
           onPress={() => onClose()}
           containerStyle={styles.btnOk}

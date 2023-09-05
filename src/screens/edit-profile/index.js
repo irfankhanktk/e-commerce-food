@@ -19,8 +19,11 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
+import {useTheme} from '@react-navigation/native';
 
 const EditProfile = props => {
+  const colors = useTheme().colors;
+
   const [image, setImage] = React.useState();
   const [updatedModal, setUpdatedModal] = React.useState(false);
   const [passwordModal, setPasswordModal] = React.useState(false);
@@ -36,7 +39,7 @@ const EditProfile = props => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('edit_profile')} />
       <KeyboardAvoidScrollview contentContainerStyle={{paddingBottom: mvs(20)}}>
         <ImageBackground
@@ -56,10 +59,19 @@ const EditProfile = props => {
           </TouchableOpacity>
         </ImageBackground>
 
-        <Medium style={styles.name} label={'Paul K. Jensen'} />
-        <Regular style={styles.email} label={'customer1@example.com'} />
-        <View style={styles.innerContainer}>
-          <Medium label={t('basic_information')} />
+        <Medium
+          color={colors.text}
+          style={styles.name}
+          label={'Paul K. Jensen'}
+        />
+        <Regular
+          color={colors.text}
+          style={styles.email}
+          label={'customer1@example.com'}
+        />
+        <View
+          style={{...styles.innerContainer, backgroundColor: colors.downColor}}>
+          <Medium color={colors.text} label={t('basic_information')} />
           <PrimaryInput
             containerStyle={{marginTop: mvs(10)}}
             placeholder={t('name')}
@@ -74,6 +86,7 @@ const EditProfile = props => {
             title={t('update_profile')}
           />
           <Medium
+            color={colors.text}
             style={{paddingVertical: mvs(10)}}
             label={t('password_changes')}
           />
