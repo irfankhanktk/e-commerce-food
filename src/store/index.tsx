@@ -1,9 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import userSlice from './reducers/user-reducer'
+import { configureStore } from '@reduxjs/toolkit';
+import userSlice from './reducers/user-reducer';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

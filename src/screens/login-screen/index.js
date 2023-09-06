@@ -24,6 +24,7 @@ import {useTheme} from '@react-navigation/native';
 const LoginScreen = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
+
   const {t} = i18n;
   const initialValues = {
     email: '',

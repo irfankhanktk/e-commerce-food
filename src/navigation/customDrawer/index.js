@@ -1,36 +1,35 @@
 import * as React from 'react';
-import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {ImageBackground, View} from 'react-native';
 import styles from './styles';
 
-import {colors} from 'config/colors';
-import {mvs} from 'config/metrices';
-import Bold from 'typography/bold-text';
-import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {IconButton, PrimaryButton} from 'components/atoms/buttons';
-import Regular from 'typography/regular-text';
+import {useTheme} from '@react-navigation/native';
 import {
   Carttt,
-  Edit,
   Heart,
   Location,
   Refund,
   Shop,
-  ShoppingBag,
   UserEdit,
   Wallet,
 } from 'assets/icons';
+import {IconButton} from 'components/atoms/buttons';
+import {mvs} from 'config/metrices';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
+import Bold from 'typography/bold-text';
+import Regular from 'typography/regular-text';
 
 const CustomDrawer = props => {
+  const colors = useTheme().colors;
+
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(s => s);
   const user = userInfo?.user?.userInfo?.user;
 
   const {navigation} = props;
   return (
-    <View style={styles.container}>
+    <View style={{...styles.container, backgroundColor: colors.background}}>
       {/* <TouchableOpacity onPress={() => navigation.goBack()}>
         <Entypo
           size={25}
@@ -50,64 +49,64 @@ const CustomDrawer = props => {
       </ImageBackground>
 
       <Bold
-        color={colors.darkBlack}
-        label={user?.name}
+        color={colors.text}
+        label={'Mohsin Khattak'}
         style={styles.userName}
       />
       <Regular
-        color={colors.darkBlack}
+        color={colors.text}
         style={{alignSelf: 'center'}}
-        label={user?.email}
+        label={'mohsinkhattak095@gmail.com'}
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>
         <IconButton
           onPress={() => navigate('MyWallet')}
           title={t('my_wallet')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Wallet />}
         />
         <IconButton
           onPress={() => navigate('OrderHistory')}
           title={t('orders')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Carttt />}
         />
         <IconButton
           onPress={() => navigate('MyWishList')}
           title={t('my_wishlist')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Heart />}
         />
         <IconButton
           onPress={() => navigate('RefundStatus')}
           title={t('refund_requests')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Refund />}
         />
         <IconButton
           onPress={() => navigate('EditProfile')}
           title={t('edit_profile')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<UserEdit />}
         />
         <IconButton
           onPress={() => navigate('AddressDetails')}
           title={t('address')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Location />}
         />
         <IconButton
           onPress={() => navigate('BrowseAllVenders')}
           title={t('browse_all_venders')}
-          textStyle={styles.textStyle}
-          containerStyle={{backgroundColor: 'white'}}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
           Icon={<Shop />}
         />
       </View>
