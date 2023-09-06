@@ -134,7 +134,7 @@ const LoginScreen = props => {
                       marginTop: mvs(12),
                     }}
                   />
-                  <Regular
+                  {/* <Regular
                     color={colors.text}
                     label={t('login_with')}
                     fontSize={mvs(10)}
@@ -147,7 +147,7 @@ const LoginScreen = props => {
                     <TouchableOpacity>
                       <Regular color={colors.text} label={t('Facebook')} />
                     </TouchableOpacity>
-                  </Row>
+                  </Row> */}
                 </KeyboardAvoidScrollview>
               </View>
             </View>
