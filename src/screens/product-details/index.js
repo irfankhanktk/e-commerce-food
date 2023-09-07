@@ -8,7 +8,7 @@ import Stars from 'components/atoms/stars';
 import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {Alert, Image, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, ScrollView, TouchableOpacity, View} from 'react-native';
 import i18n from 'translation';
 import Regular from 'typography/regular-text';
 import styles from './styles';
@@ -98,8 +98,14 @@ const ProductDetials = props => {
       <CustomFlatList
         ListHeaderComponent={
           <View>
-            <Row style={{justifyContent: 'flex-start'}}>
-              <View>
+            <View style={styles.bigImageContainer}>
+              <Image
+                source={{uri: selectImage}}
+                style={{height: '100%', width: '100%'}}
+              />
+            </View>
+            <View>
+              <ScrollView horizontal>
                 {imageSlide?.map(item => (
                   <TouchableOpacity
                     key={item.id}
@@ -111,14 +117,8 @@ const ProductDetials = props => {
                     />
                   </TouchableOpacity>
                 ))}
-              </View>
-              <View style={styles.bigImageContainer}>
-                <Image
-                  source={{uri: selectImage}}
-                  style={{height: '100%', width: '100%'}}
-                />
-              </View>
-            </Row>
+              </ScrollView>
+            </View>
             <Regular
               color={colors.text}
               style={styles.productName}

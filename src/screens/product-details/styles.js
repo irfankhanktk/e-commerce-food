@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   smallImageContainer: {
     width: mvs(53),
     height: mvs(53),
+    marginRight: mvs(15),
     borderColor: colors.primary,
     borderWidth: mvs(1),
     marginBottom: mvs(10),
@@ -17,8 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bigImageContainer: {
-    height: mvs(154),
-    margin: mvs(25),
+    height: mvs(200),
+    // margin: mvs(25),
     flex: 1,
     marginVertical: mvs(20),
   },
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     lineHeight: mvs(16),
   },
   messageMainContainer: {
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     marginTop: mvs(15),
     alignItems: 'center',
   },

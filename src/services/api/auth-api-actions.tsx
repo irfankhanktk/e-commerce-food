@@ -25,10 +25,8 @@ export const onLogin = (
       setLoading(true);
       const res = await postData(URLS.auth.login, values);
       await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
-
       console.log('res of onLogin=>', res);
       dispatch(setUserInfo(res));
-
       navigate('Drawer')
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));

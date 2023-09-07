@@ -36,7 +36,6 @@ const LoginScreen = props => {
     try {
       setLoading(true);
       await dispatch(onLogin(values, setLoading, props));
-      navigate('Drawer');
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));
     } finally {
