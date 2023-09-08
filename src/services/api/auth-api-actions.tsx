@@ -25,8 +25,9 @@ export const onLogin = (
       setLoading(true);
       const res = await postData(URLS.auth.login, values);
       await UTILS.setItem(STORAGEKEYS.token, res?.access_token);
+      await UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
       console.log('res of onLogin=>', res);
-      dispatch(setUserInfo(res));
+      dispatch(setUserInfo(res?.user));
       navigate('Drawer')
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));
@@ -56,9 +57,9 @@ export const getAllCategories = () => getData(URLS.categories.get_all_categories
 export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
 
 //////////add addresss/////////////////
-export const getAddress = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
+export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
-export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address, newAddress}`)
+export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address}`, newAddress)
 export const getCities = () => getData(URLS.address.get_cities)
 export const getAllProductCategoryPaginated = (categoryId: any, pageNumber: any,) => {
   let url = `${URLS.categories.get_all_products_of_category_paginated}${categoryId}?page=${pageNumber}&name=`;

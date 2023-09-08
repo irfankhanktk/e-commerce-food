@@ -35,4 +35,8 @@ export const URLS = {
     get_all_categories_featured: 'v2/categories/featured',
     get_all_products_of_category_paginated: 'v2/products/category/',
   },
+  wallet: {
+    add_amount: '',
+    get_wallet: '',
+  },
 };

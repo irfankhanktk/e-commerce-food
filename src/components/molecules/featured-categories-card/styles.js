@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     marginHorizontal: mvs(10),
     borderWidth: mvs(0.6),
     borderColor: colors.halfGray,
+    borderRadius: mvs(10),
   },
   backGroundImage: {
     width: mvs(77),

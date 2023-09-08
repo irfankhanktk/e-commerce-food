@@ -29,13 +29,13 @@ import {useTheme} from '@react-navigation/native';
 const AddLocation = props => {
   const {route} = props;
   const {address} = route?.params || {};
-  const {user} = useAppSelector(s => s?.user);
+  const {userInfo} = useAppSelector(s => s?.user);
   const origin = {latitude: 37.78825, longitude: -122.4324};
   const destination = {latitude: 37.7749, longitude: -122.4194};
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [payload, setPayload] = React.useState({
-    addressId: address?.id || '',
+    addressId: '',
     postal_code: '',
     title: '',
     address: '',
@@ -43,8 +43,7 @@ const AddLocation = props => {
     note: '',
     ...address,
   });
-  const userInfo = user?.userInfo;
-  const language = user?.language;
+
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const colors = useTheme().colors;
@@ -52,25 +51,30 @@ const AddLocation = props => {
     try {
       setLoading(true);
       const newAddress = {
-        addressId: payload?.addressId || '',
-        title: payload?.title,
+        // addressId: payload?.addressId || '',
+        // title: payload?.title,
+        // address: payload?.address,
+        // latitude: payload?.coordinate?.latitude,
+        // longitude: payload?.coordinate?.longitude,
+        // postal_code: payload?.postal_code,
+        // phone: payload?.note,
+        user_id: userInfo?.id,
         address: payload?.address,
-        latitude: payload?.coordinate?.latitude,
-        longitude: payload?.coordinate?.longitude,
-        postal_code: payload?.postal_code,
-        phone: payload?.note,
+        country: 'Bangladesh',
+        city: 'Comilla',
+        postal_code: '64643213456',
+        phone: '8765461215464',
       };
       console.log('check nre address===>', newAddress);
-      return;
       const res = await addAddress(newAddress);
-      console.log('res:::', res);
-      setPayload({
-        ...payload,
-        addressId: payload?.addressId ? res?.data?.id : res?.data,
-      });
+      console.log('res:::>>>>>', res);
+      // setPayload({
+      //   ...payload,
+      //   addressId: payload?.addressId ? res?.data?.id : res?.data,
+      // });
       Alert.alert('Success', 'Save Successfully');
     } catch (error) {
-      Alert.alert('Error', UTILS._returnAddress(error));
+      Alert.alert('Error', UTILS.returnError(error));
     } finally {
       setLoading(false);
     }

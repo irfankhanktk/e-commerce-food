@@ -91,7 +91,7 @@ const ProductDetials = props => {
   const [count, setCount] = React.useState(1);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('order')} icon />
+      <AppHeader back title={t('Product details')} icon />
 
       <CustomFlatList
         ListHeaderComponent={

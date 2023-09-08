@@ -14,6 +14,7 @@ const FeaturedCategories = props => {
   const colors = useTheme().colors;
 
   const route = props?.route?.params?.item;
+  const [loading, setLoading] = React.useState(true);
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
   const [allProducts, setAllProducts] = React.useState([]);
@@ -52,6 +53,9 @@ const FeaturedCategories = props => {
       fetchProducts(setPageLoading);
     }
   }, [pageNumber]);
+  React.useEffect(() => {
+    fetchProducts(setLoading);
+  }, []);
 
   const renderProduct = ({item}) => (
     <AllProductsCard
@@ -71,17 +75,21 @@ const FeaturedCategories = props => {
           color: colors.darkBlack,
         }}
       /> */}
-      <CustomFlatList
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        columnWrapperStyle={styles.columnWrapperStyle}
-        data={allProducts?.data || []}
-        renderItem={renderProduct}
-        onEndReached={handleLoadMore} // Load more when reaching the end of the list
-        onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
-        contentContainerStyle={{paddingBottom: mvs(20)}}
-        ListFooterComponent={pageLoading && <Loader />}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <CustomFlatList
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          columnWrapperStyle={styles.columnWrapperStyle}
+          data={allProducts?.data || []}
+          renderItem={renderProduct}
+          onEndReached={handleLoadMore} // Load more when reaching the end of the list
+          onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
+          contentContainerStyle={{paddingBottom: mvs(20)}}
+          ListFooterComponent={pageLoading && <Loader />}
+        />
+      )}
     </View>
   );
 };

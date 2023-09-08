@@ -49,9 +49,10 @@ const Splash = (props: props) => {
           dispatch(setLanguage(lang ?? 'en'));
         });
 
-        UTILS.getItem(STORAGEKEYS.token).then(async (token: any) => {
-          if (token) {
+        UTILS.getItem(STORAGEKEYS.user).then(async (user: any) => {
+          if (user) {
             try {
+              dispatch(setUserInfo(JSON.parse(user)));
               screen = 'Drawer';
 
             } catch (error) {
