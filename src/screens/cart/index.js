@@ -53,7 +53,7 @@ const CartTab = props => {
           paddingBottom: mvs(20),
         }}
       />
-      <View style={{paddingHorizontal: mvs(20)}}>
+      <View style={{paddingHorizontal: mvs(20), paddingBottom: mvs(10)}}>
         <View style={styles.bottomContainer}>
           <Row>
             <Regular color={colors.text} label={t('total_amount')} />

@@ -1,26 +1,24 @@
+import {useTheme} from '@react-navigation/native';
 import {CartWhite, Carttt, MessageTwo} from 'assets/icons';
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
+import CustomFlatList from 'components/atoms/custom-flatlist';
 import DescriptionCard from 'components/atoms/description-card';
 import AppHeader from 'components/atoms/headers/app-header';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {Row} from 'components/atoms/row';
 import Stars from 'components/atoms/stars';
-import {colors} from 'config/colors';
+import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
+import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
+import ProductDetailButtonCard from 'components/molecules/product-detail-button-card';
 import {mvs} from 'config/metrices';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, Image, ScrollView, TouchableOpacity, View} from 'react-native';
-import i18n from 'translation';
-import Regular from 'typography/regular-text';
-import styles from './styles';
 import {getProductDetails} from 'services/api/auth-api-actions';
-import {UTILS} from 'utils';
-import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
-import CustomFlatList from 'components/atoms/custom-flatlist';
-import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
+import i18n from 'translation';
 import Medium from 'typography/medium-text';
-import ProductDetailButtonCard from 'components/molecules/product-detail-button-card';
-import {navigate} from 'navigation/navigation-ref';
-import {useTheme} from '@react-navigation/native';
+import Regular from 'typography/regular-text';
+import {UTILS} from 'utils';
+import styles from './styles';
 
 const ProductDetials = props => {
   const colors = useTheme().colors;
@@ -101,7 +99,7 @@ const ProductDetials = props => {
             <View style={styles.bigImageContainer}>
               <Image
                 source={{uri: selectImage}}
-                style={{height: '100%', width: '100%'}}
+                style={{height: '100%', width: '100%', borderRadius: mvs(15)}}
               />
             </View>
             <View>

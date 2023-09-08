@@ -51,7 +51,7 @@ const App = () => {
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
       <Provider store={store}>
-        <NavigationContainer theme={theme === 'dark' ? { colors: darkTheme, dark: true } : { colors: lightTheme, dark: false }} ref={navigationRef} linking={linking}>
+        <NavigationContainer theme={theme == 'dark' ? { colors: darkTheme, dark: true } : { colors: lightTheme, dark: false }} ref={navigationRef} linking={linking}>
           <RootNavigator />
         </NavigationContainer>
       </Provider>

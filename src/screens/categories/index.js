@@ -8,18 +8,12 @@ import {View} from 'react-native';
 import {getAllCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import useCategories from 'hooks/use-categories';
+import {Loader} from 'components/atoms/loader';
 
 const CategoriesTab = props => {
   const colors = useTheme().colors;
-
-  const [data, setData] = React.useState([]);
-  const fetchCategories = async () => {
-    const res = await getAllCategories();
-    setData(res);
-  };
-  React.useEffect(() => {
-    fetchCategories();
-  }, []);
+  const {loading, categories, error} = useCategories(true);
 
   const featuredProduct = ({item}) => (
     <AllCategoriesCard
@@ -32,14 +26,18 @@ const CategoriesTab = props => {
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={'Categories'} />
 
-      <CustomFlatList
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        columnWrapperStyle={styles.columnWrapperStyle}
-        data={data?.data}
-        renderItem={featuredProduct}
-        contentContainerStyle={{paddingBottom: mvs(20)}}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <CustomFlatList
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          columnWrapperStyle={styles.columnWrapperStyle}
+          data={categories}
+          renderItem={featuredProduct}
+          contentContainerStyle={{paddingBottom: mvs(20)}}
+        />
+      )}
     </View>
   );
 };

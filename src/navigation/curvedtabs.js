@@ -14,10 +14,16 @@ import MessageTab from 'screens/message';
 
 // import ShoppingScreen from 'screens/shopping';
 import UserTab from 'screens/user-tab';
+import Regular from 'typography/regular-text';
 
 function MyTabBar({state, descriptors, navigation}) {
   return (
-    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: colors.halfWhite,
+      }}>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
         const label =
@@ -65,32 +71,20 @@ function MyTabBar({state, descriptors, navigation}) {
             }}>
             <View
               style={{
-                backgroundColor: isFocused
-                  ? colors.primary
-                  : colors.transparent,
+                backgroundColor:
+                  index === 2 ? colors.primary : colors.transparent,
                 borderRadius: mvs(50),
                 height: mvs(60),
                 width: 60,
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: mvs(isFocused ? -20 : 0),
+                marginTop: mvs(index === 2 ? -20 : 0),
               }}>
               <Icon height={mvs(20)} width={mvs(20)} />
+              {index !== 2 && isFocused && (
+                <Regular fontSize={mvs(10)} label={label} numberOfLines={1} />
+              )}
             </View>
-            {/* <View
-              style={{
-                flex: 1,
-                justifyContent: 'flex-end',
-                paddingBottom: mvs(10),
-              }}>
-              <Text
-                style={{
-                  fontSize: mvs(12),
-                  color: colors.black,
-                }}>
-                {label}
-              </Text>
-            </View> */}
           </TouchableOpacity>
         );
       })}

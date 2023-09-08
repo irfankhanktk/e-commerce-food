@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   },
   smallImageContainer: {
     width: mvs(53),
+    borderRadius: mvs(10),
     height: mvs(53),
     marginRight: mvs(15),
     borderColor: colors.primary,
