@@ -24,6 +24,7 @@ import { Row } from '../row';
 import { t } from 'i18next';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import DropdownModal from 'components/molecules/modals/dropdown-modal';
 type Item = { label: string; value: string };
 type props = {
   isRequired?: boolean;
@@ -258,53 +259,62 @@ export const MessageInput = (props: props) => {
     </>
   );
 };
-// export const InputWithIcon = (props: props) => {
-//   const [visible, setVisible] = React.useState(false);
-//   const {
-//     items = [],
-//     onChangeText,
-//     onBlur = () => { },
-//     value,
-//     style,
-//     containerStyle,
-//     id,
-//     editable,
-//     error,
-//     label,
-//     isRequired = false,
+export const InputWithIcon = (props: props) => {
+  const [visible, setVisible] = React.useState(false);
+  const [search, setSearch] = React.useState('');
+  const {
+    items = [],
+    onChangeText = (data) => { },
+    onBlur = () => { },
+    onPress = () => { },
+    value,
+    style,
+    containerStyle,
+    id,
+    editable,
+    error,
+    label,
+    isRequired = false,
+    placeholder,
+    selectedItem,
 
-//   } = props;
-//   return (
-//     <>
-//       {label && (
-//         <Regular label={label} style={styles.labelStyle}>
-//           {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
-//         </Regular>
-//       )}
-//       <TouchableOpacity
-//         disabled={editable}
-//         onPress={() => {
-//           setVisible(true);
-//           onBlur();
-//         }}
-//         style={[styles.dropDownContainer, containerStyle]}>
-//         <Medium label={value} />
-//         <Feather size={25} name={'chevron-down'} color={colors.black} />
-//       </TouchableOpacity>
-//       <Regular label={error ? `${t(error)}` : ''} style={styles.errorLabel} />
-//       <DropdownModal
-//         onClose={() => setVisible(false)}
-//         onChangeText={(data: string) => {
-//           onChangeText(data);
-//           setVisible(false);
-//         }}
-//         value={id}
-//         visible={visible}
-//         items={items}
-//       />
-//     </>
-//   );
-// };
+
+  } = props;
+  return (
+    <>
+      {label && (
+        <Regular label={label} style={styles.labelStyle}>
+          {isRequired ? <Regular color={colors.red} label={' *'} /> : null}
+        </Regular>
+      )}
+      <TouchableOpacity
+        disabled={editable}
+        onPress={() => {
+          onPress();
+          setVisible(true);
+          onBlur();
+        }}
+        style={[styles.dropDownContainer, containerStyle]}>
+        <Regular color={!!value ? colors.darkBlack : colors.lightGray} label={value || placeholder} />
+        <Feather size={25} name={'chevron-down'} color={colors.black} />
+      </TouchableOpacity>
+      <Regular label={error ? `${t(error)}` : ''} style={styles.errorLabel} />
+      <DropdownModal
+        selectedItem={selectedItem}
+        search={search}
+        setSearch={setSearch}
+        onClose={() => setVisible(false)}
+        onChangeText={(data: string) => {
+          onChangeText(data);
+          setVisible(false);
+        }}
+        // value={id}
+        visible={visible}
+        items={items}
+      />
+    </>
+  );
+};
 
 export const PrimaryPhoneInput = (props: props) => {
   const phoneRef = useRef<PhoneInput>(null);

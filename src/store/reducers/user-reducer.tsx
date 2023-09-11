@@ -2,21 +2,25 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type Props = {
   userInfo: any;
-  transaction_id: any;
   language: string;
   location?: {
     latitude: number;
     longitude: number;
   };
   notifications: any[];
+
+  cities: any[];
+  countries: any[];
+  states: any[];
   wallet: any;
   unreadNotification: number;
   locations: any[];
 };
 const initialState: Props = {
   userInfo: null,
-  transaction_id: null,
-
+  cities: [],
+  countries: [],
+  states: [],
   language: 'en',
   location: undefined,
   notifications: [],
@@ -32,8 +36,14 @@ export const userSlice = createSlice({
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
-    setTransactionId: (state, action) => {
-      state.transaction_id = action.payload;
+    setCities: (state, action) => {
+      state.cities = action.payload;
+    },
+    setStates: (state, action) => {
+      state.states = action.payload;
+    },
+    setCountries: (state, action) => {
+      state.countries = action.payload;
     },
     setLanguage: (state, action) => {
       state.language = action.payload;
@@ -65,10 +75,12 @@ export const userSlice = createSlice({
 export const {
   setUserInfo,
   reset,
+  setCities,
+  setStates,
+  setCountries,
   setLanguage,
   setLocation,
   setNotifications,
-  setTransactionId,
 
   setLocations,
   setWallet,

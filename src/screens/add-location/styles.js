@@ -18,6 +18,15 @@ const styles = StyleSheet.create({
   btnText: {
     fontSize: mvs(24),
   },
+  errorLabel: {
+    // alignSelf: 'flex-start',
+    color: colors.red,
+    // backgroundColor: 'red',
+    fontSize: mvs(10),
+    marginBottom: mvs(5),
+    height: mvs(15),
+    marginHorizontal: mvs(5),
+  },
   backButton: {position: 'absolute', zIndex: 1, left: mvs(20), top: mvs(20)},
   header: {
     width: '100%',
@@ -29,11 +38,8 @@ const styles = StyleSheet.create({
   },
 
   bottomContainer: {
-    height: mvs(350),
     width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    alignSelf: 'center',
+    paddingTop: mvs(30),
     flex: 1,
     borderTopLeftRadius: mvs(10),
     borderTopRightRadius: mvs(10),

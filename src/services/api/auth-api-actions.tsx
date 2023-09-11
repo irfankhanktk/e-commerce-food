@@ -6,8 +6,11 @@ import { AppDispatch, RootState } from 'store';
 import { UTILS } from 'utils';
 import { getData, postData } from './';
 import {
+  setCities,
+  setCountries,
   setLocations,
   setNotifications,
+  setStates,
   setUserInfo,
   setWallet,
 } from './../../store/reducers/user-reducer';
@@ -60,7 +63,55 @@ export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_ca
 export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
 export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address}`, newAddress)
-export const getCities = () => getData(URLS.address.get_cities)
+
+
+
+export const getCities = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+
+      const res = await getData(URLS.address.get_cities)
+
+      dispatch(setCities(res?.data || []));
+
+    } catch (error: any) {
+      console.log('error in wallet', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+    }
+  };
+};
+export const getCountries = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const res = await getData(URLS.address.get_countries)
+      console.log('res::::', res);
+
+      dispatch(setCountries(res?.data || []));
+
+    } catch (error: any) {
+      console.log('error in wallet', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+    }
+  };
+};
+export const getStates = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const res = await getData(URLS.address.get_states)
+
+      dispatch(setStates(res?.data || []));
+
+    } catch (error: any) {
+      console.log('error in wallet', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+    }
+  };
+};
+
+
 export const getAllProductCategoryPaginated = (categoryId: any, pageNumber: any,) => {
   let url = `${URLS.categories.get_all_products_of_category_paginated}${categoryId}?page=${pageNumber}&name=`;
   return getData(url);

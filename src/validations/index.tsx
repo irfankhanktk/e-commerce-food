@@ -1,6 +1,16 @@
 
 import * as yup from 'yup';
 
+export const addressFormValidation = yup.object().shape({
+  address: yup.string().required('req_address'),
+  state_id: yup.string().required('req_state'),
+  country_id: yup.string().required('req_country'),
+  city_id: yup.string().required('req_city'),
+  postal_code: yup.string().required('req_postal_code'),
+  phone: yup.string().required('req_phone'),
+  latitude: yup.number().required('req_lat_lng'),
+  // longitude: yup.number().required('req_lng'),
+});
 export const signinFormValidation = yup.object().shape({
   email: yup.string().email('invalid_email').required('req_email'),
   password: yup
