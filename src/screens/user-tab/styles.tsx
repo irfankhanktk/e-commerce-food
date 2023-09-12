@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   backgroudImage: {
     width: mvs(51),
     height: mvs(51),
+    borderRadius: mvs(51 / 2)
   },
   boxContainer: {
     backgroundColor: colors.white,

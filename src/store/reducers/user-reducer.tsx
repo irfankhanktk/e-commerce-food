@@ -15,6 +15,7 @@ type Props = {
   wallet: any;
   unreadNotification: number;
   locations: any[];
+  dashboard_counters: any
 };
 const initialState: Props = {
   userInfo: null,
@@ -27,6 +28,7 @@ const initialState: Props = {
   wallet: {},
   unreadNotification: 0,
   locations: [],
+  dashboard_counters: {}
 };
 
 export const userSlice = createSlice({
@@ -44,6 +46,9 @@ export const userSlice = createSlice({
     },
     setCountries: (state, action) => {
       state.countries = action.payload;
+    },
+    setDashboardCounters: (state, action) => {
+      state.dashboard_counters = action.payload;
     },
     setLanguage: (state, action) => {
       state.language = action.payload;
@@ -75,6 +80,7 @@ export const userSlice = createSlice({
 export const {
   setUserInfo,
   reset,
+  setDashboardCounters,
   setCities,
   setStates,
   setCountries,

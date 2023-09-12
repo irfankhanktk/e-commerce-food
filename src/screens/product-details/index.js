@@ -1,5 +1,5 @@
 import {useTheme} from '@react-navigation/native';
-import {CartWhite, Carttt, MessageTwo} from 'assets/icons';
+import {CartWhite, Carttt, Heart, HeartFill, MessageTwo} from 'assets/icons';
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import DescriptionCard from 'components/atoms/description-card';
@@ -19,11 +19,15 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
+import {addUserWishlist, removeUserWishlist} from 'services/api/api-actions';
 
 const ProductDetials = props => {
   const colors = useTheme().colors;
-
+  const {wishlists} = useAppSelector(s => s?.wishlist);
+  const dispatch = useAppDispatch();
   const productId = props?.route?.params?.productId;
+  console.log('wishlists:::', wishlists);
   const {t} = i18n;
   const [data, setData] = React.useState('');
 
@@ -89,6 +93,7 @@ const ProductDetials = props => {
   ];
   const [selectImage, setSelectImage] = React.useState(imageSlide[0]?.image);
   const [count, setCount] = React.useState(1);
+  const bool = wishlists?.some(x => x === data?.id);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('Product details')} icon />
@@ -126,7 +131,19 @@ const ProductDetials = props => {
               <Stars />
               <Regular style={styles.reviewsText} label={'(0 reviews)'} />
             </Row>
-            <Regular style={styles.inquiryText} label={'Product Inquiry'} />
+            <Row style={{alignItems: 'center'}}>
+              <Regular style={styles.inquiryText} label={'Product Inquiry'} />
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(
+                    bool
+                      ? removeUserWishlist(data?.id)
+                      : addUserWishlist(data?.id),
+                  );
+                }}>
+                {bool ? <HeartFill /> : <Heart />}
+              </TouchableOpacity>
+            </Row>
             <Row style={{justifyContent: 'flex-start'}}>
               <Regular
                 color={colors.text}

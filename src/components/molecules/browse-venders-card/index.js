@@ -1,11 +1,8 @@
+import {ford} from 'assets/images';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import {ImageBackground, View} from 'react-native';
 import styles from './styles';
-import Regular from 'typography/regular-text';
-import {featured, ford, forklift, silder} from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
 
 const BrowseAllVendersCard = ({item, style, onPress, loading}) => {
   return (

@@ -44,8 +44,6 @@ const AddLocation = props => {
   const {address} = route?.params || {};
   const {userInfo, states, countries, cities} = useAppSelector(s => s?.user);
   const [loading, setLoading] = React.useState(false);
-  const [stateCities, setStateCities] = React.useState([]);
-  const [countryStates, setCountryStates] = React.useState([]);
   const payload = {
     address: '',
     postal_code: '',
@@ -57,7 +55,7 @@ const AddLocation = props => {
     city_id: '',
     ...address,
   };
-
+  console.log('payload::::', payload);
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const colors = useTheme().colors;
@@ -68,19 +66,12 @@ const AddLocation = props => {
   }, []);
   React.useEffect(() => {}, []);
 
-  const addAddressPress = async () => {
+  const onSubmit = async values => {
     try {
       setLoading(true);
-      const newAddress = {
-        user_id: userInfo?.id,
-        address: payload?.address,
-        country: 'Bangladesh',
-        city: 'Comilla',
-        postal_code: '64643213456',
-        phone: '8765461215464',
-      };
-      console.log('check nre address===>', newAddress);
-      const res = await addAddress(newAddress);
+
+      console.log('values address===>', values);
+      const res = await addAddress(values);
       console.log('res:::>>>>>', res);
       Alert.alert('Success', 'Save Successfully');
     } catch (error) {
@@ -89,10 +80,6 @@ const AddLocation = props => {
       setLoading(false);
     }
   };
-  const onSubmit = values => {};
-  const selectedCity = stateCities?.find(x => x?.selected);
-  const selectedState = countryStates?.find(x => x?.selected);
-  const selectedCountry = countries?.find(x => x?.selected);
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
@@ -102,7 +89,7 @@ const AddLocation = props => {
             position: 'absolute',
             zIndex: 1,
             alignItems: 'center',
-            marginTop: mvs(30),
+            top: mvs(30),
             justifyContent: 'flex-start',
             paddingHorizontal: mvs(20),
           }}>
@@ -113,47 +100,37 @@ const AddLocation = props => {
               color={colors.text}
             />
           </TouchableOpacity>
-
-          <GoogleSearchBar
-            countrySlug={selectedCountry?.code?.toLowerCase()}
-            style={{width: '86%', marginLeft: mvs(20)}}
-          />
         </Row>
       </View>
       <View style={{flex: 1}}>
-        <KeyboardAvoidScrollview contentContainerStyle={{paddingHorizontal: 0}}>
-          <Formik
-            onSubmit={onSubmit}
-            initialValues={payload}
-            validationSchema={addressFormValidation}>
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              setTouched,
-              setFieldValue,
-              values,
-              touched,
-              errors,
-            }) => (
-              <View
-                style={{
-                  // ...styles.bottomContainer,
-                  backgroundColor: colors.downColor,
-                }}>
-                <CustomMap
-                  style={{height: mvs(300)}}
-                  onPress={res => {
-                    console.log('res>>>>', res);
-                    // setFieldValue('address', res?.fulladdress);
-                    setFieldValue('latitude', res?.geoCode.lat);
-                    setFieldValue('longitude', res?.geoCode?.lng);
-                    // setPayload({
-                    //   address: res?.fulladdress,
-                    //   title: res?.city,
-                    //   coordinate: res?.coordinate,
-                    // });
-                  }}></CustomMap>
+        <Formik
+          onSubmit={onSubmit}
+          initialValues={payload}
+          validationSchema={addressFormValidation}>
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setTouched,
+            setFieldValue,
+            values,
+            touched,
+            errors,
+          }) => (
+            <View
+              style={{
+                backgroundColor: colors.downColor,
+                flex: 1,
+              }}>
+              <CustomMap
+                style={{height: mvs(250)}}
+                onPress={res => {
+                  console.log('res>>>>', res);
+                  setFieldValue('latitude', res?.coordinate?.latitude);
+                  setFieldValue('longitude', res?.coordinate?.longitude);
+                }}></CustomMap>
+              <KeyboardAvoidScrollview
+                contentContainerStyle={{paddingHorizontal: 0}}>
                 <View style={styles.bottomContainer}>
                   <Regular
                     label={
@@ -166,13 +143,12 @@ const AddLocation = props => {
                   <InputWithIcon
                     onPress={() => setTouched('country_id', true)}
                     items={countries}
+                    id={values?.country_id}
                     placeholder={t('country')}
-                    selectedItem={selectedCountry}
-                    value={selectedCountry?.name}
+                    value={
+                      countries?.find(x => x?.id === values?.country_id)?.name
+                    }
                     onChangeText={data => {
-                      setCountryStates([]);
-                      setStateCities([]);
-                      dispatch(setCountries(data));
                       const find = data?.find(x => x?.selected);
                       setFieldValue('country_id', find?.id || '');
                       setFieldValue('state_id', '');
@@ -183,63 +159,66 @@ const AddLocation = props => {
                   <InputWithIcon
                     onPress={() => setTouched('state_id', true)}
                     items={states?.filter(
-                      x => x?.country_id === selectedCountry?.id,
+                      x => x?.country_id === values?.country_id,
                     )}
                     placeholder={t('state')}
-                    value={selectedState?.name}
-                    selectedItem={selectedState}
+                    // value={selectedState?.name}
+                    id={values?.state_id}
+                    value={states?.find(x => x?.id === values?.state_id)?.name}
+                    // selectedItem={selectedState}
                     onChangeText={data => {
-                      setStateCities([]);
-                      setCountryStates(data);
                       const find = data?.find(x => x?.selected);
                       setFieldValue('state_id', find?.id || '');
+                      setFieldValue('city_id', '');
                     }}
                     error={touched?.state_id && errors?.state_id}
                   />
                   <InputWithIcon
                     onPress={() => setTouched('city_id', true)}
                     items={cities?.filter(
-                      x => x?.state_id === selectedState?.id,
+                      x => x?.state_id === values?.state_id,
                     )}
                     placeholder={t('city')}
-                    value={selectedCity?.name}
-                    selectedItem={selectedCity}
+                    id={values?.city_id}
+                    value={cities?.find(x => x?.id === values?.city_id)?.name}
                     onChangeText={data => {
                       const find = data?.find(x => x?.selected);
                       setFieldValue('city_id', find?.id || '');
-                      setStateCities(data);
                     }}
                     error={touched?.city_id && errors?.city_id}
                   />
                   <PrimaryInput
+                    value={values?.address}
                     placeholder={t('address')}
                     onChangeText={handleChange('address')}
                     error={touched?.address && errors?.address}
-                    onBlur={handleBlur('address')}
+                    // onBlur={handleBlur('address')}
                   />
                   <PrimaryInput
+                    value={values?.postal_code}
                     placeholder={t('postal_code')}
                     onChangeText={handleChange('postal_code')}
                     error={touched?.postal_code && errors?.postal_code}
-                    onBlur={handleBlur('postal_code')}
+                    // onBlur={handleBlur('postal_code')}
                   />
                   <PrimaryInput
+                    value={values?.phone}
                     placeholder={t('phone')}
                     onChangeText={handleChange('phone')}
                     error={touched?.phone && errors?.phone}
-                    onBlur={handleBlur('phone')}
+                    // onBlur={handleBlur('phone')}
                   />
                   <PrimaryButton
                     onPress={handleSubmit}
                     loading={loading}
                     containerStyle={styles.addAddressBtn}
-                    title={`${payload?.addressId ? 'Update' : 'Add'} address`}
+                    title={`${payload?.id ? 'Update' : 'Add'} address`}
                   />
                 </View>
-              </View>
-            )}
-          </Formik>
-        </KeyboardAvoidScrollview>
+              </KeyboardAvoidScrollview>
+            </View>
+          )}
+        </Formik>
       </View>
     </View>
   );

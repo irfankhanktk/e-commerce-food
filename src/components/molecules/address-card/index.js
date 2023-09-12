@@ -11,8 +11,9 @@ import AddressAddedSucessfully from '../modals/address-add-sucessfully';
 import SelectEditModal from '../modals/select-edit-modal';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import {Loader} from 'components/atoms/loader';
 
-const AddressCard = ({item, style, onPress, loading}) => {
+const AddressCard = ({item, style, onPress, onPressDel, loading}) => {
   const colors = useTheme().colors;
 
   const [select, setSelect] = React.useState(true);
@@ -33,7 +34,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourAddress}
-                label={'your location'}
+                label={item?.address}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -41,7 +42,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourCity}
-                label={'your city'}
+                label={item?.city_name}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -49,7 +50,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourCountry}
-                label={'your country'}
+                label={item?.country_name}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -57,7 +58,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.phone}
-                label={'03448422399'}
+                label={item?.phone}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -65,7 +66,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.passCode}
-                label={'0344'}
+                label={item?.postal_code}
               />
             </Row>
           </View>
@@ -77,23 +78,39 @@ const AddressCard = ({item, style, onPress, loading}) => {
             />
           </TouchableOpacity>
         </Row>
+        {loading && (
+          <View
+            style={{
+              position: 'absolute',
+              height: '100%',
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Loader />
+          </View>
+        )}
       </View>
       {!select ? (
         <View
           style={{...styles.dotContainer, backgroundColor: colors.background}}>
           <TouchableOpacity
             onPress={() => {
-              navigate('Location'), setSelect(!select);
+              navigate('Location', {address: item}), setSelect(!select);
             }}>
             <Regular color={colors.text} label={t('edit')} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setSelect(!select)}>
+          <TouchableOpacity
+            onPress={() => {
+              onPressDel();
+              setSelect(!select);
+            }}>
             <Regular
               style={{color: colors.text, marginTop: mvs(10)}}
               label={t('delete')}
             />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               navigate('Location'), setSelect(!select);
             }}>
@@ -102,7 +119,7 @@ const AddressCard = ({item, style, onPress, loading}) => {
               fontSize={mvs(12)}
               label={t('add_location')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       ) : null}
       <SelectEditModal

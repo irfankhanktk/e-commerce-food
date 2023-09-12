@@ -21,6 +21,7 @@ export {default as Carttt} from './add-cart.svg';
 export {default as CartWhite} from './add-cart-white.svg';
 export {default as Refund} from './refund.svg';
 export {default as Heart} from './heart.svg';
+export {default as HeartFill} from './heart-fill.svg';
 export {default as Message} from './message.svg';
 export {default as MessageTwo} from './messagetwo.svg';
 export {default as Delete} from './delete.svg';

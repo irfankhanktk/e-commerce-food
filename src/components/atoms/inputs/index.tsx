@@ -308,7 +308,7 @@ export const InputWithIcon = (props: props) => {
           onChangeText(data);
           setVisible(false);
         }}
-        // value={id}
+        id={id}
         visible={visible}
         items={items}
       />

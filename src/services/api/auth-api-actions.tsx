@@ -8,6 +8,7 @@ import { getData, postData } from './';
 import {
   setCities,
   setCountries,
+  setDashboardCounters,
   setLocations,
   setNotifications,
   setStates,
@@ -60,9 +61,9 @@ export const getAllCategories = () => getData(URLS.categories.get_all_categories
 export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
 
 //////////add addresss/////////////////
-export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}${userId}`)
+export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}`)
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
-export const addAddress = (newAddress: any) => postData(`${URLS.address.add_address}`, newAddress)
+export const addAddress = (newAddress: any) => postData(`${newAddress?.id ? URLS.address.update : URLS.address.add_address}`, newAddress)
 
 
 
@@ -226,18 +227,56 @@ export const getPaymentTransationStatus = async (data: any) =>
     },
   });
 
-///Notifications///
-export const getNotifications = (
+// update profile
+export const updateProfile = (
+  data: any,
+  setLoading: (bool: boolean) => void
 ) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {
-      const res = await postData(URLS.auth.get_notification);
-      dispatch(setNotifications(res?.notifications || []));
+      setLoading(true);
+      const res = await postData(URLS.auth.update_profile, data);
+      console.log('res::::', res);
+      UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
+      dispatch(setUserInfo(res?.user || []));
     } catch (error: any) {
-      console.log('error in notification', UTILS.returnError(error));
+      console.log('error in updateProfile', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};
+export const uploadImage = (
+  data: any,
+  setLoading: (bool: boolean) => void
+) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      setLoading(true);
+      const res = await postData(URLS.auth.update_image, data);
+      UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
+      dispatch(setUserInfo(res?.user || []));
+    } catch (error: any) {
+      console.log('error in updateProfile', UTILS.returnError(error));
+      Alert.alert('', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+};
+export const getCounters = (
+) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const res = await getData(`${URLS.auth.dashboard_counters}`)
+      dispatch(setDashboardCounters(res || {}));
+    } catch (error: any) {
+      console.log('error in getCounters', UTILS.returnError(error));
       Alert.alert('', UTILS.returnError(error));
     } finally {
       // setLoading(false);
     }
   };
 };
+

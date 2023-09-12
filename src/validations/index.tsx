@@ -11,6 +11,23 @@ export const addressFormValidation = yup.object().shape({
   latitude: yup.number().required('req_lat_lng'),
   // longitude: yup.number().required('req_lng'),
 });
+export const updateProfileFormValidation = yup.object().shape({
+  name: yup.string().required('req_name'),
+  // email: yup.string().email('invalid_email').required('req_email'),
+  phone: yup.string().required('req_phone'),
+  // password: yup.string().required('req_pass').min(8, 'weak_pass'),
+  // passowrd_confirmation: yup
+  //   .string()
+  //   .required('req_pass')
+  //   .oneOf([yup.ref('password')], 'miss_match_pass'),
+});
+export const updatePasswordFormValidation = yup.object().shape({
+  password: yup.string().required('req_pass').min(8, 'weak_pass'),
+  passowrd_confirmation: yup
+    .string()
+    .required('req_pass')
+    .oneOf([yup.ref('password')], 'miss_match_pass'),
+});
 export const signinFormValidation = yup.object().shape({
   email: yup.string().email('invalid_email').required('req_email'),
   password: yup
@@ -38,19 +55,7 @@ export const signupFormValidation = yup.object().shape({
     .oneOf([yup.ref('password')], 'miss_match_pass'),
 
 });
-export const updateProfileFormValidation = yup.object().shape({
-  first_name: yup.string().required('req_name'),
-  email: yup.string().email('invalid_email').required('req_email'),
-  phone: yup.string().max(13, 'invalid_phone').required('phone_required'),
 
-
-  doc_cat_id: yup.string().required('req_cat'),
-  zip_code: yup.string().required('req_zip_code'),
-  city: yup.string().required('req_city'),
-  state: yup.string().required('req_state'),
-  price: yup.string().required('req_price'),
-  experience: yup.string().required('req_experience'),
-});
 
 export const updatePasswordValidation = yup.object().shape({
   old_password: yup.string().required('req_pass').min(8, 'weak_pass'),

@@ -16,6 +16,7 @@ const DropdownModal = ({
   visible = false,
   onClose = item => {},
   items = [],
+  id,
   search,
   setSearch,
 }) => {
@@ -53,7 +54,7 @@ const DropdownModal = ({
                     );
                   }}>
                   <Regular label={item?.name || item?.title} />
-                  {selectedItem?.id === item?.id && <Tick />}
+                  {id === item?.id && <Tick />}
                 </TouchableOpacity>
               );
             return null;

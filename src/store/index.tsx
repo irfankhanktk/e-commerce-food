@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './reducers/user-reducer';
+import wishlistSlice from './reducers/wishlist-reducer';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    wishlist: wishlistSlice,
 
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

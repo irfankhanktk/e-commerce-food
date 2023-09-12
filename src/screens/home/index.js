@@ -30,10 +30,12 @@ import {Loader} from 'components/atoms/loader';
 import {UTILS} from 'utils';
 import {t} from 'i18next';
 import {useTheme} from '@react-navigation/native';
+import {getWishlist} from 'services/api/api-actions';
+import {useAppDispatch} from 'hooks/use-store';
 
 const HomeTab = props => {
   const colors = useTheme().colors;
-
+  const dispatch = useAppDispatch();
   const [banner, setBanner] = React.useState([]);
   const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
   const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
@@ -85,6 +87,7 @@ const HomeTab = props => {
   };
   React.useEffect(() => {
     getBanners();
+    dispatch(getWishlist());
   }, []);
   React.useEffect(() => {
     if (pageNumber > 0 && !pageLoading) {
@@ -136,7 +139,9 @@ const HomeTab = props => {
                   fontSize={mvs(10)}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{alignItems: 'center'}}>
+              <TouchableOpacity
+                onPress={() => navigate('Brands')}
+                style={{alignItems: 'center'}}>
                 <View
                   style={{
                     ...styles.itemsContainer,
@@ -150,7 +155,9 @@ const HomeTab = props => {
                   fontSize={mvs(10)}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{alignItems: 'center'}}>
+              <TouchableOpacity
+                onPress={() => navigate('BrowseAllVenders')}
+                style={{alignItems: 'center'}}>
                 <View
                   style={{
                     ...styles.itemsContainer,

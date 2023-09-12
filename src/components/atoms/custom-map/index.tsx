@@ -9,6 +9,7 @@ import { mvs } from 'config/metrices';
 
 import { useAppDispatch } from 'hooks/use-store';
 import { setLocation } from 'store/reducers/user-reducer';
+import GoogleSearchBar from '../google-search';
 
 interface CustomMapProps extends MapViewProps {
   children?: ReactNode;
@@ -22,7 +23,7 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   },
-  style = styles.map,
+  style = styles.container,
   onPress = (address: any) => { },
   ...mapProps }) => {
   const mapRef = React.useRef<MapView>(null);
@@ -58,20 +59,25 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
       handleCurrentLocationPress();
     }, 1000);
   }, [])
-  const onPressMap = (e: MapPressEvent) => {
-    setCurrentLocation(e.nativeEvent?.coordinate);
-    UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
-      onPress({ ...res, coordinate: e.nativeEvent?.coordinate });
-    });
-  }
+
   return (
-    <View style={styles.container}>
+    <View style={style}>
       <MapView
+        showsUserLocation
         ref={mapRef}
         {...mapProps}
-        onPress={onPressMap}
-        style={style} initialRegion={initialRegion}  >
+        onPress={(e) => {
+          e.persist();
+          setCurrentLocation(e.nativeEvent?.coordinate);
+          // UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
+          onPress({ coordinate: e.nativeEvent?.coordinate });
+          handleRegionChange(e.nativeEvent?.coordinate);
+          // });
+
+        }}
+        style={styles.map} initialRegion={initialRegion}  >
         {children}
+
         {currentLocation && <Marker coordinate={currentLocation} />}
       </MapView>
       {/* <View style={[styles.currentLocationButton]}>
@@ -81,6 +87,35 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
           <CurrentLocation height={'100%'} width={'100%'} />
         </TouchableOpacity>
     </View> */}
+      <View style={{
+        position: 'absolute',
+        width: '90%',
+        alignSelf: 'center',
+        top: mvs(15),
+        zIndex: 1001,
+      }}>
+        <GoogleSearchBar
+          // countrySlug={selectedCountry?.code?.toLowerCase()}
+          style={{ width: '86%', marginLeft: mvs(20) }}
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log('data:::', details?.geometry?.location);
+            const latitude = details?.geometry?.location?.lat;
+            const longitude = details?.geometry?.location?.lng;
+            const latlng = {
+              latitude,
+              longitude
+            }
+            setCurrentLocation(latlng);
+
+            // UTILS._returnAddress(latitude, longitude).then((res) => {
+            onPress({ coordinate: latlng });
+            handleRegionChange(latlng);
+
+            // });
+          }}
+        />
+      </View>
     </View >
   );
 };

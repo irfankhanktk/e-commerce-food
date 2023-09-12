@@ -34,6 +34,7 @@ import ShippingCost from 'screens/shipping-cost';
 import ShippingInfo from 'screens/shipping-info';
 import Tracking from 'screens/tracking';
 import DrawerNavigator from './drawer-navigation';
+import Brands from 'screens/brands';
 
 const Stack = createNativeStackNavigator();
 
@@ -93,6 +94,7 @@ export const RootNavigator = () => {
             name="AllFeaturedCategories"
             component={AllFeaturedCategories}
           />
+          <Stack.Screen name="Brands" component={Brands} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

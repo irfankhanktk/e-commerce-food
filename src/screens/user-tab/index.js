@@ -19,16 +19,19 @@ import {t} from 'i18next';
 import {navigate, resetStack} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
-import {logout} from 'services/api/auth-api-actions';
+import {getCounters, logout} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 
 const UserTab = props => {
   const colors = useTheme().colors;
-
+  const {dashboard_counters, userInfo} = useAppSelector(s => s?.user);
+  const dispatch = useAppDispatch();
+  const isFocus = useIsFocused();
   const [loading, setLoading] = React.useState(false);
   const LogOut = async () => {
     try {
@@ -43,21 +46,31 @@ const UserTab = props => {
       setLoading(false);
     }
   };
-
+  const getDashboard = async () => {
+    dispatch(getCounters());
+  };
+  React.useEffect(() => {
+    if (isFocus) getDashboard();
+  }, [isFocus]);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <View style={{...styles.topContainer, backgroundColor: colors.primary}}>
         <Row style={{marginTop: mvs(25), justifyContent: 'flex-start'}}>
           <ImageBackground
-            source={user}
+            source={
+              userInfo?.avatar_original
+                ? {uri: userInfo?.avatar_original}
+                : user
+            }
+            imageStyle={{borderRadius: mvs(51 / 2)}}
             style={styles.backgroudImage}></ImageBackground>
           <View style={{flex: 1, marginLeft: mvs(10)}}>
-            <Regular color={colors.white} label={'Paul K. Jensen'} />
+            <Regular color={colors.white} label={userInfo?.name} />
             <Regular
               fontSize={mvs(12)}
               numberOfLines={1}
               color={colors.white}
-              label={'customer@example.com'}
+              label={userInfo?.email}
             />
           </View>
           <PrimaryButton
@@ -77,7 +90,10 @@ const UserTab = props => {
               ...styles.boxContainer,
               backgroundColor: colors.background,
             }}>
-            <Bold color={colors.text} label={'01'} />
+            <Bold
+              color={colors.text}
+              label={dashboard_counters?.cart_item_count || '0'}
+            />
             <Regular
               fontSize={mvs(10)}
               color={colors.text}
@@ -89,7 +105,10 @@ const UserTab = props => {
               ...styles.boxContainer,
               backgroundColor: colors.background,
             }}>
-            <Bold color={colors.text} label={'07'} />
+            <Bold
+              color={colors.text}
+              label={dashboard_counters?.wishlist_item_count || '0'}
+            />
             <Regular
               fontSize={mvs(10)}
               color={colors.text}
@@ -101,7 +120,10 @@ const UserTab = props => {
               ...styles.boxContainer,
               backgroundColor: colors.background,
             }}>
-            <Bold color={colors.text} label={'75'} />
+            <Bold
+              color={colors.text}
+              label={dashboard_counters?.order_count || '0'}
+            />
             <Regular
               fontSize={mvs(10)}
               color={colors.text}
