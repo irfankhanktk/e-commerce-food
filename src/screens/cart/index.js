@@ -1,21 +1,19 @@
+import {useIsFocused, useTheme} from '@react-navigation/native';
+import {PrimaryButton} from 'components/atoms/buttons';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
 import {Row} from 'components/atoms/row';
+import CartCard from 'components/molecules/cart-card';
 import {mvs} from 'config/metrices';
+import {useAppSelector} from 'hooks/use-store';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
+import {getCartSummary} from 'services/api/cart-api-actions';
 import i18n from 'translation';
 import Medium from 'typography/medium-text';
-import styles from './styles';
-import CartCard from 'components/molecules/cart-card';
 import Regular from 'typography/regular-text';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {useIsFocused, useTheme} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
-import {useAppSelector} from 'hooks/use-store';
-import {renderer} from 'react-test-renderer';
-import {getCartSummary} from 'services/api/cart-api-actions';
+import styles from './styles';
 
 const CartTab = props => {
   const {t} = i18n;
