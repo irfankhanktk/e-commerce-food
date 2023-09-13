@@ -12,7 +12,7 @@ export const postData = async (url, data) => {
 export const deleteData = async (url, payload) => {
   console.log('url: ', url);
   const response = await client.delete(url, {data: payload});
-  return response;
+  return response?.data;
 };
 export const putData = async (url, data) => {
   console.log('url: ', url);

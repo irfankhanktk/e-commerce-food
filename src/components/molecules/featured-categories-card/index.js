@@ -18,7 +18,14 @@ const FeaturedCategories = ({item, style, onPress, loading}) => {
           borderRadius={mvs(10)}
           source={featured}
           style={styles.backGroundImage}>
-          <Image source={{uri: item?.banner}} style={styles.innerImage} />
+          <Image
+            source={
+              item?.banner || item?.thumbnail_image
+                ? {uri: item?.banner || item?.thumbnail_image}
+                : featured
+            }
+            style={styles.innerImage}
+          />
         </ImageBackground>
         <Regular
           color={colors.text}

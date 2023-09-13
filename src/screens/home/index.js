@@ -30,13 +30,16 @@ import {Loader} from 'components/atoms/loader';
 import {UTILS} from 'utils';
 import {t} from 'i18next';
 import {useTheme} from '@react-navigation/native';
-import {getWishlist} from 'services/api/api-actions';
+import {getSearchProducts, getWishlist} from 'services/api/api-actions';
 import {useAppDispatch} from 'hooks/use-store';
+import {getTopSellingProducts} from 'services/api/product-api-actions';
+import {getCartList} from 'services/api/cart-api-actions';
 
 const HomeTab = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
   const [banner, setBanner] = React.useState([]);
+  const [searchTerm, setSearchTerm] = React.useState('');
   const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
   const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
   const [pageLoading, setPageLoading] = React.useState(false);
@@ -59,7 +62,17 @@ const HomeTab = props => {
   const fetchProducts = async setDataLoading => {
     try {
       setDataLoading(true);
-      const res = await getAllProducts(pageNumber);
+      let res = {
+        data: [],
+      };
+      if (searchTerm?.trim()) {
+        res = await getSearchProducts({
+          name: searchTerm,
+          page: pageNumber,
+        });
+      } else {
+        res = await getAllProducts(pageNumber);
+      }
       setAllProducts(preProducts =>
         pageNumber > 1
           ? {
@@ -88,12 +101,14 @@ const HomeTab = props => {
   React.useEffect(() => {
     getBanners();
     dispatch(getWishlist());
+    dispatch(getCartList());
+    dispatch(getTopSellingProducts());
   }, []);
   React.useEffect(() => {
     if (pageNumber > 0 && !pageLoading) {
       fetchProducts(setPageLoading);
     }
-  }, [pageNumber]);
+  }, [pageNumber, searchTerm]);
 
   const renderShop = ({item}) => (
     <FeaturedCategoriesCard
@@ -117,148 +132,159 @@ const HomeTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <HomeHeader menu isSearch notification />
+      <HomeHeader
+        menu
+        isSearch
+        notification
+        value={searchTerm}
+        onChangeText={txt => {
+          setPageNumber(1);
+          setSearchTerm(txt);
+        }}
+      />
 
       <CustomFlatList
         ListHeaderComponent={
-          <View>
-            <SwiperCard data={banner?.data} />
-            <Row style={{marginTop: mvs(25), paddingHorizontal: mvs(20)}}>
-              <TouchableOpacity style={{alignItems: 'center'}}>
-                <View
-                  style={{
-                    ...styles.itemsContainer,
-                    backgroundColor: colors.skyBlue,
-                    borderRadius: mvs(100),
-                  }}>
-                  <TopCategories />
-                </View>
-                <Regular
-                  color={colors.text}
-                  label={'Top Categories'}
-                  fontSize={mvs(10)}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigate('Brands')}
-                style={{alignItems: 'center'}}>
-                <View
-                  style={{
-                    ...styles.itemsContainer,
-                    backgroundColor: colors.skyBlue,
-                  }}>
-                  <Brands />
-                </View>
-                <Regular
-                  color={colors.text}
-                  label={'Brands'}
-                  fontSize={mvs(10)}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigate('BrowseAllVenders')}
-                style={{alignItems: 'center'}}>
-                <View
-                  style={{
-                    ...styles.itemsContainer,
-                    backgroundColor: colors.skyBlue,
-                    borderRadius: mvs(100),
-                  }}>
-                  <TopVendors />
-                </View>
-                <Regular
-                  color={colors.text}
-                  label={'Top Vendors'}
-                  fontSize={mvs(10)}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{alignItems: 'center'}}>
-                <View
-                  style={{
-                    ...styles.itemsContainer,
-                    backgroundColor: colors.skyBlue,
-                    borderRadius: mvs(100),
-                  }}>
-                  <FlashDeals />
-                </View>
-                <Regular
-                  color={colors.text}
-                  label={'Flash Deals'}
-                  fontSize={mvs(10)}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{alignItems: 'center'}}>
-                <View
-                  style={{
-                    ...styles.itemsContainer,
-                    backgroundColor: colors.skyBlue,
-                    borderRadius: mvs(100),
-                  }}>
-                  <Coupons />
-                </View>
-                <Regular
-                  color={colors.text}
-                  label={'Coupons'}
-                  fontSize={mvs(10)}
-                />
-              </TouchableOpacity>
-            </Row>
-            <View
-              style={{
-                ...styles.featuredContainer,
-                backgroundColor: colors.primary,
-              }}>
-              <Row
-                style={{
-                  marginTop: mvs(5),
-                  marginBottom: mvs(10),
-                  alignItems: 'center',
-                  paddingHorizontal: mvs(10),
-                }}>
-                <Medium color={colors.white} label={'Featured Categories'} />
+          !searchTerm?.trim() && (
+            <View>
+              <SwiperCard data={banner?.data} />
+              <Row style={{marginTop: mvs(25), paddingHorizontal: mvs(20)}}>
+                <TouchableOpacity style={{alignItems: 'center'}}>
+                  <View
+                    style={{
+                      ...styles.itemsContainer,
+                      backgroundColor: colors.skyBlue,
+                      borderRadius: mvs(100),
+                    }}>
+                    <TopCategories />
+                  </View>
+                  <Regular
+                    color={colors.text}
+                    label={'Top Categories'}
+                    fontSize={mvs(10)}
+                  />
+                </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigate('AllFeaturedCategories')}>
-                  <Regular color={colors.white} label={t('see_all')} />
+                  onPress={() => navigate('Brands')}
+                  style={{alignItems: 'center'}}>
+                  <View
+                    style={{
+                      ...styles.itemsContainer,
+                      backgroundColor: colors.skyBlue,
+                    }}>
+                    <Brands />
+                  </View>
+                  <Regular
+                    color={colors.text}
+                    label={'Brands'}
+                    fontSize={mvs(10)}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigate('BrowseAllVenders')}
+                  style={{alignItems: 'center'}}>
+                  <View
+                    style={{
+                      ...styles.itemsContainer,
+                      backgroundColor: colors.skyBlue,
+                      borderRadius: mvs(100),
+                    }}>
+                    <TopVendors />
+                  </View>
+                  <Regular
+                    color={colors.text}
+                    label={'Top Vendors'}
+                    fontSize={mvs(10)}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{alignItems: 'center'}}>
+                  <View
+                    style={{
+                      ...styles.itemsContainer,
+                      backgroundColor: colors.skyBlue,
+                      borderRadius: mvs(100),
+                    }}>
+                    <FlashDeals />
+                  </View>
+                  <Regular
+                    color={colors.text}
+                    label={'Flash Deals'}
+                    fontSize={mvs(10)}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{alignItems: 'center'}}>
+                  <View
+                    style={{
+                      ...styles.itemsContainer,
+                      backgroundColor: colors.skyBlue,
+                      borderRadius: mvs(100),
+                    }}>
+                    <Coupons />
+                  </View>
+                  <Regular
+                    color={colors.text}
+                    label={'Coupons'}
+                    fontSize={mvs(10)}
+                  />
                 </TouchableOpacity>
               </Row>
-
-              <CustomFlatList
-                horizontal={true}
-                showsVerticalScrollIndicator={false}
-                // columnWrapperStyle={styles.columnWrapperStyle}
-                data={featuredCategorie?.data}
-                renderItem={renderShop}
-              />
-            </View>
-
-            <View
-              style={{
-                ...styles.featuredContainer,
-                backgroundColor: colors.primary,
-              }}>
-              <Medium
+              <View
                 style={{
-                  marginTop: mvs(5),
-                  marginBottom: mvs(10),
-                  marginLeft: mvs(10),
-                }}
-                color={colors.white}
-                label={'Featured Products'}
-              />
-              <CustomFlatList
-                horizontal={true}
-                showsVerticalScrollIndicator={false}
-                // columnWrapperStyle={styles.columnWrapperStyle}
-                data={allFeaturedProducts?.data}
-                renderItem={featuredProduct}
+                  ...styles.featuredContainer,
+                  backgroundColor: colors.primary,
+                }}>
+                <Row
+                  style={{
+                    marginTop: mvs(5),
+                    marginBottom: mvs(10),
+                    alignItems: 'center',
+                    paddingHorizontal: mvs(10),
+                  }}>
+                  <Medium color={colors.white} label={'Featured Categories'} />
+                  <TouchableOpacity
+                    onPress={() => navigate('AllFeaturedCategories')}>
+                    <Regular color={colors.white} label={t('see_all')} />
+                  </TouchableOpacity>
+                </Row>
+
+                <CustomFlatList
+                  horizontal={true}
+                  showsVerticalScrollIndicator={false}
+                  // columnWrapperStyle={styles.columnWrapperStyle}
+                  data={featuredCategorie?.data}
+                  renderItem={renderShop}
+                />
+              </View>
+
+              <View
+                style={{
+                  ...styles.featuredContainer,
+                  backgroundColor: colors.primary,
+                }}>
+                <Medium
+                  style={{
+                    marginTop: mvs(5),
+                    marginBottom: mvs(10),
+                    marginLeft: mvs(10),
+                  }}
+                  color={colors.white}
+                  label={'Featured Products'}
+                />
+                <CustomFlatList
+                  horizontal={true}
+                  showsVerticalScrollIndicator={false}
+                  // columnWrapperStyle={styles.columnWrapperStyle}
+                  data={allFeaturedProducts?.data}
+                  renderItem={featuredProduct}
+                />
+              </View>
+              <Medium
+                color={colors.text}
+                style={{marginLeft: mvs(20), marginTop: mvs(10)}}
+                label={'All Products'}
               />
             </View>
-            <Medium
-              color={colors.text}
-              style={{marginLeft: mvs(20), marginTop: mvs(10)}}
-              label={'All Products'}
-            />
-          </View>
+          )
         }
         numColumns={2}
         showsVerticalScrollIndicator={false}

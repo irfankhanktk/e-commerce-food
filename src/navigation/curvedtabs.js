@@ -14,9 +14,10 @@ import MessageTab from 'screens/message';
 
 // import ShoppingScreen from 'screens/shopping';
 import UserTab from 'screens/user-tab';
+import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 
-function MyTabBar({state, descriptors, navigation}) {
+function MyTabBar({cartLength, state, descriptors, navigation}) {
   return (
     <View
       style={{
@@ -84,6 +85,26 @@ function MyTabBar({state, descriptors, navigation}) {
               {index !== 2 && isFocused && (
                 <Regular fontSize={mvs(10)} label={label} numberOfLines={1} />
               )}
+              {index === 3 && cartLength && (
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: colors.darkBlack,
+                    position: 'absolute',
+                    height: mvs(25),
+                    width: mvs(25),
+                    borderRadius: mvs(25 / 2),
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    top: mvs(-10),
+                    right: mvs(0),
+                  }}>
+                  <Medium
+                    fontSize={mvs(10)}
+                    color={colors.white}
+                    label={cartLength}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           </TouchableOpacity>
         );
@@ -96,12 +117,16 @@ function MyTabBar({state, descriptors, navigation}) {
 export const TabBar = props => {
   const initialRoute = props?.route?.params?.initialRoute;
   const Tab = createBottomTabNavigator();
-  const {user} = useAppSelector(s => s);
+  const {user, cart} = useAppSelector(s => s);
+  const {cart_list} = cart;
+  // console.log('cart_list:::', cart_list);
   return (
     <Tab.Navigator
       initialRouteName={initialRoute || 'Home'}
       screenOptions={{headerShown: false}}
-      tabBar={props => <MyTabBar {...props} />}>
+      tabBar={props => (
+        <MyTabBar cartLength={cart_list?.length || '0'} {...props} />
+      )}>
       <Tab.Screen name="Home" component={HomeTab} />
       <Tab.Screen name="Categories" component={CategoriesTab} />
       <Tab.Screen name="Message" component={MessageTab} />

@@ -36,6 +36,8 @@ export const URLS = {
     get_all_featured_products: 'products/featured',
     get_all_products: 'products',
     get_product_details: 'products/',
+    search_products: 'products/search?name=',
+    get_product_slides: 'products/slides/',
   },
   address: {
     get_address: 'user/shipping/address',
@@ -54,5 +56,15 @@ export const URLS = {
   wallet: {
     add_amount: '',
     get_wallet: '',
+  },
+  cart: {
+    get_cart_summary: 'carts',
+    get_summary: 'cart-summary',
+    add_to_cart: 'carts/add',
+    update_cart_qty: 'carts/change-quantity',
+  },
+  product: {
+    top_seller_products: 'products/best-seller',
+    related_products: 'products/related/',
   },
 };

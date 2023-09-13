@@ -1,16 +1,15 @@
+import {useTheme} from '@react-navigation/native';
+import {featured} from 'assets/images';
+import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
-import styles from './styles';
 import Regular from 'typography/regular-text';
-import {featured, silder} from 'assets/images';
-import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
-import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const AllFeaturedCategories = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
-
+  console.log('');
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -19,7 +18,9 @@ const AllFeaturedCategories = ({item, style, onPress, loading}) => {
         <View style={styles.imageMainContainer}>
           <View style={{backgroundColor: 'white'}}>
             <ImageBackground
-              source={featured}
+              source={
+                item?.thumbnail_image ? {uri: item?.thumbnail_image} : featured
+              }
               style={styles.backGroundImage}></ImageBackground>
           </View>
         </View>
@@ -29,11 +30,9 @@ const AllFeaturedCategories = ({item, style, onPress, loading}) => {
             numberOfLines={2}
             fontSize={mvs(10)}
             color={colors.text}
-            label={
-              'The 20ft dry container is ideal for moving smaller shipments of dry goods.'
-            }
+            label={item?.name}
           />
-          <Regular color={colors.text} label={'$120.000'} />
+          <Regular color={colors.text} label={item?.stroked_price} />
         </View>
       </Row>
     </TouchableOpacity>

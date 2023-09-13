@@ -55,8 +55,10 @@ export const getAllProducts = (pageNumber: any) => {
   let url = `${URLS.app.get_all_products}?page=${pageNumber}`;
   return getData(url);
 };
-export const getProductDetails = (productId: any) => getData(`${URLS.app.get_product_details}${productId}`
-)
+
+export const getProductDetails = (productId: any) => getData(`${URLS.app.get_product_details}${productId}`)
+export const getProductSlides = (productId: any) => getData(`${URLS.app.get_product_slides}${productId}`)
+
 export const getAllCategories = () => getData(URLS.categories.get_all_categories);
 export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
 
@@ -177,27 +179,6 @@ export const onUpdateProfile = (
     }
   };
 };
-export const onUpdatePassword = (
-  values: any,
-  setLoading: (bool: boolean) => void,
-  props: any,
-) => {
-  return async (dispatch: AppDispatch, getState: () => RootState) => {
-    try {
-      setLoading(true);
-      const res = await postData(URLS.auth.update_password, values);
-      console.log('res of onUpdatePassword=>', res);
-      Alert.alert('Password Changed Successfully');
-      dispatch(onLogoutPress());
-    } catch (error: any) {
-      console.log('error in onSignupPress', UTILS.returnError(error));
-      Alert.alert('', UTILS.returnError(error));
-    } finally {
-      setLoading(false);
-    }
-  };
-};
-
 export const onLogoutPress = () => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
     try {

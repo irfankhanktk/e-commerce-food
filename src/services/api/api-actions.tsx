@@ -10,6 +10,9 @@ import { Alert } from 'react-native';
 export const getBrands = () => getData(`${URLS.brand.all_brands}`)
 export const getVendors = () => getData(`${URLS.vendor.get_vendors}`)
 export const getTopBrands = () => getData(`${URLS.brand.top_brands}`)
+export const getSearchProducts = (filter: any) => {
+  return getData(`${URLS.app.search_products}${filter?.name || ''}&page=${filter?.page || 1}`)
+}
 
 //wishlist
 export const getWishlist = (

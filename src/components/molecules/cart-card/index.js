@@ -7,12 +7,15 @@ import {ImageBackground, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import {useAppDispatch} from 'hooks/use-store';
+import {updateCartQty} from 'services/api/cart-api-actions';
+import {Loader} from 'components/atoms/loader';
 
-const CartCard = ({item, style, onPress, loading}) => {
+const CartCard = ({item, style, onPress}) => {
   const colors = useTheme().colors;
-
-  const [count, setCount] = React.useState(1);
-
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = React.useState(false);
+  const product = item?.cart_items[0];
   return (
     <View
       onPress={onPress}
@@ -23,24 +26,32 @@ const CartCard = ({item, style, onPress, loading}) => {
             <View style={{marginLeft: mvs(10)}}>
               <ImageBackground
                 source={{
-                  uri: 'https://png.pngitem.com/pimgs/s/43-434027_product-beauty-skin-care-personal-care-liquid-tree.png',
+                  uri: product?.product_thumbnail_image,
                 }}
                 style={styles.backGroundImage}></ImageBackground>
             </View>
           </View>
         </View>
         <View style={styles.contentContainer}>
-          <Regular color={colors.text} label={'shipping container'} />
           <Regular
+            color={colors.text}
+            fontSize={mvs(13)}
+            label={product?.product_name}
+          />
+          {/* <Regular
             color={colors.text}
             numberOfLines={2}
             fontSize={mvs(10)}
             label={
               'The 20ft dry container is ideal for moving smaller shipments of dry goods.'
             }
-          />
+          /> */}
           <Row style={{marginTop: mvs(5)}}>
-            <Regular color={colors.text} style={{flex: 1}} label={'$120.000'} />
+            <Regular
+              color={colors.text}
+              style={{flex: 1}}
+              label={`${product?.currency_symbol} ${product?.price}`}
+            />
             <TouchableOpacity>
               <Delete />
             </TouchableOpacity>
@@ -48,8 +59,18 @@ const CartCard = ({item, style, onPress, loading}) => {
         </View>
         <View style={{alignItems: 'center', marginTop: mvs(10)}}>
           <PrimaryButton
-            disabled={count == '1'}
-            onPress={() => setCount(count - 1)}
+            disabled={product?.quantity == '1' || loading}
+            onPress={() =>
+              dispatch(
+                updateCartQty(
+                  {
+                    id: product?.id,
+                    quantity: product?.quantity - 1,
+                  },
+                  setLoading,
+                ),
+              )
+            }
             textStyle={{...styles.subAddText, color: colors.text}}
             containerStyle={{
               ...styles.subQuantity,
@@ -58,10 +79,21 @@ const CartCard = ({item, style, onPress, loading}) => {
             title={'-'}
           />
           <View style={styles.countextContainer}>
-            <Regular color={colors.text} label={count} />
+            <Regular color={colors.text} label={product?.quantity} />
           </View>
           <PrimaryButton
-            onPress={() => setCount(count + 1)}
+            disabled={loading}
+            onPress={() =>
+              dispatch(
+                updateCartQty(
+                  {
+                    id: product?.id,
+                    quantity: product?.quantity + 1,
+                  },
+                  setLoading,
+                ),
+              )
+            }
             textStyle={{...styles.subAddText, color: colors.text}}
             containerStyle={{
               ...styles.subQuantity,
@@ -71,6 +103,18 @@ const CartCard = ({item, style, onPress, loading}) => {
           />
         </View>
       </Row>
+      {loading && (
+        <View
+          style={{
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Loader />
+        </View>
+      )}
     </View>
   );
 };
