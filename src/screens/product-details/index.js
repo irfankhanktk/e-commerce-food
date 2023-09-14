@@ -46,7 +46,7 @@ const ProductDetials = props => {
   const cartItem = cart_list?.find(
     x => x?.cart_items[0]?.product_id === productId,
   );
-  console.log('cartItem', cartItem);
+
   const renderTopProducts = ({item}) => (
     <AllFeaturedCategoriesCard
       item={item}
@@ -111,6 +111,7 @@ const ProductDetials = props => {
                       height: '100%',
                       width: '100%',
                       borderRadius: mvs(15),
+                      resizeMode: 'contain',
                     }}
                   />
                 </View>
@@ -207,18 +208,22 @@ const ProductDetials = props => {
                 <ProductDetailButtonCard label={t('vendor_policy')} />
                 <ProductDetailButtonCard label={t('policy')} />
                 <ProductDetailButtonCard label={t('support_policy')} />
-                <Medium
-                  style={{marginTop: mvs(10)}}
-                  color={colors.text}
-                  label={t('product_you_may_also_like')}
-                />
-                <CustomFlatList
-                  horizontal={true}
-                  showsVerticalScrollIndicator={false}
-                  contentContainerStyle={{paddingVertical: mvs(10)}}
-                  data={relatedProducts}
-                  renderItem={renderLikeProduct}
-                />
+                {relatedProducts?.length ? (
+                  <>
+                    <Medium
+                      style={{marginTop: mvs(10)}}
+                      color={colors.text}
+                      label={t('product_you_may_also_like')}
+                    />
+                    <CustomFlatList
+                      horizontal={true}
+                      showsVerticalScrollIndicator={false}
+                      contentContainerStyle={{paddingVertical: mvs(10)}}
+                      data={relatedProducts}
+                      renderItem={renderLikeProduct}
+                    />
+                  </>
+                ) : null}
                 <Medium color={colors.text} label={t('top_selling_products')} />
               </View>
             }
@@ -236,7 +241,10 @@ const ProductDetials = props => {
               onPress={() => {
                 dispatch(
                   cartItem
-                    ? removeFromCartList(productId, setCartLoading)
+                    ? removeFromCartList(
+                        cartItem?.cart_items[0]?.id,
+                        setCartLoading,
+                      )
                     : addToCartList(
                         {
                           id: productId,

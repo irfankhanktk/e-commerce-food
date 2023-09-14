@@ -35,8 +35,8 @@ export const addToCartList = (
     try {
       setCartLoading(true)
       const res = await postData(`${URLS.cart.add_to_cart}`, data)
-      console.log('res: addToCartList', res);
-      // dispatch(setAddToCart(data?.id));
+      console.log('res: addToCartList', res?.cartlist?.original?.length);
+
       dispatch(setCart(res?.cartlist?.original || []));
     } catch (error: any) {
       console.log('error in addToCartList', UTILS.returnError(error));
@@ -58,6 +58,24 @@ export const updateCartQty = (
       dispatch(setCart(res?.cartlist?.original || []));
     } catch (error: any) {
       console.log('error in updateCartQty', UTILS.returnError(error));
+      Alert.alert('Error', UTILS.returnError(error));
+    } finally {
+      setCartLoading(false)
+    }
+  };
+};
+export const removeFromCartList = (
+  productId: any,
+  setCartLoading: (bool: boolean) => void,
+) => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      setCartLoading(true)
+      const res = await deleteData(`${URLS.cart.remove_from_cart}${productId}`)
+      console.log('res: removeFromCartList', res?.cartlist?.original[0]);
+      dispatch(setCart(res?.cartlist?.original || []));
+    } catch (error: any) {
+      console.log('error in removeFromCartList', UTILS.returnError(error));
       Alert.alert('Error', UTILS.returnError(error));
     } finally {
       setCartLoading(false)

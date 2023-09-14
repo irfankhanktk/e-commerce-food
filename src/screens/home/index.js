@@ -43,6 +43,7 @@ const HomeTab = props => {
   const [featuredCategorie, setFeaturedCategorie] = React.useState([]);
   const [allFeaturedProducts, setAllFeaturedProducts] = React.useState([]);
   const [pageLoading, setPageLoading] = React.useState(false);
+  const [cartLoading, setCartLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
   const [allProducts, setAllProducts] = React.useState([]);
   // console.log('banners check==========>', allFeaturedProducts?.data);
@@ -124,6 +125,8 @@ const HomeTab = props => {
   );
   const renderProduct = ({item}) => (
     <AllProductsCard
+      setCartLoading={setCartLoading}
+      loading={cartLoading === item?.id}
       item={item}
       onPress={() => navigate('ProductDetials', {productId: item?.id})}
       onAddCart={() => navigate('Cart')}

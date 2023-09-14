@@ -8,7 +8,7 @@ import Regular from 'typography/regular-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {useAppDispatch} from 'hooks/use-store';
-import {updateCartQty} from 'services/api/cart-api-actions';
+import {updateCartQty, removeFromCartList} from 'services/api/cart-api-actions';
 import {Loader} from 'components/atoms/loader';
 
 const CartCard = ({item, style, onPress}) => {
@@ -52,7 +52,10 @@ const CartCard = ({item, style, onPress}) => {
               style={{flex: 1}}
               label={`${product?.currency_symbol} ${product?.price}`}
             />
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(removeFromCartList(product?.id, setLoading));
+              }}>
               <Delete />
             </TouchableOpacity>
           </Row>

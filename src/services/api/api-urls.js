@@ -61,6 +61,7 @@ export const URLS = {
     get_cart_summary: 'carts',
     get_summary: 'cart-summary',
     add_to_cart: 'carts/add',
+    remove_from_cart: 'carts/',
     update_cart_qty: 'carts/change-quantity',
   },
   product: {
