@@ -69,6 +69,9 @@ export const getAddresses = (userId: any) => getData(`${URLS.address.get_address
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
 export const addAddress = (newAddress: any) => postData(`${newAddress?.id ? URLS.address.update : URLS.address.add_address}`, newAddress)
 
+/////////////payment ////////////////////////
+export const getPaymentType = () => getData(`${URLS.payment.payment_type}`)
+
 
 
 export const getCities = () => {

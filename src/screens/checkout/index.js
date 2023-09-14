@@ -12,8 +12,19 @@ import React from 'react';
 import {View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {getPaymentType} from 'services/api/auth-api-actions';
 const CheckOut = props => {
   const colors = useTheme().colors;
+
+  const [type, setType] = React.useState([]);
+
+  const fetchType = async () => {
+    const res = await getPaymentType();
+    setType(res);
+  };
+  React.useEffect(() => {
+    fetchType();
+  }, []);
 
   const [data, setData] = React.useState([
     {
@@ -77,7 +88,7 @@ const CheckOut = props => {
       <View style={{maxHeight: mvs(240)}}>
         <CustomFlatList
           showsVerticalScrollIndicator={false}
-          data={data}
+          data={type}
           renderItem={renderCheckout}
           contentContainerStyle={{
             paddingBottom: mvs(20),

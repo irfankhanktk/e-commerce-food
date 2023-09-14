@@ -1,6 +1,6 @@
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
+import {ImageBackground, Image, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
 import Regular from 'typography/regular-text';
 import {featured, forklift, silder} from 'assets/images';
@@ -11,6 +11,7 @@ import {Paypal, Select, TickTwo} from 'assets/icons';
 import {useTheme} from '@react-navigation/native';
 
 const CheckOutCard = ({item, style, onPress, loading}) => {
+  console.log('item check======>', item);
   const colors = useTheme().colors;
 
   return (
@@ -24,7 +25,10 @@ const CheckOutCard = ({item, style, onPress, loading}) => {
       }}>
       <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
         <View style={{backgroundColor: colors.white, borderRadius: mvs(5)}}>
-          <Paypal />
+          <Image
+            style={{width: mvs(50), height: mvs(50)}}
+            source={{uri: item?.image}}
+          />
         </View>
         <View
           style={{

@@ -69,4 +69,7 @@ export const URLS = {
     top_seller_products: 'products/best-seller',
     related_products: 'products/related/',
   },
+  payment: {
+    payment_type: 'payment-types',
+  },
 };
