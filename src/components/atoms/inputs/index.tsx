@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
   textInput: {
     color: colors.black,
     textAlignVertical: 'center',
-    fontSize: mvs(18),
+    fontSize: mvs(15),
     flex: 1,
     height: mvs(40),
     // width: mvs(275),

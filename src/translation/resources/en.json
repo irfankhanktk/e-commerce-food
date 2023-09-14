@@ -130,5 +130,6 @@
   "return_policy": "Return Policy",
   "resend_otp_code": "Resend OTP Code",
   "see_all": "See All",
-  "sub_tatal": "Sub Total"
+  "sub_tatal": "Sub Total",
+  "no_cart_item":"You Have No Item In The Cart"
 }

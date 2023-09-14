@@ -3,6 +3,7 @@ import userSlice from './reducers/user-reducer';
 import wishlistSlice from './reducers/wishlist-reducer';
 import cartSlice from './reducers/cart-reducer';
 import productSlice from './reducers/product-reducer';
+import addressSlice from './reducers/address-reducer';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,8 @@ export const store = configureStore({
     wishlist: wishlistSlice,
     cart: cartSlice,
     product: productSlice,
+    address: addressSlice
+
 
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

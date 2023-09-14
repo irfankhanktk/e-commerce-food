@@ -14,9 +14,10 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import {useAppSelector} from 'hooks/use-store';
 const ShippingCost = props => {
   const colors = useTheme().colors;
-
+  const {cart_list} = useAppSelector(x => x?.cart);
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -57,7 +58,7 @@ const ShippingCost = props => {
       <View style={{maxHeight: mvs(400)}}>
         <CustomFlatList
           showsVerticalScrollIndicator={false}
-          data={data}
+          data={cart_list}
           renderItem={featuredProduct}
           contentContainerStyle={{
             paddingBottom: mvs(20),

@@ -8,18 +8,21 @@ import Regular from 'typography/regular-text';
 import styles from './styles';
 import {colors} from 'config/colors';
 import {useTheme} from '@react-navigation/native';
+import {Loader} from 'components/atoms/loader';
 
 const ShippingInfoCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
+  console.log('item check========>', item);
 
   return (
     <TouchableOpacity
+      disabled={!!item?.set_default}
       onPress={onPress}
       style={{
         ...styles.container,
         backgroundColor: colors.downColor,
-        borderWidth: item?.selected ? mvs(1) : mvs(0),
-        borderColor: item?.selected ? colors.green : colors.white,
+        borderWidth: item?.set_default == 1 ? mvs(1) : mvs(0),
+        borderColor: item?.set_default == 1 ? colors.green : colors.white,
       }}>
       <View style={styles.innerContainer}>
         <Row>
@@ -33,7 +36,7 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourAddress}
-                label={'your location'}
+                label={item?.address}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -41,7 +44,7 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourCity}
-                label={'your city'}
+                label={item?.city_name}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -53,7 +56,7 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.yourCountry}
-                label={'your country'}
+                label={item?.country_name}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -61,7 +64,7 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.phone}
-                label={'03448422399'}
+                label={item?.phone}
               />
             </Row>
             <Row style={{marginTop: mvs(10), justifyContent: 'flex-start'}}>
@@ -73,11 +76,23 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 color={colors.text}
                 style={styles.passCode}
-                label={'0344'}
+                label={item?.postal_code}
               />
             </Row>
+            {loading && (
+              <View
+                style={{
+                  position: 'absolute',
+                  height: '100%',
+                  alignSelf: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Loader />
+              </View>
+            )}
           </View>
-          {item?.selected ? (
+          {item?.set_default == 1 ? (
             <View style={styles.circle}>
               <TickTwo />
             </View>

@@ -17,41 +17,35 @@ import {deleteAddress, getAddresses} from 'services/api/auth-api-actions';
 import {useAppSelector} from 'hooks/use-store';
 import {Loader} from 'components/atoms/loader';
 import {PlusButton} from 'components/atoms/buttons';
+import {useDispatch} from 'react-redux';
+import {setUserAddress} from 'store/reducers/address-reducer';
+import {getAddressess} from 'services/api/address-api-actions';
 
 const AddressDetails = props => {
+  const dispatch = useDispatch();
   const colors = useTheme().colors;
-  const [loading, setLoading] = React.useState(true);
+
   const [delLoading, setDelLoading] = React.useState(false);
   const [selectModal, setSelectModal] = React.useState(false);
-  const [addresses, setAddresses] = React.useState([]);
+
   const isFocus = useIsFocused();
   const [addressAddedModal, setAddressAddedModal] = React.useState(false);
-  const getAllAddresses = async () => {
-    try {
-      if (!isFocus) return;
-      const res = await getAddresses();
-      console.log('res>>>>', res?.data);
-      setAddresses(res?.data || []);
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
-  React.useEffect(() => {
-    if (!isFocus) return;
-    getAllAddresses();
-  }, [isFocus]);
+  const {userAddress} = useAppSelector(s => s.address);
+
   const deleteUserAddress = async id => {
     try {
       setDelLoading(id);
       await deleteAddress(id);
-      const copy = [...addresses];
-      setAddresses(copy?.filter(x => x?.id !== id));
+      const copy = [...userAddress];
+      dispatch(setUserAddress(copy?.filter(x => x?.id !== id)));
     } catch (error) {
     } finally {
       setDelLoading(false);
     }
   };
+  React.useEffect(() => {
+    dispatch(getAddressess());
+  }, [isFocus]);
   const renderItem = ({item}) => (
     <AddressCard
       loading={delLoading === item?.id}
@@ -64,35 +58,31 @@ const AddressDetails = props => {
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('address_details')} />
-      {loading ? (
-        <Loader />
-      ) : (
-        <CustomFlatList
-          emptyList={
-            !loading && (
-              <View>
-                <TouchableOpacity
-                  // onPress={() => setSelectModal(true)}
-                  onPress={() => navigate('Location')}
-                  style={{
-                    ...styles.newAddressContainer,
-                    backgroundColor: colors.skyBlue,
-                  }}>
-                  <Medium label={'No Address Is Added'} />
-                  <Bold fontSize={mvs(22)} label={'+'} />
-                </TouchableOpacity>
-              </View>
-            )
-          }
-          showsVerticalScrollIndicator={false}
-          data={addresses}
-          renderItem={renderItem}
-          contentContainerStyle={{
-            paddingBottom: mvs(20),
-            paddingHorizontal: mvs(20),
-          }}
-        />
-      )}
+
+      <CustomFlatList
+        emptyList={
+          <View>
+            <TouchableOpacity
+              // onPress={() => setSelectModal(true)}
+              onPress={() => navigate('Location')}
+              style={{
+                ...styles.newAddressContainer,
+                backgroundColor: colors.skyBlue,
+              }}>
+              <Medium label={'No Address Is Added'} />
+              <Bold fontSize={mvs(22)} label={'+'} />
+            </TouchableOpacity>
+          </View>
+        }
+        showsVerticalScrollIndicator={false}
+        data={userAddress}
+        renderItem={renderItem}
+        contentContainerStyle={{
+          paddingBottom: mvs(20),
+          paddingHorizontal: mvs(20),
+        }}
+      />
+
       <SelectEditModal
         onClose={() => setSelectModal(false)}
         visible={selectModal}

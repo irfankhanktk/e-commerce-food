@@ -47,6 +47,7 @@ export const URLS = {
     get_cities: 'cities',
     get_countries: 'countries',
     get_states: 'states',
+    make_default: 'user/shipping/make_default',
   },
   categories: {
     get_all_categories: 'categories?parent_id=0',

@@ -10,10 +10,17 @@ import styles from './styles';
 import ShippingInfoCard from 'components/molecules/shipping-info-card';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {useTheme} from '@react-navigation/native';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
+import {setSelectedAddress} from 'store/reducers/address-reducer';
+import {makeDefaultAddress} from 'services/api/address-api-actions';
 
 const ShippingInfo = props => {
   const colors = useTheme().colors;
+  const dispatch = useAppDispatch();
+  const {userAddress} = useAppSelector(s => s.address);
+  const selected = useAppSelector(s => s);
 
+  const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -36,17 +43,12 @@ const ShippingInfo = props => {
       selected: false,
     },
   ]);
+
   const featuredProduct = ({item}) => (
     <ShippingInfoCard
       item={item}
-      onPress={() => {
-        setData(prevData =>
-          prevData.map(data => ({
-            ...data,
-            selected: data.id === item.id,
-          })),
-        );
-      }}
+      loading={loading == item?.id}
+      onPress={() => dispatch(makeDefaultAddress(item?.id, setLoading))}
     />
   );
 
@@ -56,7 +58,7 @@ const ShippingInfo = props => {
 
       <CustomFlatList
         showsVerticalScrollIndicator={false}
-        data={data}
+        data={userAddress}
         renderItem={featuredProduct}
         contentContainerStyle={{
           paddingBottom: mvs(20),

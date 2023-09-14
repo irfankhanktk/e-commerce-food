@@ -12,7 +12,8 @@ import {useTheme} from '@react-navigation/native';
 
 const ShippingCostCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
-
+  const product = item?.cart_items[0];
+  console.log('shipping item check====>', product);
   return (
     <TouchableOpacity
       style={{...styles.container, backgroundColor: colors.downColor}}
@@ -28,7 +29,7 @@ const ShippingCostCard = ({item, style, onPress, loading}) => {
             justifyContent: 'center',
           }}>
           <ImageBackground
-            source={forklift}
+            source={{uri: product?.product_thumbnail_image}}
             style={{width: mvs(100), height: mvs(80)}}></ImageBackground>
         </View>
         <View
@@ -37,14 +38,12 @@ const ShippingCostCard = ({item, style, onPress, loading}) => {
             justifyContent: 'center',
             paddingHorizontal: mvs(10),
           }}>
-          <Regular label={'Shipping Container'} />
+          <Regular label={product?.product_name} />
           <Regular
             color={colors.text}
             fontSize={mvs(12)}
             numberOfLines={3}
-            label={
-              'The 20ft dry container is ideal for moving smaller shipments of dry goods.'
-            }
+            label={`${product?.currency_symbol} ${product?.price}`}
           />
         </View>
       </Row>

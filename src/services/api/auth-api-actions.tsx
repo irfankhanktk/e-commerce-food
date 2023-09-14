@@ -62,6 +62,8 @@ export const getProductSlides = (productId: any) => getData(`${URLS.app.get_prod
 export const getAllCategories = () => getData(URLS.categories.get_all_categories);
 export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
 
+
+
 //////////add addresss/////////////////
 export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}`)
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
