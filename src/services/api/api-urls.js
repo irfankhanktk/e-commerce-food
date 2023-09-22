@@ -64,6 +64,9 @@ export const URLS = {
     add_to_cart: 'carts/add',
     remove_from_cart: 'carts/',
     update_cart_qty: 'carts/change-quantity',
+    updat_shipping_type: 'update-shipping-type-in-cart',
+    create_order: 'order/store',
+    update_address_in_cart: 'update-address-in-cart/',
   },
   chat: {
     get_conversations: 'chat/conversations',
@@ -74,8 +77,11 @@ export const URLS = {
   product: {
     top_seller_products: 'products/best-seller',
     related_products: 'products/related/',
+    order_list: 'orders/customerlist',
+    order_details: 'orders/customerOrderDetails/',
   },
   payment: {
     payment_type: 'payment-types',
+    paymentselection: 'payments/pay/cod',
   },
 };

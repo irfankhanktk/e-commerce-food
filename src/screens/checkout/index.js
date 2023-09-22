@@ -13,32 +13,42 @@ import {View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {getPaymentType} from 'services/api/auth-api-actions';
+import {Alert} from 'react-native';
+import {UTILS} from 'utils';
+import {createOrder, selectPaymentType} from 'services/api/cart-api-actions';
 const CheckOut = props => {
   const colors = useTheme().colors;
 
   const [type, setType] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   const fetchType = async () => {
-    const res = await getPaymentType();
-    setType(res);
+    try {
+      const res = await getPaymentType();
+      setType(res);
+    } catch (error) {
+      console.log('Error in getPaymentType====>', error);
+      Alert.alert('Payment Type Error', UTILS.returnError(error));
+    }
   };
+
+  const CreateOrder = async () => {
+    try {
+      setLoading(true);
+      const res = await createOrder();
+      setDone(true);
+    } catch (error) {
+      console.log('Error in getPaymentType====>', error);
+      Alert.alert('Payment Type Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   React.useEffect(() => {
     fetchType();
   }, []);
 
-  const [data, setData] = React.useState([
-    {
-      id: 1,
-      selected: true,
-      title: 'Cash on delivery',
-    },
-    {
-      id: 2,
-      selected: false,
-      title: 'FEDEX',
-      price: '$20.200',
-    },
-  ]);
   const [dataa, setDataa] = React.useState([
     {
       id: 1,
@@ -61,20 +71,35 @@ const CheckOut = props => {
       selected: false,
     },
   ]);
+
+  const GetPaymentType = async item => {
+    const values = {
+      payment_type: item?.payment_type,
+    };
+    try {
+      const res = await selectPaymentType(values);
+      console.log('payment type check=========>', res);
+    } catch (error) {
+      console.log('Error in getPaymentType====>', error);
+      Alert.alert('Payment Type Error', UTILS.returnError(error));
+    }
+  };
   const [done, setDone] = React.useState(false);
   const renderCheckout = ({item}) => (
     <CheckoutCard
       item={item}
       onPress={() => {
-        setData(prevData =>
-          prevData.map(data => ({
-            ...data,
-            selected: data.id === item.id,
-          })),
-        );
+        GetPaymentType(item),
+          setType(prevData =>
+            prevData.map(data => ({
+              ...data,
+              selected: data.payment_type === item.payment_type,
+            })),
+          );
       }}
     />
   );
+
   const renderProducts = ({item}) => (
     <View style={{marginHorizontal: mvs(20)}}>
       <AllFeaturedCategoriesCard item={item} />
@@ -117,7 +142,10 @@ const CheckOut = props => {
           justifyContent: 'flex-end',
         }}>
         <PrimaryButton
-          onPress={() => setDone(true)}
+          loading={loading}
+          onPress={() => {
+            CreateOrder();
+          }}
           containerStyle={{marginBottom: mvs(20)}}
           title={t('place_my_order')}
         />

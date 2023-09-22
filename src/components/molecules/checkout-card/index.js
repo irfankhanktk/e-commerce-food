@@ -1,17 +1,13 @@
+import {useTheme} from '@react-navigation/native';
+import {TickTwo} from 'assets/icons';
+import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, Image, TouchableOpacity, View} from 'react-native';
-import styles from './styles';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
-import {featured, forklift, silder} from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
-import {Row} from 'components/atoms/row';
-import {Paypal, Select, TickTwo} from 'assets/icons';
-import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const CheckOutCard = ({item, style, onPress, loading}) => {
-  console.log('item check======>', item);
   const colors = useTheme().colors;
 
   return (

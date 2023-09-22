@@ -61,6 +61,11 @@ export const getProductSlides = (productId: any) => getData(`${URLS.app.get_prod
 
 export const getAllCategories = () => getData(URLS.categories.get_all_categories);
 export const getAllFeaturedCategories = () => getData(URLS.categories.get_all_categories_featured)
+// export const getOrderList = () => getData(URLS.product.order_list)
+export const getOrderList = (dateRange: any, paymentType: any, pageNumber: any) => {
+  let url = `${URLS.product.order_list}?date_range=${dateRange}&payment_type=${paymentType}&page=${pageNumber}`;
+  return getData(url);
+};
 
 
 

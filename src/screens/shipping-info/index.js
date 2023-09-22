@@ -21,28 +21,6 @@ const ShippingInfo = props => {
   const selected = useAppSelector(s => s);
 
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState([
-    {
-      id: 1,
-      selected: true,
-    },
-    {
-      id: 2,
-      selected: false,
-    },
-    {
-      id: 3,
-      selected: false,
-    },
-    {
-      id: 4,
-      selected: false,
-    },
-    {
-      id: 5,
-      selected: false,
-    },
-  ]);
 
   const featuredProduct = ({item}) => (
     <ShippingInfoCard

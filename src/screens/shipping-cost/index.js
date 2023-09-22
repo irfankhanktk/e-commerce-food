@@ -15,9 +15,13 @@ import Regular from 'typography/regular-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {useAppSelector} from 'hooks/use-store';
+import {updateShippingType} from 'services/api/cart-api-actions';
+import {Alert} from 'react-native';
+import {UTILS} from 'utils';
 const ShippingCost = props => {
   const colors = useTheme().colors;
   const {cart_list} = useAppSelector(x => x?.cart);
+  const [loading, setLoading] = React.useState(false);
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -40,6 +44,24 @@ const ShippingCost = props => {
       selected: false,
     },
   ]);
+
+  const value = {
+    shipping_type: 'home_delivery',
+  };
+
+  const UpdateShippingType = async () => {
+    try {
+      setLoading(true);
+      const res = await updateShippingType(value);
+      navigate('CheckOut');
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const [select, setSelect] = React.useState('carrier');
   const isButtonSelected = buttonName => {
     return select === buttonName;
@@ -49,7 +71,8 @@ const ShippingCost = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={`${t('shipping_cost')} ${'$18'}`} />
+      {/* <AppHeader back title={`${t('shipping_cost')} ${'$18'}`} /> */}
+      <AppHeader back title={`${t('shipping_cost')} `} />
       <Medium
         color={colors.text}
         label={t('inhouse_product')}
@@ -79,8 +102,9 @@ const ShippingCost = props => {
                 }
               />
             }
-            title={t('carrier')}
+            title={t('Home Delivery')}
             textStyle={{
+              fontSize: mvs(14),
               color: isButtonSelected('carrier')
                 ? colors.white
                 : colors.primary,
@@ -99,7 +123,7 @@ const ShippingCost = props => {
             ]}
             onPress={() => setSelect('carrier')}
           />
-          <IconButton
+          {/* <IconButton
             Icon={
               <Entypo
                 name={'dot-single'}
@@ -130,7 +154,7 @@ const ShippingCost = props => {
                   : colors.primary,
               },
             ]}
-          />
+          /> */}
         </Row>
       </View>
       <View
@@ -140,7 +164,8 @@ const ShippingCost = props => {
           justifyContent: 'flex-end',
         }}>
         <PrimaryButton
-          onPress={() => navigate('CheckOut')}
+          loading={loading}
+          onPress={() => UpdateShippingType()}
           containerStyle={{marginBottom: mvs(20)}}
           title={t('continue_to_delivery_info')}
         />

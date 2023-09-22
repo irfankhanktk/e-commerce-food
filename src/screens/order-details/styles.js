@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   itemsContainer: {
-    width: mvs(73),
-    height: mvs(73),
+    width: mvs(53),
+    height: mvs(53),
     backgroundColor: colors.blueHalf,
-    borderRadius: mvs(56),
+    borderRadius: mvs(36),
     alignItems: 'center',
     justifyContent: 'center',
   },

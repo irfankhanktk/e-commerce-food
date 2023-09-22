@@ -83,3 +83,10 @@ export const removeFromCartList = (
   };
 };
 export const getCartSummary = () => getData(`${URLS.cart.get_summary}`)
+
+export const updateShippingType = (values: any) => postData(URLS.cart.updat_shipping_type, values);
+export const selectPaymentType = (values: any) => postData(URLS.payment.paymentselection, values);
+export const createOrder = () => postData(URLS.cart.create_order);
+export const orderDetails = (productId: any) => getData(`${URLS.product.order_details}${productId}`)
+
+

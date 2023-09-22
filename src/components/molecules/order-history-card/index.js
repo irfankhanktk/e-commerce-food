@@ -1,13 +1,13 @@
+import {useTheme} from '@react-navigation/native';
+import {Clander, CreaditCard, Delivery} from 'assets/icons';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
+import moment from 'moment';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import Medium from 'typography/medium-text';
-import styles from './styles';
 import Regular from 'typography/regular-text';
-import {Clander, CreaditCard, Delivery} from 'assets/icons';
-import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const OrderHistoryCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
@@ -17,7 +17,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
       <Row style={{...styles.container, backgroundColor: colors.background}}>
         <View style={styles.idContainer} />
         <View style={styles.contentContainer}>
-          <Regular label={item?.id} fontSize={mvs(12)} />
+          <Regular label={item?.code} fontSize={mvs(12)} />
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
             <Clander />
             <Regular
@@ -26,7 +26,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.text,
                 fontSize: mvs(12),
               }}
-              label={item?.date}
+              label={moment(item?.created_at).format('MM-DD-YYYY')}
             />
           </Row>
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -53,7 +53,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
           </Row>
         </View>
         <View style={styles.priceContainer}>
-          <Medium fontSize={mvs(12)} label={'$12.150'} />
+          <Medium fontSize={mvs(12)} label={`$ ${item?.grand_total}`} />
         </View>
       </Row>
     </TouchableOpacity>

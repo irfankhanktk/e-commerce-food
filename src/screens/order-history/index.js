@@ -6,21 +6,30 @@ import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Alert, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import {ClanderTwo, DeliveryTwo} from 'assets/icons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {UTILS} from 'utils';
+import {getOrderList} from 'services/api/auth-api-actions';
+import {Loader} from 'components/atoms/loader';
 
 const OrderHistory = props => {
   const colors = useTheme().colors;
-
+  const isFocus = useIsFocused();
+  const [loading, setLoading] = React.useState(true);
   const [select, setSelect] = React.useState(true);
-  const [selectByPayment, setSelectByPayment] = React.useState('All');
-  const [selectByDelivery, setSelectByDelivery] = React.useState('All');
+  const [selectByPayment, setSelectByPayment] = React.useState('');
+  const [selectByDelivery, setSelectByDelivery] = React.useState('');
   const [deliverySelect, setDeliverySelect] = React.useState(true);
+  const [pageLoading, setPageLoading] = React.useState(false);
+  const [pageNumber, setPageNumber] = React.useState(1);
+
+  const [data, setData] = React.useState([]);
+
   const toggleOptions = () => {
     setSelect(!select);
   };
@@ -28,58 +37,62 @@ const OrderHistory = props => {
     setDeliverySelect(!deliverySelect);
   };
 
-  const featuredCategories = [
-    {
-      id: '202104002-050430',
-      date: '01-08-2023',
-      payment_status: 'Unpaid',
-      delivery_status: 'Placed',
-      price: '$12.150',
-    },
-    {
-      id: '202104002-050430',
-      date: '01-08-2023',
-      payment_status: 'Paid',
-      delivery_status: 'Order Placed',
-      price: '$12.150',
-    },
-    {
-      id: '202104002-050430',
-      date: '01-08-2023',
-      payment_status: 'Unpaid',
-      delivery_status: 'On the way',
-      price: '$12.150',
-    },
-    {
-      id: '202104002-050430',
-      date: '01-08-2023',
-      payment_status: 'UnPaid',
-      delivery_status: 'Confirm',
-      price: '$12.150',
-    },
-    {
-      id: '202104002-050430',
-      date: '01-08-2023',
-      payment_status: 'Paid',
-      delivery_status: 'Placed',
-      price: '$12.150',
-    },
-  ];
+  const fetchData = async setDataLoading => {
+    try {
+      setLoading(true);
+      setDataLoading(true);
+      const res = await getOrderList(
+        selectByPayment?.toLowerCase(),
+        selectByDelivery?.toLowerCase(),
+        pageNumber,
+      );
 
-  const featuredProduct = ({item, index}) => (
+      setData(preProducts =>
+        pageNumber > 1
+          ? {
+              ...res,
+              data: preProducts?.data
+                ? [...preProducts?.data, ...res?.data]
+                : [...res?.data],
+            }
+          : res,
+      );
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setDataLoading(false);
+      setLoading(false);
+    }
+  };
+  const handleLoadMore = () => {
+    const lastPage = Math.ceil((data?.meta?.total || 0) / data?.meta?.per_page);
+    if (!pageLoading && pageNumber < lastPage) {
+      setPageNumber(prevPageNumber => prevPageNumber + 1);
+    }
+  };
+  React.useEffect(() => {
+    if (pageNumber > 0 && !pageLoading) {
+      fetchData(setPageLoading);
+    }
+  }, [pageNumber, selectByDelivery, selectByPayment, isFocus]);
+
+  const renderOrders = ({item, index}) => (
     <OrderHistoryCard
       item={item}
       onPress={() =>
         navigate('OrderDetails', {
           order: item,
           status:
-            item?.delivery_status === 'Placed'
-              ? '1'
-              : item?.delivery_status === 'Confirm'
+            item?.delivery_status === 'pending'
+              ? '0'
+              : item?.delivery_status === 'picked_up'
               ? '2'
-              : item?.delivery_status === 'On the way'
+              : item?.delivery_status === 'confirmed'
+              ? '1'
+              : item?.delivery_status === 'on_the_way'
               ? '3'
-              : item?.delivery_status === 'Order Placed'
+              : item?.delivery_status === 'delivered'
               ? '4'
               : null,
         })
@@ -102,7 +115,7 @@ const OrderHistory = props => {
               <Regular
                 color={colors.text}
                 fontSize={mvs(12)}
-                label={t(selectByPayment)}
+                label={selectByPayment === '' ? t('All') : t(selectByPayment)}
               />
               <Entypo
                 name={'chevron-small-right'}
@@ -124,30 +137,46 @@ const OrderHistory = props => {
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('all');
-                  setSelect(!select);
-                }}>
-                <Regular color={colors.text} label={t('all')} />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setSelectByPayment('paid');
+                  setSelectByPayment('');
                   setSelect(!select);
                 }}>
                 <Regular
-                  style={{color: colors.text, marginTop: mvs(10)}}
-                  label={t('paid')}
+                  fontSize={mvs(12)}
+                  color={colors.text}
+                  label={t('all')}
                 />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByPayment('unpaid');
+                  setSelectByPayment('Today');
+                  setSelect(!select);
+                }}>
+                <Regular
+                  fontSize={mvs(12)}
+                  style={{color: colors.text, marginTop: mvs(10)}}
+                  label={t('Today')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setSelectByPayment('This-Week');
                   setSelect(!select);
                 }}>
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
-                  label={t('unpaid')}
+                  label={t('This_Week')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setSelectByPayment('This-Month');
+                  setSelect(!select);
+                }}>
+                <Regular
+                  style={{color: colors.text, marginTop: mvs(10)}}
+                  fontSize={mvs(12)}
+                  label={t('This_Month')}
                 />
               </TouchableOpacity>
             </View>
@@ -168,7 +197,7 @@ const OrderHistory = props => {
               <Regular
                 color={colors.text}
                 fontSize={mvs(12)}
-                label={t(selectByDelivery)}
+                label={selectByDelivery === '' ? t('All') : t(selectByDelivery)}
               />
               <Entypo
                 name={'chevron-small-right'}
@@ -188,56 +217,54 @@ const OrderHistory = props => {
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('all');
+                  setSelectByDelivery('ALL');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular color={colors.text} label={t('all')} />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('confirmed');
+                  setSelectByDelivery('COD');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
-                  label={t('confirmed')}
+                  label={t('COD')}
                 />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  setSelectByDelivery('on_delivery');
+                  setSelectByDelivery('NON-COD');
                   setDeliverySelect(!deliverySelect);
                 }}>
                 <Regular
                   style={{color: colors.text, marginTop: mvs(10)}}
                   fontSize={mvs(12)}
-                  label={t('on_delivery')}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => {
-                  setSelectByDelivery('delivered');
-                  setDeliverySelect(!deliverySelect);
-                }}>
-                <Regular
-                  style={{color: colors.text, marginTop: mvs(10)}}
-                  fontSize={mvs(12)}
-                  label={t('delivered')}
+                  label={t('NON_COD')}
                 />
               </TouchableOpacity>
             </View>
           ) : null}
         </Row>
       </Row>
-      <CustomFlatList
-        showsVerticalScrollIndicator={false}
-        data={featuredCategories}
-        renderItem={featuredProduct}
-        contentContainerStyle={{
-          paddingBottom: mvs(20),
-          paddingHorizontal: mvs(20),
-        }}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <CustomFlatList
+            showsVerticalScrollIndicator={false}
+            data={data?.data}
+            renderItem={renderOrders}
+            onEndReached={handleLoadMore} // Load more when reaching the end of the list
+            onEndReachedThreshold={0.5} // Load more when the user reaches the last 50% of the list
+            ListFooterComponent={pageLoading && <Loader />}
+            contentContainerStyle={{
+              paddingBottom: mvs(20),
+              paddingHorizontal: mvs(20),
+            }}
+          />
+        </>
+      )}
     </View>
   );
 };

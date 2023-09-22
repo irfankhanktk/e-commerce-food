@@ -35,11 +35,14 @@ import ShippingInfo from 'screens/shipping-info';
 import Tracking from 'screens/tracking';
 import DrawerNavigator from './drawer-navigation';
 import Brands from 'screens/brands';
+import {useAppSelector} from 'hooks/use-store';
 
 const Stack = createNativeStackNavigator();
 
 export const RootNavigator = () => {
   const {colors, dark} = useTheme();
+  const {userInfo} = useAppSelector(s => s?.user);
+  const userId = userInfo?.id;
 
   return (
     <View style={styles.container}>
