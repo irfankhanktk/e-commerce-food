@@ -27,9 +27,11 @@ import {addUserWishlist, removeUserWishlist} from 'services/api/api-actions';
 import {Loader} from 'components/atoms/loader';
 import {getRelatedProducts} from 'services/api/product-api-actions';
 import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
+import {onCreateConveration} from 'services/api/chat-api-actions';
 
 const ProductDetials = props => {
   const colors = useTheme().colors;
+
   const {wishlist, product, cart} = useAppSelector(s => s);
   const {cart_list} = cart;
   const {wishlists} = wishlist;
@@ -37,16 +39,34 @@ const ProductDetials = props => {
   const dispatch = useAppDispatch();
   const productId = props?.route?.params?.productId;
   const {t} = i18n;
-  const [data, setData] = React.useState('');
+  const [data, setData] = React.useState();
   const [loading, setLoading] = React.useState(true);
   const [cartLoading, setCartLoading] = React.useState(false);
   const [relatedProducts, setRelatedProducts] = React.useState([]);
   const [selectImage, setSelectImage] = React.useState('');
   const [count, setCount] = React.useState(1);
+  const [chatLoading, setChatLoading] = React.useState(false);
   const cartItem = cart_list?.find(
     x => x?.cart_items[0]?.product_id === productId,
   );
-
+  const onMessageSellerPress = async () => {
+    try {
+      setChatLoading(true);
+      const res = await onCreateConveration({
+        product_id: productId,
+        title: data?.productDetails?.name,
+        message: 'I have a query about this product',
+      });
+      navigate('InboxMessage', {
+        id: res?.conversation_id,
+        shop: res,
+      });
+    } catch (error) {
+    } finally {
+      setChatLoading(false);
+    }
+  };
+  // () => navigate('InboxMessage')
   const renderTopProducts = ({item}) => (
     <AllFeaturedCategoriesCard
       item={item}
@@ -93,7 +113,7 @@ const ProductDetials = props => {
     fetchProduct();
   }, []);
 
-  const bool = wishlists?.some(x => x === data?.id);
+  const bool = wishlists?.some(x => x === data?.productDetails?.id);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('Product details')} icon />
@@ -133,7 +153,7 @@ const ProductDetials = props => {
                 <Regular
                   color={colors.text}
                   style={styles.productName}
-                  label={data?.name}
+                  label={data?.productDetails?.name}
                 />
                 <Row style={styles.reviewContainer}>
                   <Stars />
@@ -148,8 +168,8 @@ const ProductDetials = props => {
                     onPress={() => {
                       dispatch(
                         bool
-                          ? removeUserWishlist(data?.id)
-                          : addUserWishlist(data?.id),
+                          ? removeUserWishlist(data?.productDetails?.id)
+                          : addUserWishlist(data?.productDetails?.id),
                       );
                     }}>
                     {bool ? <HeartFill /> : <Heart />}
@@ -169,7 +189,8 @@ const ProductDetials = props => {
                     label={t('inhouse_product')}
                   />
                   <IconButton
-                    onPress={() => navigate('InboxMessage')}
+                    loading={chatLoading}
+                    onPress={onMessageSellerPress}
                     containerStyle={styles.messageContainer}
                     textStyle={styles.messageTextStyle}
                     Icon={<MessageTwo />}

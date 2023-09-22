@@ -11,10 +11,10 @@ const styles = StyleSheet.create({
     marginTop: mvs(20),
   },
   backGroundImage: {
-    width: mvs(46),
-    height: mvs(50),
-
-    marginTop: mvs(10),
+    width: '100%',
+    height: '100%',
+    borderRadius: mvs(5),
+    // marginTop: mvs(10),
   },
   // innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
   imageContainer: {
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: mvs(10),
+    padding: mvs(5),
   },
   InnerContainer: {alignItems: 'center', justifyContent: 'flex-start'},
 });

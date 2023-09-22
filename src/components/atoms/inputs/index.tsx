@@ -247,13 +247,13 @@ export const MessageInput = (props: props) => {
           placeholder={placeholder}
           style={[styles.textInput, style]}
         />
-        <TouchableOpacity style={styles.PasswordIcon} onPress={onPress}>
+        {/* <TouchableOpacity style={styles.PasswordIcon} onPress={onPress}>
           <Entypo
             size={20}
             name={'attachment'}
             color={colors.halfGray}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </Row>
 
     </>

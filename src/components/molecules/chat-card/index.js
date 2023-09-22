@@ -9,6 +9,9 @@ import {colors} from 'config/colors';
 import {Row} from 'components/atoms/row';
 import Bold from 'typography/bold-text';
 import {useTheme} from '@react-navigation/native';
+import moment from 'moment';
+import {DATE_FORMAT} from 'config/constants';
+import {Image} from 'react-native';
 
 const ChatCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
@@ -19,22 +22,23 @@ const ChatCard = ({item, style, onPress, loading}) => {
       style={{...styles.container, backgroundColor: colors.background}}>
       <Row style={styles.InnerContainer}>
         <View style={{...styles.imageContainer, borderColor: colors.primary}}>
-          <ImageBackground
-            borderRadius={mvs(10)}
-            source={forklift}
-            style={styles.backGroundImage}>
-            {/* <Image source={{uri: item?.image}} style={styles.innerImage} /> */}
-          </ImageBackground>
+          <Image
+            source={item?.shop_logo ? {uri: item?.shop_logo} : forklift}
+            style={styles.backGroundImage}
+          />
         </View>
         <View style={{paddingHorizontal: mvs(10), flex: 1}}>
-          <Bold color={colors.text} label={'Mitsubishi'} />
+          <Bold color={colors.text} label={item?.title} numberOfLines={1} />
           <Regular
             color={colors.text}
             numberOfLines={1}
-            label={'Mitsubishi@email.com'}
+            label={moment(item?.date).format(DATE_FORMAT.mmm_dd_yyyy)}
           />
         </View>
-        <Regular color={colors.text} label={'08:06'} />
+        <Regular
+          color={colors.text}
+          label={moment(item?.date).format('HH:mm:a')}
+        />
       </Row>
     </TouchableOpacity>
   );

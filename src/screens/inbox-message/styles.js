@@ -21,11 +21,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: mvs(10),
     marginLeft: mvs(20),
+    padding: mvs(5),
   },
   backGroundImage: {
-    width: mvs(45),
-    height: mvs(30),
-    marginTop: mvs(10),
+    width: '100%',
+    height: '100%',
+    borderRadius: mvs(5),
+    // marginTop: mvs(10),
   },
   sendIcon: {
     width: mvs(50),

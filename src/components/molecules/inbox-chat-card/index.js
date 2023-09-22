@@ -5,6 +5,7 @@ import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import moment from 'moment';
 
 const InboxChatCard = ({item, style, onPress, loading}) => {
   const me = item.me;
@@ -31,11 +32,9 @@ const InboxChatCard = ({item, style, onPress, loading}) => {
           color={colors.white}
           fontSize={mvs(12)}
           numberOfLines={5}
-          label={
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod'
-          }
+          label={item?.message || ''}
         />
-        <Regular style={styles.timeText} label={'6 min ago'} />
+        <Regular style={styles.timeText} label={item?.time} />
       </View>
     </View>
   );

@@ -5,13 +5,15 @@ import {MessageInput} from 'components/atoms/inputs';
 import {Row} from 'components/atoms/row';
 import InboxChatCard from 'components/molecules/inbox-chat-card';
 import {mvs} from 'config/metrices';
-import {useAppDispatch} from 'hooks/use-store';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {goBack} from 'navigation/navigation-ref';
 import React from 'react';
 import {
+  Alert,
   I18nManager,
   ImageBackground,
   TouchableOpacity,
+  Image,
   View,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -20,8 +22,18 @@ import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {getChatMessages, onSendMessage} from 'services/api/chat-api-actions';
+import {Loader} from 'components/atoms/loader';
+import {UTILS} from 'utils';
 const InboxMessage = props => {
+  const {id, shop, product} = props?.route?.params || {};
+
   const dispatch = useAppDispatch();
+  const {chat, user} = useAppSelector(s => s);
+  const {userInfo} = user;
+  const [loading, setLoading] = React.useState(true);
+  const [messages, setMessages] = React.useState([]);
+  const [message, setMessage] = React.useState('');
   const colors = useTheme().colors;
 
   const {t} = i18n;
@@ -31,29 +43,57 @@ const InboxMessage = props => {
     },
     {
       id: 2,
-      me: true,
     },
     {
       id: 3,
     },
     {
       id: 3,
-      me: true,
     },
     {
       id: 3,
-      me: false,
-    },
-    {
-      id: 3,
-      me: true,
-    },
-    {
-      id: 3,
-      me: false,
     },
   ];
-  const featuredProduct = ({item}) => <InboxChatCard item={item} />;
+  const getMessages = async () => {
+    try {
+      const res = await getChatMessages(id);
+      setMessages(res?.data || []);
+    } catch (error) {
+      console.log('error', error);
+      Alert.alert('Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+  React.useEffect(() => {
+    //Implementing the setInterval method
+    const interval = setInterval(() => {
+      getMessages();
+    }, 30000);
+
+    //Clearing the interval
+    return () => clearInterval(interval);
+  }, []);
+  const sendMessage = async () => {
+    try {
+      if (!message?.trim()) return;
+      const res = await onSendMessage({
+        conversation_id: id,
+        message: message,
+      });
+      await getMessages();
+      setMessage('');
+      // setMessages(res?.data || []);
+    } catch (error) {
+      console.log('error', error);
+      Alert.alert('Error', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+  const renderItem = ({item}) => (
+    <InboxChatCard item={{...item, me: userInfo?.id === item?.user_id}} />
+  );
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <View
@@ -73,45 +113,48 @@ const InboxMessage = props => {
             />
           </TouchableOpacity>
           <View style={{...styles.imageContainer, borderColor: colors.primary}}>
-            <ImageBackground
-              borderRadius={mvs(10)}
-              source={ford}
-              style={styles.backGroundImage}>
-              {/* <Image source={{uri: item?.image}} style={styles.innerImage} /> */}
-            </ImageBackground>
+            <Image
+              source={shop?.shop_logo ? {uri: shop?.shop_logo} : ford}
+              style={styles.backGroundImage}
+            />
           </View>
           <View style={{paddingHorizontal: mvs(10), flex: 1}}>
-            <Bold color={colors.text} label={'Mitsubishi'} />
+            <Bold color={colors.text} label={shop?.title} numberOfLines={1} />
             <Regular
               color={colors.text}
               numberOfLines={1}
-              label={'Mitsubishi@email.com'}
+              label={shop?.shop_name}
             />
           </View>
         </Row>
       </View>
-      <CustomFlatList
-        inverted
-        showsVerticalScrollIndicator={false}
-        data={featuredCategories}
-        renderItem={featuredProduct}
-        contentContainerStyle={{
-          paddingBottom: mvs(20),
-          paddingHorizontal: mvs(20),
-        }}
-      />
-
-      <Row
-        style={{
-          marginHorizontal: mvs(20),
-          alignItems: 'center',
-          paddingBottom: mvs(20),
-        }}>
-        <MessageInput />
-        <TouchableOpacity style={styles.sendIcon}>
-          <Feather name={'send'} size={25} color={colors.white} />
-        </TouchableOpacity>
-      </Row>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <CustomFlatList
+            inverted
+            showsVerticalScrollIndicator={false}
+            data={messages || []}
+            renderItem={renderItem}
+            contentContainerStyle={{
+              paddingBottom: mvs(20),
+              paddingHorizontal: mvs(20),
+            }}
+          />
+          <Row
+            style={{
+              marginHorizontal: mvs(20),
+              alignItems: 'center',
+              paddingBottom: mvs(20),
+            }}>
+            <MessageInput value={message} onChangeText={setMessage} />
+            <TouchableOpacity onPress={sendMessage} style={styles.sendIcon}>
+              <Feather name={'send'} size={25} color={colors.white} />
+            </TouchableOpacity>
+          </Row>
+        </>
+      )}
     </View>
   );
 };

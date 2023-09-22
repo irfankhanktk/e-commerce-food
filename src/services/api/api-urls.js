@@ -65,6 +65,12 @@ export const URLS = {
     remove_from_cart: 'carts/',
     update_cart_qty: 'carts/change-quantity',
   },
+  chat: {
+    get_conversations: 'chat/conversations',
+    get_chat_messages: 'chat/messages/',
+    send_message: 'chat/insert-message',
+    create_conversation: 'chat/create-conversation',
+  },
   product: {
     top_seller_products: 'products/best-seller',
     related_products: 'products/related/',
