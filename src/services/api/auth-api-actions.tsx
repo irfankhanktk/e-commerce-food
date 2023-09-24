@@ -32,7 +32,11 @@ export const onLogin = (
       await UTILS.setItem(STORAGEKEYS.user, JSON.stringify(res?.user));
       console.log('res of onLogin=>', res);
       dispatch(setUserInfo(res?.user));
-      navigate('Drawer')
+      if (res?.user?.type === 'customer') {
+        navigate('Drawer')
+      } else {
+        navigate('AdminDashBoard')
+      }
     } catch (error: any) {
       console.log('error in login', UTILS.returnError(error));
       Alert.alert('', UTILS.returnError(error));
@@ -94,6 +98,10 @@ export const getDistance = async (lat1: any, lat2: any, lon1: any, lon2: any) =>
 export const getAddresses = (userId: any) => getData(`${URLS.address.get_address}`)
 export const deleteAddress = (addressId: any) => getData(`${URLS.address.delete_address}${addressId}`)
 export const addAddress = (newAddress: any) => postData(`${newAddress?.id ? URLS.address.update : URLS.address.add_address}`, newAddress)
+
+
+//////////admin dashboard///////////////
+export const getStatus = () => getData(URLS.admin.dashboard_status);
 
 /////////////payment ////////////////////////
 export const getPaymentType = () => getData(`${URLS.payment.payment_type}`)

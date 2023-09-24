@@ -84,4 +84,7 @@ export const URLS = {
     payment_type: 'payment-types',
     paymentselection: 'payments/pay/cod',
   },
+  admin: {
+    dashboard_status: 'dashboard/admin/stats',
+  },
 };

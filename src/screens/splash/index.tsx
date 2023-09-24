@@ -52,8 +52,14 @@ const Splash = (props: props) => {
         UTILS.getItem(STORAGEKEYS.user).then(async (user: any) => {
           if (user) {
             try {
-              dispatch(setUserInfo(JSON.parse(user)));
-              screen = 'Drawer';
+              const dataUser = JSON.parse(user)
+              // console.log('data user check============>', dataUser);
+              dispatch(setUserInfo(dataUser));
+              if (dataUser?.type === 'customer') {
+                screen = 'Drawer';
+              } else {
+                screen = 'AdminDashBoard'
+              }
 
             } catch (error) {
               console.log('error', error);

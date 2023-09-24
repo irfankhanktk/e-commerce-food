@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {ImageBackground, View} from 'react-native';
+import {Alert, ImageBackground, View} from 'react-native';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {
   Carttt,
   Heart,
   Location,
+  LogOut,
   Refund,
   Shop,
   UserEdit,
@@ -15,9 +16,11 @@ import {IconButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
-import {navigate} from 'navigation/navigation-ref';
+import {navigate, resetStack} from 'navigation/navigation-ref';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
+import {logout} from 'services/api/auth-api-actions';
+import {UTILS} from 'utils';
 
 const CustomDrawer = props => {
   const colors = useTheme().colors;
@@ -27,6 +30,21 @@ const CustomDrawer = props => {
   const user = userInfo?.user?.userInfo?.user;
 
   const {navigation} = props;
+  const [loading, setLoading] = React.useState(false);
+
+  const logOut = async () => {
+    try {
+      setLoading(true);
+      const res = await logout();
+      Alert.alert(res?.message);
+      await UTILS.clearStorage();
+      resetStack('Login');
+    } catch (error) {
+      console.log('Error===>', UTILS.returnError(error));
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       {/* <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -107,6 +125,14 @@ const CustomDrawer = props => {
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}
           Icon={<Shop />}
+        />
+        <IconButton
+          onPress={logOut}
+          title={t('Logout')}
+          loading={loading}
+          textStyle={{...styles.textStyle, color: colors.text}}
+          containerStyle={{backgroundColor: colors.background}}
+          Icon={<LogOut />}
         />
       </View>
     </View>
