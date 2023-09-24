@@ -1,29 +1,29 @@
-import React, { ReactNode } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import MapView, { LatLng, MapPressEvent, MapViewProps, Marker, Region } from 'react-native-maps';
-import { UTILS } from 'utils';
-import { GeoPosition } from 'react-native-geolocation-service';
-import { CurrentLocation } from 'assets/icons';
 import { colors } from 'config/colors';
 import { mvs } from 'config/metrices';
+import React, { ReactNode } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { GeoPosition } from 'react-native-geolocation-service';
+import MapView, { LatLng, MapPressEvent, MapViewProps, Marker } from 'react-native-maps';
+import { UTILS } from 'utils';
 
 import { useAppDispatch } from 'hooks/use-store';
-import { setLocation } from 'store/reducers/user-reducer';
-import GoogleSearchBar from '../google-search';
+import { setLocation } from '../../../store/reducers/user-reducer';
 
 interface CustomMapProps extends MapViewProps {
   children?: ReactNode;
   onPress: (e: any) => void;
+  latLng: any;
 }
 
 const CustomMap: React.FC<CustomMapProps> = ({ children,
+  latLng,
   initialRegion = {
     latitude: 37.78825,
     longitude: -122.4324,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   },
-  style = styles.container,
+  style = styles.map,
   onPress = (address: any) => { },
   ...mapProps }) => {
   const mapRef = React.useRef<MapView>(null);
@@ -35,7 +35,11 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
       longitudeDelta: 0.0421,
     }, 1000);
   };
-
+  React.useEffect(() => {
+    if (latLng) {
+      handleRegionChange(latLng);
+    }
+  }, [latLng])
   const handleCurrentLocationPress = () => {
     // Logic to retrieve and set the current location
     // For example, using Geolocation API or a location service library
@@ -59,26 +63,22 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
       handleCurrentLocationPress();
     }, 1000);
   }, [])
-
+  const onPressMap = (e: MapPressEvent) => {
+    setCurrentLocation(e.nativeEvent?.coordinate);
+    UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
+      onPress({ ...res, coordinate: e.nativeEvent?.coordinate });
+    });
+  }
   return (
-    <View style={style}>
+    <View style={styles.container}>
       <MapView
-        showsUserLocation
         ref={mapRef}
         {...mapProps}
-        onPress={(e) => {
-          e.persist();
-          setCurrentLocation(e.nativeEvent?.coordinate);
-          // UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
-          onPress({ coordinate: e.nativeEvent?.coordinate });
-          handleRegionChange(e.nativeEvent?.coordinate);
-          // });
-
-        }}
-        style={styles.map} initialRegion={initialRegion}  >
+        onPress={onPressMap}
+        style={style} initialRegion={initialRegion}  >
         {children}
+        {/* {currentLocation && <Marker coordinate={currentLocation} ></Marker>} */}
 
-        {currentLocation && <Marker coordinate={currentLocation} />}
       </MapView>
       {/* <View style={[styles.currentLocationButton]}>
         <TouchableOpacity
@@ -87,35 +87,6 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
           <CurrentLocation height={'100%'} width={'100%'} />
         </TouchableOpacity>
     </View> */}
-      <View style={{
-        position: 'absolute',
-        width: '90%',
-        alignSelf: 'center',
-        top: mvs(15),
-        zIndex: 1001,
-      }}>
-        <GoogleSearchBar
-          // countrySlug={selectedCountry?.code?.toLowerCase()}
-          style={{ width: '86%', marginLeft: mvs(20) }}
-          onPress={(data, details = null) => {
-            // 'details' is provided when fetchDetails = true
-            console.log('data:::', details?.geometry?.location);
-            const latitude = details?.geometry?.location?.lat;
-            const longitude = details?.geometry?.location?.lng;
-            const latlng = {
-              latitude,
-              longitude
-            }
-            setCurrentLocation(latlng);
-
-            // UTILS._returnAddress(latitude, longitude).then((res) => {
-            onPress({ coordinate: latlng });
-            handleRegionChange(latlng);
-
-            // });
-          }}
-        />
-      </View>
     </View >
   );
 };

@@ -132,7 +132,9 @@ const UserTab = props => {
           </View>
         </Row>
         <Row style={{marginTop: mvs(25)}}>
-          <TouchableOpacity style={{alignItems: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigate('LanguageScreen')}
+            style={{alignItems: 'center'}}>
             <View
               style={{
                 ...styles.itemsContainer,

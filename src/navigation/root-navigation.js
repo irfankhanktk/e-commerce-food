@@ -36,6 +36,8 @@ import Tracking from 'screens/tracking';
 import DrawerNavigator from './drawer-navigation';
 import Brands from 'screens/brands';
 import {useAppSelector} from 'hooks/use-store';
+import LanguageScreen from 'screens/language-screen';
+import AdminDashBoard from 'screens/admin-dashboard';
 
 const Stack = createNativeStackNavigator();
 
@@ -98,6 +100,8 @@ export const RootNavigator = () => {
             component={AllFeaturedCategories}
           />
           <Stack.Screen name="Brands" component={Brands} />
+          <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
+          <Stack.Screen name="AdminDashBoard" component={AdminDashBoard} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

@@ -48,7 +48,6 @@ const HomeTab = props => {
   const [pageNumber, setPageNumber] = React.useState(1);
   const [allProducts, setAllProducts] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  // console.log('banners check==========>', allFeaturedProducts?.data);
 
   const getBanners = async () => {
     try {

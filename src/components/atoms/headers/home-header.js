@@ -32,7 +32,7 @@ const HomeHeader = ({
         <TouchableOpacity onPress={() => navigation.openDrawer()}>
           {menu && (
             <Entypo
-              name={I18nManager.isRTL ? 'Menu' : 'menu'}
+              name={I18nManager.isRTL ? 'menu' : 'menu'}
               size={mvs(40)}
               color={colors.iconColor}
             />
