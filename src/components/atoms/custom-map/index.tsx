@@ -63,18 +63,20 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
       handleCurrentLocationPress();
     }, 1000);
   }, [])
-  const onPressMap = (e: MapPressEvent) => {
-    setCurrentLocation(e.nativeEvent?.coordinate);
-    UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
-      onPress({ ...res, coordinate: e.nativeEvent?.coordinate });
-    });
-  }
+
   return (
     <View style={styles.container}>
       <MapView
         ref={mapRef}
         {...mapProps}
-        onPress={onPressMap}
+        onPress={(e) => {
+          console.log('e.nativeEvent::', e.nativeEvent);
+
+          setCurrentLocation(e.nativeEvent?.coordinate);
+          UTILS._returnAddress(e.nativeEvent?.coordinate?.latitude, e.nativeEvent?.coordinate?.longitude).then((res) => {
+            onPress({ ...res, coordinate: e.nativeEvent?.coordinate });
+          });
+        }}
         style={style} initialRegion={initialRegion}  >
         {children}
         {currentLocation && <Marker coordinate={currentLocation} ></Marker>}

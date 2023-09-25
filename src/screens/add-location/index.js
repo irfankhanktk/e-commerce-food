@@ -68,11 +68,7 @@ const AddLocation = props => {
 
   const onSubmit = async values => {
     try {
-      console.log('values me check====>', values);
-      Alert.alert('check data');
-      return;
       setLoading(true);
-
       console.log('values address===>', values);
       const res = await addAddress(values);
       console.log('res:::>>>>>', res);
@@ -86,7 +82,7 @@ const AddLocation = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <View style={{}}>
+      {/* <View style={{}}>
         <Row
           style={{
             position: 'absolute',
@@ -104,7 +100,7 @@ const AddLocation = props => {
             />
           </TouchableOpacity>
         </Row>
-      </View>
+      </View> */}
       <View style={{flex: 1}}>
         <Formik
           onSubmit={onSubmit}
@@ -125,15 +121,24 @@ const AddLocation = props => {
                 backgroundColor: colors.downColor,
                 flex: 1,
               }}>
-              <CustomMap
-                style={{height: mvs(250)}}
-                onPress={res => {
-                  console.log('res>>>>', res);
-                  setFieldValue('latitude', res?.coordinate?.latitude);
-                  setFieldValue('longitude', res?.coordinate?.longitude);
-                }}></CustomMap>
+              <View
+                style={{
+                  height: mvs(250),
+                }}>
+                <CustomMap
+                  // style={{height: mvs(250)}}
+                  onPress={res => {
+                    console.log('ddddd::', res);
+                    setFieldValue('latitude', res?.geoCode?.lat);
+                    setFieldValue('longitude', res?.geoCode?.lng);
+                  }}></CustomMap>
+              </View>
+
               <KeyboardAvoidScrollview
-                contentContainerStyle={{paddingHorizontal: 0}}>
+                contentContainerStyle={{
+                  paddingHorizontal: 0,
+                  flexGrow: 1,
+                }}>
                 <View style={styles.bottomContainer}>
                   <Regular
                     label={
