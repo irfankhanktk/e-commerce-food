@@ -19,6 +19,9 @@ const RatingModal = ({
   setValues,
   userInfo,
   isSubmited,
+  ratingLoading,
+  onSubmit,
+  resRating,
   onClose = item => {},
 }) => {
   const {t} = i18n;
@@ -26,9 +29,6 @@ const RatingModal = ({
   const colors = useTheme().colors;
   const [rankingCount, setRankingCount] = React.useState(0);
 
-  const handleCount = newRating => {
-    setRankingCount(newRating);
-  };
   // Handler to update the comment value
   const handleCommentChange = newComment => {
     // Update the value state with the new comment
@@ -59,7 +59,7 @@ const RatingModal = ({
           numberOfLines={5}
           value={values.comment} // Use the comment value from state
           onChangeText={handleCommentChange} // Use the comment change handler
-          placeholder="Enter Comment"
+          placeholder={t('enter_comment')}
           containerStyle={{height: mvs(150), marginTop: mvs(20)}}
           style={{
             height: mvs(150),
@@ -79,6 +79,8 @@ const RatingModal = ({
               }}
             />
             <PrimaryButton
+              onPress={onSubmit}
+              loading={ratingLoading}
               title={t('submit')}
               containerStyle={{
                 marginTop: mvs(20),

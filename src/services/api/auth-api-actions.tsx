@@ -102,6 +102,11 @@ export const addAddress = (newAddress: any) => postData(`${newAddress?.id ? URLS
 
 //////////admin dashboard///////////////
 export const getStatus = () => getData(URLS.admin.dashboard_status);
+export const getShop = () => getData(URLS.brand.shop);
+
+///////////rating delivery boy/////////////
+export const ratingDeliveryBoy = (values: any) => postData(URLS.rating.delivery_boy_rating, values);
+
 
 /////////////payment ////////////////////////
 export const getPaymentType = () => getData(`${URLS.payment.payment_type}`)

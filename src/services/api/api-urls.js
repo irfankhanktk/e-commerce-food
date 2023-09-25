@@ -29,6 +29,7 @@ export const URLS = {
   brand: {
     all_brands: 'brands',
     top_brands: 'brands/top',
+    shop: 'shops',
   },
   app: {
     get_banners: 'sliders',
@@ -86,5 +87,8 @@ export const URLS = {
   },
   admin: {
     dashboard_status: 'dashboard/admin/stats',
+  },
+  rating: {
+    delivery_boy_rating: '/deliveryBoy/rating',
   },
 };

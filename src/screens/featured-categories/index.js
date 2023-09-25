@@ -5,6 +5,7 @@ import AppHeader from 'components/atoms/headers/app-header';
 import {Loader} from 'components/atoms/loader';
 import AllProductsCard from 'components/molecules/all-products-card';
 import {mvs} from 'config/metrices';
+import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import {getAllProductCategoryPaginated} from 'services/api/auth-api-actions';
@@ -14,6 +15,7 @@ const FeaturedCategories = props => {
   const colors = useTheme().colors;
 
   const route = props?.route?.params?.item;
+
   const [loading, setLoading] = React.useState(true);
   const [pageLoading, setPageLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
@@ -60,7 +62,7 @@ const FeaturedCategories = props => {
   const renderProduct = ({item}) => (
     <AllProductsCard
       item={item}
-      // onPress={() => navigate('CategoriesTab')}
+      onPress={() => navigate('ProductDetials', {productId: item?.id})}
     />
   );
 

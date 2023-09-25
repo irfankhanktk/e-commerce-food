@@ -8,9 +8,12 @@ import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
+import {useAppSelector} from 'hooks/use-store';
 
 const MyWishList = props => {
   const colors = useTheme().colors;
+  const wishlist = useAppSelector(s => s);
+  console.log('wishlist====>', wishlist?.wishlist);
 
   const featuredCategories = [
     {

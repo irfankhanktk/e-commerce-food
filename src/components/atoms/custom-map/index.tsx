@@ -77,7 +77,7 @@ const CustomMap: React.FC<CustomMapProps> = ({ children,
         onPress={onPressMap}
         style={style} initialRegion={initialRegion}  >
         {children}
-        {/* {currentLocation && <Marker coordinate={currentLocation} ></Marker>} */}
+        {currentLocation && <Marker coordinate={currentLocation} ></Marker>}
 
       </MapView>
       {/* <View style={[styles.currentLocationButton]}>

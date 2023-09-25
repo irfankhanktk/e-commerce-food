@@ -155,6 +155,10 @@
 "shipping_cost":"تكلفة الشحن",
 "home_delivery":"توصيل منزلي",
 "deliver_status":"حالة التسليم -",
-"payment_statuss":"حالة السداد -"
+"payment_statuss":"حالة السداد -",
+"rate_delivery_boy":"معدل تسليم الصبي",
+"enter_comment":"أدخل التعليق",
+"submit":"يُقدِّم",
+"order_placed":"تم الطلب"
 
 }

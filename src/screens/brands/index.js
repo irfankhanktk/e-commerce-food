@@ -9,6 +9,7 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 import styles from './styles';
+import {t} from 'i18next';
 
 const Brands = props => {
   const colors = useTheme().colors;

@@ -9,13 +9,15 @@ import React from 'react';
 import {Alert, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useIsFocused, useTheme} from '@react-navigation/native';
 import {ClanderTwo, DeliveryTwo} from 'assets/icons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {UTILS} from 'utils';
 import {getOrderList} from 'services/api/auth-api-actions';
 import {Loader} from 'components/atoms/loader';
+import {I18nManager} from 'react-native';
+import Medium from 'typography/medium-text';
 
 const OrderHistory = props => {
   const colors = useTheme().colors;
@@ -102,7 +104,27 @@ const OrderHistory = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('order_history')} />
+      {/* <AppHeader back title={t('order_history')} /> */}
+      <View style={{...styles.header, backgroundColor: colors.background}}>
+        <Row style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => navigate('Me')}>
+            <FontAwesome5
+              name={I18nManager.isRTL ? 'arrow-right' : 'arrow-left'}
+              size={mvs(20)}
+              color={colors.iconColor}
+            />
+          </TouchableOpacity>
+
+          <Medium
+            color={colors.iconColor}
+            fontSize={mvs(20)}
+            label={t('order_history')}
+          />
+
+          <View />
+        </Row>
+      </View>
+
       <Row style={{paddingHorizontal: mvs(20)}}>
         <Row style={styles.innerContainer}>
           <TouchableOpacity

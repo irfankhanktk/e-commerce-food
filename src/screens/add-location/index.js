@@ -55,7 +55,7 @@ const AddLocation = props => {
     city_id: '',
     ...address,
   };
-  console.log('payload::::', payload);
+  // console.log('payload::::', payload);
   const dispatch = useAppDispatch();
   const {t} = i18n;
   const colors = useTheme().colors;
@@ -68,6 +68,9 @@ const AddLocation = props => {
 
   const onSubmit = async values => {
     try {
+      console.log('values me check====>', values);
+      Alert.alert('check data');
+      return;
       setLoading(true);
 
       console.log('values address===>', values);

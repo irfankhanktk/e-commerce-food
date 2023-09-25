@@ -34,23 +34,25 @@ import Stars from 'components/atoms/stars';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Bold from 'typography/bold-text';
-import {getDistance} from 'services/api/auth-api-actions';
+import {getDistance, ratingDeliveryBoy} from 'services/api/auth-api-actions';
 import {Loader} from 'components/atoms/loader';
 import RatingModal from './../../components/molecules/modals/rating-modal';
 const OrderDetails = props => {
   const colors = useTheme().colors;
   const [path, setPath] = React.useState([]);
   const [values, setValues] = React.useState({rating: '', comment: ''});
-  console.log('value me check===', values);
+  // console.log('value me check===', values);
 
   const {status, order} = props?.route?.params || {};
   const data = order;
+  const order_id = data?.id;
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState({});
   const [totalDistance, setTotalDistance] = React.useState('');
   const [ratingModal, setRatingModal] = React.useState(false);
+  const [ratingLoading, setRatingLoading] = React.useState(false);
 
   // const deliveryOrigin = {
   //   latitude: item?.DeliveryBoyPath[1]?.lat || 37.78825,
@@ -65,9 +67,9 @@ const OrderDetails = props => {
     latitude: item?.customerLatLng?.latitude * 1 || 37.78825,
     longitude: item?.customerLatLng?.longitude * 1 || -122.4324,
   };
-
   const fetchData = async setLoading => {
     try {
+      setLoading(true);
       const res = await orderDetails(data?.id);
       setItem(res);
 
@@ -112,6 +114,24 @@ const OrderDetails = props => {
     // Clean up the interval when the component unmounts
     return () => clearInterval(intervalId);
   }, []);
+
+  const onPressRating = async () => {
+    try {
+      setRatingLoading(true);
+      await ratingDeliveryBoy({
+        ...values,
+        order_id: order_id,
+        delivery_boy: item?.deliveryBoy?.id,
+      });
+
+      setRatingModal(false);
+    } catch (error) {
+      console.log('Error in getProducts====>', error);
+      Alert.alert('Products Error', UTILS.returnError(error));
+    } finally {
+      setRatingLoading(false);
+    }
+  };
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
@@ -412,13 +432,16 @@ const OrderDetails = props => {
                 />
                 {status === '4' && (
                   <PrimaryButton
-                    onPress={() => setRatingModal(true)}
+                    disabled={!item?.deliveryBoyRating?.id}
+                    onPress={() => {
+                      setRatingModal(true);
+                    }}
                     containerStyle={{
                       height: mvs(40),
                       borderRadius: mvs(5),
                       marginTop: mvs(45),
                     }}
-                    title={'Order Confirmed'}
+                    title={t('rate_delivery_boy')}
                   />
                 )}
               </View>
@@ -764,6 +787,8 @@ const OrderDetails = props => {
         visible={ratingModal}
         setValues={setValues}
         values={values}
+        ratingLoading={ratingLoading}
+        onSubmit={() => onPressRating()}
       />
     </View>
   );

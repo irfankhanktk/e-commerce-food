@@ -81,5 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     left: mvs(29),
   },
+  header: {
+    paddingHorizontal: mvs(20),
+    paddingVertical: mvs(15),
+  },
 });
 export default styles;

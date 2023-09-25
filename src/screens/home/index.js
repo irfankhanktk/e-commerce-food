@@ -46,6 +46,7 @@ const HomeTab = props => {
   const [cartLoading, setCartLoading] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
   const [allProducts, setAllProducts] = React.useState([]);
+
   const [loading, setLoading] = React.useState(true);
 
   const getBanners = async () => {
@@ -156,7 +157,13 @@ const HomeTab = props => {
                 <View>
                   <SwiperCard data={banner?.data} />
                   <Row style={{marginTop: mvs(25), paddingHorizontal: mvs(20)}}>
-                    <TouchableOpacity style={{alignItems: 'center'}}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props?.navigation?.replace('Drawer', {
+                          initialRoute: 'Categories',
+                        })
+                      }
+                      style={{alignItems: 'center'}}>
                       <View
                         style={{
                           ...styles.itemsContainer,
@@ -204,7 +211,9 @@ const HomeTab = props => {
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{alignItems: 'center'}}>
+                    <TouchableOpacity
+                      onPress={() => navigate('FeaturedCategories')}
+                      style={{alignItems: 'center'}}>
                       <View
                         style={{
                           ...styles.itemsContainer,
@@ -219,7 +228,7 @@ const HomeTab = props => {
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity style={{alignItems: 'center'}}>
+                    {/* <TouchableOpacity style={{alignItems: 'center'}}>
                       <View
                         style={{
                           ...styles.itemsContainer,
@@ -233,7 +242,7 @@ const HomeTab = props => {
                         label={t('coupons')}
                         fontSize={mvs(10)}
                       />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                   </Row>
                   <View
                     style={{

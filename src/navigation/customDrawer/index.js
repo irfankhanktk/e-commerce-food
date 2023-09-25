@@ -27,7 +27,8 @@ const CustomDrawer = props => {
 
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector(s => s);
-  const user = userInfo?.user?.userInfo?.user;
+  const user = userInfo?.user?.userInfo;
+  console.log('user check===>', user);
 
   const {navigation} = props;
   const [loading, setLoading] = React.useState(false);
@@ -58,22 +59,18 @@ const CustomDrawer = props => {
 
       <ImageBackground
         source={{
-          uri: 'https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg',
+          uri: user?.avatar_original,
         }}
         style={styles.imageStyle}
         borderRadius={mvs(100)}>
         {/* <Image source={{uri: user?.profileImage}} style={styles.userImage} /> */}
       </ImageBackground>
 
-      <Bold
-        color={colors.text}
-        label={'Mohsin Khattak'}
-        style={styles.userName}
-      />
+      <Bold color={colors.text} label={user?.name} style={styles.userName} />
       <Regular
         color={colors.text}
         style={{alignSelf: 'center'}}
-        label={'mohsinkhattak095@gmail.com'}
+        label={user?.email}
       />
       <View style={styles.line} />
       <View style={styles.innerContainer}>

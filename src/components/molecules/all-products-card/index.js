@@ -1,15 +1,14 @@
-import {mvs} from 'config/metrices';
-import React from 'react';
-import {ImageBackground, TouchableOpacity, View, Image} from 'react-native';
-import styles from './styles';
-import Regular from 'typography/regular-text';
-import {featured, forklift, silder} from 'assets/images';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {colors} from 'config/colors';
 import {useTheme} from '@react-navigation/native';
+import {forklift} from 'assets/images';
+import {PrimaryButton} from 'components/atoms/buttons';
+import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
 import {t} from 'i18next';
+import React from 'react';
+import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
+import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
+import Regular from 'typography/regular-text';
+import styles from './styles';
 
 const AllProductsCard = ({
   item,

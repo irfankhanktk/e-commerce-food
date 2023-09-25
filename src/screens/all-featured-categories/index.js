@@ -15,7 +15,10 @@ const AllFeaturedCategories = props => {
   const {loading, categories, error} = useCategories();
 
   const featuredProduct = ({item}) => (
-    <AllCategoriesCard item={item} onPress={() => navigate('ProductDetials')} />
+    <AllCategoriesCard
+      item={item}
+      onPress={() => navigate('FeaturedCategories', {item: item})}
+    />
   );
 
   return (

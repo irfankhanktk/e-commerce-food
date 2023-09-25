@@ -28,11 +28,13 @@ import {Loader} from 'components/atoms/loader';
 import {getRelatedProducts} from 'services/api/product-api-actions';
 import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
 import {onCreateConveration} from 'services/api/chat-api-actions';
+import {Checkbox} from 'components/atoms/checkbox';
 
 const ProductDetials = props => {
   const colors = useTheme().colors;
 
   const {wishlist, product, cart} = useAppSelector(s => s);
+
   const {cart_list} = cart;
   const {wishlists} = wishlist;
   const {top_selling_products} = product;
@@ -40,6 +42,8 @@ const ProductDetials = props => {
   const productId = props?.route?.params?.productId;
   const {t} = i18n;
   const [data, setData] = React.useState();
+  console.log('item check=========>', data?.variation);
+
   const [loading, setLoading] = React.useState(true);
   const [cartLoading, setCartLoading] = React.useState(false);
   const [relatedProducts, setRelatedProducts] = React.useState([]);
@@ -49,6 +53,7 @@ const ProductDetials = props => {
   const cartItem = cart_list?.find(
     x => x?.cart_items[0]?.product_id === productId,
   );
+
   const onMessageSellerPress = async () => {
     try {
       setChatLoading(true);
@@ -175,6 +180,21 @@ const ProductDetials = props => {
                     {bool ? <HeartFill /> : <Heart />}
                   </TouchableOpacity>
                 </Row>
+                <View style={{backgroundColor: 'red', padding: mvs(10)}}>
+                  {data?.variation?.map(({item, index}) => (
+                    <View
+                      style={{
+                        backgroundColor: 'red',
+                        width: 100,
+                        height: mvs(10),
+                      }}
+                      key={index}>
+                      <Checkbox />
+                      <Regular color={colors.primary} label={'kdjsf'} />
+                    </View>
+                  ))}
+                </View>
+
                 <Row style={{justifyContent: 'flex-start'}}>
                   <Regular
                     color={colors.text}
@@ -256,8 +276,14 @@ const ProductDetials = props => {
               paddingHorizontal: mvs(20),
             }}
           />
-          <Row style={{paddingHorizontal: mvs(20), paddingVertical: mvs(10)}}>
-            <IconButton
+          <Row
+            style={{
+              width: '100%',
+              justifyContent: 'center',
+              paddingHorizontal: mvs(20),
+              paddingVertical: mvs(10),
+            }}>
+            {/* <IconButton
               loading={cartLoading}
               onPress={() => {
                 dispatch(
@@ -277,17 +303,41 @@ const ProductDetials = props => {
                 );
                 // props?.navigation?.replace('Drawer', {initialRoute: 'Cart'})
               }}
-              Icon={<CartWhite />}
+              // Icon={ <CartWhite />}
               title={t(!cartItem ? 'add_to_cart' : 'remove')}
-              containerStyle={{width: '48%'}}
-              textStyle={{marginLeft: mvs(20)}}
+              containerStyle={{width: '100%'}}
+              textStyle={{marginLeft: mvs(100)}}
+            /> */}
+            <PrimaryButton
+              loading={cartLoading}
+              onPress={() => {
+                dispatch(
+                  cartItem
+                    ? removeFromCartList(
+                        cartItem?.cart_items[0]?.id,
+                        setCartLoading,
+                      )
+                    : addToCartList(
+                        {
+                          id: productId,
+                          variant: '',
+                          quantity: 1,
+                        },
+                        setCartLoading,
+                      ),
+                );
+                // props?.navigation?.replace('Drawer', {initialRoute: 'Cart'})
+              }}
+              // Icon={ <CartWhite />}
+              title={t(!cartItem ? 'add_to_cart' : 'remove')}
             />
-            <IconButton
+
+            {/* <IconButton
               Icon={<Carttt />}
               containerStyle={styles.buynowBtn}
               title={t('buy_now')}
               textStyle={{color: colors.primary, marginLeft: mvs(20)}}
-            />
+            /> */}
           </Row>
         </>
       )}

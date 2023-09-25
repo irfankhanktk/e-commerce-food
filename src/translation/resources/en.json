@@ -159,7 +159,11 @@
 "update":"Update",
 "home_delivery":"Home Delivery",
 "deliver_status":"Delivery Status -",
-"payment_statuss":"Payment Status -"
+"payment_statuss":"Payment Status -",
+"rate_delivery_boy":"Rate Delivery Boy",
+"enter_comment":"Enter Comment",
+"submit":"Submit",
+"order_placed":"Order Placed"
 
 
 
