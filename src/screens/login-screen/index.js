@@ -113,7 +113,7 @@ const LoginScreen = props => {
                   <TouchableOpacity
                     style={{alignSelf: 'flex-end', marginBottom: mvs(15)}}
                     onPress={() => navigate('ForgotPassword')}>
-                    <Bold color={colors.text} label={t('Forgot Password?')} />
+                    <Bold color={colors.text} label={t('forgotpassword')} />
                   </TouchableOpacity>
                   <PrimaryButton
                     loading={loading}

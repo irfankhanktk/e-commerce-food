@@ -128,7 +128,7 @@ const CustomDrawer = props => {
         />
         <IconButton
           onPress={logOut}
-          title={t('Logout')}
+          title={t('log_out')}
           loading={loading}
           textStyle={{...styles.textStyle, color: colors.text}}
           containerStyle={{backgroundColor: colors.background}}

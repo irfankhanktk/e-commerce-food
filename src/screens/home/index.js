@@ -1,3 +1,4 @@
+import {useTheme} from '@react-navigation/native';
 import {
   Brands,
   Coupons,
@@ -7,34 +8,32 @@ import {
 } from 'assets/icons';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import HomeHeader from 'components/atoms/headers/home-header';
+import {Loader} from 'components/atoms/loader';
 import {Row} from 'components/atoms/row';
 import SwiperCard from 'components/atoms/swiper';
+import AllProductsCard from 'components/molecules/all-products-card';
 import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
 import FeaturedProductsCard from 'components/molecules/featured-products-card';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
+import {useAppDispatch} from 'hooks/use-store';
+import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, TouchableOpacity, View} from 'react-native';
-import Medium from 'typography/medium-text';
-import Regular from 'typography/regular-text';
-import styles from './styles';
+import {getAddressess} from 'services/api/address-api-actions';
+import {getSearchProducts, getWishlist} from 'services/api/api-actions';
 import {
   banners,
   getAllFeaturedProducts,
   getAllProducts,
   getFeaturedCategories,
 } from 'services/api/auth-api-actions';
-import AllProductsCard from 'components/molecules/all-products-card';
-import {Loader} from 'components/atoms/loader';
-import {UTILS} from 'utils';
-import {t} from 'i18next';
-import {useTheme} from '@react-navigation/native';
-import {getSearchProducts, getWishlist} from 'services/api/api-actions';
-import {useAppDispatch} from 'hooks/use-store';
-import {getTopSellingProducts} from 'services/api/product-api-actions';
 import {getCartList} from 'services/api/cart-api-actions';
-import {getAddressess} from 'services/api/address-api-actions';
+import {getTopSellingProducts} from 'services/api/product-api-actions';
+import Medium from 'typography/medium-text';
+import Regular from 'typography/regular-text';
+import {UTILS} from 'utils';
+import styles from './styles';
 
 const HomeTab = props => {
   const colors = useTheme().colors;
@@ -168,7 +167,7 @@ const HomeTab = props => {
                       </View>
                       <Regular
                         color={colors.text}
-                        label={'Top Categories'}
+                        label={t('top_category')}
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
@@ -184,7 +183,7 @@ const HomeTab = props => {
                       </View>
                       <Regular
                         color={colors.text}
-                        label={'Brands'}
+                        label={t('brands')}
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
@@ -201,7 +200,7 @@ const HomeTab = props => {
                       </View>
                       <Regular
                         color={colors.text}
-                        label={'Top Vendors'}
+                        label={t('top_vendors')}
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
@@ -216,7 +215,7 @@ const HomeTab = props => {
                       </View>
                       <Regular
                         color={colors.text}
-                        label={'Flash Deals'}
+                        label={t('flash_deals')}
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
@@ -231,7 +230,7 @@ const HomeTab = props => {
                       </View>
                       <Regular
                         color={colors.text}
-                        label={'Coupons'}
+                        label={t('coupons')}
                         fontSize={mvs(10)}
                       />
                     </TouchableOpacity>
@@ -250,7 +249,7 @@ const HomeTab = props => {
                       }}>
                       <Medium
                         color={colors.white}
-                        label={'Featured Categories'}
+                        label={t('featured_categories')}
                       />
                       <TouchableOpacity
                         onPress={() => navigate('AllFeaturedCategories')}>
@@ -279,7 +278,7 @@ const HomeTab = props => {
                         marginLeft: mvs(10),
                       }}
                       color={colors.white}
-                      label={'Featured Products'}
+                      label={t('featured_products')}
                     />
                     <CustomFlatList
                       horizontal={true}
@@ -291,8 +290,8 @@ const HomeTab = props => {
                   </View>
                   <Medium
                     color={colors.text}
-                    style={{marginLeft: mvs(20), marginTop: mvs(10)}}
-                    label={'All Products'}
+                    style={{paddingHorizontal: mvs(20), marginTop: mvs(10)}}
+                    label={t('all_product')}
                   />
                 </View>
               )

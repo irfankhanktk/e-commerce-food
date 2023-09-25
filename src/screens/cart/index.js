@@ -39,7 +39,7 @@ const CartTab = props => {
       <AppHeader back title={t('shopping_cart')} />
       {cart_list?.length > 0 && (
         <Row style={{paddingHorizontal: mvs(20)}}>
-          <Medium color={colors.text} label={t('sub_tatal')} />
+          <Medium color={colors.text} label={t('sub_total')} />
           <Medium color={colors.text} label={cartSummary?.sub_total} />
         </Row>
       )}

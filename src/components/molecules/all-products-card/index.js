@@ -9,6 +9,7 @@ import {colors} from 'config/colors';
 import {useTheme} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
+import {t} from 'i18next';
 
 const AllProductsCard = ({
   item,
@@ -57,7 +58,7 @@ const AllProductsCard = ({
             );
           }}
           containerStyle={styles.btnAddtoCart}
-          title={cartItem ? 'remove' : 'Add To Cart'}
+          title={cartItem ? t('remove') : t('add_to_cart')}
         />
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular

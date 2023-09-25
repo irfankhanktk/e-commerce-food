@@ -10,6 +10,7 @@ import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import useCategories from 'hooks/use-categories';
 import {Loader} from 'components/atoms/loader';
+import {t} from 'i18next';
 
 const CategoriesTab = props => {
   const colors = useTheme().colors;
@@ -24,7 +25,7 @@ const CategoriesTab = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={'Categories'} />
+      <AppHeader back title={t('categories')} />
 
       {loading ? (
         <Loader />

@@ -71,7 +71,7 @@ const ForgotPassword = (props: props) => {
                 <Bold
                   color={colors.text}
                   style={styles.loginTexhzologyContainer}
-                  label={'Forgot Password'}
+                  label={t('forgot_password')}
                 />
                 <PrimaryInput
                   keyboardType={'email-address'}
@@ -88,7 +88,7 @@ const ForgotPassword = (props: props) => {
 
                 <PrimaryButton
                   loading={loading}
-                  title="Send"
+                  title={t("send")}
                   onPress={handleSubmit}
                   containerStyle={{
                     marginTop: mvs(12),

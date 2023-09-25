@@ -212,7 +212,9 @@ const AddLocation = props => {
                     onPress={handleSubmit}
                     loading={loading}
                     containerStyle={styles.addAddressBtn}
-                    title={`${payload?.id ? 'Update' : 'Add'} address`}
+                    title={`${payload?.id ? t('update') : t('add')} ${t(
+                      'address',
+                    )}`}
                   />
                 </View>
               </KeyboardAvoidScrollview>

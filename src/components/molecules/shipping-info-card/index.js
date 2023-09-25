@@ -71,7 +71,7 @@ const ShippingInfoCard = ({item, style, onPress, loading}) => {
               <Regular
                 style={{flex: 1}}
                 fontSize={mvs(12)}
-                label={t('postal_code ')}
+                label={t('postal_code')}
               />
               <Regular
                 color={colors.text}

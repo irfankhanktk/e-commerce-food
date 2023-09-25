@@ -98,7 +98,10 @@ const AdminDashBoard = () => {
             <Bold style={{marginTop: mvs(10)}} label={'Admin DashBoard'} />
             <TouchableOpacity onPress={() => logOut()}>
               <Row>
-                <Bold style={{marginRight: mvs(10)}} label={'LogOut'} />
+                <Bold
+                  style={{marginRight: mvs(10), fontSize: mvs(12)}}
+                  label={'LogOut'}
+                />
                 {/* <LogOut /> */}
               </Row>
             </TouchableOpacity>

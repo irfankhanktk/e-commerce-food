@@ -42,3 +42,5 @@ export {default as Tick} from './tick.svg';
 export {default as RefundTwo} from './refundtwo.svg';
 export {default as TickTwo} from './ticktwo.svg';
 export {default as LogOut} from './logout.svg';
+export {default as StarFill} from './starFill.svg';
+export {default as StarEmpty} from './starEmpty.svg';

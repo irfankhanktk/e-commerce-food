@@ -23,7 +23,7 @@ const Brands = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={'Brands'} />
+      <AppHeader back title={t('brands')} />
 
       {loading ? (
         <Loader />

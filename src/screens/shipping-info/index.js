@@ -1,18 +1,17 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 
+import {useTheme} from '@react-navigation/native';
+import {PrimaryButton} from 'components/atoms/buttons';
 import AppHeader from 'components/atoms/headers/app-header';
+import ShippingInfoCard from 'components/molecules/shipping-info-card';
 import {mvs} from 'config/metrices';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
-import styles from './styles';
-import ShippingInfoCard from 'components/molecules/shipping-info-card';
-import {PrimaryButton} from 'components/atoms/buttons';
-import {useTheme} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {setSelectedAddress} from 'store/reducers/address-reducer';
 import {makeDefaultAddress} from 'services/api/address-api-actions';
+import styles from './styles';
 
 const ShippingInfo = props => {
   const colors = useTheme().colors;

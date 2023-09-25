@@ -49,7 +49,10 @@ type props = {
   isPassword?: boolean;
   editable?: boolean;
   disabledSearch?: boolean;
+  multiline?: boolean;
   error?: string;
+  numberOfLines?: number;
+
   id?: any;
   keyboardType?: KeyboardTypeOptions | undefined;
   onBlur?: (e?: NativeSyntheticEvent<TextInputFocusEventData>) => void;
@@ -138,6 +141,7 @@ const PrimaryInput = (props: props) => {
     error,
     mainContainer,
     editable = true,
+    multiline = false,
     onBlur = () => { },
     onPressIn = () => { },
     isRequired = false,
@@ -149,6 +153,7 @@ const PrimaryInput = (props: props) => {
       </Regular> */}
       <View style={[styles.Container, containerStyle]}>
         <TextInput
+          multiline={multiline}
           editable={editable}
           onBlur={onBlur}
           onPressIn={onPressIn}
@@ -195,6 +200,7 @@ export const CommentInput = (props: props) => {
     containerStyle,
     isPassword,
     keyboardType,
+    numberOfLines,
     error,
     onBlur = () => { },
   } = props;
@@ -202,6 +208,7 @@ export const CommentInput = (props: props) => {
     <>
       <View style={[styles.commentContainer, containerStyle]}>
         <TextInput
+          numberOfLines={numberOfLines}
           onBlur={onBlur}
           keyboardType={keyboardType}
           value={value}

@@ -102,7 +102,7 @@ const ShippingCost = props => {
                 }
               />
             }
-            title={t('Home Delivery')}
+            title={t('home_delivery')}
             textStyle={{
               fontSize: mvs(14),
               color: isButtonSelected('carrier')

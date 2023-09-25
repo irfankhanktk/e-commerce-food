@@ -42,7 +42,7 @@ export const renewpasswordFormValidation = yup.object().shape({
   password: yup.string().required('req_pass').min(8, 'weak_pass'),
   verification_code: yup
     .string()
-    .required('Verification code is required').min(6, 'Enter 6 digit verification code').max(6, 'Enter 6 digit verification code')
+    .required('verification_password').min(6, 'min_verification_code').max(6, 'min_verification_code')
 
 });
 export const signupFormValidation = yup.object().shape({

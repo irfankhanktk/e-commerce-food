@@ -98,7 +98,7 @@ const RenewPassword = (props: props) => {
                 />
                 <PrimaryInput
                   isPassword
-                  placeholder={t('New Password')}
+                  placeholder={t('new_password')}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
@@ -111,7 +111,7 @@ const RenewPassword = (props: props) => {
                 />
 
                 <PrimaryButton
-                  title="Confirm"
+                  title={t("confirm")}
                   onPress={handleSubmit}
                   containerStyle={{
                     marginTop: mvs(12),

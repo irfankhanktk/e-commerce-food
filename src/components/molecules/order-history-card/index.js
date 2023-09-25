@@ -8,6 +8,7 @@ import {TouchableOpacity, View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
+import {t} from 'i18next';
 
 const OrderHistoryCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
@@ -37,7 +38,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.text,
                 fontSize: mvs(12),
               }}
-              label={`${'Payment Status -'} ${item?.payment_status}`}
+              label={`${t('payment_statuss')} ${item?.payment_status}`}
             />
           </Row>
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>
@@ -48,7 +49,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
                 color: colors.text,
                 fontSize: mvs(12),
               }}
-              label={`${'Delivery Status -'} ${item?.delivery_status}`}
+              label={`${t('deliver_status')} ${item?.delivery_status}`}
             />
           </Row>
         </View>

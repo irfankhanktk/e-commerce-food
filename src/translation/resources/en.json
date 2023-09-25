@@ -134,5 +134,36 @@
   "no_cart_item":"You Have No Item In The Cart",
   "en":"English",
   "ar":"Arabic",
-  "change_language":"Change Language"
+  "change_language":"Change Language",
+  "forgotpassword":"Forgot Password?",
+  "send":"Send",
+  "forgot_password":"Forgot Password",
+  "confirm":"Confirm",
+"verification_password":"Verification code is required",
+"min_verification_code":"Enter 6 digit verification code",
+
+
+"top_category":"Top Categories",
+"brands":"Brands",
+"top_vendors":"Top Vendors",
+"flash_deals":"Flash Deals",
+"coupons":"Coupons",
+"featured_categories":"Featured Categories",
+"featured_products":"Featured Products",
+"all_product":"All Products",
+"remove":"Remove",
+"categories":"Categories",
+"product_details":"Product details",
+"brand":"Brand",
+"description":"Description",
+"update":"Update",
+"home_delivery":"Home Delivery",
+"deliver_status":"Delivery Status -",
+"payment_statuss":"Payment Status -"
+
+
+
+
+
+  
 }

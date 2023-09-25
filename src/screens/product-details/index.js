@@ -116,7 +116,7 @@ const ProductDetials = props => {
   const bool = wishlists?.some(x => x === data?.productDetails?.id);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      <AppHeader back title={t('Product details')} icon />
+      <AppHeader back title={t('product_details')} icon />
       {loading ? (
         <Loader />
       ) : (
@@ -178,7 +178,7 @@ const ProductDetials = props => {
                 <Row style={{justifyContent: 'flex-start'}}>
                   <Regular
                     color={colors.text}
-                    label={'Brand'}
+                    label={t('brand')}
                     style={styles.brand}
                   />
                   <Regular label={'Calvin Klein'} style={styles.brandName} />

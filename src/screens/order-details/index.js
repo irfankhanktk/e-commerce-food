@@ -36,20 +36,21 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Bold from 'typography/bold-text';
 import {getDistance} from 'services/api/auth-api-actions';
 import {Loader} from 'components/atoms/loader';
+import RatingModal from './../../components/molecules/modals/rating-modal';
 const OrderDetails = props => {
   const colors = useTheme().colors;
   const [path, setPath] = React.useState([]);
+  const [values, setValues] = React.useState({rating: '', comment: ''});
+  console.log('value me check===', values);
 
   const {status, order} = props?.route?.params || {};
   const data = order;
-
   const [orderConformationModal, setOrderConfirmationModal] =
     React.useState(false);
-
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState({});
   const [totalDistance, setTotalDistance] = React.useState('');
-  console.log('totalDistance==========>', item);
+  const [ratingModal, setRatingModal] = React.useState(false);
 
   // const deliveryOrigin = {
   //   latitude: item?.DeliveryBoyPath[1]?.lat || 37.78825,
@@ -74,7 +75,7 @@ const OrderDetails = props => {
         latitude: x?.lat * 1,
         longitude: x?.lng * 1,
       }));
-      console.log('set path track======>', pathTrack);
+
       setPath(pathTrack || []);
     } catch (error) {
       console.log('Error in getProducts====>', error);
@@ -112,9 +113,6 @@ const OrderDetails = props => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // React.useEffect(() => {
-  //   fetchData();
-  // }, []);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('order_details')} />
@@ -255,7 +253,6 @@ const OrderDetails = props => {
               </View>
             </Row>
           </View>
-
           <View
             style={{
               ...styles.innerContainer,
@@ -413,10 +410,20 @@ const OrderDetails = props => {
                   fontSize={mvs(12)}
                   label={`$ ${item?.order_details?.grand_total}`}
                 />
+                {status === '4' && (
+                  <PrimaryButton
+                    onPress={() => setRatingModal(true)}
+                    containerStyle={{
+                      height: mvs(40),
+                      borderRadius: mvs(5),
+                      marginTop: mvs(45),
+                    }}
+                    title={'Order Confirmed'}
+                  />
+                )}
               </View>
             </Row>
           </View>
-
           {status === '4' || status === '3' ? (
             <>
               <View style={styles.mapContainer}>
@@ -426,7 +433,7 @@ const OrderDetails = props => {
                     origin={origin}
                     destination={destination}
                   />
-                  {console.log()}
+
                   <Marker coordinate={origin} />
                   <Marker coordinate={destination}>
                     <ImageBackground
@@ -475,6 +482,9 @@ const OrderDetails = props => {
                       </Row>
                       <Row>
                         <IconButton
+                          onPress={() =>
+                            UTILS.dialPhone(item?.deliveryBoy?.phone || '')
+                          }
                           Icon={
                             <Ionicons
                               name={'call-outline'}
@@ -743,9 +753,17 @@ const OrderDetails = props => {
           )}
         </KeyboardAvoidScrollview>
       )}
+
       <OrderConfirmationModal
         onClose={() => setOrderConfirmationModal(false)}
         visible={orderConformationModal}
+      />
+
+      <RatingModal
+        onClose={() => setRatingModal(false)}
+        visible={ratingModal}
+        setValues={setValues}
+        values={values}
       />
     </View>
   );
