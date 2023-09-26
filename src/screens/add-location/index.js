@@ -1,29 +1,18 @@
 import {PrimaryButton} from 'components/atoms/buttons';
 import CustomMap from 'components/atoms/custom-map';
-import {Row} from 'components/atoms/row';
 import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import React from 'react';
-import {
-  Alert,
-  I18nManager,
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, View} from 'react-native';
 import i18n from 'translation';
-import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
 // import {addUserAddress} from 'services/api/api-actions';
 import {useTheme} from '@react-navigation/native';
-import PrimaryInput, {
-  InputWithIcon,
-  SearchInput,
-} from 'components/atoms/inputs';
-import {goBack} from 'navigation/navigation-ref';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import PrimaryInput, {InputWithIcon} from 'components/atoms/inputs';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
+import {Formik} from 'formik';
 import {
   addAddress,
   getCities,
@@ -31,13 +20,7 @@ import {
   getStates,
 } from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
-import {setCountries} from 'store/reducers/user-reducer';
-import {setStates} from 'store/reducers/user-reducer';
-import {setCities} from 'store/reducers/user-reducer';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
-import GoogleSearchBar from 'components/atoms/google-search';
-import {Formik} from 'formik';
-import {addressFormValidation, signinFormValidation} from 'validations';
+import {addressFormValidation} from 'validations';
 
 const AddLocation = props => {
   const {route} = props;
