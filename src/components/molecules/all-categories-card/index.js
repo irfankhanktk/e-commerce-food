@@ -8,18 +8,17 @@ import {useTheme} from '@react-navigation/native';
 
 const AllCategoriesCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
-
   return (
     <TouchableOpacity
       onPress={onPress}
       style={{...styles.container, backgroundColor: colors.downColor}}>
       <View style={{alignItems: 'center'}}>
-        <ImageBackground
+        {/* <ImageBackground
           borderRadius={mvs(10)}
           source={featured}
-          style={styles.backGroundImage}>
-          <Image source={{uri: item?.banner}} style={styles.innerImage} />
-        </ImageBackground>
+          style={styles.backGroundImage}> */}
+        <Image source={{uri: item?.banner}} style={styles.backGroundImage} />
+        {/* </ImageBackground> */}
         <Regular
           color={colors.text}
           label={item?.name}

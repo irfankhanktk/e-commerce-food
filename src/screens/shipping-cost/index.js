@@ -22,28 +22,6 @@ const ShippingCost = props => {
   const colors = useTheme().colors;
   const {cart_list} = useAppSelector(x => x?.cart);
   const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState([
-    {
-      id: 1,
-      selected: false,
-    },
-    {
-      id: 2,
-      selected: false,
-    },
-    {
-      id: 3,
-      selected: false,
-    },
-    {
-      id: 4,
-      selected: false,
-    },
-    {
-      id: 5,
-      selected: false,
-    },
-  ]);
 
   const value = {
     shipping_type: 'home_delivery',
@@ -52,7 +30,7 @@ const ShippingCost = props => {
   const UpdateShippingType = async () => {
     try {
       setLoading(true);
-      const res = await updateShippingType(value);
+      await updateShippingType(value);
       navigate('CheckOut');
     } catch (error) {
       console.log('Error in getProducts====>', error);

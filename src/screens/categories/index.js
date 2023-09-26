@@ -1,16 +1,15 @@
+import {useTheme} from '@react-navigation/native';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
+import {Loader} from 'components/atoms/loader';
 import AllCategoriesCard from 'components/molecules/all-categories-card';
 import {mvs} from 'config/metrices';
+import useCategories from 'hooks/use-categories';
+import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
-import {getAllCategories} from 'services/api/auth-api-actions';
 import styles from './styles';
-import {useTheme} from '@react-navigation/native';
-import useCategories from 'hooks/use-categories';
-import {Loader} from 'components/atoms/loader';
-import {t} from 'i18next';
 
 const CategoriesTab = props => {
   const colors = useTheme().colors;

@@ -1,12 +1,10 @@
 import {useTheme} from '@react-navigation/native';
-import {forklift} from 'assets/images';
 import {PrimaryButton} from 'components/atoms/buttons';
 import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
 import React from 'react';
-import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
-import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
@@ -29,32 +27,35 @@ const AllProductsCard = ({
       onPress={onPress}
       style={{...styles.container, backgroundColor: colors.downColor}}>
       <View style={{alignItems: 'center'}}>
-        <ImageBackground
+        {/* <ImageBackground
           borderRadius={mvs(10)}
           source={forklift}
-          style={styles.backGroundImage}>
-          <Image
-            source={{uri: item?.thumbnail_image}}
-            style={styles.innerImage}
-          />
-        </ImageBackground>
+          style={styles.backGroundImage}> */}
+        <Image
+          source={{uri: item?.thumbnail_image}}
+          style={styles.backGroundImage}
+        />
+        {/* </ImageBackground> */}
         <PrimaryButton
           loading={loading}
           onPress={() => {
-            dispatch(
-              cartItem
-                ? removeFromCartList(cartItem?.cart_items[0]?.id, bool =>
-                    setCartLoading(bool ? item?.id : false),
-                  )
-                : addToCartList(
-                    {
-                      id: item?.id,
-                      variant: '',
-                      quantity: 1,
-                    },
-                    bool => setCartLoading(bool ? item?.id : false),
-                  ),
-            );
+            onPress();
+
+            // }
+            // dispatch(
+            //   cartItem
+            //     ? removeFromCartList(cartItem?.cart_items[0]?.id, bool =>
+            //         setCartLoading(bool ? item?.id : false),
+            //       )
+            //     : addToCartList(
+            //         {
+            //           id: item?.id,
+            //           variant: '',
+            //           quantity: 1,
+            //         },
+            //         bool => setCartLoading(bool ? item?.id : false),
+            //       ),
+            // );
           }}
           containerStyle={styles.btnAddtoCart}
           title={cartItem ? t('remove') : t('add_to_cart')}

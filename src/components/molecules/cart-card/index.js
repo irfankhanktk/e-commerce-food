@@ -25,6 +25,7 @@ const CartCard = ({item, style, onPress}) => {
           <View style={{backgroundColor: colors.background, height: mvs(110)}}>
             <View style={{marginLeft: mvs(10)}}>
               <ImageBackground
+                borderRadius={mvs(5)}
                 source={{
                   uri: product?.product_thumbnail_image,
                 }}

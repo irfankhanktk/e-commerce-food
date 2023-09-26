@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: mvs(77),
     height: mvs(56),
     marginTop: mvs(10),
+    borderRadius: mvs(10),
   },
   innerImage: {width: '100%', height: '100%', borderRadius: mvs(10)},
 });

@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
   backGroundImage: {
     width: mvs(90),
     height: mvs(78),
-    marginTop: mvs(10),
+    marginVertical: mvs(10),
+    marginHorizontal: mvs(10),
   },
   imageMainContainer: {
     width: mvs(120),

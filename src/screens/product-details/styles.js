@@ -79,5 +79,6 @@ const styles = StyleSheet.create({
     borderWidth: mvs(1),
     borderColor: colors.primary,
   },
+ 
 });
 export default styles;

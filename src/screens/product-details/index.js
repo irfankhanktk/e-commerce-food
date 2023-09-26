@@ -1,40 +1,35 @@
 import {useTheme} from '@react-navigation/native';
-import {CartWhite, Carttt, Heart, HeartFill, MessageTwo} from 'assets/icons';
+import {Heart, HeartFill, MessageTwo} from 'assets/icons';
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
+import {Checkbox} from 'components/atoms/checkbox';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import DescriptionCard from 'components/atoms/description-card';
 import AppHeader from 'components/atoms/headers/app-header';
+import {Loader} from 'components/atoms/loader';
 import {Row} from 'components/atoms/row';
 import Stars from 'components/atoms/stars';
 import AllFeaturedCategoriesCard from 'components/molecules/all-featured-categories-card';
 import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
 import ProductDetailButtonCard from 'components/molecules/product-detail-button-card';
 import {mvs} from 'config/metrices';
+import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, Image, ScrollView, TouchableOpacity, View} from 'react-native';
-import {
-  getProductDetails,
-  getProductSlides,
-} from 'services/api/auth-api-actions';
+import {addUserWishlist, removeUserWishlist} from 'services/api/api-actions';
+import {getProductDetails} from 'services/api/auth-api-actions';
+import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
+import {onCreateConveration} from 'services/api/chat-api-actions';
+import {getRelatedProducts} from 'services/api/product-api-actions';
 import i18n from 'translation';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import styles from './styles';
-import {useAppDispatch, useAppSelector} from 'hooks/use-store';
-import {addUserWishlist, removeUserWishlist} from 'services/api/api-actions';
-import {Loader} from 'components/atoms/loader';
-import {getRelatedProducts} from 'services/api/product-api-actions';
-import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
-import {onCreateConveration} from 'services/api/chat-api-actions';
-import {Checkbox} from 'components/atoms/checkbox';
 
 const ProductDetials = props => {
   const colors = useTheme().colors;
-
   const {wishlist, product, cart} = useAppSelector(s => s);
-
   const {cart_list} = cart;
   const {wishlists} = wishlist;
   const {top_selling_products} = product;
@@ -42,7 +37,7 @@ const ProductDetials = props => {
   const productId = props?.route?.params?.productId;
   const {t} = i18n;
   const [data, setData] = React.useState();
-  console.log('item check=========>', data?.variation);
+  const [variation, setVariation] = React.useState('');
 
   const [loading, setLoading] = React.useState(true);
   const [cartLoading, setCartLoading] = React.useState(false);
@@ -75,7 +70,9 @@ const ProductDetials = props => {
   const renderTopProducts = ({item}) => (
     <AllFeaturedCategoriesCard
       item={item}
-      // onPress={() => navigate('CategoriesTab')}
+      onPress={() =>
+        props?.navigation?.push('ProductDetials', {productId: item?.id})
+      }
     />
   );
   const renderLikeProduct = ({item}) => (
@@ -180,18 +177,17 @@ const ProductDetials = props => {
                     {bool ? <HeartFill /> : <Heart />}
                   </TouchableOpacity>
                 </Row>
-                <View style={{backgroundColor: 'red', padding: mvs(10)}}>
-                  {data?.variation?.map(({item, index}) => (
-                    <View
-                      style={{
-                        backgroundColor: 'red',
-                        width: 100,
-                        height: mvs(10),
-                      }}
-                      key={index}>
-                      <Checkbox />
-                      <Regular color={colors.primary} label={'kdjsf'} />
-                    </View>
+                <Regular color={colors.text} label={'Variant'} />
+                <View style={{padding: mvs(10)}}>
+                  {data?.variations?.map((item, index) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => setVariation(item)}>
+                      <Row>
+                        <Checkbox checked={variation == item} />
+                        <Regular color={colors.text} label={item} />
+                      </Row>
+                    </TouchableOpacity>
                   ))}
                 </View>
 
@@ -310,6 +306,7 @@ const ProductDetials = props => {
             /> */}
             <PrimaryButton
               loading={cartLoading}
+              // disabled={!variation && data?.variations.length}
               onPress={() => {
                 dispatch(
                   cartItem
@@ -320,7 +317,7 @@ const ProductDetials = props => {
                     : addToCartList(
                         {
                           id: productId,
-                          variant: '',
+                          variant: variation,
                           quantity: 1,
                         },
                         setCartLoading,

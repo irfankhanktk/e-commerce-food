@@ -14,15 +14,15 @@ const FeaturedProducts = ({item, style, onPress, loading}) => {
       onPress={onPress}
       style={{...styles.container, backgroundColor: colors.downColor}}>
       <View style={{alignItems: 'center'}}>
-        <ImageBackground
+        {/* <ImageBackground
           borderRadius={mvs(10)}
           source={forklift}
-          style={styles.backGroundImage}>
-          <Image
-            source={{uri: item?.thumbnail_image}}
-            style={styles.innerImage}
-          />
-        </ImageBackground>
+          style={styles.backGroundImage}> */}
+        <Image
+          source={{uri: item?.thumbnail_image}}
+          style={styles.backGroundImage}
+        />
+        {/* </ImageBackground> */}
 
         <View style={{padding: mvs(5), alignItems: 'center'}}>
           <Regular

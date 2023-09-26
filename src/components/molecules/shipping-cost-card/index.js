@@ -1,21 +1,17 @@
+import {useTheme} from '@react-navigation/native';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import React from 'react';
-import {ImageBackground, TouchableOpacity, View} from 'react-native';
-import Medium from 'typography/medium-text';
-import styles from './styles';
+import {ImageBackground, View} from 'react-native';
 import Regular from 'typography/regular-text';
-import {Clander, CreaditCard, Delivery} from 'assets/icons';
-import {forklift} from 'assets/images';
-import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const ShippingCostCard = ({item, style, onPress, loading}) => {
   const colors = useTheme().colors;
   const product = item?.cart_items[0];
   console.log('shipping item check====>', product);
   return (
-    <TouchableOpacity
+    <View
       style={{...styles.container, backgroundColor: colors.downColor}}
       onPress={onPress}>
       <Row>
@@ -47,7 +43,7 @@ const ShippingCostCard = ({item, style, onPress, loading}) => {
           />
         </View>
       </Row>
-    </TouchableOpacity>
+    </View>
   );
 };
 export default React.memo(ShippingCostCard);

@@ -1,38 +1,37 @@
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import {
   Brands,
-  Coupons,
   FlashDeals,
   TopCategories,
-  TopVendors,
+  TopVendors
 } from 'assets/icons';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import HomeHeader from 'components/atoms/headers/home-header';
-import {Loader} from 'components/atoms/loader';
-import {Row} from 'components/atoms/row';
+import { Loader } from 'components/atoms/loader';
+import { Row } from 'components/atoms/row';
 import SwiperCard from 'components/atoms/swiper';
 import AllProductsCard from 'components/molecules/all-products-card';
 import FeaturedCategoriesCard from 'components/molecules/featured-categories-card';
 import FeaturedProductsCard from 'components/molecules/featured-products-card';
-import {mvs} from 'config/metrices';
-import {useAppDispatch} from 'hooks/use-store';
-import {t} from 'i18next';
-import {navigate} from 'navigation/navigation-ref';
+import { mvs } from 'config/metrices';
+import { useAppDispatch } from 'hooks/use-store';
+import { t } from 'i18next';
+import { navigate } from 'navigation/navigation-ref';
 import React from 'react';
-import {Alert, TouchableOpacity, View} from 'react-native';
-import {getAddressess} from 'services/api/address-api-actions';
-import {getSearchProducts, getWishlist} from 'services/api/api-actions';
+import { Alert, TouchableOpacity, View } from 'react-native';
+import { getAddressess } from 'services/api/address-api-actions';
+import { getSearchProducts, getWishlist } from 'services/api/api-actions';
 import {
   banners,
   getAllFeaturedProducts,
   getAllProducts,
   getFeaturedCategories,
 } from 'services/api/auth-api-actions';
-import {getCartList} from 'services/api/cart-api-actions';
-import {getTopSellingProducts} from 'services/api/product-api-actions';
+import { getCartList } from 'services/api/cart-api-actions';
+import { getTopSellingProducts } from 'services/api/product-api-actions';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-import {UTILS} from 'utils';
+import { UTILS } from 'utils';
 import styles from './styles';
 
 const HomeTab = props => {

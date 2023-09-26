@@ -8,6 +8,10 @@ import {mvs} from 'config/metrices';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Medium from 'typography/medium-text';
 import {Row} from '../row';
+import {CartActive} from 'assets/icons/tab-icons';
+import Regular from 'typography/regular-text';
+import {useAppSelector} from 'hooks/use-store';
+import {navigate} from 'navigation/navigation-ref';
 const AppHeader = ({
   style = {},
   title,
@@ -25,6 +29,8 @@ const AppHeader = ({
   const navigation = useNavigation();
   const colors = useTheme().colors;
 
+  const {user, cart} = useAppSelector(s => s);
+  const {cart_list} = cart;
   return (
     <View
       style={{...styles.container, style, backgroundColor: colors.background}}>
@@ -50,12 +56,20 @@ const AppHeader = ({
           <></>
         )}
         {icon ? (
-          <TouchableOpacity onPress={() => navigation?.goBack()}>
-            <AntDesign
+          <TouchableOpacity onPress={() => navigate('Cart')}>
+            {/* <AntDesign
               name={'sharealt'}
               size={mvs(20)}
               color={colors.iconColor}
-            />
+            /> */}
+            <CartActive />
+            <View style={styles.circle}>
+              <Regular
+                fontSize={mvs(12)}
+                color={colors.white}
+                label={cart_list?.length || '0'}
+              />
+            </View>
           </TouchableOpacity>
         ) : (
           <View></View>
@@ -90,4 +104,15 @@ const styles = StyleSheet.create({
     fontSize: mvs(18),
   },
   back: {},
+  circle: {
+    width: mvs(20),
+    height: mvs(20),
+    borderRadius: mvs(10),
+    backgroundColor: colors.primary,
+    position: 'absolute',
+    left: mvs(10),
+    bottom: mvs(15),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
