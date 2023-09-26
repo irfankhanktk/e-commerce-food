@@ -79,6 +79,14 @@ const styles = StyleSheet.create({
     borderWidth: mvs(1),
     borderColor: colors.primary,
   },
- 
+  errorLabel: {
+    // alignSelf: 'flex-start',
+    color: colors.red,
+    // backgroundColor: 'red',
+    fontSize: mvs(10),
+    marginBottom: mvs(5),
+    height: mvs(15),
+    marginHorizontal: mvs(10),
+  },
 });
 export default styles;

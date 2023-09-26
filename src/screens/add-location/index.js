@@ -3,7 +3,7 @@ import CustomMap from 'components/atoms/custom-map';
 import {mvs} from 'config/metrices';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import React from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, I18nManager, View} from 'react-native';
 import i18n from 'translation';
 import Regular from 'typography/regular-text';
 import styles from './styles';
@@ -21,6 +21,10 @@ import {
 } from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
 import {addressFormValidation} from 'validations';
+import {Row} from 'components/atoms/row';
+import {TouchableOpacity} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {goBack} from 'navigation/navigation-ref';
 
 const AddLocation = props => {
   const {route} = props;
@@ -65,8 +69,8 @@ const AddLocation = props => {
 
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
-      {/* <View style={{}}>
-        <Row
+      <View style={{}}>
+        <View
           style={{
             position: 'absolute',
             zIndex: 1,
@@ -82,8 +86,8 @@ const AddLocation = props => {
               color={colors.text}
             />
           </TouchableOpacity>
-        </Row>
-      </View> */}
+        </View>
+      </View>
       <View style={{flex: 1}}>
         <Formik
           onSubmit={onSubmit}
@@ -145,7 +149,11 @@ const AddLocation = props => {
                       setFieldValue('state_id', '');
                       setFieldValue('city_id', '');
                     }}
-                    error={touched?.country_id && errors?.country_id}
+                    error={
+                      touched?.country_id && errors?.country_id
+                        ? `${t(errors?.country_id)}`
+                        : undefined
+                    }
                   />
                   <InputWithIcon
                     onPress={() => setTouched('state_id', true)}
@@ -162,7 +170,12 @@ const AddLocation = props => {
                       setFieldValue('state_id', find?.id || '');
                       setFieldValue('city_id', '');
                     }}
-                    error={touched?.state_id && errors?.state_id}
+                    // error={touched?.state_id && errors?.state_id}
+                    error={
+                      touched?.state_id && errors?.state_id
+                        ? `${t(errors?.state_id)}`
+                        : undefined
+                    }
                   />
                   <InputWithIcon
                     onPress={() => setTouched('city_id', true)}
@@ -176,27 +189,43 @@ const AddLocation = props => {
                       const find = data?.find(x => x?.selected);
                       setFieldValue('city_id', find?.id || '');
                     }}
-                    error={touched?.city_id && errors?.city_id}
+                    error={
+                      touched?.city_id && errors?.city_id
+                        ? `${t(errors?.city_id)}`
+                        : undefined
+                    }
                   />
                   <PrimaryInput
                     value={values?.address}
                     placeholder={t('address')}
                     onChangeText={handleChange('address')}
-                    error={touched?.address && errors?.address}
+                    error={
+                      touched?.address && errors?.address
+                        ? `${t(errors?.address)}`
+                        : undefined
+                    }
                     // onBlur={handleBlur('address')}
                   />
                   <PrimaryInput
                     value={values?.postal_code}
                     placeholder={t('postal_code')}
                     onChangeText={handleChange('postal_code')}
-                    error={touched?.postal_code && errors?.postal_code}
+                    error={
+                      touched?.postal_code && errors?.postal_code
+                        ? `${t(errors?.postal_code)}`
+                        : undefined
+                    }
                     // onBlur={handleBlur('postal_code')}
                   />
                   <PrimaryInput
                     value={values?.phone}
                     placeholder={t('phone')}
                     onChangeText={handleChange('phone')}
-                    error={touched?.phone && errors?.phone}
+                    error={
+                      touched?.phone && errors?.phone
+                        ? `${t(errors?.phone)}`
+                        : undefined
+                    }
                     // onBlur={handleBlur('phone')}
                   />
                   <PrimaryButton

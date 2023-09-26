@@ -163,7 +163,27 @@
 "rate_delivery_boy":"Rate Delivery Boy",
 "enter_comment":"Enter Comment",
 "submit":"Submit",
-"order_placed":"Order Placed"
+"order_placed":"Order Placed",
+"req_lat_lng":"Latitude  longitude is required",
+"req_address":"Address is required",
+"req_state":"State is required",
+"req_country":"Country is required",
+"req_city":"City is required",
+"req_postal_code":"Postal code is required",
+"req_phone":"Phone number is required",
+"sure_language":"Are you sure to change language ?",
+"app_will_restart":"App will restart once",
+"ok":"Ok",
+"cancel":"Cancel",
+"admin_dashboard":"Admin DashBoard",
+"total_customer":"Total Customer",
+"total_order":"Total Order",
+"total_product_category":"Total Product Category",
+"total_product_brand":"Total Product Brand",
+"sellers":"Sellers",
+"category_wise_product_sale":"Category wise product sale",
+"category_wise_stock":"Category wise product stock",
+"please_select_variant":"Please select variant"
 
 
 

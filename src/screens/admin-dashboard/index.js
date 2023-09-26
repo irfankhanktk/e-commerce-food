@@ -11,6 +11,7 @@ import {getStatus, logout} from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
 import {resetStack} from 'navigation/navigation-ref';
 import {Loader} from 'components/atoms/loader';
+import {t} from 'i18next';
 
 const AdminDashBoard = () => {
   const [status, setStatus] = React.useState({});
@@ -45,41 +46,35 @@ const AdminDashBoard = () => {
   }, []);
 
   const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ['Cellphones & tabs', 'Automobile', 'Women clothing'],
     datasets: [
       {
-        data: [20, 60, 28, 80, 99, 43],
+        data: [80, 38, 53],
       },
     ],
   };
   const pieData = [
     {
-      name: 'Seoul',
-      population: 21500000,
+      name: 'Published products',
+      population: 50,
       color: 'rgba(131, 167, 234, 1)',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
+      legendFontSize: 12,
     },
+
     {
-      name: 'Toronto',
-      population: 2800000,
-      color: '#F00',
-      legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
-    },
-    {
-      name: 'Beijing',
-      population: 527612,
+      name: 'Sellers products',
+      population: 40,
       color: 'red',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
+      legendFontSize: 12,
     },
     {
-      name: 'Moscow',
-      population: 11920000,
+      name: 'Admin products',
+      population: 20,
       color: 'rgb(0, 0, 255)',
       legendFontColor: '#7F7F7F',
-      legendFontSize: 15,
+      legendFontSize: 12,
     },
   ];
   return (
@@ -95,12 +90,12 @@ const AdminDashBoard = () => {
               paddingHorizontal: mvs(20),
             }}>
             <View />
-            <Bold style={{marginTop: mvs(10)}} label={'Admin DashBoard'} />
+            <Bold style={{marginTop: mvs(10)}} label={t('admin_dashboard')} />
             <TouchableOpacity onPress={() => logOut()}>
               <Row>
                 <Bold
                   style={{marginRight: mvs(10), fontSize: mvs(12)}}
-                  label={'LogOut'}
+                  label={t('log_out')}
                 />
                 {/* <LogOut /> */}
               </Row>
@@ -109,14 +104,14 @@ const AdminDashBoard = () => {
           <ScrollView style={{paddingBottom: mvs(20)}}>
             <Row style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}>
               <View style={styles.box}>
-                <Bold color={colors.white} label={'Total Customer'} />
+                <Bold color={colors.white} label={t('total_customer')} />
                 <Bold
                   style={{marginTop: mvs(10), color: colors.white}}
                   label={status?.totalCustomer}
                 />
               </View>
               <View style={styles.box}>
-                <Bold color={colors.white} label={'Total Order'} />
+                <Bold color={colors.white} label={t('total_order')} />
                 <Bold
                   style={{marginTop: mvs(10), color: colors.white}}
                   label={status?.total_orders}
@@ -125,14 +120,17 @@ const AdminDashBoard = () => {
             </Row>
             <Row style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}>
               <View style={styles.box}>
-                <Bold color={colors.white} label={'Total Product Category'} />
+                <Bold
+                  color={colors.white}
+                  label={t('total_product_category')}
+                />
                 <Bold
                   style={{marginTop: mvs(10), color: colors.white}}
                   label={status?.total_product_category}
                 />
               </View>
               <View style={styles.box}>
-                <Bold color={colors.white} label={'Total Product Brand'} />
+                <Bold color={colors.white} label={t('total_product_brand')} />
                 <Bold
                   style={{marginTop: mvs(10), color: colors.white}}
                   label={status?.total_product_brand}
@@ -140,13 +138,13 @@ const AdminDashBoard = () => {
               </View>
             </Row>
             <Bold
-              style={{marginTop: mvs(20), marginLeft: mvs(20)}}
-              label={'Products'}
+              style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
+              label={t('products')}
             />
             <PieChart
               data={pieData}
               width={width}
-              height={220}
+              height={200}
               chartConfig={{
                 backgroundColor: '#e26a00',
                 backgroundGradientFrom: colors.blueHalf,
@@ -161,8 +159,8 @@ const AdminDashBoard = () => {
               style={{height: 220}}
             />
             <Bold
-              style={{marginTop: mvs(20), marginLeft: mvs(20)}}
-              label={'Sellers'}
+              style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
+              label={t('sellers')}
             />
             <PieChart
               data={pieData}
@@ -183,8 +181,8 @@ const AdminDashBoard = () => {
             />
 
             <Bold
-              style={{marginTop: mvs(20), marginLeft: mvs(20)}}
-              label={'Category wise product sale'}
+              style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
+              label={t('category_wise_product_sale')}
             />
 
             <BarChart
@@ -202,8 +200,8 @@ const AdminDashBoard = () => {
               style={styles.chart}
             />
             <Bold
-              style={{marginTop: mvs(20), marginLeft: mvs(20)}}
-              label={'Category wise product stock'}
+              style={{marginTop: mvs(20), paddingHorizontal: mvs(20)}}
+              label={t('category_wise_stock')}
             />
             <BarChart
               data={data}

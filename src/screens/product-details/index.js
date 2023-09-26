@@ -38,7 +38,7 @@ const ProductDetials = props => {
   const {t} = i18n;
   const [data, setData] = React.useState();
   const [variation, setVariation] = React.useState('');
-
+  const [checkVariant, setCheckVariant] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [cartLoading, setCartLoading] = React.useState(false);
   const [relatedProducts, setRelatedProducts] = React.useState([]);
@@ -177,20 +177,39 @@ const ProductDetials = props => {
                     {bool ? <HeartFill /> : <Heart />}
                   </TouchableOpacity>
                 </Row>
+
                 <Regular color={colors.text} label={'Variant'} />
-                <View style={{padding: mvs(10)}}>
+
+                <View style={{paddingHorizontal: mvs(10)}}>
                   {data?.variations?.map((item, index) => (
                     <TouchableOpacity
                       key={index}
                       onPress={() => setVariation(item)}>
-                      <Row>
+                      <Row
+                        style={{
+                          justifyContent: 'flex-start',
+                          marginTop: mvs(10),
+                        }}>
                         <Checkbox checked={variation == item} />
-                        <Regular color={colors.text} label={item} />
+                        <Regular
+                          style={{paddingHorizontal: mvs(20)}}
+                          color={colors.text}
+                          label={item}
+                        />
                       </Row>
                     </TouchableOpacity>
                   ))}
                 </View>
-
+                {checkVariant == true && (
+                  <Regular
+                    label={
+                      !variation && data?.variations.length
+                        ? t('please_select_variant')
+                        : ''
+                    }
+                    style={styles.errorLabel}
+                  />
+                )}
                 <Row style={{justifyContent: 'flex-start'}}>
                   <Regular
                     color={colors.text}
@@ -308,21 +327,24 @@ const ProductDetials = props => {
               loading={cartLoading}
               // disabled={!variation && data?.variations.length}
               onPress={() => {
-                dispatch(
-                  cartItem
-                    ? removeFromCartList(
-                        cartItem?.cart_items[0]?.id,
-                        setCartLoading,
-                      )
-                    : addToCartList(
-                        {
-                          id: productId,
-                          variant: variation,
-                          quantity: 1,
-                        },
-                        setCartLoading,
-                      ),
-                );
+                !variation && data?.variations.length
+                  ? // Alert.alert('Please select Variant')
+                    setCheckVariant(true)
+                  : dispatch(
+                      cartItem
+                        ? removeFromCartList(
+                            cartItem?.cart_items[0]?.id,
+                            setCartLoading,
+                          )
+                        : addToCartList(
+                            {
+                              id: productId,
+                              variant: variation,
+                              quantity: 1,
+                            },
+                            setCartLoading,
+                          ),
+                    );
                 // props?.navigation?.replace('Drawer', {initialRoute: 'Cart'})
               }}
               // Icon={ <CartWhite />}

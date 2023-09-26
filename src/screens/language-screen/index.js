@@ -20,27 +20,23 @@ const LanguageScreen = props => {
   const {t} = i18n;
   const onChangeLanguage = (lang = 'en', rtl = false) => {
     try {
-      Alert.alert(
-        'Are you sure to change language ?',
-        'App will restart once',
-        [
-          {
-            text: 'Cancel',
-            onPress: () => console.log('Cancel Pressed'),
-            style: 'cancel',
+      Alert.alert(t('sure_language'), t('app_will_restart'), [
+        {
+          text: t('cancel'),
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: t('ok'),
+          onPress: () => {
+            dispatch(setLanguage(lang));
+            i18n.changeLanguage(lang);
+            I18nManager.forceRTL(rtl);
+            UTILS.setItem(STORAGEKEYS.lang, lang);
+            RNRestart.restart();
           },
-          {
-            text: 'OK',
-            onPress: () => {
-              dispatch(setLanguage(lang));
-              i18n.changeLanguage(lang);
-              I18nManager.forceRTL(rtl);
-              UTILS.setItem(STORAGEKEYS.lang, lang);
-              RNRestart.restart();
-            },
-          },
-        ],
-      );
+        },
+      ]);
     } catch (error) {
       console.log(error);
     }

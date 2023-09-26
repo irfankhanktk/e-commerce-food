@@ -159,6 +159,27 @@
 "rate_delivery_boy":"معدل تسليم الصبي",
 "enter_comment":"أدخل التعليق",
 "submit":"يُقدِّم",
-"order_placed":"تم الطلب"
+"order_placed":"تم الطلب",
+"req_lat_lng":"مطلوب خط الطول",
+"req_address":"العنوان مطلوب",
+"req_state":"الدولة مطلوبة",
+"req_country":"الدولة مطلوبة",
+"req_city":"المدينة مطلوبة",
+"req_postal_code":"الرمز البريدي مطلوب",
+"req_phone":"رقم الهاتف مطلوب",
+"sure_language":"هل أنت متأكد من تغيير اللغة؟",
+"app_will_restart":"سيتم إعادة تشغيل التطبيق مرة واحدة",
+"ok":"نعم",
+"cancel":"يلغي",
+"admin_dashboard":"لوحة تحكم المشرف",
+"total_customer":"إجمالي العملاء",
+"total_order":"من أجل الكاملة",
+"total_product_category":"إجمالي فئة المنتج",
+"total_product_brand":"إجمالي العلامة التجارية للمنتج",
+"sellers":"البائعين",
+"category_wise_product_sale":"فئة بيع المنتجات الحكيمة",
+"category_wise_stock":"فئة مخزون المنتجات الحكيمة",
+"please_select_variant":"الرجاء تحديد البديل"
+
 
 }

@@ -64,7 +64,7 @@ const UserTab = props => {
             }
             imageStyle={{borderRadius: mvs(51 / 2)}}
             style={styles.backgroudImage}></ImageBackground>
-          <View style={{flex: 1, marginLeft: mvs(10)}}>
+          <View style={{flex: 1, paddingHorizontal: mvs(10)}}>
             <Regular color={colors.white} label={userInfo?.name} />
             <Regular
               fontSize={mvs(12)}
