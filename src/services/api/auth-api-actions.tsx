@@ -103,6 +103,7 @@ export const addAddress = (newAddress: any) => postData(`${newAddress?.id ? URLS
 //////////admin dashboard///////////////
 export const getStatus = () => getData(URLS.admin.dashboard_status);
 export const getShop = () => getData(URLS.brand.shop);
+export const getWishlist = () => getData(URLS.wishlist.wishlist);
 
 ///////////rating delivery boy/////////////
 export const ratingDeliveryBoy = (values: any) => postData(URLS.rating.delivery_boy_rating, values);

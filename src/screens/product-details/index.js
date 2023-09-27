@@ -119,7 +119,7 @@ const ProductDetials = props => {
     fetchProduct();
   }, []);
 
-  const bool = wishlists?.some(x => x.id === data?.productDetails?.id);
+  const bool = wishlists?.some(x => x === data?.productDetails?.id);
   console.log('data?.productDetails?.id=========>', bool);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
