@@ -16,7 +16,11 @@ import {useAppDispatch, useAppSelector} from 'hooks/use-store';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, Image, ScrollView, TouchableOpacity, View} from 'react-native';
-import {addUserWishlist, removeUserWishlist} from 'services/api/api-actions';
+import {
+  addUserWishlist,
+  getWishlist,
+  removeUserWishlist,
+} from 'services/api/api-actions';
 import {getProductDetails} from 'services/api/auth-api-actions';
 import {addToCartList, removeFromCartList} from 'services/api/cart-api-actions';
 import {onCreateConveration} from 'services/api/chat-api-actions';
@@ -115,7 +119,8 @@ const ProductDetials = props => {
     fetchProduct();
   }, []);
 
-  const bool = wishlists?.some(x => x === data?.productDetails?.id);
+  const bool = wishlists?.some(x => x.id === data?.productDetails?.id);
+  console.log('data?.productDetails?.id=========>', bool);
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <AppHeader back title={t('product_details')} icon />

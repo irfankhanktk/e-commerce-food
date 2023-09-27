@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const DATE_FORMAT = {
   yyyy_mm_dd: 'YYYY-MM-DD',
   mmm_dd_yyyy: 'MMM DD, YYYY',
@@ -144,3 +146,20 @@ export const ADD_CAR_DEFAULT = {
   number: '1',
   faqs: [],
 };
+export const NOTIFICATION_LIST = [
+  {
+    title: 'message',
+    desc: 'Moving is pretty complicated; however, these four items can make your moving experience even worse!',
+    date: moment().format(DATE_FORMAT.yyyy_mm_dd),
+  },
+  {
+    title: 'message',
+    desc: 'Moving is pretty complicated; however, these four items can make your moving experience even worse!',
+    date: moment().format(DATE_FORMAT.yyyy_mm_dd),
+  },
+  {
+    title: 'message',
+    desc: 'Moving is pretty complicated; however, these four items can make your moving experience even worse!',
+    date: moment().format(DATE_FORMAT.yyyy_mm_dd),
+  },
+];

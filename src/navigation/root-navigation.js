@@ -38,6 +38,7 @@ import Brands from 'screens/brands';
 import {useAppSelector} from 'hooks/use-store';
 import LanguageScreen from 'screens/language-screen';
 import AdminDashBoard from 'screens/admin-dashboard';
+import Notification from 'screens/notification';
 
 const Stack = createNativeStackNavigator();
 
@@ -102,6 +103,7 @@ export const RootNavigator = () => {
           <Stack.Screen name="Brands" component={Brands} />
           <Stack.Screen name="LanguageScreen" component={LanguageScreen} />
           <Stack.Screen name="AdminDashBoard" component={AdminDashBoard} />
+          <Stack.Screen name="Notification" component={Notification} />
         </Stack.Group>
       </Stack.Navigator>
     </View>

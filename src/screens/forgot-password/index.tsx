@@ -38,7 +38,7 @@ const ForgotPassword = (props: props) => {
   const onSubmit = async (values: any) => {
     try {
       setLoading(true)
-      // const res = await forgotPassword(values)
+      const res = await forgotPassword(values)
       navigate('RenewPassword', { email_or_phone: values?.email_or_phone })
     } catch (error) {
       console.log('error=>', UTILS.returnError(error));

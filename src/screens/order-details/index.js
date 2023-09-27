@@ -1,6 +1,5 @@
 import AppHeader from 'components/atoms/headers/app-header';
 import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
 import {mvs} from 'config/metrices';
 import {t} from 'i18next';
 import React from 'react';
@@ -8,34 +7,30 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import Regular from 'typography/regular-text';
 import styles from './styles';
 
+import {useTheme} from '@react-navigation/native';
 import {
   DeliveryThree,
   Like,
-  Refund,
   RefundTwo,
   ShoppingBag,
   Tick,
   TickTwo,
 } from 'assets/icons';
-import Medium from 'typography/medium-text';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {IconButton, PrimaryButton} from 'components/atoms/buttons';
-import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
 import CustomMap from 'components/atoms/custom-map';
 import MapDirections from 'components/atoms/custom-map-direction';
-import {navigate} from 'navigation/navigation-ref';
-import {useTheme} from '@react-navigation/native';
-import {Alert} from 'react-native';
-import {UTILS} from 'utils';
-import {orderDetails} from 'services/api/cart-api-actions';
-import {Marker} from 'react-native-maps';
-import {ImageBackground} from 'react-native';
-import Stars from 'components/atoms/stars';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Bold from 'typography/bold-text';
-import {getDistance, ratingDeliveryBoy} from 'services/api/auth-api-actions';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {Loader} from 'components/atoms/loader';
+import OrderConfirmationModal from 'components/molecules/modals/order-conformation-modal';
+import {navigate} from 'navigation/navigation-ref';
+import {Alert, ImageBackground} from 'react-native';
+import {Marker} from 'react-native-maps';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {getDistance, ratingDeliveryBoy} from 'services/api/auth-api-actions';
+import {orderDetails} from 'services/api/cart-api-actions';
+import Bold from 'typography/bold-text';
+import Medium from 'typography/medium-text';
+import {UTILS} from 'utils';
 import RatingModal from './../../components/molecules/modals/rating-modal';
 const OrderDetails = props => {
   const colors = useTheme().colors;
@@ -58,7 +53,7 @@ const OrderDetails = props => {
   //   latitude: item?.DeliveryBoyPath[1]?.lat || 37.78825,
   //   longitude: item?.DeliveryBoyPath[1]?.lng || -122.4324,
   // };
-
+  // console.log('delivery boy rating===>', item);
   const origin = {
     latitude: item?.warehouse?.latitude * 1 || 37.78825,
     longitude: item?.warehouse?.longitude * 1 || -122.4324,
@@ -432,7 +427,7 @@ const OrderDetails = props => {
                 />
                 {status === '4' && (
                   <PrimaryButton
-                    disabled={!item?.deliveryBoyRating?.id}
+                    disabled={!!item?.deliveryBoyRating?.id}
                     onPress={() => {
                       setRatingModal(true);
                     }}

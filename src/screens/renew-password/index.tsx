@@ -16,7 +16,7 @@ import styles from './styles';
 
 import { fotgotJson } from 'assets/lottie';
 import LottieAnimation from 'components/atoms/animation';
-import { resendPasswordCode } from 'services/api/auth-api-actions';
+import { changePassword, resendPasswordCode } from 'services/api/auth-api-actions';
 import Regular from 'typography/regular-text';
 import { UTILS } from 'utils';
 import { useTheme } from '@react-navigation/native';
@@ -39,7 +39,7 @@ const RenewPassword = (props: props) => {
     try {
 
       setLoading(true)
-      // const res = await changePassword(values)
+      const res = await changePassword(values)
 
 
       navigate('SucessfullyChangePassword')

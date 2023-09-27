@@ -9,34 +9,22 @@ import {View} from 'react-native';
 import styles from './styles';
 import {useTheme} from '@react-navigation/native';
 import {useAppSelector} from 'hooks/use-store';
+import {useDispatch} from 'react-redux';
+import {getWishlist} from 'services/api/api-actions';
 
 const MyWishList = props => {
   const colors = useTheme().colors;
+  const dispatch = useDispatch();
   const wishlist = useAppSelector(s => s);
-  console.log('wishlist====>', wishlist?.wishlist);
 
-  const featuredCategories = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-  ];
+  React.useEffect(() => {
+    dispatch(getWishlist());
+  }, []);
 
   const featuredProduct = ({item}) => (
     <FeaturedProductsCard
       item={item}
-      onPress={() => navigate('ProductDetials')}
+      onPress={() => navigate('ProductDetials', {productId: item?.id})}
     />
   );
 
@@ -48,7 +36,7 @@ const MyWishList = props => {
         numColumns={2}
         showsVerticalScrollIndicator={false}
         columnWrapperStyle={styles.columnWrapperStyle}
-        data={featuredCategories}
+        data={wishlist?.wishlist?.wishlists}
         renderItem={featuredProduct}
         contentContainerStyle={{paddingBottom: mvs(20)}}
       />

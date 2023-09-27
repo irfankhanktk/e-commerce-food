@@ -22,7 +22,8 @@ export const getWishlist = (
       const res = await getData(`${URLS.wishlist.wishlist}`);
       console.log('res: getWishlist::', res?.data);
 
-      dispatch(setWishlist(res?.data?.map((w: any) => w?.product?.id)));
+      dispatch(setWishlist(res?.data?.map((w: any) => w?.product)));
+
     } catch (error: any) {
       console.log('error in getCounters', UTILS.returnError(error));
       Alert.alert('', UTILS.returnError(error));

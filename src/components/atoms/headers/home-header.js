@@ -47,7 +47,7 @@ const HomeHeader = ({
           </View>
         )}
         {notification ? (
-          <TouchableOpacity onPress={() => navigate('Notifications')}>
+          <TouchableOpacity onPress={() => navigate('Notification')}>
             <MaterialCommunityIcons
               name="bell-ring-outline"
               size={mvs(30)}
