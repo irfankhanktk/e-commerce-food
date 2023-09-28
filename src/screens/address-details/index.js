@@ -1,25 +1,24 @@
 import CustomFlatList from 'components/atoms/custom-flatlist';
 
+import {useIsFocused, useTheme} from '@react-navigation/native';
+import {PlusButton} from 'components/atoms/buttons';
 import AppHeader from 'components/atoms/headers/app-header';
 import AddressCard from 'components/molecules/address-card';
 import AddressAddedSucessfully from 'components/molecules/modals/address-add-sucessfully';
 import SelectEditModal from 'components/molecules/modals/select-edit-modal';
 import {mvs} from 'config/metrices';
+import {useAppSelector} from 'hooks/use-store';
 import {t} from 'i18next';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
+import {useDispatch} from 'react-redux';
+import {getAddressess} from 'services/api/address-api-actions';
+import {deleteAddress} from 'services/api/auth-api-actions';
+import {setUserAddress} from 'store/reducers/address-reducer';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
 import styles from './styles';
-import {useIsFocused, useTheme} from '@react-navigation/native';
-import {deleteAddress, getAddresses} from 'services/api/auth-api-actions';
-import {useAppSelector} from 'hooks/use-store';
-import {Loader} from 'components/atoms/loader';
-import {PlusButton} from 'components/atoms/buttons';
-import {useDispatch} from 'react-redux';
-import {setUserAddress} from 'store/reducers/address-reducer';
-import {getAddressess} from 'services/api/address-api-actions';
 
 const AddressDetails = props => {
   const dispatch = useDispatch();

@@ -610,12 +610,14 @@ const OrderDetails = props => {
                             paddingVertical: mvs(5),
                             flex: 1,
                           }}>
-                          <View style={{height: mvs(45)}}>
+                          <View
+                            style={{height: mvs(45), backgroundColor: 'red'}}>
                             <Regular
+                              numberOfLines={2}
                               label={item?.shipping_adress_developer?.address}
                             />
                           </View>
-                          <Regular numberOfLines={2} label={t('distance')} />
+                          <Regular label={t('distance')} />
                           <Row style={{justifyContent: 'flex-start'}}>
                             <Regular label={`${totalDistance?.km} km`} />
                             <Regular
@@ -625,10 +627,7 @@ const OrderDetails = props => {
                           </Row>
 
                           <Regular
-                            style={{
-                              justifyContent: 'flex-end',
-                              marginTop: mvs(15),
-                            }}
+                            style={{marginTop: mvs(15)}}
                             label={item?.customerDetails?.address}
                           />
                         </View>

@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     width: '100%',
-    height: mvs(90),
+    // height: mvs(90),
+    paddingVertical: mvs(10),
     marginTop: mvs(20),
     shadowColor: '#000',
     shadowOffset: {
@@ -19,6 +20,8 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: mvs(10),
     justifyContent: 'flex-start',
+    borderLeftWidth: mvs(10),
+    borderLeftColor: colors.primary,
   },
   idContainer: {
     width: '3%',

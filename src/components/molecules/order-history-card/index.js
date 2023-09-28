@@ -16,7 +16,7 @@ const OrderHistoryCard = ({item, style, onPress, loading}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Row style={{...styles.container, backgroundColor: colors.background}}>
-        <View style={styles.idContainer} />
+        {/* <View style={styles.idContainer} /> */}
         <View style={styles.contentContainer}>
           <Regular label={item?.code} fontSize={mvs(12)} />
           <Row style={{justifyContent: 'flex-start', alignItems: 'center'}}>

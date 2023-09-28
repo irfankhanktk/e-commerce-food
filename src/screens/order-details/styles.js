@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     borderWidth: mvs(1),
     borderColor: colors.primary,
     marginTop: mvs(20),
-    height: mvs(366),
+    // height: mvs(366),
+    paddingBottom: mvs(10),
   },
   trackingTextContainer: {
     backgroundColor: colors.primary,

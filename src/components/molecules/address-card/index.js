@@ -29,7 +29,7 @@ const AddressCard = ({item, style, onPress, onPressDel, loading}) => {
       <View style={styles.innerContainer}>
         <Row>
           <View style={{flex: 1}}>
-            <Row style={{justifyContent: 'flex-start'}}>
+            <Row style={{justifyContent: 'flex-start', flex: 1}}>
               <Regular fontSize={mvs(12)} label={t('address')} />
               <Regular
                 color={colors.text}

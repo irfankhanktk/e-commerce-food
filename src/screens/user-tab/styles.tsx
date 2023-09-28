@@ -43,8 +43,9 @@ const styles = StyleSheet.create({
   },
   boxContainer1: {
     width: '100%',
-    backgroundColor: colors.white,
-    height: mvs(150),
+    // backgroundColor: colors.white,
+    // height: mvs(150),
+
     marginTop: mvs(25),
     borderRadius: mvs(10),
     padding: mvs(15),
