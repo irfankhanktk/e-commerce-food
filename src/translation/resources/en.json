@@ -184,7 +184,13 @@
 "category_wise_product_sale":"Category wise product sale",
 "category_wise_stock":"Category wise product stock",
 "please_select_variant":"Please select variant",
-"notification":"Notification"
+"notification":"Notification",
+"on_the_way":"On the way",
+"time_line":"Time Line",
+"location":"Location",
+"distance":"Distance",
+"vehicle":"Vehicle",
+"reg_no":"Reg No"
 
 
 

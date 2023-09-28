@@ -180,7 +180,13 @@
 "category_wise_product_sale":"فئة بيع المنتجات الحكيمة",
 "category_wise_stock":"فئة مخزون المنتجات الحكيمة",
 "please_select_variant":"الرجاء تحديد البديل",
-"notification":"إشعار"
+"notification":"إشعار",
+"on_the_way":"علي الطريق",
+"time_line":"الجدول الزمني",
+"location":"موقع",
+"distance":"مسافة",
+"vehicle":"عربة",
+"reg_no":"رقم التسجيل"
 
 
 }

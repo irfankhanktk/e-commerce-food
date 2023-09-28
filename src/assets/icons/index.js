@@ -44,3 +44,4 @@ export {default as TickTwo} from './ticktwo.svg';
 export {default as LogOut} from './logout.svg';
 export {default as StarFill} from './starFill.svg';
 export {default as StarEmpty} from './starEmpty.svg';
+export {default as LocationMarker} from './location-marker.svg';

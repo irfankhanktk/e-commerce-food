@@ -11,6 +11,7 @@ import {useTheme} from '@react-navigation/native';
 import {
   DeliveryThree,
   Like,
+  LocationMarker,
   RefundTwo,
   ShoppingBag,
   Tick,
@@ -544,7 +545,7 @@ const OrderDetails = props => {
                       </View> */}
                       <View style={{flex: 1}}>
                         <Regular
-                          label={t('Vehicle')}
+                          label={t('vehicle')}
                           fontSize={mvs(12)}
                           color={colors.darkBlack}
                         />
@@ -556,7 +557,7 @@ const OrderDetails = props => {
                       </View>
                       <View style={{flex: 1}}>
                         <Regular
-                          label={t('Reg No')}
+                          label={t('reg_no')}
                           fontSize={mvs(12)}
                           color={colors.darkBlack}
                         />
@@ -585,85 +586,51 @@ const OrderDetails = props => {
                     </View>
                     <View style={{paddingHorizontal: mvs(20)}}>
                       <Regular label={t('time_line')} />
-                      <Row>
+                      <Row
+                        style={{
+                          justifyContent: 'flex-start',
+                        }}>
                         <View>
-                          <View style={{height: mvs(120)}}>
-                            <View style={styles.lineVertical} />
-                            <View
-                              style={{
-                                justifyContent: 'space-between',
-                                height: mvs(120),
-                              }}>
-                              <Row
-                                style={{
-                                  alignItems: 'flex-start',
-                                }}>
-                                <View style={styles.circleOne} />
-                                <Row style={{marginLeft: mvs(15)}}>
-                                  <View style={{width: mvs(80)}}>
-                                    <Regular
-                                      style={{fontSize: mvs(12)}}
-                                      label={'pending'}
-                                    />
-                                  </View>
-                                  <View style={{flex: 1}}>
-                                    <Regular label={'Start Driving'} />
-                                    <Regular label={'Locatioin'} />
-                                  </View>
-                                </Row>
-                              </Row>
-                              <Row
-                                style={{
-                                  alignItems: 'flex-start',
-                                }}>
-                                <View style={styles.circleOne} />
-                                <Row style={{marginLeft: mvs(15), flex: 1}}>
-                                  <View style={{width: mvs(80)}}>
-                                    <Regular
-                                      style={{fontSize: mvs(12)}}
-                                      label={'on the way'}
-                                    />
-                                  </View>
-                                  <View style={{flex: 1}}>
-                                    <Regular label={'driving'} />
-                                    <Regular fontSize={mvs(12)} label={''} />
-                                    <Row style={{paddingRight: mvs(15)}}>
-                                      <Regular
-                                        fontSize={mvs(12)}
-                                        label={`${totalDistance?.km} km`}
-                                      />
-                                      <Regular
-                                        fontSize={mvs(12)}
-                                        label={totalDistance?.time}
-                                      />
-                                    </Row>
-                                  </View>
-                                </Row>
-                              </Row>
-                              <Row style={{alignItems: 'flex-end'}}>
-                                <View style={styles.circleOne} />
-                                <Row
-                                  style={{
-                                    alignItems: 'flex-end',
-                                    marginLeft: mvs(15),
-                                  }}>
-                                  <View style={{width: mvs(80)}}>
-                                    <Regular
-                                      style={{fontSize: mvs(12)}}
-                                      label={'Location'}
-                                    />
-                                  </View>
-                                  <View style={{flex: 1}}>
-                                    <Regular
-                                      label={
-                                        item?.shipping_adress_developer?.address
-                                      }
-                                    />
-                                  </View>
-                                </Row>
-                              </Row>
-                            </View>
+                          <LocationMarker />
+                        </View>
+                        <View
+                          style={{
+                            paddingHorizontal: mvs(10),
+                            paddingVertical: mvs(5),
+                          }}>
+                          <Regular label={t('on_the_way')} />
+                          <Regular
+                            style={{marginTop: mvs(85)}}
+                            label={t('location')}
+                          />
+                        </View>
+                        <View
+                          style={{
+                            paddingHorizontal: mvs(10),
+                            paddingVertical: mvs(5),
+                            flex: 1,
+                          }}>
+                          <View style={{height: mvs(45)}}>
+                            <Regular
+                              label={item?.shipping_adress_developer?.address}
+                            />
                           </View>
+                          <Regular numberOfLines={2} label={t('distance')} />
+                          <Row style={{justifyContent: 'flex-start'}}>
+                            <Regular label={`${totalDistance?.km} km`} />
+                            <Regular
+                              style={{paddingHorizontal: mvs(20)}}
+                              label={totalDistance?.time}
+                            />
+                          </Row>
+
+                          <Regular
+                            style={{
+                              justifyContent: 'flex-end',
+                              marginTop: mvs(15),
+                            }}
+                            label={item?.customerDetails?.address}
+                          />
                         </View>
                       </Row>
                     </View>
