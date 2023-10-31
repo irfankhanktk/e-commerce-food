@@ -4,15 +4,14 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {View} from 'react-native';
 
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
+import {Loader} from 'components/atoms/loader';
+import ChatCard from 'components/molecules/chat-card';
+import {getConversationsList} from 'services/api/chat-api-actions';
 import i18n from 'translation';
 import styles from './styles';
-import ChatCard from 'components/molecules/chat-card';
-import {useIsFocused, useTheme} from '@react-navigation/native';
-import {getWishlist} from 'services/api/api-actions';
-import {getConversationsList} from 'services/api/chat-api-actions';
-import {Loader} from 'components/atoms/loader';
 
 const MessageTab = props => {
   const dispatch = useAppDispatch();
@@ -23,23 +22,7 @@ const MessageTab = props => {
   const isFocus = useIsFocused();
 
   const {t} = i18n;
-  const featuredCategories = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-  ];
+
   React.useEffect(() => {
     if (isFocus) dispatch(getConversationsList(setLoading));
   }, [isFocus]);

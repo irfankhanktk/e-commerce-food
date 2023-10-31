@@ -610,8 +610,7 @@ const OrderDetails = props => {
                             paddingVertical: mvs(5),
                             flex: 1,
                           }}>
-                          <View
-                            style={{height: mvs(45), backgroundColor: 'red'}}>
+                          <View style={{height: mvs(45)}}>
                             <Regular
                               numberOfLines={2}
                               label={item?.shipping_adress_developer?.address}

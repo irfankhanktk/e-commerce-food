@@ -1,11 +1,10 @@
+import {useTheme} from '@react-navigation/native';
 import {mvs} from 'config/metrices';
 import React from 'react';
 import {View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
 import styles from './styles';
-import {useTheme} from '@react-navigation/native';
-import moment from 'moment';
 
 const InboxChatCard = ({item, style, onPress, loading}) => {
   const me = item.me;

@@ -37,23 +37,7 @@ const InboxMessage = props => {
   const colors = useTheme().colors;
 
   const {t} = i18n;
-  const featuredCategories = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-    {
-      id: 3,
-    },
-  ];
+
   const getMessages = async () => {
     try {
       const res = await getChatMessages(id);
