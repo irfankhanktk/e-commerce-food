@@ -6,10 +6,12 @@ import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
+import {useTheme} from '@react-navigation/native';
 import {SplashIcon} from 'assets/icons';
+import {loginJson} from 'assets/lottie';
+import LottieAnimation from 'components/atoms/animation';
 import PrimaryInput from 'components/atoms/inputs';
-import {Row} from 'components/atoms/row';
-import {colors} from 'config/colors';
+import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {onLogin} from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
@@ -17,10 +19,6 @@ import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
-import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
-import LottieAnimation from 'components/atoms/animation';
-import {loginJson} from 'assets/lottie';
-import {useTheme} from '@react-navigation/native';
 const LoginScreen = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();

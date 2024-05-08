@@ -26,6 +26,7 @@ import {UTILS} from 'utils';
 import styles from './styles';
 import {useIsFocused, useTheme} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from 'hooks/use-store';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const UserTab = props => {
   const colors = useTheme().colors;
@@ -297,6 +298,21 @@ const UserTab = props => {
             label={t('followed_vendors')}
           />
         </Row>
+        <TouchableOpacity onPress={() => navigate('BrowseAllVenders')}>
+          <Row
+            style={{
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              marginTop: mvs(20),
+            }}>
+            <AntDesign name="delete" size={25} color={colors.primary} />
+            <Regular
+              color={colors.text}
+              style={{marginLeft: mvs(20)}}
+              label={t('delete_account')}
+            />
+          </Row>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -3,14 +3,14 @@ import { Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
-
+import { useTheme } from '@react-navigation/native';
 import { SplashIcon } from 'assets/icons';
 import { PrimaryButton } from 'components/atoms/buttons';
 import { Checkbox } from 'components/atoms/checkbox';
 import PrimaryInput from 'components/atoms/inputs';
+import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview';
 import { Row } from 'components/atoms/row';
 import OtpModal from 'components/molecules/modals/otp-modal';
-import { colors } from 'config/colors';
 import { height, mvs } from 'config/metrices';
 import { navigate } from 'navigation/navigation-ref';
 import { resendVerifyOtp } from 'services/api/auth-api-actions';
@@ -21,8 +21,6 @@ import Regular from 'typography/regular-text';
 import { signupFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
-import { KeyboardAvoidScrollview } from 'components/atoms/keyboard-avoid-scrollview';
-import { useTheme } from '@react-navigation/native';
 Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
@@ -52,8 +50,8 @@ const Signup = (props: props) => {
     try {
       setEmail(values?.email);
       setLoading(true)
-      // const res = await onSignup(values);
-      // setUserId(res?.user_id);
+      const res = await onSignup(values);
+      setUserId(res?.user_id);
       setOtpModalVisible(true)
     } catch (error) {
       console.log('error=>', error);
@@ -64,8 +62,8 @@ const Signup = (props: props) => {
   const onVerifySubmit = async () => {
     try {
       setVerifyLoading(true);
-      // const res = await verifyOtp({ user_id: userId, verification_code: value })
-      // console.log('otp verification res =====>', res);
+      const res = await verifyOtp({ user_id: userId, verification_code: value })
+      console.log('otp verification res =====>', res);
       navigate('Drawer')
     } catch (error) {
       console.log('error=>', error);

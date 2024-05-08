@@ -190,7 +190,8 @@
 "location":"Location",
 "distance":"Distance",
 "vehicle":"Vehicle",
-"reg_no":"Reg No"
+"reg_no":"Reg No",
+"delete_account":"Delete Account"
 
 
 
