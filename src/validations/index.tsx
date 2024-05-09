@@ -8,7 +8,7 @@ export const addressFormValidation = yup.object().shape({
   city_id: yup.string().required('req_city'),
   postal_code: yup.string().required('req_postal_code'),
   phone: yup.string().required('req_phone'),
-  latitude: yup.number().required('req_lat_lng'),
+  // latitude: yup.number().required('req_lat_lng'),
   // longitude: yup.number().required('req_lng'),
 });
 export const updateProfileFormValidation = yup.object().shape({

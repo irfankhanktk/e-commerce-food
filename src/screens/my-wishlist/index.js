@@ -1,4 +1,4 @@
-import {useTheme} from '@react-navigation/native';
+import {useIsFocused, useTheme} from '@react-navigation/native';
 import CustomFlatList from 'components/atoms/custom-flatlist';
 import AppHeader from 'components/atoms/headers/app-header';
 import WishlistCard from 'components/molecules/wishlist-card';
@@ -16,6 +16,7 @@ const MyWishList = props => {
   const colors = useTheme().colors;
   const [wishlist, setWishlist] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const isFocus = useIsFocused();
   const fetchWishlist = async () => {
     try {
       setLoading(true);
@@ -30,7 +31,7 @@ const MyWishList = props => {
   };
   React.useEffect(() => {
     fetchWishlist();
-  }, []);
+  }, [isFocus]);
   const data = [{id: 1}];
 
   const featuredProduct = ({item}) => (

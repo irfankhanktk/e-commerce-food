@@ -13,7 +13,7 @@ import { Row } from 'components/atoms/row';
 import OtpModal from 'components/molecules/modals/otp-modal';
 import { height, mvs } from 'config/metrices';
 import { navigate } from 'navigation/navigation-ref';
-import { resendVerifyOtp } from 'services/api/auth-api-actions';
+import { onSignup, resendVerifyOtp, verifyOtp } from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import Bold from 'typography/bold-text';
 import Medium from 'typography/medium-text';
@@ -48,7 +48,9 @@ const Signup = (props: props) => {
   const [email, setEmail] = React.useState('');
   const onSubmit = async (values: any) => {
     try {
-      setEmail(values?.email);
+  console.log('email===>',values?.email_or_phone)
+
+      setEmail(values?.email_or_phone);
       setLoading(true)
       const res = await onSignup(values);
       setUserId(res?.user_id);

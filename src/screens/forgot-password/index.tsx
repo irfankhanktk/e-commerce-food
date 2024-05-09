@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SplashIcon } from 'assets/icons';
 import { PrimaryButton } from 'components/atoms/buttons';
 import PrimaryInput from 'components/atoms/inputs';
-
 import { mvs } from 'config/metrices';
 import { Formik, useFormik } from 'formik';
 import { useAppDispatch } from 'hooks/use-store';

@@ -13,6 +13,9 @@ import {useTheme} from '@react-navigation/native';
 import PrimaryInput, {InputWithIcon} from 'components/atoms/inputs';
 import {KeyboardAvoidScrollview} from 'components/atoms/keyboard-avoid-scrollview';
 import {Formik} from 'formik';
+import {goBack} from 'navigation/navigation-ref';
+import {TouchableOpacity} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   addAddress,
   getCities,
@@ -21,10 +24,6 @@ import {
 } from 'services/api/auth-api-actions';
 import {UTILS} from 'utils';
 import {addressFormValidation} from 'validations';
-import {Row} from 'components/atoms/row';
-import {TouchableOpacity} from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {goBack} from 'navigation/navigation-ref';
 
 const AddLocation = props => {
   const {route} = props;

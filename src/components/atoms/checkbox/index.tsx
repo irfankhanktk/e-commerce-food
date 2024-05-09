@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 type IProps = {
     label?: string | number;
     checked?: boolean;
+    disabled?:boolean;
     children?: JSX.Element | JSX.Element[]
     onPress: () => void;
 
@@ -14,10 +15,11 @@ type IProps = {
 export const Checkbox = (props: IProps) => {
     const {
         checked,
-        onPress
+        onPress,
+        disabled
     } = props;
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <TouchableOpacity disabled={disabled} style={styles.container} onPress={onPress}>
             {checked && <Icon name={'check'} color={colors.primary} size={mvs(16)} />}
         </TouchableOpacity>
     );
