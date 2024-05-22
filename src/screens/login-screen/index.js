@@ -4,7 +4,7 @@ import {Formik} from 'formik';
 import {useAppDispatch} from 'hooks/use-store';
 import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 
 import {useTheme} from '@react-navigation/native';
 import {SplashIcon} from 'assets/icons';
@@ -19,6 +19,7 @@ import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
 import {signinFormValidation} from 'validations';
 import styles from './styles';
+import {hsmasrine} from 'assets/images';
 const LoginScreen = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
@@ -53,8 +54,14 @@ const LoginScreen = props => {
             paddingTop: mvs(76),
             paddingBottom: height / 5,
             backgroundColor: colors.primary,
+            alignItems: 'center',
           }}>
-          <SplashIcon style={{alignSelf: 'center'}} />
+          {/* <SplashIcon style={{alignSelf: 'center'}} />
+           */}
+          <Image
+            style={{width: mvs(260), height: mvs(30)}}
+            source={hsmasrine}
+          />
         </View>
 
         <Formik

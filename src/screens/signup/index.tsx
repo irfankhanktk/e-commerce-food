@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Formik } from 'formik';
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import { useTheme } from '@react-navigation/native';
 import { SplashIcon } from 'assets/icons';
@@ -21,7 +21,8 @@ import Regular from 'typography/regular-text';
 import { signupFormValidation } from 'validations';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
-Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
+import { hsmasrine } from 'assets/images';
+Geocoder.init('AIzaSyC4lnIdJpGeIXhvicsbuhAR3FF29zzuEsI');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 
@@ -90,8 +91,14 @@ const Signup = (props: props) => {
           paddingTop: mvs(76),
           paddingBottom: height / 5,
           backgroundColor: colors.primary,
+          alignItems:'center'
         }}>
-        <SplashIcon style={{ alignSelf: 'center' }} />
+        {/* <SplashIcon style={{ alignSelf: 'center' }} />
+         */}
+            <Image
+            style={{width: mvs(260), height: mvs(30)}}
+            source={hsmasrine}
+          />
       </View>
       <Formik
         onSubmit={onSubmit}

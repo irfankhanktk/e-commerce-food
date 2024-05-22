@@ -2,7 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SplashIcon } from 'assets/icons';
 import { useAppDispatch } from 'hooks/use-store';
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import { getNotifications, getUserInfo } from 'services/api/auth-api-actions';
 import i18n from 'translation';
 import { UTILS } from 'utils';
@@ -15,6 +15,8 @@ import {
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
 import { useTheme } from '@react-navigation/native';
+import { logo } from 'assets/images';
+import { mvs } from 'config/metrices';
 type props = NativeStackScreenProps<RootStackParamList, 'Splash'>;
 
 const Splash = (props: props) => {
@@ -67,7 +69,7 @@ const Splash = (props: props) => {
           }
           setTimeout(() => {
             navigation?.replace(screen);
-          }, 2000);
+          }, 12000);
         });
       } catch (error) { }
     })();
@@ -76,9 +78,10 @@ const Splash = (props: props) => {
   return (
     <View style={{
       ...styles.container,
-      backgroundColor: colors.primary,
+      backgroundColor: colors.white,
     }}>
-      <SplashIcon />
+      {/* <SplashIcon /> */}
+      <Image source={logo}/>
     </View>
   );
 };

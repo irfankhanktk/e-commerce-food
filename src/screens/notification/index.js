@@ -1,18 +1,16 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-import styles from './styles';
 import {useTheme} from '@react-navigation/native';
-import AppHeader from 'components/atoms/headers/app-header';
-import {t} from 'i18next';
 import CustomFlatList from 'components/atoms/custom-flatlist';
-
-import {mvs} from 'config/metrices';
+import AppHeader from 'components/atoms/headers/app-header';
 import {Row} from 'components/atoms/row';
-import {Image} from 'react-native';
+import {NOTIFICATION_LIST} from 'config/constants';
+import {mvs} from 'config/metrices';
+import {t} from 'i18next';
+import moment from 'moment';
+import React from 'react';
+import {View} from 'react-native';
 import Medium from 'typography/medium-text';
 import Regular from 'typography/regular-text';
-import moment from 'moment';
-import {NOTIFICATION_LIST} from 'config/constants';
+import styles from './styles';
 
 const Notification = () => {
   const colors = useTheme().colors;

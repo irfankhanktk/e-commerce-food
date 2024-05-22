@@ -77,7 +77,7 @@ export const getDistance = async (lat1: any, lat2: any, lon1: any, lon2: any) =>
     var km = 1;
     let time = 0;
     const response = await axios.get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98`
+      `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${lat1},${lon1}&destinations=${lat2},${lon2}&key=AIzaSyC4lnIdJpGeIXhvicsbuhAR3FF29zzuEsI`
     );
     if (response?.data?.status === "OK") {
       console.log("Distance is ");

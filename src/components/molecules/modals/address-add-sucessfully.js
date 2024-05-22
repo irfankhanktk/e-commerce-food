@@ -1,18 +1,12 @@
 import {colors} from 'config/colors';
-import {navigate} from 'navigation/navigation-ref';
 import React from 'react';
-import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
-
-import i18n from 'translation';
-import PrimaryInput from 'components/atoms/inputs';
-import {mvs} from 'config/metrices';
-import {ModalWrapper} from 'components/atoms/modal-wrapper';
-
+import {StyleSheet, View} from 'react-native';
 import {PrimaryButton} from 'components/atoms/buttons';
-import {UTILS} from 'utils';
-import {CrossModal} from 'assets/icons';
-import {Row} from 'components/atoms/row';
+import {ModalWrapper} from 'components/atoms/modal-wrapper';
+import {mvs} from 'config/metrices';
+import i18n from 'translation';
 import Medium from 'typography/medium-text';
+
 const AddressAddedSucessfully = ({
   style,
   visible = false,

@@ -11,7 +11,7 @@ import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import RootStackParamList from '../../types/navigation-types/root-stack';
 import styles from './styles';
-Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
+Geocoder.init('AIzaSyC4lnIdJpGeIXhvicsbuhAR3FF29zzuEsI');
 
 type props = NativeStackScreenProps<RootStackParamList, 'Signup'>;
 

@@ -12,7 +12,7 @@ import Geocoder from 'react-native-geocoding';
 import Geolocation from 'react-native-geolocation-service';
 import ImagePicker from 'react-native-image-crop-picker';
 import { NavigationProps } from '../types/navigation-types';
-Geocoder.init('AIzaSyCbFQqjZgQOWRMuQ_RpXU0kGAUIfJhDw98');
+Geocoder.init('AIzaSyC4lnIdJpGeIXhvicsbuhAR3FF29zzuEsI');
 // Helper function to convert degrees to radians
 function toRadians(degrees: any) {
   return (degrees * Math.PI) / 180;
