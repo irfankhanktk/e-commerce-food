@@ -20,6 +20,7 @@ import {navigate, resetStack} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
 import {
+  deletePermanentAccount,
   getCounters,
   logout,
   onLogoutPress,
@@ -57,6 +58,25 @@ const UserTab = props => {
   React.useEffect(() => {
     if (isFocus) getDashboard();
   }, [isFocus]);
+  const deleteAccount = async () => {
+    Alert.alert(
+      'Warning',
+      'Are you sure you want to Delete your account?. Your account will be deleted permanently and your all data will be deleted"',
+      [
+        {
+          text: t('Cancel'),
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: t('Delete'),
+          onPress: () => {
+            dispatch(deletePermanentAccount());
+          },
+        },
+      ],
+    );
+  };
   return (
     <View style={{...styles.container, backgroundColor: colors.background}}>
       <View style={{...styles.topContainer, backgroundColor: colors.primary}}>
@@ -302,7 +322,7 @@ const UserTab = props => {
             label={t('followed_vendors')}
           />
         </Row>
-        <TouchableOpacity onPress={() => dispatch(onLogoutPress())}>
+        <TouchableOpacity onPress={() => deleteAccount()}>
           <Row
             style={{
               justifyContent: 'flex-start',
