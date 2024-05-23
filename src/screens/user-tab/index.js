@@ -19,7 +19,11 @@ import {t} from 'i18next';
 import {navigate, resetStack} from 'navigation/navigation-ref';
 import React from 'react';
 import {Alert, ImageBackground, TouchableOpacity, View} from 'react-native';
-import {getCounters, logout} from 'services/api/auth-api-actions';
+import {
+  getCounters,
+  logout,
+  onLogoutPress,
+} from 'services/api/auth-api-actions';
 import Bold from 'typography/bold-text';
 import Regular from 'typography/regular-text';
 import {UTILS} from 'utils';
@@ -298,7 +302,7 @@ const UserTab = props => {
             label={t('followed_vendors')}
           />
         </Row>
-        <TouchableOpacity onPress={() => navigate('BrowseAllVenders')}>
+        <TouchableOpacity onPress={() => dispatch(onLogoutPress())}>
           <Row
             style={{
               justifyContent: 'flex-start',

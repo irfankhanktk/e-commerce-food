@@ -17,6 +17,7 @@ export const URLS = {
     update_profile: 'profile/update',
     locations: 'locations',
     logout: 'auth/logout',
+    account_delete: 'account-deletion',
   },
   vendor: {
     get_vendors: 'shops',

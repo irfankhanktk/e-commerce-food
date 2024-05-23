@@ -306,3 +306,20 @@ export const getCounters = (
   };
 };
 
+export const deletePermanentAccount = () => {
+  return async (dispatch: AppDispatch, getState: () => RootState) => {
+    try {
+      const res = await getData(URLS.auth.account_delete) ;
+      console.log('res of deletaccount', res);
+      // Alert.alert('Success', 'Account Deleted Successfully');
+    
+      dispatch(onLogoutPress());
+      return res;
+     
+    } catch (error) {
+      console.log('error', UTILS.returnError(error));
+      // Alert.alert('Error', UTILS.returnError(error));
+  
+    }
+  };
+};
