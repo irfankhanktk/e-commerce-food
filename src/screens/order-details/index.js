@@ -46,6 +46,7 @@ const OrderDetails = props => {
     React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState({});
+
   const [totalDistance, setTotalDistance] = React.useState('');
   const [ratingModal, setRatingModal] = React.useState(false);
   const [ratingLoading, setRatingLoading] = React.useState(false);
@@ -687,7 +688,10 @@ const OrderDetails = props => {
                     fontSize={mvs(12)}
                     label={t('sub_total')}
                   />
-                  <Regular fontSize={mvs(12)} label={'$12000.00'} />
+                  <Regular
+                    fontSize={mvs(12)}
+                    label={`$ ${item?.order_details?.grand_total}`}
+                  />
                 </Row>
                 <Row>
                   <Regular

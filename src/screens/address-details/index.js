@@ -30,7 +30,6 @@ const AddressDetails = props => {
   const isFocus = useIsFocused();
   const [addressAddedModal, setAddressAddedModal] = React.useState(false);
   const {userAddress} = useAppSelector(s => s.address);
-  console.log('user addresses checkd===>', userAddress);
 
   const deleteUserAddress = async id => {
     try {

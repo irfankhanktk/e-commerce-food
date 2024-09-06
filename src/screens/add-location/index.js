@@ -58,6 +58,7 @@ const AddLocation = props => {
       console.log('values address===>', values);
       const res = await addAddress(values);
       console.log('res:::>>>>>', res);
+      goBack();
       Alert.alert('Success', 'Save Successfully');
     } catch (error) {
       Alert.alert('Error', UTILS.returnError(error));

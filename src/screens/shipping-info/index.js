@@ -17,6 +17,7 @@ const ShippingInfo = props => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
   const {userAddress} = useAppSelector(s => s.address);
+  console.log('user adddress check==>', userAddress);
   const selected = useAppSelector(s => s);
 
   const [loading, setLoading] = React.useState(false);
@@ -44,9 +45,17 @@ const ShippingInfo = props => {
       />
       <View style={{paddingHorizontal: mvs(20)}}>
         <PrimaryButton
-          onPress={() => navigate('ShippingCost')}
+          onPress={() =>
+            navigate(
+              userAddress?.length > 0 ? 'ShippingCost' : 'AddressDetails',
+            )
+          }
           containerStyle={{marginBottom: mvs(20)}}
-          title={t('continue_to_delivery_info')}
+          title={
+            userAddress?.length > 0
+              ? t('continue_to_delivery_info')
+              : t('Add Address')
+          }
         />
       </View>
     </View>
