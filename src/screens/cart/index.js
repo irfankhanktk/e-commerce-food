@@ -118,7 +118,16 @@ const CartTab = props => {
       console.log('Error fetching cart list:', error);
     }
   };
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch(getCartList());
+    }, 3000); // Fetch every 30 seconds (adjust as necessary)
 
+    // Clear the interval when the component is unmounted or screen is not focused
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [dispatch]);
   React.useEffect(() => {
     if (isFocus) {
       fetchCartSummary();
