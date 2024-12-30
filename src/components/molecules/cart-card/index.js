@@ -15,98 +15,83 @@ const CartCard = ({item, style, onPress}) => {
   const colors = useTheme().colors;
   const dispatch = useAppDispatch();
   const [loading, setLoading] = React.useState(false);
-  const product = item?.cart_items[0];
+
   return (
     <View
       onPress={onPress}
       style={{...styles.container, backgroundColor: colors.background}}>
-      <Row style={{justifyContent: 'flex-start'}}>
-        <View style={styles.imageMainContainer}>
-          <View style={{backgroundColor: colors.background, height: mvs(110)}}>
-            <View style={{marginLeft: mvs(10)}}>
-              <ImageBackground
-                borderRadius={mvs(5)}
-                source={{
-                  uri: product?.product_thumbnail_image,
-                }}
-                style={styles.backGroundImage}></ImageBackground>
-            </View>
+      {item?.cart_items?.map((product, index) => (
+        <Row
+          key={index}
+          style={{justifyContent: 'flex-start', marginBottom: mvs(10)}}>
+          <View style={styles.imageMainContainer}>
+            <ImageBackground
+              borderRadius={mvs(5)}
+              source={{uri: product?.product_thumbnail_image}}
+              style={styles.backGroundImage}
+            />
           </View>
-        </View>
-        <View style={styles.contentContainer}>
-          <Regular
-            color={colors.text}
-            fontSize={mvs(13)}
-            label={product?.product_name}
-          />
-          {/* <Regular
-            color={colors.text}
-            numberOfLines={2}
-            fontSize={mvs(10)}
-            label={
-              'The 20ft dry container is ideal for moving smaller shipments of dry goods.'
-            }
-          /> */}
-          <Row style={{marginTop: mvs(5)}}>
+          <View style={styles.contentContainer}>
             <Regular
               color={colors.text}
-              style={{flex: 1}}
-              label={`${product?.currency_symbol} ${product?.price}`}
+              fontSize={mvs(13)}
+              label={product?.product_name}
             />
-            <TouchableOpacity
-              onPress={() => {
-                dispatch(removeFromCartList(product?.id, setLoading));
-              }}>
-              <Delete />
-            </TouchableOpacity>
-          </Row>
-        </View>
-        <View style={{alignItems: 'center', marginTop: mvs(10)}}>
-          <PrimaryButton
-            disabled={product?.quantity == '1' || loading}
-            onPress={() =>
-              dispatch(
-                updateCartQty(
-                  {
-                    id: product?.id,
-                    quantity: product?.quantity - 1,
-                  },
-                  setLoading,
-                ),
-              )
-            }
-            textStyle={{...styles.subAddText, color: colors.text}}
-            containerStyle={{
-              ...styles.subQuantity,
-              borderColor: colors.primary,
-            }}
-            title={'-'}
-          />
-          <View style={styles.countextContainer}>
-            <Regular color={colors.text} label={product?.quantity} />
+            <Row style={{marginTop: mvs(5)}}>
+              <Regular
+                color={colors.text}
+                style={{flex: 1}}
+                label={`${product?.currency_symbol} ${product?.price}`}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  dispatch(removeFromCartList(product?.id, setLoading));
+                }}>
+                <Delete />
+              </TouchableOpacity>
+            </Row>
           </View>
-          <PrimaryButton
-            disabled={loading}
-            onPress={() =>
-              dispatch(
-                updateCartQty(
-                  {
-                    id: product?.id,
-                    quantity: product?.quantity + 1,
-                  },
-                  setLoading,
-                ),
-              )
-            }
-            textStyle={{...styles.subAddText, color: colors.text}}
-            containerStyle={{
-              ...styles.subQuantity,
-              borderColor: colors.primary,
-            }}
-            title={'+'}
-          />
-        </View>
-      </Row>
+          <View style={{alignItems: 'center', marginTop: mvs(10)}}>
+            <PrimaryButton
+              disabled={product?.quantity === 1 || loading}
+              onPress={() =>
+                dispatch(
+                  updateCartQty(
+                    {id: product?.id, quantity: product?.quantity - 1},
+                    setLoading,
+                  ),
+                )
+              }
+              textStyle={{...styles.subAddText, color: colors.text}}
+              containerStyle={{
+                ...styles.subQuantity,
+                borderColor: colors.primary,
+              }}
+              title={'-'}
+            />
+            <View style={styles.countextContainer}>
+              <Regular color={colors.text} label={product?.quantity} />
+            </View>
+            <PrimaryButton
+              disabled={loading}
+              onPress={() =>
+                dispatch(
+                  updateCartQty(
+                    {id: product?.id, quantity: product?.quantity + 1},
+                    setLoading,
+                  ),
+                )
+              }
+              textStyle={{...styles.subAddText, color: colors.text}}
+              containerStyle={{
+                ...styles.subQuantity,
+                borderColor: colors.primary,
+              }}
+              title={'+'}
+            />
+          </View>
+        </Row>
+      ))}
       {loading && (
         <View
           style={{
@@ -122,4 +107,5 @@ const CartCard = ({item, style, onPress}) => {
     </View>
   );
 };
+
 export default React.memo(CartCard);

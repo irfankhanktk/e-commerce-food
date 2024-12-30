@@ -1,3 +1,4 @@
+// export const IP = 'https://hsmarinestore.com';
 export const IP = 'https://multiecom.prismatic-technologies.com';
 export const URLS = {
   base_url: `${IP}/api/v2/`,
@@ -62,7 +63,8 @@ export const URLS = {
   },
   cart: {
     get_cart_summary: 'carts',
-    get_summary: 'cart-summary',
+    get_summary: 'carts',
+    // get_summary: 'cart-summary',
     add_to_cart: 'carts/add',
     remove_from_cart: 'carts/',
     update_cart_qty: 'carts/change-quantity',

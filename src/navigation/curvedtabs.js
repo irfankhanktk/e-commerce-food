@@ -119,13 +119,33 @@ export const TabBar = props => {
   const Tab = createBottomTabNavigator();
   const {user, cart} = useAppSelector(s => s);
   const {cart_list} = cart;
+
+  console.log('cart_list:', cart_list);
+
+  // Calculate total cart item count
+  const totalItemCount = cart_list?.reduce((total, cartItem) => {
+    console.log('cartItem:', cartItem); // Log each cartItem to inspect its structure
+
+    // Check if cartItem.cart_items exists and contains products with quantity
+    const quantitySum =
+      cartItem?.cart_items?.reduce((sum, product) => {
+        console.log('product:', product); // Log each product to check for quantity
+        return sum + (product?.quantity || 0); // Sum up the quantity, defaulting to 0 if not available
+      }, 0) || 0;
+
+    console.log('quantitySum:', quantitySum); // Log the calculated quantity sum for the cartItem
+    return total + quantitySum; // Add the quantity sum to the total count
+  }, 0);
+
+  console.log('totalItemCount:', totalItemCount); // Log the final total item count
+
   // console.log('cart_list:::', cart_list);
   return (
     <Tab.Navigator
       initialRouteName={initialRoute || 'Home'}
       screenOptions={{headerShown: false}}
       tabBar={props => (
-        <MyTabBar cartLength={cart_list?.length || '0'} {...props} />
+        <MyTabBar cartLength={totalItemCount || '0'} {...props} />
       )}>
       <Tab.Screen name="Home" component={HomeTab} />
       <Tab.Screen name="Categories" component={CategoriesTab} />
